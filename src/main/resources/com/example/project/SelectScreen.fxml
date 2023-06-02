@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.project.SelectController">
     <children>
         <ImageView fitHeight="400.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true">
             <image>
@@ -60,9 +60,9 @@
                   <Insets bottom="30.0" />
                </VBox.margin>
             </Spinner>
-                <Button mnemonicParsing="false" text="Flow" />
-                <Button mnemonicParsing="false" text="2048" />
-                <Button mnemonicParsing="false" text="Codenames" />
+                <Button fx:id="flowButton" mnemonicParsing="false" onAction="#flowSwitch" text="Flow" />
+                <Button fx:id="numbergameButton" mnemonicParsing="false" onAction="#twentySwitch" text="2048" />
+                <Button fx:id="codenamesButton" mnemonicParsing="false" onAction="#codeNameSwitch" text="Codenames" />
             </children>
         </VBox>
     </children>
