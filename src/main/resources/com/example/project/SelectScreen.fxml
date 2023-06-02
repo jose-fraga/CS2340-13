@@ -23,6 +23,14 @@
         </ImageView>
       <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
          <image>
+            <Image url="@arcadegif.gif" />
+         </image>
+         <StackPane.margin>
+            <Insets top="-225.0" />
+         </StackPane.margin>
+      </ImageView>
+      <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+         <image>
             <Image url="@character1.gif" />
          </image>
          <StackPane.margin>
@@ -116,7 +124,7 @@
                         <Font size="18.0" />
                      </font>
                      <HBox.margin>
-                        <Insets left="200.0" top="75.0" />
+                        <Insets left="200.0" top="110.0" />
                      </HBox.margin>
                   </Label>
                    <Label fx:id="myLabel" textFill="#1942a1">
