@@ -1,143 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.project.SelectController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.project.SelectController">
     <children>
-        <ImageView fitHeight="400.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true">
-            <image>
-                <Image url="@infiniteloop.gif" />
-            </image>
-        </ImageView>
-      <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@arcadegif.gif" />
-         </image>
-         <StackPane.margin>
-            <Insets top="-225.0" />
-         </StackPane.margin>
-      </ImageView>
-      <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@character1.gif" />
-         </image>
-         <StackPane.margin>
-            <Insets right="380.0" top="-200.0" />
-         </StackPane.margin>
-      </ImageView>
-      <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@character2.gif" />
-         </image>
-         <StackPane.margin>
-            <Insets right="-380.0" top="-200.0" />
-         </StackPane.margin>
-      </ImageView>
-      <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@character3.gif" />
-         </image>
-         <StackPane.margin>
-            <Insets right="380.0" top="240.0" />
-         </StackPane.margin>
-      </ImageView>
-      <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@character4.gif" />
-         </image>
-         <StackPane.margin>
-            <Insets right="-380.0" top="240.0" />
-         </StackPane.margin>
-      </ImageView>
-      <Label text="Avatar 1" textFill="WHITE">
-         <font>
-            <Font size="21.0" />
-         </font>
-         <StackPane.margin>
-            <Insets right="380.0" top="-30.0" />
-         </StackPane.margin>
-      </Label>
-      <Label text="Avatar 2" textFill="WHITE">
-         <StackPane.margin>
-            <Insets right="380.0" top="50.0" />
-         </StackPane.margin>
-         <font>
-            <Font size="21.0" />
-         </font>
-      </Label>
-      <Label text="Avatar 3" textFill="WHITE">
-         <font>
-            <Font size="21.0" />
-         </font>
-         <StackPane.margin>
-            <Insets right="-380.0" top="-30.0" />
-         </StackPane.margin>
-      </Label>
-      <Label text="Avatar 4" textFill="WHITE">
-         <font>
-            <Font size="21.0" />
-         </font>
-         <StackPane.margin>
-            <Insets right="-380.0" top="50.0" />
-         </StackPane.margin>
-      </Label>
-      <MenuBar>
-        <menus>
-          <Menu mnemonicParsing="false" text="File">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Close" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Edit">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Help">
-            <items>
-              <MenuItem mnemonicParsing="false" text="About" />
-            </items>
-          </Menu>
-        </menus>
-         <StackPane.margin>
-            <Insets bottom="380.0" />
-         </StackPane.margin>
-      </MenuBar>
         <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="20.0">
             <children>
-            <HBox prefHeight="100.0" prefWidth="200.0">
+            <HBox prefHeight="49.0" prefWidth="600.0">
                <children>
-                  <Label text="You have selected" textFill="WHITE">
+                  <Label alignment="CENTER" prefHeight="56.0" prefWidth="601.0" text="Pick A Game:" textAlignment="CENTER">
                      <font>
-                        <Font size="18.0" />
+                        <Font size="35.0" />
                      </font>
-                     <HBox.margin>
-                        <Insets left="200.0" top="110.0" />
-                     </HBox.margin>
-                  </Label>
-                   <Label fx:id="myLabel" textFill="#1942a1">
-                     <font>
-                        <Font name="System Bold" size="19.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets left="5.0" top="110.0" />
-                     </HBox.margin>
                   </Label>
                </children>
             </HBox>
-                <ChoiceBox fx:id="myChoiceBox" layoutX="225.0" layoutY="188.0" prefWidth="150.0" />
                 <Button fx:id="flowButton" mnemonicParsing="false" onAction="#flowSwitch" text="Flow" />
                 <Button fx:id="numbergameButton" mnemonicParsing="false" onAction="#twentySwitch" text="2048" />
                 <Button fx:id="codenamesButton" mnemonicParsing="false" onAction="#codeNameSwitch" text="Codenames" />

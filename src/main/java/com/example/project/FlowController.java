@@ -14,7 +14,6 @@ public class FlowController implements Initializable {
     @FXML
     private Button btn2;
 
-
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
             System.out.println("Flow Free Main Start Screen");
@@ -32,7 +31,7 @@ public class FlowController implements Initializable {
 
     public void playFlowFree(ActionEvent actionEvent) {
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        Helper.changeScreen(stage, "FlowFreeGameScreen.fxml", "Flow Free Game Screen");
+        Helper.changeScreen(stage, "FlowGameScreen.fxml", "Flow Free Game Screen");
     }
 }
 
