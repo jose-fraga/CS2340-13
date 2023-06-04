@@ -27,17 +27,6 @@ public class ConfigureController implements Initializable {
     @FXML
     private void continueToGame(ActionEvent actionEvent) {
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        String screenName;
-        switch (Helper.currentGame) {
-            case "Flow":
-                Helper.changeScreen(stage, "FlowGameScreen.fxml", "CS2340 - Flow (Game)");
-                break;
-            case "2048":
-                Helper.changeScreen(stage, "2048GameScreen.fxml", "CS2340 - 2048 (Game)");
-                break;
-            case "Codenames":
-                // Set this to Codename Game Screen
-                break;
-        }
+        Helper.changeScreen(stage, Helper.currentGame.gameFxmlPath(), "CS2340 - " + Helper.currentGame.title() + " (Game)");
     }
 }

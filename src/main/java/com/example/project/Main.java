@@ -8,7 +8,8 @@ import java.io.IOException;
 public class Main extends Application {
     @Override
     public void start(Stage stage) {
-        Helper.changeScreen(stage, "SelectScreen.fxml", "CS2340 Project");
+        Helper.currentGame = Game.UNSELECTED;
+        Helper.changeScreen(stage, Game.UNSELECTED.initialFxmlPath(), Game.UNSELECTED.title());
     }
 
     public static void main(Stage args) {
