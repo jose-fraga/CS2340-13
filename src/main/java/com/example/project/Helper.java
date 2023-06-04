@@ -12,7 +12,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class Helper {
-    public static String currentGame;
+    public static Game currentGame;
 
     public static void changeScreen(Stage stage, String screenName, String stageTitle) {
         try {
