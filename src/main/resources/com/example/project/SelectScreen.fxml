@@ -1,16 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.project.SelectController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.project.SelectController">
     <children>
+        <ImageView fitHeight="400.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@images/infiniteloop.gif" />
+            </image>
+        </ImageView>
         <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="20.0">
             <children>
+            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/arcadelogo.gif" />
+               </image>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </ImageView>
             <HBox prefHeight="49.0" prefWidth="600.0">
                <children>
                   <Label alignment="CENTER" prefHeight="56.0" prefWidth="601.0" text="Pick A Game:" textAlignment="CENTER">
@@ -24,6 +40,9 @@
                 <Button fx:id="numbergameButton" mnemonicParsing="false" onAction="#twentySwitch" text="2048" />
                 <Button fx:id="codenamesButton" mnemonicParsing="false" onAction="#codeNameSwitch" text="Codenames" />
             </children>
+         <StackPane.margin>
+            <Insets top="-30.0" />
+         </StackPane.margin>
         </VBox>
     </children>
 </StackPane>
