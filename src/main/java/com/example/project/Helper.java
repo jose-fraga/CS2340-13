@@ -1,4 +1,6 @@
-/** Class to create utils reusable methods */
+/**
+ * Class to create and store utils reusable methods
+ */
 
 package com.example.project;
 
@@ -10,6 +12,8 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class Helper {
+    public static String currentGame;
+
     public static void changeScreen(Stage stage, String screenName, String stageTitle) {
         try {
             FXMLLoader loader = new FXMLLoader(Helper.class.getResource(screenName));
