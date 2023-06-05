@@ -1,19 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.shape.Sphere?>
-<?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.project.codenames.CodenamesController">
+<AnchorPane prefHeight="340" prefWidth="600.0"  xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.project.codenames.CodenamesController">
    <children>
-      <BorderPane prefHeight="400.0" prefWidth="600.0">
+      <BorderPane prefHeight="340.0" prefWidth="600.0">
          <center>
             <GridPane gridLinesVisible="true" hgap="8.0" vgap="8.0" BorderPane.alignment="CENTER">
               <columnConstraints>
@@ -35,25 +31,6 @@
                </padding>
             </GridPane>
          </center>
-         <top>
-            <HBox alignment="CENTER" maxWidth="1.7976931348623157E308" BorderPane.alignment="CENTER">
-               <children>
-                  <Sphere radius="8.0" HBox.hgrow="ALWAYS">
-                     <HBox.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </HBox.margin>
-                  </Sphere>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Codenames" textAlignment="CENTER" textOrigin="TOP" HBox.hgrow="ALWAYS">
-                     <HBox.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </HBox.margin></Text>
-                  <Button cancelButton="true" mnemonicParsing="false" onAction="#backToGameSelect" text="Quit" HBox.hgrow="ALWAYS">
-                     <HBox.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </HBox.margin></Button>
-               </children>
-            </HBox>
-         </top>
       </BorderPane>
    </children>
 </AnchorPane>

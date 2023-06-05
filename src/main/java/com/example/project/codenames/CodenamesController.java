@@ -26,11 +26,4 @@ public class CodenamesController implements Initializable {
           6) gameState = <CodenamesState.STARTING, CodenamesState.CREATING_CLUE, CodenamesState.GUESSING, CodenamesState.NEXT_SPYMASTER...>
         */
     }
-
-    @FXML
-    public void backToGameSelect(ActionEvent actionEvent) {
-        Helper.currentGame = Game.UNSELECTED;
-        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        Helper.changeScreen(stage, Game.UNSELECTED.initialFxmlPath(), Game.UNSELECTED.title());
-    }
 }

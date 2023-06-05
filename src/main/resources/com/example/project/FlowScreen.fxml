@@ -20,7 +20,7 @@
          <children>
             <Label text="This is the Flow Free Start screen">
                <font>
-                  <Font size="42.0" />
+                  <Font size="32.0" />
                </font>
                <padding>
                   <Insets left="100.0" right="100.0" top="175.0" />
