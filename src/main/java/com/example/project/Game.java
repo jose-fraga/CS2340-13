@@ -3,22 +3,26 @@ package com.example.project;
 public enum Game {
     UNSELECTED("CS2340 Project",
             "SelectScreen.fxml",
+            "ConfigureScreen.fxml",
             "SelectScreen.fxml"),
     FLOW("Flow",
             "FlowScreen.fxml",
+            "ConfigureScreen.fxml",
             "FlowGameScreen.fxml"),
     TWENTY_FOURTY_EIGHT("2048",
             "2048Screen.fxml",
+            "ConfigureScreen.fxml",
             "2048GameScreen.fxml"),
     CODENAMES("Codenames",
             "codenames/CodenamesSplashScreen.fxml",
+            "codenames/CodenamesConfigurationScreen.fxml",
             "codenames/CodenamesInitialGamePlayScreen.fxml");
 
     private final String title;
     private final String initialFxmlPath;
     private final String gameFxmlPath;
 
-    Game(String title, String initialFxmlPath, String gameFxmlPath) {
+    Game(String title, String initialFxmlPath, String configFxmlPath, String gameFxmlPath) {
         this.title = title;
         this.initialFxmlPath = initialFxmlPath;
         this.gameFxmlPath = gameFxmlPath;

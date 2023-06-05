@@ -12,7 +12,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class CodenamesSplashScreenController implements Initializable {
-
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         System.out.println("Codenames Main Start Screen");
@@ -28,6 +27,6 @@ public class CodenamesSplashScreenController implements Initializable {
     @FXML
     private void configureGame(ActionEvent actionEvent) {
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        Helper.changeScreen(stage, "ConfigureScreen.fxml", "CS2340 Configuration");
+        Helper.changeScreen(stage, "ConfigureScreen.fxml", "CS2340 " + Helper.currentGame.title() + " Configuration");
     }
 }

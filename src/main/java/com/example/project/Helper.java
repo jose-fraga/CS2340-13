@@ -13,6 +13,14 @@ import java.io.IOException;
 
 public class Helper {
     public static Game currentGame;
+    private static Player currentPlayer;
+
+    public static Player getPlayerInstance() {
+        if (currentPlayer == null) {
+            currentPlayer = new Player();
+        }
+        return currentPlayer;
+    }
 
     public static void changeScreen(Stage stage, String screenName, String stageTitle) {
         try {

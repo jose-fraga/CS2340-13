@@ -31,7 +31,7 @@ public class FlowController implements Initializable {
 
     public void playFlowFree(ActionEvent actionEvent) {
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        Helper.changeScreen(stage, "FlowGameScreen.fxml", "Flow Free Game Screen");
+        Helper.changeScreen(stage, "ConfigureScreen.fxml", "CS2340 " + Helper.currentGame.title() + " Configuration");
     }
 }
 
