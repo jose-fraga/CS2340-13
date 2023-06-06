@@ -7,4 +7,6 @@ module com.example.project {
     exports com.example.project;
     exports com.example.project.codenames;
     opens com.example.project.codenames to javafx.fxml;
+    exports com.example.project.flowfree;
+    opens com.example.project.flowfree to javafx.fxml;
 }
