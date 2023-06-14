@@ -21,6 +21,42 @@ class GameTest {
      */
 
     @Test
+    void testGameUNSELECTED() {
+        assertEquals("CS2340 Project", Game.UNSELECTED.title());
+        assertEquals("SelectScreen.fxml", Game.UNSELECTED.initialFxmlPath());
+        assertEquals("SelectScreen.fxml", Game.UNSELECTED.gameFxmlPath());
+        assertEquals(Game.UNSELECTED, Game.values()[0]);
+        assertEquals(Game.UNSELECTED, Game.valueOf("UNSELECTED"));
+    }
+
+    @Test
+    void testGameFLOW() {
+        assertEquals("Flow", Game.FLOW.title());
+        assertEquals("FlowScreen.fxml", Game.FLOW.initialFxmlPath());
+        assertEquals("FlowGameScreen.fxml", Game.FLOW.gameFxmlPath());
+        assertEquals(Game.FLOW, Game.values()[1]);
+        assertEquals(Game.FLOW, Game.valueOf("FLOW"));
+    }
+
+    @Test
+    void testGameTWENTY_FOURTY_EIGHT() {
+        assertEquals("2048", Game.TWENTY_FOURTY_EIGHT.title());
+        assertEquals("2048Screen.fxml", Game.TWENTY_FOURTY_EIGHT.initialFxmlPath());
+        assertEquals("2048GameScreen.fxml", Game.TWENTY_FOURTY_EIGHT.gameFxmlPath());
+        assertEquals(Game.TWENTY_FOURTY_EIGHT, Game.values()[2]);
+        assertEquals(Game.TWENTY_FOURTY_EIGHT, Game.valueOf("TWENTY_FOURTY_EIGHT"));
+    }
+
+    @Test
+    void testGameCODENAMES() {
+        assertEquals("Codenames", Game.CODENAMES.title());
+        assertEquals("codenames/CodenamesSplashScreen.fxml", Game.CODENAMES.initialFxmlPath());
+        assertEquals("codenames/CodenamesInitialGamePlayScreen.fxml", Game.CODENAMES.gameFxmlPath());
+        assertEquals(Game.CODENAMES, Game.values()[3]);
+        assertEquals(Game.CODENAMES, Game.valueOf("CODENAMES"));
+    }
+
+    @Test
     void testTitle() {
         assertEquals("CS2340 Project", Game.UNSELECTED.title());
         assertEquals("Flow", Game.FLOW.title());
