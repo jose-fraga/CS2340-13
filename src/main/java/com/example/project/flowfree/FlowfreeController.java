@@ -1,29 +1,30 @@
 package com.example.project.flowfree;
 
-import com.example.project.Game;
 import com.example.project.Helper;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class FlowfreeController implements Initializable {
+    @FXML private Button button1;
+
+    private Level level;
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         System.out.println("Flow Free Game Started");
+        level = new Level();
+    }
 
-        /*
-          1) wordset = 25 wordset arrangement
-          2) gameTurn = <Team.RED, Team.BLUE>
-          3) firstTeamWords = 9 words assigned to gameTurn team
-          4) secondTeamWords = 8 words for other team
-          5) neutralWords = choose remaining words as bystanders
-          6) gameState = <CodenamesState.STARTING, CodenamesState.CREATING_CLUE, CodenamesState.GUESSING, CodenamesState.NEXT_SPYMASTER...>
-        */
+    @FXML private void selectLevel(ActionEvent e) {
+        level.setLevelNumber(Integer.parseInt(((Button) e.getSource()).getText()));
+        Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        Helper.changeScreen(stage, "flowfree/levels/level1.fxml", "Level #1");
     }
 }

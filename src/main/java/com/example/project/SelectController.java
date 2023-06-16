@@ -8,11 +8,9 @@ public class SelectController {
     public void flowSwitch(ActionEvent actionEvent) {
         selectGame(actionEvent, Game.FLOW);
     }
-
     public void twentySwitch(ActionEvent actionEvent) {
         selectGame(actionEvent, Game.TWENTY_FOURTY_EIGHT);
     }
-
     public void codeNameSwitch(ActionEvent actionEvent) {
         selectGame(actionEvent, Game.CODENAMES);
     }
