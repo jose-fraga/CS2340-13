@@ -17,4 +17,9 @@ public class FFPane extends Pane {
         super(content);
         this.gridItem = gridItem;
     }
+
+    @Override
+    public String toString() {
+        return String.format("FFPane(%d, %d)", this.gridItem.getX(), this.gridItem.getY());
+    }
 }

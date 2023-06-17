@@ -21,4 +21,9 @@ public class Obstacle extends GridItem {
         return this.hitPoints <= 0;
     }
 
+    @Override
+    public String toString() {
+        return String.format("Obstacle(%d, %d, %d)", this.getX(), this.getY(), this.hitPoints);
+    }
+
 }

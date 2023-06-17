@@ -53,17 +53,13 @@ public class GridController implements Initializable {
         }
     }
 
-    // Reset drag when end dot is not same as start dot
-    // Level's isCompleted
-    // Show Player sprite and name on game
-
     private void resetPipePath() {
         for (int i = 0; i < pipePaths.size(); i++) {
             FFPane curr = pipePaths.get(i);
-            curr.getGridItem().setIsEmpty(true);
-            ((Pipe) curr.getGridItem()).setPipeState(PipeState.EMPTY);
-            curr.setStyle("-fx-background-color:white");
+            ((Pipe) curr.getGridItem()).reset();
+            curr.setStyle("-fx-background-color: transparent");
         }
+        activeDot = null;
     }
 
     private void handleEvent() {
@@ -77,13 +73,16 @@ public class GridController implements Initializable {
                 if (itemPane.getGridItem() instanceof Dot ) {
                     activeDot = (Dot) itemPane.getGridItem();
                     item.startFullDrag();
+                } else {
+                    activeDot = null;
                 }
             });
 
-            // Half way should reset
-            // First drag is not resetting
-            // If dots connected, then don't reset
             item.addEventFilter(MouseDragEvent.MOUSE_DRAG_ENTERED, e -> {
+//                System.out.println("Mouse Drag Entered: " + e.getSource());
+                if (activeDot == null) {
+                    return;
+                }
                 FFPane itemPane = (FFPane) e.getSource();
                 GridItem gridItem = itemPane.getGridItem();
                 if (gridItem instanceof Pipe && ((Pipe) gridItem).isEmpty()) {
@@ -91,13 +90,51 @@ public class GridController implements Initializable {
                     Pipe pipe = (Pipe) gridItem;
                     pipe.tempFill(activeDot.getColor());
                     item.setStyle("-fx-background-color:" + (activeDot.getHexColor()));
-                } else {
-                    
                 }
+//                else if (gridItem instanceof Dot) {
+//                    Dot currentDot = (Dot) gridItem;
+//                    System.out.println("Current dot different: " + (currentDot != activeDot));
+//                    System.out.println("Current colors equal: " + currentDot.getColor().equals(activeDot.getColor()));
+//                    System.out.println(currentDot + " " + activeDot);
+//                    if (currentDot != activeDot && currentDot.getColor().equals(activeDot.getColor())){
+//                        // VALID CONNECTION
+//                        System.out.println("VALID: " + currentDot.getColor());
+//                    } else {
+//                        // INVALID CONNECTION
+//                        System.out.println("INVALID: " + currentDot.getColor() + ", " + activeDot.getColor());
+//                        resetPipePath();
+//                    }
+//                }
+//                else {
+//
+//                    // not a pipe completion and not an empty space, means invalid cell like other pipe or obstacle
+//                    resetPipePath();
+//                }
             });
 
             item.addEventFilter(MouseDragEvent.MOUSE_DRAG_RELEASED, e -> {
                 FFPane itemPane = (FFPane) e.getSource();
+                GridItem gridItem = itemPane.getGridItem();
+
+                System.out.println(pipePaths);
+
+                // checkPipe();
+                if ((gridItem instanceof Dot) && (activeDot != gridItem) && (activeDot.getColor().equals(((Dot) gridItem).getColor()))) {
+                    // Released On Matching Dot -> Check Pipes
+                    if (checkPipe()) {
+                        System.out.println("SUCCESS");
+                        pipePaths.clear();
+                    } else {
+                        System.out.println("FAILURE #1");
+                        resetPipePath();
+                        pipePaths.clear();
+                    }
+                } else {
+                    // Released On Non-Dot -> Reset & Clear Pipe
+                    System.out.println("FAILURE #2");
+                    resetPipePath();
+                    pipePaths.clear();
+                }
 
 //                if (itemPane.getGridItem() instanceof Dot) {
 //                    Dot currentDot = (Dot) itemPane.getGridItem();
@@ -123,5 +160,19 @@ public class GridController implements Initializable {
                 }
             });
         });
+    }
+
+    private boolean checkPipe() {
+        for (int i = 0; i < pipePaths.size(); i++) {
+            FFPane curr = pipePaths.get(i);
+            if ((curr.getGridItem() instanceof Pipe) & (activeDot.getColor().equals(((Pipe) curr.getGridItem()).getColor()))) {
+//                ((Pipe) curr.getGridItem()).setPipeState(PipeState.FILLED_FINAL);
+                ((Pipe) curr.getGridItem()).finalize();
+            } else {
+                // pipePath contains non-Pipe || pipe wrong color
+                return false;
+            }
+        }
+        return true;
     }
 }

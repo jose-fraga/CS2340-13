@@ -33,4 +33,15 @@ public class Pipe extends ColoredGridItem {
         this.setColor(null);
         this.setPipeState(PipeState.EMPTY);
     }
+
+    public void finalize() {
+        if (this.pipeState == PipeState.FILLED_TEMP) {
+            this.setPipeState(PipeState.FILLED_FINAL);
+        }
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Pipe(%s, %d, %d, %s)", this.pipeState, this.getX(), this.getY(), this.getHexColor());
+    }
 }
