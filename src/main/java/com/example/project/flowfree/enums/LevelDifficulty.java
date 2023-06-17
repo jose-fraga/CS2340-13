@@ -3,6 +3,7 @@ package com.example.project.flowfree.enums;
 import com.example.project.flowfree.Dot;
 import com.example.project.flowfree.GridItem;
 import com.example.project.flowfree.Obstacle;
+import com.example.project.flowfree.Pipe;
 import javafx.scene.paint.Color;
 
 public enum LevelDifficulty {
@@ -45,11 +46,13 @@ public enum LevelDifficulty {
                     int y = i % size;
                     int x = i / size; //integer division
                     GridItem itemToCopy = levelToCopy[i];
-                    GridItem copiedItem = null;
+                    GridItem copiedItem;
                     if (itemToCopy instanceof Obstacle) {
                         copiedItem = new Obstacle((Obstacle) itemToCopy, x, y);
                     } else if (itemToCopy instanceof Dot) {
                         copiedItem = new Dot((Dot) itemToCopy, x, y);
+                    } else {
+                        copiedItem = new Pipe(x, y);
                     }
                     copiedLevel[x][y] = copiedItem;
                 }
