@@ -4,24 +4,22 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Group;
 import javafx.scene.control.Label;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseDragEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
 
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.ResourceBundle;
-import java.util.concurrent.Flow;
 
-// Work on update & Controllers, UI Elements
 public class GridController implements Initializable {
     @FXML private GridPane gridPane = new GridPane(); // for FXML
+
     private Grid grid = new Grid(); // for Code Logic
+    private Dot activeDot;
+    private LinkedList<FFPane> pipePaths = new LinkedList<>();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -32,7 +30,6 @@ public class GridController implements Initializable {
     private int[] getXYfromIndex(int index) {
         int y = index % grid.getGridCells()[0].length;
         int x = index / grid.getGridCells()[0].length;
-//        System.out.println("x: " + x + " y: " + y);
         return new int[]{x, y};
     }
 
@@ -56,49 +53,73 @@ public class GridController implements Initializable {
         }
     }
 
+    // Reset drag when end dot is not same as start dot
+    // Level's isCompleted
+    // Show Player sprite and name on game
+
+    private void resetPipePath() {
+        for (int i = 0; i < pipePaths.size(); i++) {
+            FFPane curr = pipePaths.get(i);
+            curr.getGridItem().setIsEmpty(true);
+            ((Pipe) curr.getGridItem()).setPipeState(PipeState.EMPTY);
+            curr.setStyle("-fx-background-color:white");
+        }
+    }
+
     private void handleEvent() {
-        ArrayList<Integer> indices = new ArrayList<>();
         gridPane.getChildren().forEach(item -> {
             if (item instanceof Group) {
                 return;
             }
-            item.addEventFilter(MouseDragEvent.DRAG_DETECTED, e -> {
-                Pane temp = (Pane) e.getSource();
-                int[] temp1 = getXYfromIndex(gridPane.getChildren().indexOf(temp)-1);
-                if (grid.getGridCells()[temp1[0]][temp1[1]] instanceof Dot) {
-                    indices.clear();
-                    item.startFullDrag();
-                    indices.add(gridPane.getChildren().indexOf(temp)-1);
-                }
-            });
-            item.addEventFilter(MouseDragEvent.MOUSE_DRAG_ENTERED, e -> {
-                Pane temp = (Pane) e.getSource();
-                int[] temp1 = getXYfromIndex(gridPane.getChildren().indexOf(temp)-1);
-                if (grid.getGridCells()[temp1[0]][temp1[1]] == null) {
-                    item.setStyle("-fx-background-color:green");
-                    indices.add(gridPane.getChildren().indexOf(temp)-1);
-                }
-            });
-            item.addEventFilter(MouseDragEvent.MOUSE_DRAG_RELEASED, e -> {
-                Pane temp = (Pane) e.getSource();
-                int[] temp1 = getXYfromIndex(gridPane.getChildren().indexOf(temp)-1);
-                int[] temp2 = getXYfromIndex(indices.get(0));
-                int[] temp3 = getXYfromIndex(indices.get(indices.size()-1));
-                Object o1 = grid.getGridCells()[temp2[0]][temp2[1]];
-                Object o2 = grid.getGridCells()[temp3[0]][temp3[1]];
-                System.out.println(o1);
-                System.out.println(o2);
 
+            item.addEventFilter(MouseDragEvent.DRAG_DETECTED, e -> {
+                FFPane itemPane = (FFPane) e.getSource();
+                if (itemPane.getGridItem() instanceof Dot ) {
+                    activeDot = (Dot) itemPane.getGridItem();
+                    item.startFullDrag();
+                }
             });
-            // Error when clicking on non-Obstacle Tile
+
+            // Half way should reset
+            // First drag is not resetting
+            // If dots connected, then don't reset
+            item.addEventFilter(MouseDragEvent.MOUSE_DRAG_ENTERED, e -> {
+                FFPane itemPane = (FFPane) e.getSource();
+                GridItem gridItem = itemPane.getGridItem();
+                if (gridItem instanceof Pipe && ((Pipe) gridItem).isEmpty()) {
+                    pipePaths.add(itemPane);
+                    Pipe pipe = (Pipe) gridItem;
+                    pipe.tempFill(activeDot.getColor());
+                    item.setStyle("-fx-background-color:" + (activeDot.getHexColor()));
+                } else {
+
+                }
+            });
+
+            item.addEventFilter(MouseDragEvent.MOUSE_DRAG_RELEASED, e -> {
+                FFPane itemPane = (FFPane) e.getSource();
+
+//                if (itemPane.getGridItem() instanceof Dot) {
+//                    Dot currentDot = (Dot) itemPane.getGridItem();
+//                    if (currentDot.getColor() == this.activeDot.getColor()) {
+//                        System.out.println("COMPLETE");
+//                    } else {
+//                        System.out.println("RESET");
+//                    }
+//                }
+            });
+
             item.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> {
-                Pane temp = (Pane) e.getSource();
-                int[] temp1 = getXYfromIndex(gridPane.getChildren().indexOf(temp)-1);
-                if (grid.getGridCells()[temp1[0]][temp1[1]] instanceof Obstacle) {
-                    if (!grid.update(temp1)) {
-                        ((Label) temp.getChildren().get(0)).setText(((Obstacle) grid.getGridCells()[temp1[0]][temp1[1]]).getHitPoints() + "");
+                FFPane pane = (FFPane) e.getSource();
+                if (pane.getGridItem() instanceof Obstacle) {
+                    Obstacle obstacle = (Obstacle) pane.getGridItem();
+                    int[] values = {obstacle.getX(), obstacle.getY()};
+                    if (!obstacle.destroy()) {
+                        ((Label) pane.getChildren().get(0)).setText(((Obstacle) pane.getGridItem()).getHitPoints() + "");
+                    } else {
+                        pane.getChildren().clear();
+                        pane.setGridItem(new Pipe(values[0], values[1]));
                     }
-//                    temp.getChildren().clear();
                 }
             });
         });
