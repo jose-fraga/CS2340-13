@@ -26,7 +26,7 @@ public class Helper {
         try {
             FXMLLoader loader = new FXMLLoader(Helper.class.getResource(screenName));
             Parent root = loader.load();
-            Scene scene = new Scene(root);
+            Scene scene = new Scene(root,850,850);
             stage.setScene(scene);
             stage.setTitle(stageTitle);
             stage.show();
