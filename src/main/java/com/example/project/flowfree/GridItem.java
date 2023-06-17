@@ -23,4 +23,9 @@ public class GridItem {
         this.y = y;
         this.isEmpty = isEmpty;
     }
+
+    @Override
+    public String toString() {
+        return String.format("GridItem(%d, %d)", this.x, this.y);
+    }
 }
