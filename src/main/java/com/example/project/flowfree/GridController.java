@@ -21,16 +21,12 @@ public class GridController implements Initializable {
     private Dot activeDot;
     private LinkedList<FFPane> pipePaths = new LinkedList<>();
 
+    private Level level;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         populate();
         handleEvent();
-    }
-
-    private int[] getXYfromIndex(int index) {
-        int y = index % grid.getGridCells()[0].length;
-        int x = index / grid.getGridCells()[0].length;
-        return new int[]{x, y};
     }
 
     private void populate() {
@@ -54,8 +50,8 @@ public class GridController implements Initializable {
     }
 
     private void resetPipePath() {
-        for (int i = 0; i < pipePaths.size(); i++) {
-            FFPane curr = pipePaths.get(i);
+        while (!pipePaths.isEmpty()) {
+            FFPane curr = pipePaths.pop();
             ((Pipe) curr.getGridItem()).reset();
             curr.setStyle("-fx-background-color: transparent");
         }
@@ -64,9 +60,7 @@ public class GridController implements Initializable {
 
     private void handleEvent() {
         gridPane.getChildren().forEach(item -> {
-            if (item instanceof Group) {
-                return;
-            }
+            if (item instanceof Group) return;
 
             item.addEventFilter(MouseDragEvent.DRAG_DETECTED, e -> {
                 FFPane itemPane = (FFPane) e.getSource();
@@ -79,10 +73,9 @@ public class GridController implements Initializable {
             });
 
             item.addEventFilter(MouseDragEvent.MOUSE_DRAG_ENTERED, e -> {
-//                System.out.println("Mouse Drag Entered: " + e.getSource());
-                if (activeDot == null) {
-                    return;
-                }
+                System.out.println("Mouse Drag Entered: " + item);
+                if (activeDot == null) return;
+
                 FFPane itemPane = (FFPane) e.getSource();
                 GridItem gridItem = itemPane.getGridItem();
                 if (gridItem instanceof Pipe && ((Pipe) gridItem).isEmpty()) {
@@ -90,7 +83,13 @@ public class GridController implements Initializable {
                     Pipe pipe = (Pipe) gridItem;
                     pipe.tempFill(activeDot.getColor());
                     item.setStyle("-fx-background-color:" + (activeDot.getHexColor()));
+                } else if (!pipePaths.isEmpty() && !activeDot.isConnectingDot(gridItem)) {
+                    System.out.println("BAD CONNECTION");
+                    resetPipePath();
                 }
+
+
+
 //                else if (gridItem instanceof Dot) {
 //                    Dot currentDot = (Dot) gridItem;
 //                    System.out.println("Current dot different: " + (currentDot != activeDot));
@@ -118,20 +117,28 @@ public class GridController implements Initializable {
 
                 System.out.println(pipePaths);
 
-                // checkPipe();
+                if ((pipePaths.size() == 0)) {
+                    // pipePath has no elements
+                    System.out.println("FAILURE #1");
+                    pipePaths.clear();
+                    return;
+                }
+                
+
                 if ((gridItem instanceof Dot) && (activeDot != gridItem) && (activeDot.getColor().equals(((Dot) gridItem).getColor()))) {
                     // Released On Matching Dot -> Check Pipes
                     if (checkPipe()) {
                         System.out.println("SUCCESS");
                         pipePaths.clear();
                     } else {
-                        System.out.println("FAILURE #1");
+                        // pipePath has incorrect objects
+                        System.out.println("FAILURE #2");
                         resetPipePath();
                         pipePaths.clear();
                     }
                 } else {
                     // Released On Non-Dot -> Reset & Clear Pipe
-                    System.out.println("FAILURE #2");
+                    System.out.println("FAILURE #3");
                     resetPipePath();
                     pipePaths.clear();
                 }
@@ -173,6 +180,7 @@ public class GridController implements Initializable {
                 return false;
             }
         }
+        System.out.println(pipePaths);
         return true;
     }
 }
