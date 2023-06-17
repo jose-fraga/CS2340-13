@@ -92,7 +92,7 @@ public class GridController implements Initializable {
                     pipe.tempFill(activeDot.getColor());
                     item.setStyle("-fx-background-color:" + (activeDot.getHexColor()));
                 } else {
-
+                    
                 }
             });
 
