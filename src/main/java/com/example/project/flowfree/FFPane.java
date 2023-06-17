@@ -20,6 +20,6 @@ public class FFPane extends Pane {
 
     @Override
     public String toString() {
-        return String.format("FFPane(%d, %d)", this.gridItem.getX(), this.gridItem.getY());
+        return String.format("FFPane(%s)", this.gridItem.toString());
     }
 }
