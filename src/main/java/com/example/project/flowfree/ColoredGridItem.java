@@ -23,4 +23,9 @@ public class ColoredGridItem extends GridItem {
                 (int)(color.getGreen() * 255),
                 (int)(color.getBlue() * 255));
     }
+
+    @Override
+    public String toString() {
+        return String.format("ColoredGridItem(%d, %d, %s)", this.getX(), this.getY(), this.getHexColor());
+    }
 }
