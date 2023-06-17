@@ -38,13 +38,13 @@ public class GameScreenController implements Initializable {
     public void initialize(URL arg0, ResourceBundle arg1) {
         try {
             FXMLLoader loader = new FXMLLoader();
-            AnchorPane gameScreen = loader.load(getClass().getResource(Helper.currentGame.gameFxmlPath()));
+            AnchorPane gameScreen = loader.load(Main.class.getResource(Helper.currentGame.gameFxmlPath()));
             gameContainer = gameScreen;
 
             gameTitle.setText(Helper.currentGame.title());
             String spritePath = Helper.getPlayerInstance().getSpritePath();
 
-            playerSprite.setImage(new Image(getClass().getResourceAsStream(spritePath)));
+            playerSprite.setImage(new Image(Main.class.getResourceAsStream(spritePath)));
             playerName.setText(Helper.getPlayerInstance().getName());
 
             System.out.println(Helper.currentGame.title() + " Game Started");
