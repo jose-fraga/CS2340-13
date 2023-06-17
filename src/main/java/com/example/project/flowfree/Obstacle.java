@@ -1,13 +1,14 @@
 package com.example.project.flowfree;
 
-public class Obstacle {
+public class Obstacle extends GridItem {
     private int hitPoints;
 
     public Obstacle(int hp) {
         this.hitPoints = hp;
     }
 
-    public Obstacle(Obstacle obstacleToCopy) {
+    public Obstacle(Obstacle obstacleToCopy, int x, int y) {
+        super(x, y);
         this.hitPoints = obstacleToCopy.getHitPoints();
     }
 

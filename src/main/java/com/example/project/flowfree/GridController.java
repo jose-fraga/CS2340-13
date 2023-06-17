@@ -2,93 +2,104 @@ package com.example.project.flowfree;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Group;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseDragEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.ResourceBundle;
-
+import java.util.concurrent.Flow;
 
 // Work on update & Controllers, UI Elements
-// 
-//
 public class GridController implements Initializable {
-    @FXML private GridPane gridPane = new GridPane();
-
-    private Grid grid;
+    @FXML private GridPane gridPane = new GridPane(); // for FXML
+    private Grid grid = new Grid(); // for Code Logic
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        grid = new Grid();
         populate();
         handleEvent();
     }
 
     private int[] getXYfromIndex(int index) {
-        int x = index % grid.getGridCells()[0].length;
-        int y = index / grid.getGridCells()[0].length;
-        System.out.println("x: " + x + " y: " + y);
+        int y = index % grid.getGridCells()[0].length;
+        int x = index / grid.getGridCells()[0].length;
+//        System.out.println("x: " + x + " y: " + y);
         return new int[]{x, y};
     }
 
-    private static String toRGBCode( Color color )
-    {
-        return String.format( "#%02X%02X%02X",
-                (int)( color.getRed() * 255 ),
-                (int)( color.getGreen() * 255 ),
-                (int)( color.getBlue() * 255 ) );
-    }
-
-    // Find the way to set the size of gridPane because now its hardcoded staticly in the fxml
     private void populate() {
-        Object[][] gridCells = grid.getGridCells();
+        GridItem[][] gridCells = grid.getGridCells();
         for (int i = 0; i < gridCells.length; i++) {
             for (int j = 0; j < gridCells[0].length; j++) {
-                Pane pane = new Pane();
-                if (gridCells[i][j] instanceof Dot) {
-                    Dot dot = (Dot) gridCells[i][j];
-                    pane.setStyle("-fx-background-color:" + toRGBCode(dot.getColor()));
-                } else if (gridCells[i][j] instanceof Obstacle) {
-                    Obstacle obstacle = (Obstacle) gridCells[i][j];
-                    pane.getChildren().add(new Label(obstacle.getHitPoints() + ""));
+                GridItem gridItem = gridCells[i][j];
+                FFPane pane = new FFPane(gridItem);
+                if (gridItem instanceof ColoredGridItem) {
+                    ColoredGridItem coloredGridItem = (ColoredGridItem) gridItem;
+                    if (coloredGridItem instanceof Dot) {
+                        pane.setStyle("-fx-background-color:" + (coloredGridItem.getHexColor()));
+                    }
+                } else if (gridItem instanceof Obstacle) {
+                    pane.getChildren().add(new Label(((Obstacle) gridItem).getHitPoints() + ""));
+                    pane.getChildren().get(0).setTranslateX(20);
                 }
-                gridPane.add(pane,i,j,1,1);
+                gridPane.add(pane,j,i,1,1);
             }
         }
     }
 
     private void handleEvent() {
+        ArrayList<Integer> indices = new ArrayList<>();
         gridPane.getChildren().forEach(item -> {
+            if (item instanceof Group) {
+                return;
+            }
             item.addEventFilter(MouseDragEvent.DRAG_DETECTED, e -> {
-                item.startFullDrag();
+                Pane temp = (Pane) e.getSource();
+                int[] temp1 = getXYfromIndex(gridPane.getChildren().indexOf(temp)-1);
+                if (grid.getGridCells()[temp1[0]][temp1[1]] instanceof Dot) {
+                    indices.clear();
+                    item.startFullDrag();
+                    indices.add(gridPane.getChildren().indexOf(temp)-1);
+                }
             });
             item.addEventFilter(MouseDragEvent.MOUSE_DRAG_ENTERED, e -> {
-//                if (item instanceof ImageView) {
-//                    ImageView gridCell = (ImageView) item;
-//                    gridCell.setImage(new Image(Objects.requireNonNull(Main.class.getResourceAsStream("images/x.png"))));
-//                    item.setDisable(true);
-//                }
-                item.setStyle("-fx-background-color:green");
-                grid.update(getXYfromIndex(gridPane.getChildren().indexOf(((Pane) e.getSource()))), Color.GREEN);
-                System.out.println(Arrays.deepToString(grid.getGridCells()));
+                Pane temp = (Pane) e.getSource();
+                int[] temp1 = getXYfromIndex(gridPane.getChildren().indexOf(temp)-1);
+                if (grid.getGridCells()[temp1[0]][temp1[1]] == null) {
+                    item.setStyle("-fx-background-color:green");
+                    indices.add(gridPane.getChildren().indexOf(temp)-1);
+                }
             });
             item.addEventFilter(MouseDragEvent.MOUSE_DRAG_RELEASED, e -> {
-                // endIndex
-//                if (item instanceof ImageView) {
-//                    System.out.println(gridPane.getChildren().indexOf(((ImageView) e.getSource())));
-//                }
-                getXYfromIndex(gridPane.getChildren().indexOf(((Pane) e.getSource())));
+                Pane temp = (Pane) e.getSource();
+                int[] temp1 = getXYfromIndex(gridPane.getChildren().indexOf(temp)-1);
+                int[] temp2 = getXYfromIndex(indices.get(0));
+                int[] temp3 = getXYfromIndex(indices.get(indices.size()-1));
+                Object o1 = grid.getGridCells()[temp2[0]][temp2[1]];
+                Object o2 = grid.getGridCells()[temp3[0]][temp3[1]];
+                System.out.println(o1);
+                System.out.println(o2);
+
             });
+            // Error when clicking on non-Obstacle Tile
             item.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> {
-                int[] temp = getXYfromIndex(gridPane.getChildren().indexOf(((Pane) e.getSource())));
-                grid.update(temp);
-                ((Label)((Pane) item).getChildren().get(0)).setText(grid.get);
+                Pane temp = (Pane) e.getSource();
+                int[] temp1 = getXYfromIndex(gridPane.getChildren().indexOf(temp)-1);
+                if (grid.getGridCells()[temp1[0]][temp1[1]] instanceof Obstacle) {
+                    if (!grid.update(temp1)) {
+                        ((Label) temp.getChildren().get(0)).setText(((Obstacle) grid.getGridCells()[temp1[0]][temp1[1]]).getHitPoints() + "");
+                    }
+//                    temp.getChildren().clear();
+                }
             });
         });
     }
