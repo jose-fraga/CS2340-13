@@ -6,7 +6,7 @@ import javafx.scene.paint.Color;
 
 public enum LevelDifficulty {
         EASY(3, new Object[][]{
-                {new Obstacle(5), new Dot(Color.GOLD), null, null, null, null, new Dot(Color.GOLD), null, null},
+                {new Obstacle(5), new Dot(Color.GOLD), null, null, null, new Dot(Color.BROWN), new Dot(Color.BLUE), null, null},
                 {new Obstacle(10), null, new Dot(Color.GOLD), null, null, null, new Dot(Color.GOLD), null, null},
                 {new Obstacle(15), null, null, null, null, new Dot(Color.GOLD), new Dot(Color.GOLD), null, null},
             }
@@ -36,8 +36,8 @@ public enum LevelDifficulty {
             if (level <= levels.length) {
                 Object[] levelToCopy = levels[level];
                 for (int i = 0; i < levelToCopy.length; i++) {
-                    int y = i % size;
-                    int x = i / size; //integer division
+                    int x = i % size;
+                    int y = i / size; //integer division
                     copiedLevel[x][y] = levelToCopy[i];
                 }
             }
