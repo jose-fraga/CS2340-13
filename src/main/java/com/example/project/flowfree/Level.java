@@ -19,10 +19,6 @@ public class Level {
     public int getLevelNumber() { return this.levelNumber; }
     public void setLevelNumber(int number) { this.levelNumber = number; }
 
-    public boolean isCompleted() {
-        return true;
-    }
-
     public void pause() {
     }
 
