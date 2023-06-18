@@ -14,17 +14,20 @@ public enum LevelDifficulty {
                         null, null, new Dot(Color.BLUE), null,
                         new Dot(Color.GREEN), null, new Obstacle(10), null
                 },
-                {new Obstacle(10), null, new Dot(Color.GOLD), null, null, null, new Dot(Color.GOLD), null, null},
-                {new Obstacle(15), null, null, null, null, new Dot(Color.GOLD), new Dot(Color.GOLD), null, null},
+                {
+                        new Dot(Color.ORCHID), new Obstacle(5), new Obstacle(5), new Obstacle(5),
+                        new Dot(Color.LIMEGREEN), new Obstacle(10), new Dot(Color.LIMEGREEN), new Obstacle(5),
+                        new Dot(Color.MEDIUMPURPLE), new Obstacle(10), new Dot(Color.MEDIUMPURPLE), new Obstacle(5),
+                        new Dot(Color.ORCHID), new Obstacle(5), new Obstacle(5), new Obstacle(5)
+                },
+                {
+                        new Dot(Color.LIMEGREEN), null, null, new Dot(Color.RED),
+                        new Dot(Color.BLUEVIOLET), new Obstacle(15), new Dot(Color.RED), new Dot(Color.BLUEVIOLET),
+                        null, null, new Dot(Color.LIMEGREEN), new Obstacle(15),
+                        null, new Obstacle(10), null, null
+                },
             }
         );
-
-//        MEDIUM(4, new GridItem[][]{
-//                { new Obstacle(10), new Dot(Color.GOLD), null, null, null, null, new Dot(Color.GOLD) },
-//                { new Obstacle(10), new Dot(Color.GOLD), null, null, null, null, new Dot(Color.GOLD) },
-//                { new Obstacle(10), new Dot(Color.GOLD), null, null, null, null, new Dot(Color.GOLD) },
-//            }
-//        );
 
         private final int size;
         private final GridItem[][] levels;
@@ -34,10 +37,10 @@ public enum LevelDifficulty {
             this.levels = levels;
         }
 
-//          0 1 2
-//       0 [1,2,3]
-//       1 [1,2,3]
-//       2 [1,2,3]
+        public int size() {
+            return size;
+        }
+
         public GridItem[][] level(int level) {
             GridItem[][] copiedLevel = new GridItem[size][size];
             if (level >= 0 && level < levels.length) {

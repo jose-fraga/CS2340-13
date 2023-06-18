@@ -1,15 +1,19 @@
 package com.example.project.flowfree;
 
-public class Obstacle extends GridItem {
+import javafx.scene.paint.Color;
+
+public class Obstacle extends Pipe {
     private int hitPoints;
 
     public Obstacle(int hp) {
+        super();
         this.hitPoints = hp;
     }
 
     public Obstacle(Obstacle obstacleToCopy, int x, int y) {
         super(x, y);
         this.hitPoints = obstacleToCopy.getHitPoints();
+        this.setIsEmpty(false);
     }
 
     public int getHitPoints() {
@@ -18,6 +22,13 @@ public class Obstacle extends GridItem {
 
     public boolean destroy() {
         this.hitPoints--;
+        if (this.hitPoints <= 0) {
+            this.setIsEmpty(true);
+        }
+        return this.isCleared();
+    }
+
+    public boolean isCleared() {
         return this.hitPoints <= 0;
     }
 

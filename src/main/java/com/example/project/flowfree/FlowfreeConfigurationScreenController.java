@@ -11,5 +11,4 @@ public class FlowfreeConfigurationScreenController implements Initializable {
     public void initialize(URL arg0, ResourceBundle arg1) {
         System.out.println("Flow Free Configuration Screen");
     }
-
 }

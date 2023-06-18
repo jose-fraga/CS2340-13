@@ -5,29 +5,23 @@ import javafx.scene.paint.Color;
 
 public class Grid {
     private GridItem gridCells[][];
+    private int size;
 
-    public Grid() {
-        gridCells = LevelDifficulty.EASY.level(0);
+    public Grid(LevelDifficulty difficulty, int level) {
+        gridCells = difficulty.level(level);
+        size = difficulty.size();
     }
 
-    public boolean update(int[] xy) {
-        GridItem o = gridCells[xy[0]][xy[1]];
-        if (o instanceof Obstacle) {
-            if (((Obstacle) o).destroy()) {
-                gridCells[xy[0]][xy[1]] = null;
-                return true;
+    public boolean isComplete() {
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                GridItem gridItem = gridCells[i][j];
+                if (gridItem.isEmpty()) {
+                    return false;
+                }
             }
         }
-        return false;
-    }
-
-    public boolean update(int[] xy, Color color) {
-        GridItem o = gridCells[xy[0]][xy[1]];
-        if (o == null) {
-            gridCells[xy[0]][xy[1]] = new Pipe(color,xy[0],xy[1]);
-            return true;
-        }
-        return false;
+        return true;
     }
 
     public GridItem[][] getGridCells() {

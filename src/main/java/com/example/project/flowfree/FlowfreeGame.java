@@ -2,8 +2,17 @@ package com.example.project.flowfree;
 
 public class FlowfreeGame {
     private static FlowfreeGame game_instance;
-    public int selectLevel(int level) {
-        return 1;
+    private Level level;
+
+    private FlowfreeGame() {}
+
+    public Level selectLevel(int levelNumber) {
+        this.level = new Level(levelNumber);
+        return this.level;
+    }
+
+    public Level getLevel() {
+        return this.level;
     }
 
     public void exit() {}

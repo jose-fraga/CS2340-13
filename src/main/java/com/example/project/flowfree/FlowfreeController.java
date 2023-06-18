@@ -13,18 +13,21 @@ import java.util.ResourceBundle;
 
 public class FlowfreeController implements Initializable {
     @FXML private Button button1;
+    @FXML private Button button2;
+    @FXML private Button button3;
 
-    private Level level;
+    private FlowfreeGame gameInstance;
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
-        System.out.println("Flow Free Game Started");
-        level = new Level();
+        System.out.println("Flow Free Started!");
+        this.gameInstance = FlowfreeGame.getInstance();
     }
 
     @FXML private void selectLevel(ActionEvent e) {
-        level.setLevelNumber(Integer.parseInt(((Button) e.getSource()).getText()));
+        int levelNumber = Integer.parseInt(((Button) e.getSource()).getText()) - 1;
+        this.gameInstance.selectLevel(levelNumber);
         Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-        Helper.changeScreen(stage, "flowfree/levels/level1.fxml", "Level #1");
+        Helper.changeScreen(stage, "flowfree/levels/easy.fxml", "Flow Free (Difficulty - EASY)");
     }
 }
