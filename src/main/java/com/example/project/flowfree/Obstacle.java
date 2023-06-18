@@ -1,7 +1,5 @@
 package com.example.project.flowfree;
 
-import javafx.scene.paint.Color;
-
 public class Obstacle extends Pipe {
     private int hitPoints;
 
@@ -9,16 +7,13 @@ public class Obstacle extends Pipe {
         super();
         this.hitPoints = hp;
     }
-
     public Obstacle(Obstacle obstacleToCopy, int x, int y) {
         super(x, y);
         this.hitPoints = obstacleToCopy.getHitPoints();
         this.setIsEmpty(false);
     }
 
-    public int getHitPoints() {
-        return hitPoints;
-    }
+    public int getHitPoints() { return this.hitPoints; }
 
     public boolean destroy() {
         this.hitPoints--;

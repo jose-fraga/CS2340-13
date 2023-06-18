@@ -1,15 +1,12 @@
 package com.example.project;
 
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.MenuButton;
 import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 import java.net.URL;
@@ -19,6 +16,7 @@ public class ConfigureController implements Initializable {
     @FXML private TextField avatarName;
     @FXML private Label avatarNameError;
     @FXML private ChoiceBox<String> characterSelect;
+
     private String[] characters = {
             Sprite.CHARACTER1.name(),
             Sprite.CHARACTER2.name(),
@@ -28,6 +26,7 @@ public class ConfigureController implements Initializable {
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
+        System.out.println("ENTERED: " + Helper.currentGame.title() + " Configuration Screen");
         characterSelect.getItems().addAll(characters);
     }
 
@@ -45,7 +44,6 @@ public class ConfigureController implements Initializable {
         player.setName(playerName);
         player.setSpritePath(selectedSprite.path());
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-//        Helper.changeScreen(stage, Helper.currentGame.gameFxmlPath(), "CS2340 - " + Helper.currentGame.title() + " (Game)");
         Helper.changeScreen(stage, "GameScreen.fxml", "CS2340 - " + Helper.currentGame.title() + " (Game)");
     }
 }

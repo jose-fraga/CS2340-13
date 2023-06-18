@@ -1,17 +1,15 @@
 package com.example.project.flowfree;
+
 import javafx.scene.paint.Color;
 
 public class Dot extends ColoredGridItem {
+    // Might remove isConnected
     private boolean isConnected;
 
-    public void setConnected(boolean value) { this.isConnected = value; }
+    public Dot(Color color) { super(color); }
+    public Dot(Dot dotToCopy, int x, int y) { super(dotToCopy.getColor(), x,y); }
 
-    public Dot(Color color) {
-        super(color);
-    }
-    public Dot(Dot dotToCopy, int x, int y) {
-        super(dotToCopy.getColor(), x,y);
-    }
+    public void setConnected(boolean value) { this.isConnected = value; }
 
     public boolean isConnectingDot(GridItem gridItem) {
         boolean result = false;

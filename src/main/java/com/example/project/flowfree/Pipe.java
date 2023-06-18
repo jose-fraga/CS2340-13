@@ -1,5 +1,6 @@
 package com.example.project.flowfree;
 
+import com.example.project.flowfree.enums.PipeState;
 import javafx.scene.paint.Color;
 
 public class Pipe extends ColoredGridItem {
@@ -9,16 +10,18 @@ public class Pipe extends ColoredGridItem {
         super(null);
         setPipeState(PipeState.EMPTY);
     }
-
-
     public Pipe(int x, int y) {
         super(null, x, y);
         setPipeState(PipeState.EMPTY);
     }
-
     public Pipe(Color color, int x, int y) {
         super(color, x, y);
         setPipeState(PipeState.EMPTY);
+    }
+
+    @Override
+    public boolean getIsEmpty() {
+        return this.pipeState == PipeState.EMPTY;
     }
 
     public void setPipeState(PipeState state) {
@@ -26,22 +29,17 @@ public class Pipe extends ColoredGridItem {
         this.setIsEmpty(this.pipeState == PipeState.EMPTY);
     }
 
+    public void resetFill() {
+        this.setColor(null);
+        this.setPipeState(PipeState.EMPTY);
+    }
+
     public void tempFill(Color color) {
         this.setColor(color);
         setPipeState(PipeState.FILLED_TEMP);
     }
 
-    @Override
-    public boolean isEmpty() {
-        return this.pipeState == PipeState.EMPTY;
-    }
-
-    public void reset() {
-        this.setColor(null);
-        this.setPipeState(PipeState.EMPTY);
-    }
-
-    public void finalize() {
+    public void finalizeFill() {
         if (this.pipeState == PipeState.FILLED_TEMP) {
             this.setPipeState(PipeState.FILLED_FINAL);
         }
