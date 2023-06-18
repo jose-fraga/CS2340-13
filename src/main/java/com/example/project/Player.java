@@ -1,5 +1,4 @@
 package com.example.project;
-
 public class Player {
     private String name = DEFAULT_NAME;
     private String spritePath = DEFAULT_SPRITE_PATH;

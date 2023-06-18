@@ -1,4 +1,4 @@
-package com.example.project.flowfree;
+package com.example.project.flowfree.enums;
 
 public enum PipeState {
     EMPTY,

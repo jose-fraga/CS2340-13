@@ -1,6 +1,14 @@
-package com.example.project.flowfree;
+package com.example.project.flowfree.controllers;
 
 import com.example.project.Helper;
+import com.example.project.flowfree.ColoredGridItem;
+import com.example.project.flowfree.Dot;
+import com.example.project.flowfree.FFGame;
+import com.example.project.flowfree.FFPane;
+import com.example.project.flowfree.Grid;
+import com.example.project.flowfree.GridItem;
+import com.example.project.flowfree.Obstacle;
+import com.example.project.flowfree.Pipe;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Group;
@@ -8,24 +16,21 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseDragEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
 
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.ResourceBundle;
 
 public class GridController implements Initializable {
-    // for UI
     @FXML private GridPane gridPane = new GridPane();
-    // for Code
+
     private Grid grid;
     private Dot activeDot;
     private LinkedList<FFPane> pipePaths = new LinkedList<>();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        this.grid = FlowfreeGame.getInstance().getLevel().getGrid();
+        this.grid = FFGame.getGameInstance().getLevel().getGrid();
         populate();
         handleEvent();
     }
@@ -50,15 +55,6 @@ public class GridController implements Initializable {
         }
     }
 
-    private void resetPipePath() {
-        while (!pipePaths.isEmpty()) {
-            FFPane curr = pipePaths.pop();
-            ((Pipe) curr.getGridItem()).reset();
-            curr.setStyle("-fx-background-color: transparent");
-        }
-        activeDot = null;
-    }
-
     private void handleEvent() {
         gridPane.getChildren().forEach(item -> {
             if (item instanceof Group) return;
@@ -80,7 +76,7 @@ public class GridController implements Initializable {
 
                 FFPane itemPane = (FFPane) e.getSource();
                 GridItem gridItem = itemPane.getGridItem();
-                if (gridItem instanceof Pipe && ((Pipe) gridItem).isEmpty()) {
+                if (gridItem instanceof Pipe && ((Pipe) gridItem).getIsEmpty()) {
                     pipePaths.add(itemPane);
                     Pipe pipe = (Pipe) gridItem;
                     pipe.tempFill(activeDot.getColor());
@@ -95,21 +91,19 @@ public class GridController implements Initializable {
             item.addEventFilter(MouseDragEvent.MOUSE_DRAG_RELEASED, e -> {
                 FFPane itemPane = (FFPane) e.getSource();
                 GridItem gridItem = itemPane.getGridItem();
-
                 if ((pipePaths.size() == 0)) {
                     // pipePaths has no elements
                     System.out.println("FAILURE #1 - PipePaths is Empty");
                     pipePaths.clear();
                     return;
                 }
-
                 if ((gridItem instanceof Dot) && (activeDot != gridItem) && (activeDot.getColor().equals(((Dot) gridItem).getColor()))) {
                     // Drag released on matching dots -> checkPipes()
                     if (checkPipes()) {
                         System.out.println("SUCCESS!");
                         if (grid.isComplete()) {
                             System.out.println("LEVEL COMPLETE!");
-                            Helper.changeGameScreen("flowfree/gameSuccess.fxml");
+                            Helper.changeGameScreen("flowfree/FFEndScreen.fxml");
                         } else {
                             System.out.println("KEEP GOING...");
                         }
@@ -145,6 +139,15 @@ public class GridController implements Initializable {
         });
     }
 
+    private void resetPipePath() {
+        while (!pipePaths.isEmpty()) {
+            FFPane curr = pipePaths.pop();
+            ((Pipe) curr.getGridItem()).resetFill();
+            curr.setStyle("-fx-background-color: transparent");
+        }
+        activeDot = null;
+    }
+
     private boolean checkPipes() {
         for (int i = 0; i < pipePaths.size(); i++) {
             FFPane curr = pipePaths.get(i);
@@ -152,7 +155,7 @@ public class GridController implements Initializable {
                 return false;
             }
             if ((curr.getGridItem() instanceof Pipe) & (activeDot.getColor().equals(((Pipe) curr.getGridItem()).getColor()))) {
-                ((Pipe) curr.getGridItem()).finalize();
+                ((Pipe) curr.getGridItem()).finalizeFill();
             } else {
                 return false;
             }

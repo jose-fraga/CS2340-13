@@ -1,12 +1,11 @@
 package com.example.project.flowfree;
 
-
 import com.example.project.flowfree.enums.LevelDifficulty;
 
 public class Level {
+    // Update class with timer
     private int levelNumber;
     private int timer;
-
     private Grid grid;
 
     public Level(int levelNumber) {
@@ -15,9 +14,7 @@ public class Level {
         this.grid = new Grid(LevelDifficulty.EASY, levelNumber); //Hardcoding EASY here
     }
 
-    public Grid getGrid() {
-        return this.grid;
-    }
+    public Grid getGrid() { return this.grid; }
 
     public int getLevelNumber() { return this.levelNumber; }
     public void setLevelNumber(int number) { this.levelNumber = number; }

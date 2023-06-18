@@ -9,4 +9,10 @@ module com.example.project {
     opens com.example.project.codenames to javafx.fxml;
     exports com.example.project.flowfree;
     opens com.example.project.flowfree to javafx.fxml;
+    exports com.example.project.flowfree.controllers;
+    opens com.example.project.flowfree.controllers to javafx.fxml;
+    exports com.example.project.flowfree.enums;
+    opens com.example.project.flowfree.enums to javafx.fxml;
+    exports com.example.project.twentyfourtyeight;
+    opens com.example.project.twentyfourtyeight to javafx.fxml;
 }

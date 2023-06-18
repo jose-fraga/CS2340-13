@@ -5,24 +5,23 @@ public class GridItem {
     private int y;
     private boolean isEmpty;
 
-    public int getX() { return x; }
-    public int getY() { return y; }
-    public boolean isEmpty() { return isEmpty; }
-    public void setIsEmpty(boolean isEmpty) { this.isEmpty = isEmpty;}
-
     public GridItem() {}
-
     public GridItem(int x, int y) {
         this.x = x;
         this.y = y;
         this.isEmpty = false;
     }
-
     public GridItem(int x, int y, boolean isEmpty) {
         this.x = x;
         this.y = y;
         this.isEmpty = isEmpty;
     }
+
+    public int getX() { return this.x; }
+    public int getY() { return this.y; }
+
+    public boolean getIsEmpty() { return this.isEmpty; }
+    public void setIsEmpty(boolean isEmpty) { this.isEmpty = isEmpty;}
 
     @Override
     public String toString() {

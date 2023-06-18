@@ -37,9 +37,7 @@ public enum LevelDifficulty {
             this.levels = levels;
         }
 
-        public int size() {
-            return size;
-        }
+        public int size() { return size; }
 
         public GridItem[][] level(int level) {
             GridItem[][] copiedLevel = new GridItem[size][size];
