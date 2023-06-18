@@ -9,8 +9,8 @@
         <ButtonBar fx:id="buttonBar" buttonOrder="" layoutX="172.0" layoutY="150.0" prefHeight="40.0" prefWidth="200.0">
             <buttons>
                 <Button mnemonicParsing="false" onAction="#selectLevel" text="1" />
-                <Button mnemonicParsing="false" text="2" />
-                <Button mnemonicParsing="false" text="3" />
+                <Button mnemonicParsing="false" onAction="#selectLevel" text="2" />
+                <Button mnemonicParsing="false" onAction="#selectLevel" text="3" />
             </buttons>
         </ButtonBar>
     </children>

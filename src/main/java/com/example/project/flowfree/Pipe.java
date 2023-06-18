@@ -4,6 +4,13 @@ import javafx.scene.paint.Color;
 
 public class Pipe extends ColoredGridItem {
     private PipeState pipeState;
+
+    public Pipe() {
+        super(null);
+        setPipeState(PipeState.EMPTY);
+    }
+
+
     public Pipe(int x, int y) {
         super(null, x, y);
         setPipeState(PipeState.EMPTY);
