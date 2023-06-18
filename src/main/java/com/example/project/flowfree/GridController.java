@@ -75,7 +75,6 @@ public class GridController implements Initializable {
 
             // Checks full drag from Dots
             item.addEventFilter(MouseDragEvent.MOUSE_DRAG_ENTERED, e -> {
-                System.out.println("Mouse Drag Entered: " + item);
                 if (activeDot == null) return;
 
                 FFPane itemPane = (FFPane) e.getSource();
@@ -110,7 +109,7 @@ public class GridController implements Initializable {
                         if (grid.isComplete()) {
                             System.out.println("LEVEL COMPLETE!");
                         } else {
-                            System.out.println("Keep going...");
+                            System.out.println("KEEP GOING...");
                         }
                         pipePaths.clear();
                     } else {
@@ -121,7 +120,7 @@ public class GridController implements Initializable {
                     }
                 } else {
                     // Released On non-Dot object -> Reset & clear pipePaths
-                    System.out.println("FAILURE #3");
+                    System.out.println("FAILURE #3 - Drag released on non-Dot Object");
                     resetPipePath();
                     pipePaths.clear();
                 }
@@ -156,7 +155,6 @@ public class GridController implements Initializable {
                 return false;
             }
         }
-        System.out.println(pipePaths);
         return true;
     }
 }
