@@ -7,7 +7,7 @@ import com.example.project.flowfree.Pipe;
 import javafx.scene.paint.Color;
 
 public enum LevelDifficulty {
-        EASY(4, new GridItem[][]{
+        EASY("flowfree/levels/Easy.fxml", 4, new GridItem[][]{
                 {
                         new Dot(Color.GREEN), new Dot(Color.RED), new Dot(Color.BLUE), new Dot(Color.RED),
                         null, null, new Obstacle(1), null,
@@ -29,14 +29,17 @@ public enum LevelDifficulty {
             }
         );
 
+        private final String path;
         private final int size;
         private final GridItem[][] levels;
 
-        LevelDifficulty(int size, GridItem[][] levels) {
+        LevelDifficulty(String path, int size, GridItem[][] levels) {
+            this.path = path;
             this.size = size;
             this.levels = levels;
         }
 
+        public String path() { return this.path; }
         public int size() { return size; }
 
         public GridItem[][] level(int level) {

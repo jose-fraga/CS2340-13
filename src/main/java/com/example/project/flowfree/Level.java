@@ -5,12 +5,12 @@ import com.example.project.flowfree.enums.LevelDifficulty;
 public class Level {
     // Update class with timer
     private int levelNumber;
-    private int timer;
+    public TimerLogic timer;
     private Grid grid;
 
     public Level(int levelNumber) {
         this.levelNumber = levelNumber;
-        this.timer = 0;
+        this.timer = new TimerLogic();
         this.grid = new Grid(LevelDifficulty.EASY, levelNumber); //Hardcoding EASY here
     }
 
@@ -20,14 +20,14 @@ public class Level {
     public void setLevelNumber(int number) { this.levelNumber = number; }
 
     public void pause() {
+
     }
 
     public void resume() {
+
     }
 
     public void restart() {
-    }
 
-    public void quit() {
     }
 }

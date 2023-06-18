@@ -7,11 +7,16 @@ import com.example.project.flowfree.FFGame;
 import com.example.project.flowfree.FFPane;
 import com.example.project.flowfree.Grid;
 import com.example.project.flowfree.GridItem;
+import com.example.project.flowfree.Level;
 import com.example.project.flowfree.Obstacle;
 import com.example.project.flowfree.Pipe;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Group;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseDragEvent;
 import javafx.scene.input.MouseEvent;
@@ -23,17 +28,36 @@ import java.util.ResourceBundle;
 
 public class GridController implements Initializable {
     @FXML private GridPane gridPane = new GridPane();
+    @FXML private Button pauseButton;
+    @FXML private Label timer;
 
+    private Level level;
     private Grid grid;
     private Dot activeDot;
     private LinkedList<FFPane> pipePaths = new LinkedList<>();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        this.level = FFGame.getGameInstance().getLevel();
         this.grid = FFGame.getGameInstance().getLevel().getGrid();
+
+        level.timer.startTimer(0);
+//        timer.setText(level.timer.getSspTime().get());
+
+        level.timer.getSspTime().addListener(
+            new ChangeListener() {
+                @Override public void changed(ObservableValue o, Object oldVal, Object newVal) {
+                    timer.setText(((SimpleStringProperty) newVal).get());
+                }
+            }
+        );
+
+
         populate();
         handleEvent();
     }
+
+
 
     private void populate() {
         GridItem[][] gridCells = grid.getGridCells();
@@ -58,6 +82,8 @@ public class GridController implements Initializable {
     private void handleEvent() {
         gridPane.getChildren().forEach(item -> {
             if (item instanceof Group) return;
+            timer.setText(level.timer.getSspTime().get());
+            System.out.println(level.timer.getSspTime().get());
 
             // Starts drags from Dots
             item.addEventFilter(MouseDragEvent.DRAG_DETECTED, e -> {
