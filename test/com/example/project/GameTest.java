@@ -32,8 +32,8 @@ class GameTest {
     @Test
     void testGameFLOW() {
         assertEquals("Flow Free", Game.FLOW.title());
-        assertEquals("flowfree/FFSplashScreen.fxml", Game.FLOW.initialFxmlPath());
-        assertEquals("flowfree/FFLevelScreen.fxml", Game.FLOW.gameFxmlPath());
+        assertEquals("FlowScreen.fxml", Game.FLOW.initialFxmlPath());
+        assertEquals("FlowGameScreen.fxml", Game.FLOW.gameFxmlPath());
         assertEquals(Game.FLOW, Game.values()[1]);
         assertEquals(Game.FLOW, Game.valueOf("FLOW"));
     }
