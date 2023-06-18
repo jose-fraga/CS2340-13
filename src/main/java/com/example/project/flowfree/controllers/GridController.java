@@ -10,9 +10,11 @@ import com.example.project.flowfree.GridItem;
 import com.example.project.flowfree.Level;
 import com.example.project.flowfree.Obstacle;
 import com.example.project.flowfree.Pipe;
+import javafx.animation.Animation;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Group;
@@ -41,23 +43,14 @@ public class GridController implements Initializable {
         this.level = FFGame.getGameInstance().getLevel();
         this.grid = FFGame.getGameInstance().getLevel().getGrid();
 
-        level.timer.startTimer(0);
-//        timer.setText(level.timer.getSspTime().get());
-
-        level.timer.getSspTime().addListener(
-            new ChangeListener() {
-                @Override public void changed(ObservableValue o, Object oldVal, Object newVal) {
-                    timer.setText(((SimpleStringProperty) newVal).get());
-                }
-            }
-        );
-
 
         populate();
         handleEvent();
     }
 
+    private void pauseTimer(ActionEvent actionEvent) {
 
+    }
 
     private void populate() {
         GridItem[][] gridCells = grid.getGridCells();
