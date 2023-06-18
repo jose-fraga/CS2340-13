@@ -7,7 +7,7 @@ public class FFGame {
     private FFGame() {}
 
     public Level getLevel() { return this.level; }
-    public void setLevel(int levelNumber) { this.level = new Level(levelNumber); }
+    public void createLevel(int levelNumber) { this.level = new Level(levelNumber); }
 
     public static synchronized FFGame getGameInstance() {
         if (game_instance == null) {

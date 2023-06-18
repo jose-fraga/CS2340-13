@@ -154,7 +154,6 @@ public class GridController implements Initializable {
                 if (pane.getGridItem() instanceof Obstacle) {
                     Obstacle obstacle = (Obstacle) pane.getGridItem();
                     if (obstacle.isCleared()) return;
-                    int[] values = {obstacle.getX(), obstacle.getY()};
                     if (!obstacle.destroy()) {
                         ((Label) pane.getChildren().get(0)).setText(((Obstacle) pane.getGridItem()).getHitPoints() + "");
                     } else {

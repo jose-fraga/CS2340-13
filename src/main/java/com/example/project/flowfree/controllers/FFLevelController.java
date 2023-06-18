@@ -26,12 +26,12 @@ public class FFLevelController implements Initializable {
     @FXML private Label timerDisplay;
 
     private FFGame gameInstance;
-
     private final String SCREEN_GAME_EASY = LevelDifficulty.EASY.path();
     private final String SCREEN_LEVEL_SELECT = "flowfree/FFLevelSelectScreen.fxml";
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
+
         this.gameInstance = FFGame.getGameInstance();
     }
 
@@ -44,8 +44,8 @@ public class FFLevelController implements Initializable {
     }
 
     @FXML private void selectLevel(ActionEvent e) throws IOException {
-        int levelNumber = Integer.parseInt(((Button) e.getSource()).getText())-1;
-        this.gameInstance.setLevel(levelNumber);
+        int levelNumber = Integer.parseInt(((Button) e.getSource()).getText()) - 1;
+        this.gameInstance.createLevel(levelNumber);
         Helper.changeGameScreen(SCREEN_GAME_EASY);
     }
 }
