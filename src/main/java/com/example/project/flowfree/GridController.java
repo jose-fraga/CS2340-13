@@ -1,5 +1,6 @@
 package com.example.project.flowfree;
 
+import com.example.project.Helper;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Group;
@@ -108,6 +109,7 @@ public class GridController implements Initializable {
                         System.out.println("SUCCESS!");
                         if (grid.isComplete()) {
                             System.out.println("LEVEL COMPLETE!");
+                            Helper.changeGameScreen("flowfree/gameSuccess.fxml");
                         } else {
                             System.out.println("KEEP GOING...");
                         }

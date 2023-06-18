@@ -11,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -19,7 +20,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class GameScreenController implements Initializable {
-    @FXML private AnchorPane gameContainer;
+//    @FXML private AnchorPane gameContainer;
+    @FXML private BorderPane gamePane;
     @FXML private Text gameTitle;
     @FXML private ImageView playerSprite;
     @FXML private Text playerName;
@@ -27,9 +29,14 @@ public class GameScreenController implements Initializable {
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         try {
-            FXMLLoader loader = new FXMLLoader();
-            AnchorPane gameScreen = loader.load(Main.class.getResource(Helper.currentGame.gameFxmlPath()));
-            gameContainer = gameScreen;
+//            FXMLLoader loader = new FXMLLoader();
+//            AnchorPane gameScreen = loader.load(Main.class.getResource(Helper.currentGame.gameFxmlPath()));
+//            gameContainer = gameScreen;
+            Helper.setGamePane(gamePane);
+            Helper.changeGameScreen(Helper.currentGame.gameFxmlPath());
+//            FXMLLoader loader = new FXMLLoader();
+//            Parent root = loader.load(Main.class.getResource(Helper.currentGame.gameFxmlPath()));
+//            gamePane.setCenter(root);
 
             gameTitle.setText(Helper.currentGame.title());
             String spritePath = Helper.getPlayerInstance().getSpritePath();

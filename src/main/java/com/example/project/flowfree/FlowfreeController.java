@@ -27,7 +27,9 @@ public class FlowfreeController implements Initializable {
     @FXML private void selectLevel(ActionEvent e) {
         int levelNumber = Integer.parseInt(((Button) e.getSource()).getText()) - 1;
         this.gameInstance.selectLevel(levelNumber);
-        Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-        Helper.changeScreen(stage, "flowfree/levels/easy.fxml", "Flow Free (Difficulty - EASY)");
+
+//        Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+//        Helper.changeScreen(stage, "flowfree/levels/easy.fxml", "Flow Free (Difficulty - EASY)");
+        Helper.changeGameScreen("flowfree/levels/easy.fxml");
     }
 }

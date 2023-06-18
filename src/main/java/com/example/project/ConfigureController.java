@@ -45,6 +45,7 @@ public class ConfigureController implements Initializable {
         player.setName(playerName);
         player.setSpritePath(selectedSprite.path());
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        Helper.changeScreen(stage, Helper.currentGame.gameFxmlPath(), "CS2340 - " + Helper.currentGame.title() + " (Game)");
+//        Helper.changeScreen(stage, Helper.currentGame.gameFxmlPath(), "CS2340 - " + Helper.currentGame.title() + " (Game)");
+        Helper.changeScreen(stage, "GameScreen.fxml", "CS2340 - " + Helper.currentGame.title() + " (Game)");
     }
 }
