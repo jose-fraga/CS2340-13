@@ -96,4 +96,26 @@ class GameTest {
         assertEquals(Game.TWENTY_FOURTY_EIGHT, Game.valueOf("TWENTY_FOURTY_EIGHT"));
         assertEquals(Game.CODENAMES, Game.valueOf("CODENAMES"));
     }
+
+    @Test
+    void testGameToString() {
+        assertEquals("UNSELECTED", Game.UNSELECTED.toString());
+        assertEquals("FLOW", Game.FLOW.toString());
+        assertEquals("TWENTY_FOURTY_EIGHT", Game.TWENTY_FOURTY_EIGHT.toString());
+        assertEquals("CODENAMES", Game.CODENAMES.toString());
+    }
+
+    @Test
+    void testGameEquals() {
+        assertNotEquals(Game.UNSELECTED, Game.FLOW);
+        assertNotEquals(Game.UNSELECTED, Game.TWENTY_FOURTY_EIGHT);
+        assertNotEquals(Game.UNSELECTED, Game.CODENAMES);
+
+        assertNotEquals(Game.FLOW, Game.TWENTY_FOURTY_EIGHT);
+        assertNotEquals(Game.FLOW, Game.CODENAMES);
+
+        assertNotEquals(Game.TWENTY_FOURTY_EIGHT, Game.CODENAMES);
+    }
+
+
 }
