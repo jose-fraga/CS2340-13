@@ -147,6 +147,9 @@ public class GridController implements Initializable {
     private boolean checkPipes() {
         for (int i = 0; i < pipePaths.size(); i++) {
             FFPane curr = pipePaths.get(i);
+            if ((curr.getGridItem() instanceof Obstacle) && !((Obstacle) curr.getGridItem()).isCleared()) {
+                return false;
+            }
             if ((curr.getGridItem() instanceof Pipe) & (activeDot.getColor().equals(((Pipe) curr.getGridItem()).getColor()))) {
                 ((Pipe) curr.getGridItem()).finalize();
             } else {
