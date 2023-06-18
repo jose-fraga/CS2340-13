@@ -1,5 +1,7 @@
 package com.example.project;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,18 +12,26 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class GameScreenController implements Initializable {
-    @FXML private AnchorPane gameContainer;
-    @FXML private Text gameTitle;
-    @FXML private ImageView playerSprite;
-    @FXML private Text playerName;
+    @FXML
+    private AnchorPane gameContainer;
+    @FXML
+    private Text gameTitle;
+    @FXML
+    private ImageView playerSprite;
+    @FXML
+    private Text playerName;
+    @FXML
+    private int time;
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
@@ -37,6 +47,9 @@ public class GameScreenController implements Initializable {
             playerName.setText(Helper.getPlayerInstance().getName());
 
             System.out.println(Helper.currentGame.title() + " Game Started");
+            TimerLogic timer = new TimerLogic();
+            timer.startTimer(time);
+
         } catch (Exception e) {
             System.out.println(Helper.currentGame.title() + " Game FXML issue");
             e.printStackTrace();

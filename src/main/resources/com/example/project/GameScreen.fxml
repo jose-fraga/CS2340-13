@@ -19,6 +19,12 @@
                   <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
                      <children>
                         <Text fx:id="gameTitle" strokeType="OUTSIDE" strokeWidth="0.0" text="Game Title" />
+                        <HBox prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Text  strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+                              <Button fx:id="interactTimer" mnemonicParsing="false"  text="Resume" />
+                           </children>
+                        </HBox>
                      </children>
                   </VBox>
                   <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
