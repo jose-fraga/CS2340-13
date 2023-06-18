@@ -40,7 +40,6 @@
             </HBox>
          </top>
          <center>
-            <AnchorPane fx:id="gameContainer" prefHeight="340" prefWidth="600.0" BorderPane.alignment="CENTER" />
          </center>
       </BorderPane>
    </children>
