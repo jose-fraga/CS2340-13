@@ -16,15 +16,13 @@ public class FFEndController implements Initializable {
     @FXML private Label endLabel;
     @FXML private Label messageLabel;
 
-    public static boolean isSuccess = true;
-
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        if (!isSuccess) {
-            endLabel.setText("FAILURE!");
-            endLabel.setStyle("-fx-background-color: red; -fx-border-color: black");
-            messageLabel.setText("Sorry! Ran out of Time!");
-        }
+    public void initialize(URL url, ResourceBundle resourceBundle) {}
+
+    public void showFailureMessage() {
+        endLabel.setText("FAILURE!");
+        endLabel.setStyle("-fx-background-color: red; -fx-border-color: black");
+        messageLabel.setText("Sorry! Ran out of Time!");
     }
 
     @FXML public void returnToLevelSelect(ActionEvent e) {

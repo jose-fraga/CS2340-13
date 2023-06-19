@@ -1,5 +1,6 @@
 package com.example.project.flowfree.controllers;
 
+import com.example.project.Game;
 import com.example.project.Helper;
 import com.example.project.flowfree.ColoredGridItem;
 import com.example.project.flowfree.Dot;
@@ -14,6 +15,7 @@ import com.example.project.flowfree.enums.Warning;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
@@ -29,6 +31,7 @@ import java.util.LinkedList;
 import java.util.ResourceBundle;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.function.Function;
 
 public class FFGridController implements Initializable {
     @FXML private GridPane gridPane;
@@ -42,6 +45,7 @@ public class FFGridController implements Initializable {
     private Level level;
     private Grid grid;
     private Dot activeDot;
+    private Timer timer;
     private LinkedList<FFPane> pipePaths = new LinkedList<>();
 
     private boolean isDragging;
@@ -64,20 +68,20 @@ public class FFGridController implements Initializable {
         if (!this.level.getTimer().isStarted()) {
             this.level.getTimer().start();
         }
-        Timer timer = new Timer();
+        timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
                 Platform.runLater(new Runnable() {
                     @Override
                     public void run() {
-                        timerDisplay.setText(level.getTimer().toString().substring(3, 8));
+                        int timeLeft = level.getSecondsLeft();
+                        timerDisplay.setText(timeLeft + "");
 
-                        int timeLimit = Integer.parseInt(level.getTimer().toString().substring(6, 8));
-                        // Game ends if timer runs of (Current limit: 1 min)
-                        if (timeLimit == 30) {
-                            FFEndController.isSuccess = false;
-                            Helper.changeGameScreen("flowfree/FFEndScreen.fxml");
+                        if (timeLeft <= 0) {
+                            FXMLLoader loader = safelyChangeScreen("flowfree/FFEndScreen.fxml");
+                            FFEndController controller = loader.<FFEndController>getController();
+                            controller.showFailureMessage();
                         }
 
                         if (warningLabel.isVisible()) {
@@ -196,8 +200,10 @@ public class FFGridController implements Initializable {
                     if (checkPipes()) {
                         System.out.println("SUCCESS!");
                         if (grid.isComplete()) {
+                            level.complete();
                             System.out.println("LEVEL COMPLETE!");
-                            Helper.changeGameScreen("flowfree/FFEndScreen.fxml");
+                            safelyChangeScreen("flowfree/FFEndScreen.fxml");
+
                         } else {
                             System.out.println("KEEP GOING...");
                         }
@@ -268,7 +274,7 @@ public class FFGridController implements Initializable {
     }
 
     @FXML private void returnToLevelSelect(ActionEvent e) {
-        Helper.changeGameScreen(Helper.currentGame.gameFxmlPath());
+        safelyChangeScreen(Game.FLOW.gameFxmlPath());
     }
 
     @FXML private void restartLevel(ActionEvent e) {
@@ -277,7 +283,14 @@ public class FFGridController implements Initializable {
             pauseLabel.setVisible(false);
             toggleButton.setText("Pause");
         }
+        timerDisplay.setText(Level.TIME_LIMIT + "");
         level.restart();
         initializeGrid();
+    }
+
+    // Use to change screens instead of using Helper directly, because we need to clean up the timer
+    private FXMLLoader safelyChangeScreen(String fxmlPath) {
+        timer.cancel();
+        return Helper.changeGameScreen(fxmlPath);
     }
 }
