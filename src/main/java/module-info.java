@@ -1,8 +1,9 @@
 module com.example.project {
     requires javafx.controls;
     requires javafx.fxml;
-            
-                            
+    requires org.apache.commons.lang3;
+
+
     opens com.example.project to javafx.fxml;
     exports com.example.project;
     exports com.example.project.codenames;

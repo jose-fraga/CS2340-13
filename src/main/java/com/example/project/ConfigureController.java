@@ -28,6 +28,8 @@ public class ConfigureController implements Initializable {
     public void initialize(URL arg0, ResourceBundle arg1) {
         System.out.println("ENTERED: " + Helper.currentGame.title() + " Configuration Screen");
         characterSelect.getItems().addAll(characters);
+        characterSelect.setValue(characters[0]);
+        avatarName.setText(Helper.getPlayerInstance().getName());
     }
 
     @FXML

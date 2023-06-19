@@ -11,6 +11,7 @@ import com.example.project.flowfree.Level;
 import com.example.project.flowfree.Obstacle;
 import com.example.project.flowfree.Pipe;
 import javafx.animation.Animation;
+import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -29,35 +30,70 @@ import javafx.scene.text.Font;
 import java.net.URL;
 import java.util.LinkedList;
 import java.util.ResourceBundle;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class GridController implements Initializable {
     @FXML private GridPane gridPane = new GridPane();
-    @FXML private Button pauseButton;
-    @FXML private Label timer;
+    @FXML private Button timerButton;
+    @FXML private Label timerLabel;
+    @FXML private Label gamePausedText;
 
     private Level level;
     private Grid grid;
     private Dot activeDot;
     private LinkedList<FFPane> pipePaths = new LinkedList<>();
 
+    private final String BORDER_STYLE = "-fx-border-width: 1px; -fx-border-color: grey;";
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        initializeGrid();
+
+        Timer timer = new Timer();
+        timer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                Platform.runLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        timerLabel.setText(level.getTimer().toString().substring(3, 8));
+                    }
+                });
+            }
+        }, 0, 1000);
+    }
+
+    private void initializeGrid() {
         this.level = FFGame.getGameInstance().getLevel();
-        this.grid = FFGame.getGameInstance().getLevel().getGrid();
+        this.grid = this.level.getGrid();
         populate();
         handleEvent();
     }
 
-    private void pauseTimer(ActionEvent actionEvent) {
-
+    @FXML
+    private void toggleTimer(ActionEvent actionEvent) {
+        if (level.isPaused()) { // Resume timer if paused
+            level.resume();
+            timerButton.setText("Pause");
+            gridPane.setVisible(true);
+            gamePausedText.setVisible(false);
+        } else { // Pause timer if running
+            timerButton.setText("Resume");
+            level.pause();
+            gridPane.setVisible(false);
+            gamePausedText.setVisible(false);
+        }
     }
 
     private void populate() {
+        gridPane.getChildren().clear();
         GridItem[][] gridCells = grid.getGridCells();
         for (int i = 0; i < gridCells.length; i++) {
             for (int j = 0; j < gridCells[0].length; j++) {
                 GridItem gridItem = gridCells[i][j];
                 FFPane pane = new FFPane(gridItem);
+                pane.setStyle(BORDER_STYLE);
                 if (gridItem instanceof Obstacle) {
                     Label curr = new Label(((Obstacle) gridItem).getHitPoints() + "");
                     curr.setFont(Font.font("Impact", 15));
@@ -66,7 +102,7 @@ public class GridController implements Initializable {
                 } else if (gridItem instanceof ColoredGridItem) {
                     ColoredGridItem coloredGridItem = (ColoredGridItem) gridItem;
                     if (coloredGridItem instanceof Dot) {
-                        pane.setStyle("-fx-background-color:" + (coloredGridItem.getHexColor()));
+                        pane.setStyle("-fx-background-color:" + coloredGridItem.getHexColor());
                     }
                 }
                 gridPane.add(pane,j,i,1,1);
@@ -161,7 +197,7 @@ public class GridController implements Initializable {
         while (!pipePaths.isEmpty()) {
             FFPane curr = pipePaths.pop();
             ((Pipe) curr.getGridItem()).resetFill();
-            curr.setStyle("-fx-background-color: transparent");
+            curr.setStyle("-fx-background-color: transparent;" + BORDER_STYLE);
         }
         activeDot = null;
     }
@@ -183,5 +219,10 @@ public class GridController implements Initializable {
 
     @FXML private void returnToLevelSelect(ActionEvent e) {
         Helper.changeGameScreen(Helper.currentGame.gameFxmlPath());
+    }
+
+    @FXML private void restartLevel(ActionEvent e) {
+        level.restart();
+        initializeGrid();
     }
 }

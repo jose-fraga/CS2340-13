@@ -12,7 +12,7 @@
    <top>
       <AnchorPane prefHeight="85.0" prefWidth="600.0" style="-fx-border-color: black;" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="quitGame" layoutX="14.0" layoutY="30.0" mnemonicParsing="false" onAction="#quitGame" prefHeight="26.0" prefWidth="55.0" text="Quit" />
+            <Button fx:id="quitGame" layoutX="14.0" layoutY="30.0" mnemonicParsing="false" onAction="#quitGame" prefHeight="26.0" prefWidth="150" text="Exit Game" />
             <Label fx:id="gameTitle" alignment="CENTER" contentDisplay="CENTER" layoutX="216.0" layoutY="22.0" prefHeight="42.0" prefWidth="167.0">
                <font>
                   <Font name="Gill Sans Ultra Bold" size="20.0" />
