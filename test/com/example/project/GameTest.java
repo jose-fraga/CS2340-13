@@ -31,9 +31,9 @@ class GameTest {
 
     @Test
     void testGameFLOW() {
-        assertEquals("Flow", Game.FLOW.title());
-        assertEquals("FlowScreen.fxml", Game.FLOW.initialFxmlPath());
-        assertEquals("FlowGameScreen.fxml", Game.FLOW.gameFxmlPath());
+        assertEquals("Flow Free", Game.FLOW.title());
+        assertEquals("flowfree/FFSplashScreen.fxml", Game.FLOW.initialFxmlPath());
+        assertEquals("flowfree/FFLevelScreen.fxml", Game.FLOW.gameFxmlPath());
         assertEquals(Game.FLOW, Game.values()[1]);
         assertEquals(Game.FLOW, Game.valueOf("FLOW"));
     }
@@ -59,7 +59,7 @@ class GameTest {
     @Test
     void testTitle() {
         assertEquals("CS2340 Project", Game.UNSELECTED.title());
-        assertEquals("Flow", Game.FLOW.title());
+        assertEquals("Flow Free", Game.FLOW.title());
         assertEquals("2048", Game.TWENTY_FOURTY_EIGHT.title());
         assertEquals("Codenames", Game.CODENAMES.title());
     }
@@ -67,7 +67,7 @@ class GameTest {
     @Test
     void testInitialFxmlPath() {
         assertEquals("SelectScreen.fxml", Game.UNSELECTED.initialFxmlPath());
-        assertEquals("FlowScreen.fxml", Game.FLOW.initialFxmlPath());
+        assertEquals("flowfree/FFSplashScreen.fxml", Game.FLOW.initialFxmlPath());
         assertEquals("2048Screen.fxml", Game.TWENTY_FOURTY_EIGHT.initialFxmlPath());
         assertEquals("codenames/CodenamesSplashScreen.fxml", Game.CODENAMES.initialFxmlPath());
     }
@@ -75,7 +75,7 @@ class GameTest {
     @Test
     void testGameFxmlPath() {
         assertEquals("SelectScreen.fxml", Game.UNSELECTED.gameFxmlPath());
-        assertEquals("FlowGameScreen.fxml", Game.FLOW.gameFxmlPath());
+        assertEquals("flowfree/FFLevelScreen.fxml", Game.FLOW.gameFxmlPath());
         assertEquals("2048GameScreen.fxml", Game.TWENTY_FOURTY_EIGHT.gameFxmlPath());
         assertEquals("codenames/CodenamesInitialGamePlayScreen.fxml", Game.CODENAMES.gameFxmlPath());
     }

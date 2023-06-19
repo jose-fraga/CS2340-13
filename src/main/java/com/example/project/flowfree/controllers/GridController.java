@@ -10,6 +10,10 @@ import com.example.project.flowfree.GridItem;
 import com.example.project.flowfree.Level;
 import com.example.project.flowfree.Obstacle;
 import com.example.project.flowfree.Pipe;
+import javafx.animation.Animation;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -42,6 +46,10 @@ public class GridController implements Initializable {
         this.grid = FFGame.getGameInstance().getLevel().getGrid();
         populate();
         handleEvent();
+    }
+
+    private void pauseTimer(ActionEvent actionEvent) {
+
     }
 
     private void populate() {
@@ -139,7 +147,6 @@ public class GridController implements Initializable {
                 if (pane.getGridItem() instanceof Obstacle) {
                     Obstacle obstacle = (Obstacle) pane.getGridItem();
                     if (obstacle.isCleared()) return;
-                    int[] values = {obstacle.getX(), obstacle.getY()};
                     if (!obstacle.destroy()) {
                         ((Label) pane.getChildren().get(0)).setText(((Obstacle) pane.getGridItem()).getHitPoints() + "");
                     } else {

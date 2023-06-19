@@ -2,6 +2,8 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
@@ -26,6 +28,12 @@
       <HBox alignment="CENTER" layoutX="207.0" layoutY="33.0" prefHeight="26.0" prefWidth="186.0">
          <children>
             <Button mnemonicParsing="false" onAction="#returnToLevelSelect" text="Return" />
+            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" scaleX="0.7" scaleY="0.7">
+               <image>
+                  <Image url="@../../images/timer.gif" />
+               </image>
+            </ImageView>
+            <Button fx:id="toggle" mnemonicParsing="false" text="Pause" />
          </children>
       </HBox>
    </children>
