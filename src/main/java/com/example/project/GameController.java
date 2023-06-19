@@ -1,10 +1,13 @@
 package com.example.project;
 
+import com.example.project.flowfree.FFGame;
 import com.example.project.flowfree.TimerLogic;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -23,9 +26,9 @@ public class GameController implements Initializable {
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
-        System.out.println("ENTERED: " + Helper.currentGame.title() + " Free Game Screen");
         try {
-            // GameScreen pane
+            System.out.println("ENTERED: " + Helper.currentGame.title() + " Free Game Screen");
+
             Helper.setGamePane(gamePane);
             Helper.changeGameScreen(Helper.currentGame.gameFxmlPath());
 
@@ -34,10 +37,6 @@ public class GameController implements Initializable {
 
             playerSprite.setImage(new Image(Main.class.getResourceAsStream(spritePath)));
             playerName.setText(Helper.getPlayerInstance().getName());
-//            System.out.println(Helper.currentGame.title() + " Game Started");
-//
-//            TimerLogic timer = new TimerLogic();
-//            timer.startTimer(time);
         } catch (Exception e) {
             System.out.println("FAILURE: " + Helper.currentGame.title() + " Free Game Scrreen FXML Error");
             e.printStackTrace();

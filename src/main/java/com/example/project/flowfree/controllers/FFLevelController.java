@@ -28,19 +28,11 @@ public class FFLevelController implements Initializable {
     private FFGame gameInstance;
 
     private final String SCREEN_GAME_EASY = LevelDifficulty.EASY.path();
-    private final String SCREEN_LEVEL_SELECT = "flowfree/FFLevelSelectScreen.fxml";
+    private final String SCREEN_LEVEL_SELECT = "flowfree/FFLevelScreen.fxml";
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         this.gameInstance = FFGame.getGameInstance();
-    }
-
-    @FXML private void returnToLevelSelect(ActionEvent e) throws IOException {
-        Helper.changeGameScreen(SCREEN_LEVEL_SELECT);
-    }
-
-    @FXML private void togglePause(ActionEvent e) {
-        System.out.println("PAUSE");
     }
 
     @FXML private void selectLevel(ActionEvent e) throws IOException {

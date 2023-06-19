@@ -10,17 +10,17 @@ import com.example.project.flowfree.GridItem;
 import com.example.project.flowfree.Level;
 import com.example.project.flowfree.Obstacle;
 import com.example.project.flowfree.Pipe;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseDragEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.text.Font;
 
 import java.net.URL;
 import java.util.LinkedList;
@@ -40,24 +40,9 @@ public class GridController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.level = FFGame.getGameInstance().getLevel();
         this.grid = FFGame.getGameInstance().getLevel().getGrid();
-
-        level.timer.startTimer(0);
-//        timer.setText(level.timer.getSspTime().get());
-
-        level.timer.getSspTime().addListener(
-            new ChangeListener() {
-                @Override public void changed(ObservableValue o, Object oldVal, Object newVal) {
-                    timer.setText(((SimpleStringProperty) newVal).get());
-                }
-            }
-        );
-
-
         populate();
         handleEvent();
     }
-
-
 
     private void populate() {
         GridItem[][] gridCells = grid.getGridCells();
@@ -66,8 +51,10 @@ public class GridController implements Initializable {
                 GridItem gridItem = gridCells[i][j];
                 FFPane pane = new FFPane(gridItem);
                 if (gridItem instanceof Obstacle) {
-                    pane.getChildren().add(new Label(((Obstacle) gridItem).getHitPoints() + ""));
-                    pane.getChildren().get(0).setTranslateX(20);
+                    Label curr = new Label(((Obstacle) gridItem).getHitPoints() + "");
+                    curr.setFont(Font.font("Impact", 15));
+                    pane.getChildren().add(curr);
+                    pane.setAlignment(curr, Pos.CENTER);
                 } else if (gridItem instanceof ColoredGridItem) {
                     ColoredGridItem coloredGridItem = (ColoredGridItem) gridItem;
                     if (coloredGridItem instanceof Dot) {
@@ -82,8 +69,6 @@ public class GridController implements Initializable {
     private void handleEvent() {
         gridPane.getChildren().forEach(item -> {
             if (item instanceof Group) return;
-            timer.setText(level.timer.getSspTime().get());
-            System.out.println(level.timer.getSspTime().get());
 
             // Starts drags from Dots
             item.addEventFilter(MouseDragEvent.DRAG_DETECTED, e -> {
@@ -187,5 +172,9 @@ public class GridController implements Initializable {
             }
         }
         return true;
+    }
+
+    @FXML private void returnToLevelSelect(ActionEvent e) {
+        Helper.changeGameScreen(Helper.currentGame.gameFxmlPath());
     }
 }

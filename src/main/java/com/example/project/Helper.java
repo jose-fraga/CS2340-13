@@ -42,6 +42,7 @@ public class Helper {
             Parent root = loader.load();
             Scene scene = new Scene(root);
             stage.setScene(scene);
+            stage.setResizable(false);
             stage.setTitle(stageTitle);
             stage.show();
         } catch (IOException e) {
