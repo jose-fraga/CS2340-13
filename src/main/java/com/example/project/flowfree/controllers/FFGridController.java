@@ -1,5 +1,6 @@
 package com.example.project.flowfree.controllers;
 
+import com.example.project.Game;
 import com.example.project.Helper;
 import com.example.project.flowfree.ColoredGridItem;
 import com.example.project.flowfree.Dot;
@@ -30,6 +31,7 @@ import java.util.LinkedList;
 import java.util.ResourceBundle;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.function.Function;
 
 public class FFGridController implements Initializable {
     @FXML private GridPane gridPane;
@@ -77,10 +79,9 @@ public class FFGridController implements Initializable {
                         timerDisplay.setText(timeLeft + "");
 
                         if (timeLeft <= 0) {
-                            FXMLLoader loader = Helper.changeGameScreen("flowfree/FFEndScreen.fxml");
+                            FXMLLoader loader = safelyChangeScreen("flowfree/FFEndScreen.fxml");
                             FFEndController controller = loader.<FFEndController>getController();
                             controller.showFailureMessage();
-                            timer.cancel();
                         }
 
                         if (warningLabel.isVisible()) {
@@ -199,10 +200,10 @@ public class FFGridController implements Initializable {
                     if (checkPipes()) {
                         System.out.println("SUCCESS!");
                         if (grid.isComplete()) {
-                            timer.cancel();
                             level.complete();
                             System.out.println("LEVEL COMPLETE!");
-                            Helper.changeGameScreen("flowfree/FFEndScreen.fxml");
+                            safelyChangeScreen("flowfree/FFEndScreen.fxml");
+
                         } else {
                             System.out.println("KEEP GOING...");
                         }
@@ -273,7 +274,7 @@ public class FFGridController implements Initializable {
     }
 
     @FXML private void returnToLevelSelect(ActionEvent e) {
-        Helper.changeGameScreen(Helper.currentGame.gameFxmlPath());
+        safelyChangeScreen(Game.FLOW.gameFxmlPath());
     }
 
     @FXML private void restartLevel(ActionEvent e) {
@@ -282,7 +283,14 @@ public class FFGridController implements Initializable {
             pauseLabel.setVisible(false);
             toggleButton.setText("Pause");
         }
+        timerDisplay.setText(Level.TIME_LIMIT + "");
         level.restart();
         initializeGrid();
+    }
+
+    // Use to change screens instead of using Helper directly, because we need to clean up the timer
+    private FXMLLoader safelyChangeScreen(String fxmlPath) {
+        timer.cancel();
+        return Helper.changeGameScreen(fxmlPath);
     }
 }
