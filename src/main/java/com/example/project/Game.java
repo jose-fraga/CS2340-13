@@ -7,28 +7,32 @@ public enum Game {
             "SelectScreen.fxml"),
     FLOW("Flow Free",
             "flowfree/FFSplashScreen.fxml",
-            null,
+            "ConfigureScreen.fxml",
             "flowfree/FFLevelScreen.fxml"),
     TWENTY_FOURTY_EIGHT("2048",
-            "2048Screen.fxml",
+            "twentyfourtyeight/2048Screen.fxml",
             "ConfigureScreen.fxml",
-            "2048GameScreen.fxml"),
+            "twentyfourtyeight/2048GameScreen.fxml"),
     CODENAMES("Codenames",
             "codenames/CodenamesSplashScreen.fxml",
-            "codenames/CodenamesConfigurationScreen.fxml",
+            "ConfigureScreen.fxml", //"codenames/CodenamesConfigurationScreen.fxml",
             "codenames/CodenamesInitialGamePlayScreen.fxml");
 
     private final String title;
     private final String initialFxmlPath;
+    private final String configFxmlPath;
     private final String gameFxmlPath;
 
     Game(String title, String initialFxmlPath, String configFxmlPath, String gameFxmlPath) {
         this.title = title;
         this.initialFxmlPath = initialFxmlPath;
+        this.configFxmlPath = configFxmlPath;
         this.gameFxmlPath = gameFxmlPath;
+
     }
 
     public String title() { return this.title; }
     public String initialFxmlPath() { return this.initialFxmlPath; }
+    public String configFxmlPath() { return this.configFxmlPath; }
     public String gameFxmlPath() { return this.gameFxmlPath; }
 }
