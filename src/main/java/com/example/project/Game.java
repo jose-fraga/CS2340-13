@@ -28,15 +28,7 @@ public enum Game {
         this.gameFxmlPath = gameFxmlPath;
     }
 
-    public String title() {
-        return this.title;
-    }
-
-    public String initialFxmlPath() {
-        return this.initialFxmlPath;
-    }
-
-    public String gameFxmlPath() {
-        return this.gameFxmlPath;
-    }
+    public String title() { return this.title; }
+    public String initialFxmlPath() { return this.initialFxmlPath; }
+    public String gameFxmlPath() { return this.gameFxmlPath; }
 }

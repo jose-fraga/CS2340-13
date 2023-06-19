@@ -12,20 +12,20 @@
    <top>
       <AnchorPane prefHeight="85.0" prefWidth="600.0" style="-fx-border-color: black;" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="quitGame" layoutX="14.0" layoutY="30.0" mnemonicParsing="false" onAction="#quitGame" prefHeight="26.0" prefWidth="150" text="Exit Game" />
-            <Label fx:id="gameTitle" alignment="CENTER" contentDisplay="CENTER" layoutX="216.0" layoutY="22.0" prefHeight="42.0" prefWidth="167.0">
+            <Label fx:id="gameTitle" alignment="CENTER" contentDisplay="CENTER" layoutX="212.0" layoutY="17.0" prefHeight="50.0" prefWidth="175.0">
                <font>
-                  <Font name="Gill Sans Ultra Bold" size="20.0" />
+                  <Font name="Gill Sans Ultra Bold" size="22.0" />
                </font></Label>
             <VBox alignment="CENTER" layoutX="518.0" layoutY="5.0" prefHeight="75.0" prefWidth="68.0">
                <children>
-                  <ImageView fx:id="playerSprite" fitHeight="41.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="playerSprite" fitHeight="47.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
                   <Label fx:id="playerName" alignment="CENTER" prefHeight="5.0" prefWidth="68.0">
                      <font>
-                        <Font name="Georgia" size="12.0" />
+                        <Font name="Gill Sans Ultra Bold Condensed" size="12.0" />
                      </font></Label>
                </children>
             </VBox>
+            <Button alignment="CENTER" contentDisplay="CENTER" defaultButton="true" layoutX="26.0" layoutY="30.0" mnemonicParsing="false" onAction="#quitGame" prefHeight="25.0" prefWidth="60.0" text="Exit" />
          </children>
       </AnchorPane>
    </top>

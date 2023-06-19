@@ -13,11 +13,11 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class ConfigureController implements Initializable {
-    @FXML private TextField avatarName;
-    @FXML private Label avatarNameError;
+    @FXML private TextField characterName;
+    @FXML private Label characterNameError;
     @FXML private ChoiceBox<String> characterSelect;
 
-    private String[] characters = {
+    private final String[] characters = {
             Sprite.CHARACTER1.name(),
             Sprite.CHARACTER2.name(),
             Sprite.CHARACTER3.name(),
@@ -29,23 +29,21 @@ public class ConfigureController implements Initializable {
         System.out.println("ENTERED: " + Helper.currentGame.title() + " Configuration Screen");
         characterSelect.getItems().addAll(characters);
         characterSelect.setValue(characters[0]);
-        avatarName.setText(Helper.getPlayerInstance().getName());
+        characterName.setText(Helper.getPlayerInstance().getName());
     }
 
     @FXML
-    private void continueToGame(ActionEvent actionEvent) {
-        String playerName = avatarName.getCharacters().toString();
+    private void continueToGame(ActionEvent e) {
+        String playerName = characterName.getCharacters().toString();
         Sprite selectedSprite = Sprite.valueOf(characterSelect.getValue());
         Player player = Helper.getPlayerInstance();
-
         if (playerName.isBlank()) {
-            avatarNameError.setVisible(true);
+            characterNameError.setVisible(true);
             return;
         }
-
         player.setName(playerName);
-        player.setSpritePath(selectedSprite.path());
-        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        player.setSpritePath(selectedSprite.getPath());
+        Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
         Helper.changeScreen(stage, "GameScreen.fxml", "CS2340 - " + Helper.currentGame.title() + " (Game)");
     }
 }

@@ -17,14 +17,14 @@ public class FFSplashScreenController implements Initializable {
         System.out.println("ENTERED: Flow Free Splash Screen");
     }
 
-    @FXML public void backToGameSelect(ActionEvent actionEvent) {
+    @FXML public void backToGameSelect(ActionEvent e) {
         Helper.currentGame = Game.UNSELECTED;
-        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
         Helper.changeScreen(stage, Game.UNSELECTED.initialFxmlPath(), Game.UNSELECTED.title());
     }
 
-    @FXML private void configureGame(ActionEvent actionEvent) {
-        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+    @FXML private void configureGame(ActionEvent e) {
+        Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
         Helper.changeScreen(stage, "ConfigureScreen.fxml", "CS2340 - " + Helper.currentGame.title() + " (Configuration)");
     }
 }

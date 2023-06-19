@@ -28,8 +28,8 @@ public class Helper {
 
     public static void changeGameScreen(String path) {
         try {
-            FXMLLoader loader = new FXMLLoader();
-            Parent root = loader.load(Main.class.getResource(path));
+            FXMLLoader loader = new FXMLLoader(Main.class.getResource(path));
+            Parent root = loader.load();
             gamePane.setCenter(root);
         } catch (IOException e) {
             e.printStackTrace();
