@@ -3,9 +3,8 @@ package com.example.project;
 import com.example.project.flowfree.Obstacle;
 import org.junit.jupiter.api.Test;
 
-import java.net.URL;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class GameTest {
     /*
