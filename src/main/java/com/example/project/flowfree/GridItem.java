@@ -11,11 +11,6 @@ public class GridItem {
         this.y = y;
         this.isEmpty = false;
     }
-    public GridItem(int x, int y, boolean isEmpty) {
-        this.x = x;
-        this.y = y;
-        this.isEmpty = isEmpty;
-    }
 
     public int getX() { return this.x; }
     public int getY() { return this.y; }

@@ -14,10 +14,6 @@ public class Pipe extends ColoredGridItem {
         super(null, x, y);
         setPipeState(PipeState.EMPTY);
     }
-    public Pipe(Color color, int x, int y) {
-        super(color, x, y);
-        setPipeState(PipeState.EMPTY);
-    }
 
     @Override
     public boolean getIsEmpty() {

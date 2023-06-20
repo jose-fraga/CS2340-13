@@ -2,6 +2,8 @@ package com.example.project;
 
 import org.junit.jupiter.api.Test;
 
+import java.net.URL;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class GameTest {
@@ -20,11 +22,28 @@ class GameTest {
         assertThat— Asserts that an object matches the given conditions (see section A.2.2 for a more thorough explanation).
      */
 
+    private String fileNotFoundMessage(Game game, String pathMethodName, String path) {
+        return "FXML File not found for Game." + game + "." + pathMethodName + "() at " + path + "\n" +
+                "Check that the file exists in src/main/resources/com/example/project/" + path + "\n" +
+                "Check that the file is included in the build.gradle file";
+    }
+
+    private void checkFilePaths(Game game) {
+        assertNotNull(GameTest.class.getResource(game.initialFxmlPath()), fileNotFoundMessage(game, "initialFxmlPath", game.initialFxmlPath()));
+        assertNotNull(GameTest.class.getResource(game.configFxmlPath()), fileNotFoundMessage(game, "configFxmlPath", game.configFxmlPath()));
+        assertNotNull(GameTest.class.getResource(game.gameFxmlPath()), fileNotFoundMessage(game, "gameFxmlPath", game.gameFxmlPath()));
+    }
+
     @Test
     void testGameUNSELECTED() {
         assertEquals("CS2340 Project", Game.UNSELECTED.title());
+
+        checkFilePaths(Game.UNSELECTED);
+
         assertEquals("SelectScreen.fxml", Game.UNSELECTED.initialFxmlPath());
+        assertEquals("ConfigureScreen.fxml", Game.UNSELECTED.configFxmlPath());
         assertEquals("SelectScreen.fxml", Game.UNSELECTED.gameFxmlPath());
+
         assertEquals(Game.UNSELECTED, Game.values()[0]);
         assertEquals(Game.UNSELECTED, Game.valueOf("UNSELECTED"));
     }
@@ -32,8 +51,13 @@ class GameTest {
     @Test
     void testGameFLOW() {
         assertEquals("Flow Free", Game.FLOW.title());
-        assertEquals("FlowScreen.fxml", Game.FLOW.initialFxmlPath());
-        assertEquals("FlowGameScreen.fxml", Game.FLOW.gameFxmlPath());
+
+        checkFilePaths(Game.FLOW);
+
+        assertEquals("flowfree/FFSplashScreen.fxml", Game.FLOW.initialFxmlPath());
+        assertEquals("ConfigureScreen.fxml", Game.FLOW.configFxmlPath());
+        assertEquals("flowfree/FFLevelScreen.fxml", Game.FLOW.gameFxmlPath());
+
         assertEquals(Game.FLOW, Game.values()[1]);
         assertEquals(Game.FLOW, Game.valueOf("FLOW"));
     }
@@ -41,8 +65,13 @@ class GameTest {
     @Test
     void testGameTWENTY_FOURTY_EIGHT() {
         assertEquals("2048", Game.TWENTY_FOURTY_EIGHT.title());
-        assertEquals("2048Screen.fxml", Game.TWENTY_FOURTY_EIGHT.initialFxmlPath());
-        assertEquals("2048GameScreen.fxml", Game.TWENTY_FOURTY_EIGHT.gameFxmlPath());
+
+        checkFilePaths(Game.TWENTY_FOURTY_EIGHT);
+
+        assertEquals("twentyfourtyeight/2048Screen.fxml", Game.TWENTY_FOURTY_EIGHT.initialFxmlPath());
+        assertEquals("ConfigureScreen.fxml", Game.TWENTY_FOURTY_EIGHT.configFxmlPath());
+        assertEquals("twentyfourtyeight/2048GameScreen.fxml", Game.TWENTY_FOURTY_EIGHT.gameFxmlPath());
+
         assertEquals(Game.TWENTY_FOURTY_EIGHT, Game.values()[2]);
         assertEquals(Game.TWENTY_FOURTY_EIGHT, Game.valueOf("TWENTY_FOURTY_EIGHT"));
     }
@@ -50,50 +79,14 @@ class GameTest {
     @Test
     void testGameCODENAMES() {
         assertEquals("Codenames", Game.CODENAMES.title());
+
+        checkFilePaths(Game.CODENAMES);
+
         assertEquals("codenames/CodenamesSplashScreen.fxml", Game.CODENAMES.initialFxmlPath());
+        assertEquals("ConfigureScreen.fxml", Game.CODENAMES.configFxmlPath());
         assertEquals("codenames/CodenamesInitialGamePlayScreen.fxml", Game.CODENAMES.gameFxmlPath());
+
         assertEquals(Game.CODENAMES, Game.values()[3]);
-        assertEquals(Game.CODENAMES, Game.valueOf("CODENAMES"));
-    }
-
-    @Test
-    void testTitle() {
-        assertEquals("CS2340 Project", Game.UNSELECTED.title());
-        assertEquals("Flow Free", Game.FLOW.title());
-        assertEquals("2048", Game.TWENTY_FOURTY_EIGHT.title());
-        assertEquals("Codenames", Game.CODENAMES.title());
-    }
-
-    @Test
-    void testInitialFxmlPath() {
-        assertEquals("SelectScreen.fxml", Game.UNSELECTED.initialFxmlPath());
-        assertEquals("flowfree/FFSplashScreen.fxml", Game.FLOW.initialFxmlPath());
-        assertEquals("2048Screen.fxml", Game.TWENTY_FOURTY_EIGHT.initialFxmlPath());
-        assertEquals("codenames/CodenamesSplashScreen.fxml", Game.CODENAMES.initialFxmlPath());
-    }
-
-    @Test
-    void testGameFxmlPath() {
-        assertEquals("SelectScreen.fxml", Game.UNSELECTED.gameFxmlPath());
-        assertEquals("flowfree/FFLevelScreen.fxml", Game.FLOW.gameFxmlPath());
-        assertEquals("2048GameScreen.fxml", Game.TWENTY_FOURTY_EIGHT.gameFxmlPath());
-        assertEquals("codenames/CodenamesInitialGamePlayScreen.fxml", Game.CODENAMES.gameFxmlPath());
-    }
-
-    @Test
-    void testValues() {
-        assertEquals(4, Game.values().length);
-        assertEquals(Game.UNSELECTED, Game.values()[0]);
-        assertEquals(Game.FLOW, Game.values()[1]);
-        assertEquals(Game.TWENTY_FOURTY_EIGHT, Game.values()[2]);
-        assertEquals(Game.CODENAMES, Game.values()[3]);
-    }
-
-    @Test
-    void testValueOf() {
-        assertEquals(Game.UNSELECTED, Game.valueOf("UNSELECTED"));
-        assertEquals(Game.FLOW, Game.valueOf("FLOW"));
-        assertEquals(Game.TWENTY_FOURTY_EIGHT, Game.valueOf("TWENTY_FOURTY_EIGHT"));
         assertEquals(Game.CODENAMES, Game.valueOf("CODENAMES"));
     }
 }

@@ -26,14 +26,17 @@ public class Helper {
         return currentPlayer;
     }
 
-    public static void changeGameScreen(String path) {
+    public static FXMLLoader changeGameScreen(String path) {
+        FXMLLoader loader = null;
         try {
-            FXMLLoader loader = new FXMLLoader();
-            Parent root = loader.load(Main.class.getResource(path));
+            loader = new FXMLLoader(Main.class.getResource(path));
+            Parent root = loader.load();
             gamePane.setCenter(root);
+
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return loader;
     }
 
     public static void changeScreen(Stage stage, String screenName, String stageTitle) {
@@ -42,6 +45,7 @@ public class Helper {
             Parent root = loader.load();
             Scene scene = new Scene(root);
             stage.setScene(scene);
+            stage.setResizable(false);
             stage.setTitle(stageTitle);
             stage.show();
         } catch (IOException e) {

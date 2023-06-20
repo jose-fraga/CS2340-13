@@ -1,5 +1,6 @@
 package com.example.project.twentyfourtyeight;
 
+import com.example.project.Game;
 import com.example.project.Helper;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -25,7 +26,7 @@ public class TwentyController implements Initializable {
     @FXML
     private void continueToConfigure(ActionEvent actionEvent) {
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        Helper.changeScreen(stage, "ConfigureScreen.fxml", "CS2340 Configuration");
+        Helper.changeScreen(stage, Game.TWENTY_FOURTY_EIGHT.configFxmlPath(), "CS2340 Configuration");
     }
 }
 
