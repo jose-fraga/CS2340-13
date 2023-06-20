@@ -64,7 +64,6 @@ public class FFGridController implements Initializable {
     }
 
     private void initializeTimer() {
-        System.out.println(level.getTimer().toString());
         if (!this.level.getTimer().isStarted()) {
             this.level.getTimer().start();
         }
