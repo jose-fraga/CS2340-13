@@ -1,6 +1,5 @@
 package com.example.project.flowfree.controllers;
 
-import com.example.project.Game;
 import com.example.project.Helper;
 import com.example.project.flowfree.ColoredGridItem;
 import com.example.project.flowfree.Dot;
@@ -11,128 +10,61 @@ import com.example.project.flowfree.GridItem;
 import com.example.project.flowfree.Level;
 import com.example.project.flowfree.Obstacle;
 import com.example.project.flowfree.Pipe;
-import com.example.project.flowfree.enums.Warning;
-import javafx.application.Platform;
+import javafx.animation.Animation;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseDragEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
-import javafx.scene.text.Font;
 
 import java.net.URL;
 import java.util.LinkedList;
 import java.util.ResourceBundle;
-import java.util.Timer;
-import java.util.TimerTask;
-import java.util.function.Function;
 
-public class FFGridController implements Initializable {
-    @FXML private GridPane gridPane;
-    @FXML private Button toggleButton;
-    @FXML private Label timerDisplay;
-    @FXML private Label pauseLabel;
-    @FXML private Label warningLabel;
-
-    private final String BORDER_STYLE = "-fx-border-width: 1px; -fx-border-color: grey;";
+public class GridController implements Initializable {
+    @FXML private GridPane gridPane = new GridPane();
+    @FXML private Button pauseButton;
+    @FXML private Label timer;
 
     private Level level;
     private Grid grid;
     private Dot activeDot;
-    private Timer timer;
     private LinkedList<FFPane> pipePaths = new LinkedList<>();
-
-    private boolean isDragging;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        initializeGrid();
-        initializeTimer();
-    }
-
-    private void initializeGrid() {
         this.level = FFGame.getGameInstance().getLevel();
-        this.grid = this.level.getGrid();
+        this.grid = FFGame.getGameInstance().getLevel().getGrid();
+
+
         populate();
         handleEvent();
     }
 
-    private void initializeTimer() {
-        System.out.println(level.getTimer().toString());
-        if (!this.level.getTimer().isStarted()) {
-            this.level.getTimer().start();
-        }
-        timer = new Timer();
-        timer.scheduleAtFixedRate(new TimerTask() {
-            @Override
-            public void run() {
-                Platform.runLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        int timeLeft = level.getSecondsLeft();
-                        timerDisplay.setText(timeLeft + "");
+    private void pauseTimer(ActionEvent actionEvent) {
 
-                        if (timeLeft <= 0) {
-                            FXMLLoader loader = safelyChangeScreen("flowfree/FFEndScreen.fxml");
-                            FFEndController controller = loader.<FFEndController>getController();
-                            controller.showFailureMessage();
-                        }
-
-                        if (warningLabel.isVisible()) {
-                            level.pause();
-                            synchronized (timer) {
-                                try {
-                                    timer.wait(1000);
-                                } catch (InterruptedException e) {
-                                    throw new RuntimeException(e);
-                                }
-                            }
-                            warningLabel.setVisible(false);
-                            level.resume();
-                        }
-                    }
-                });
-            }
-        }, 0, 1000);
-    }
-
-    @FXML private void toggleTimer(ActionEvent e) {
-        if (level.isPaused()) { // Resume timer if paused
-            level.resume();
-            toggleButton.setText("Pause");
-            gridPane.setVisible(true);
-            pauseLabel.setVisible(false);
-        } else { // Pause timer if running
-            toggleButton.setText("Resume");
-            level.pause();
-            gridPane.setVisible(false);
-            pauseLabel.setVisible(true);
-        }
     }
 
     private void populate() {
-        gridPane.getChildren().clear();
         GridItem[][] gridCells = grid.getGridCells();
         for (int i = 0; i < gridCells.length; i++) {
             for (int j = 0; j < gridCells[0].length; j++) {
                 GridItem gridItem = gridCells[i][j];
                 FFPane pane = new FFPane(gridItem);
-                pane.setStyle(BORDER_STYLE);
                 if (gridItem instanceof Obstacle) {
-                    Label curr = new Label(((Obstacle) gridItem).getHitPoints() + "");
-                    curr.setFont(Font.font("Gill Sans Ultra Bold Condensed", 15));
-                    pane.getChildren().add(curr);
-                    pane.setAlignment(curr, Pos.CENTER);
+                    pane.getChildren().add(new Label(((Obstacle) gridItem).getHitPoints() + ""));
+                    pane.getChildren().get(0).setTranslateX(20);
                 } else if (gridItem instanceof ColoredGridItem) {
                     ColoredGridItem coloredGridItem = (ColoredGridItem) gridItem;
                     if (coloredGridItem instanceof Dot) {
-                        pane.setStyle("-fx-background-color:" + coloredGridItem.getHexColor());
+                        pane.setStyle("-fx-background-color:" + (coloredGridItem.getHexColor()));
                     }
                 }
                 gridPane.add(pane,j,i,1,1);
@@ -142,17 +74,9 @@ public class FFGridController implements Initializable {
 
     private void handleEvent() {
         gridPane.getChildren().forEach(item -> {
-            gridPane.setOnMouseExited(e1 -> {
-//              System.out.println("FAILURE #1 - Drag Exited Pane!");
-                if (isDragging) {
-                    displayWarning(Warning.FAILURE_1.getMessage());
-                    activeDot = null;
-                    resetPipePath();
-                    pipePaths.clear();
-                }
-                return;
-            });
             if (item instanceof Group) return;
+            timer.setText(level.timer.getSspTime().get());
+            System.out.println(level.timer.getSspTime().get());
 
             // Starts drags from Dots
             item.addEventFilter(MouseDragEvent.DRAG_DETECTED, e -> {
@@ -160,7 +84,6 @@ public class FFGridController implements Initializable {
                 if (itemPane.getGridItem() instanceof Dot ) {
                     activeDot = (Dot) itemPane.getGridItem();
                     item.startFullDrag();
-                    isDragging = true;
                 } else {
                     activeDot = null;
                 }
@@ -168,7 +91,8 @@ public class FFGridController implements Initializable {
 
             // Checks full drag from Dots
             item.addEventFilter(MouseDragEvent.MOUSE_DRAG_ENTERED, e -> {
-                if (activeDot == null) { return; }
+                if (activeDot == null) return;
+
                 FFPane itemPane = (FFPane) e.getSource();
                 GridItem gridItem = itemPane.getGridItem();
                 if (gridItem instanceof Pipe && ((Pipe) gridItem).getIsEmpty()) {
@@ -177,10 +101,8 @@ public class FFGridController implements Initializable {
                     pipe.tempFill(activeDot.getColor());
                     item.setStyle("-fx-background-color:" + (activeDot.getHexColor()));
                 } else if (!pipePaths.isEmpty() && !activeDot.isConnectingDot(gridItem)) {
-//                    System.out.println("BAD CONNECTION");
-                    displayWarning(Warning.FAILURE_2.getMessage());
+                    System.out.println("BAD CONNECTION");
                     resetPipePath();
-                    return;
                 }
             });
 
@@ -190,8 +112,7 @@ public class FFGridController implements Initializable {
                 GridItem gridItem = itemPane.getGridItem();
                 if ((pipePaths.size() == 0)) {
                     // pipePaths has no elements
-//                    System.out.println("FAILURE #1 - PipePaths is Empty");
-                    displayWarning(Warning.FAILURE_3.getMessage());
+                    System.out.println("FAILURE #1 - PipePaths is Empty");
                     pipePaths.clear();
                     return;
                 }
@@ -200,31 +121,24 @@ public class FFGridController implements Initializable {
                     if (checkPipes()) {
                         System.out.println("SUCCESS!");
                         if (grid.isComplete()) {
-                            level.complete();
                             System.out.println("LEVEL COMPLETE!");
-                            safelyChangeScreen("flowfree/FFEndScreen.fxml");
-
+                            Helper.changeGameScreen("flowfree/FFEndScreen.fxml");
                         } else {
                             System.out.println("KEEP GOING...");
                         }
                         pipePaths.clear();
                     } else {
                         // pipePath has non-Pipe objects
-//                        System.out.println("FAILURE #2 - PipePaths has Invalid Objects");
-                        displayWarning(Warning.FAILURE_4.getMessage());
+                        System.out.println("FAILURE #2 - PipePaths has Invalid Objects");
                         resetPipePath();
                         pipePaths.clear();
-                        return;
                     }
                 } else {
                     // Released On non-Dot object -> Reset & clear pipePaths
-//                    System.out.println("FAILURE #3 - Drag released on non-Dot Object");
-                    displayWarning(Warning.FAILURE_2.getMessage());
+                    System.out.println("FAILURE #3 - Drag released on non-Dot Object");
                     resetPipePath();
                     pipePaths.clear();
-                    return;
                 }
-                isDragging = false;
             });
 
             // Destorys Obstacles
@@ -232,7 +146,7 @@ public class FFGridController implements Initializable {
                 FFPane pane = (FFPane) e.getSource();
                 if (pane.getGridItem() instanceof Obstacle) {
                     Obstacle obstacle = (Obstacle) pane.getGridItem();
-                    if (obstacle.isCleared()) { return; }
+                    if (obstacle.isCleared()) return;
                     if (!obstacle.destroy()) {
                         ((Label) pane.getChildren().get(0)).setText(((Obstacle) pane.getGridItem()).getHitPoints() + "");
                     } else {
@@ -243,17 +157,11 @@ public class FFGridController implements Initializable {
         });
     }
 
-    private void displayWarning(String message) {
-        warningLabel.setVisible(true);
-        warningLabel.setText(message);
-        isDragging = false;
-    }
-
     private void resetPipePath() {
         while (!pipePaths.isEmpty()) {
             FFPane curr = pipePaths.pop();
             ((Pipe) curr.getGridItem()).resetFill();
-            curr.setStyle("-fx-background-color: transparent;" + BORDER_STYLE);
+            curr.setStyle("-fx-background-color: transparent");
         }
         activeDot = null;
     }
@@ -271,26 +179,5 @@ public class FFGridController implements Initializable {
             }
         }
         return true;
-    }
-
-    @FXML private void returnToLevelSelect(ActionEvent e) {
-        safelyChangeScreen(Game.FLOW.gameFxmlPath());
-    }
-
-    @FXML private void restartLevel(ActionEvent e) {
-        if (!gridPane.isVisible()) {
-            gridPane.setVisible(true);
-            pauseLabel.setVisible(false);
-            toggleButton.setText("Pause");
-        }
-        timerDisplay.setText(Level.TIME_LIMIT + "");
-        level.restart();
-        initializeGrid();
-    }
-
-    // Use to change screens instead of using Helper directly, because we need to clean up the timer
-    private FXMLLoader safelyChangeScreen(String fxmlPath) {
-        timer.cancel();
-        return Helper.changeGameScreen(fxmlPath);
     }
 }

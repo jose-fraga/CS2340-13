@@ -30,9 +30,9 @@
             </ImageView>
             <HBox prefHeight="49.0" prefWidth="600.0">
                <children>
-                  <Label alignment="CENTER" opacity="0.8" prefHeight="56.0" prefWidth="601.0" style="-fx-background-color: seashell;" text="Select A Game:" textAlignment="CENTER">
+                  <Label alignment="CENTER" opacity="0.85" prefHeight="56.0" prefWidth="601.0" style="-fx-background-color: seashell;" text="Select A Game:" textAlignment="CENTER">
                      <font>
-                        <Font name="Gill Sans Ultra Bold Condensed" size="35.0" />
+                        <Font name="Impact" size="35.0" />
                      </font>
                      <effect>
                         <InnerShadow blurType="ONE_PASS_BOX" height="10.0" radius="4.5" width="10.0" />

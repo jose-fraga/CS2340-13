@@ -9,11 +9,13 @@ public class Grid {
 
     public Grid(LevelDifficulty difficulty, int level) {
         this.gridCells = difficulty.level(level);
-        this.size = difficulty.getSize();
+        this.size = difficulty.size();
         this.isComplete = false;
     }
 
-    public GridItem[][] getGridCells() { return this.gridCells; }
+    public GridItem[][] getGridCells() {
+        return this.gridCells;
+    }
 
     public boolean isComplete() {
         if (this.isComplete) return true;

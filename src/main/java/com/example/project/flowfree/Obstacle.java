@@ -23,7 +23,9 @@ public class Obstacle extends Pipe {
         return this.isCleared();
     }
 
-    public boolean isCleared() { return this.hitPoints <= 0; }
+    public boolean isCleared() {
+        return this.hitPoints <= 0;
+    }
 
     @Override
     public String toString() {

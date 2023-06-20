@@ -1,18 +1,18 @@
 package com.example.project.flowfree;
 
 import javafx.scene.Node;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.Pane;
 
-public class FFPane extends StackPane {
+public class FFPane extends Pane {
     private GridItem gridItem;
+
+    public GridItem getGridItem() { return this.gridItem; }
 
     public FFPane(GridItem gridItem) { this.gridItem = gridItem; }
     public FFPane(GridItem gridItem, Node content) {
         super(content);
         this.gridItem = gridItem;
     }
-
-    public GridItem getGridItem() { return this.gridItem; }
 
     @Override
     public String toString() {

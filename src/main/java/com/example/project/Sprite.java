@@ -14,6 +14,11 @@ public enum Sprite {
         this.path = path;
     }
 
-    public String getLabel() { return this.label; }
-    public String getPath() { return this.path; }
+    public String label() {
+        return this.label;
+    }
+
+    public String path() {
+        return this.path;
+    }
 }

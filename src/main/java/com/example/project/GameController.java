@@ -1,5 +1,6 @@
 package com.example.project;
 
+import com.example.project.flowfree.TimerLogic;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -18,12 +19,13 @@ public class GameController implements Initializable {
     @FXML private Label gameTitle;
     @FXML private ImageView playerSprite;
     @FXML private Label playerName;
+    @FXML private int time;
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
+        System.out.println("ENTERED: " + Helper.currentGame.title() + " Free Game Screen");
         try {
-            System.out.println("ENTERED: " + Helper.currentGame.title() + " Free Game Screen");
-
+            // GameScreen pane
             Helper.setGamePane(gamePane);
             Helper.changeGameScreen(Helper.currentGame.gameFxmlPath());
 
@@ -32,15 +34,20 @@ public class GameController implements Initializable {
 
             playerSprite.setImage(new Image(Main.class.getResourceAsStream(spritePath)));
             playerName.setText(Helper.getPlayerInstance().getName());
+//            System.out.println(Helper.currentGame.title() + " Game Started");
+//
+//            TimerLogic timer = new TimerLogic();
+//            timer.startTimer(time);
         } catch (Exception e) {
             System.out.println("FAILURE: " + Helper.currentGame.title() + " Free Game Scrreen FXML Error");
             e.printStackTrace();
         }
     }
 
-    @FXML public void quitGame(ActionEvent e) {
+    @FXML
+    public void quitGame(ActionEvent actionEvent) {
         Helper.currentGame = Game.UNSELECTED;
-        Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         Helper.changeScreen(stage, Game.UNSELECTED.initialFxmlPath(), Game.UNSELECTED.title());
     }
 }
