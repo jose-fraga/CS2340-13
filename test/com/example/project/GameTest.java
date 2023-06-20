@@ -89,4 +89,16 @@ class GameTest {
         assertEquals(Game.CODENAMES, Game.values()[3]);
         assertEquals(Game.CODENAMES, Game.valueOf("CODENAMES"));
     }
+    @Test
+    void testDestroyObstacle() {
+        int health = 15;
+        Obstacle o1 = new Obstacle(health);
+        o1.destroy();
+        assertTrue("Destroy is not working", o1.health == health);
+    }
+    @Test
+    void testObstacleCreated() {
+        Obstacle o1 = new Obstacle(15,1,1);
+        assertNull("Obstacle is null", o1);
+    }
 }
