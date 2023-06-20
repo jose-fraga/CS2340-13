@@ -20,6 +20,10 @@ public class Pipe extends ColoredGridItem {
         return this.pipeState == PipeState.EMPTY;
     }
 
+    public PipeState getPipeState() {
+        return this.pipeState;
+    }
+
     public void setPipeState(PipeState state) {
         this.pipeState = state;
         this.setIsEmpty(this.pipeState == PipeState.EMPTY);
