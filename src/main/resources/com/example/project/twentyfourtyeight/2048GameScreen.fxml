@@ -1,6 +1,79 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <?import javafx.scene.layout.AnchorPane?>
 
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" />
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane fx:id="gamePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.project.GameController">
+    <top>
+        <AnchorPane prefHeight="85.0" prefWidth="600.0" style="-fx-border-color: black;" BorderPane.alignment="CENTER">
+            <children>
+                <Label fx:id="gameTitle" alignment="CENTER" contentDisplay="CENTER" layoutX="212.0" layoutY="17.0" prefHeight="50.0" prefWidth="175.0">
+                    <font>
+                        <Font name="Gill Sans Ultra Bold" size="22.0" />
+                    </font></Label>
+                <VBox alignment="CENTER" layoutX="518.0" layoutY="5.0" prefHeight="75.0" prefWidth="68.0">
+                    <children>
+                        <ImageView fx:id="playerSprite" fitHeight="47.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
+                        <Label fx:id="playerName" alignment="CENTER" prefHeight="5.0" prefWidth="68.0">
+                            <font>
+                                <Font name="Gill Sans Ultra Bold Condensed" size="12.0" />
+                            </font></Label>
+                    </children>
+                </VBox>
+                <Button alignment="CENTER" contentDisplay="CENTER" defaultButton="true" layoutX="26.0" layoutY="30.0" mnemonicParsing="false" onAction="#quitGame" prefHeight="25.0" prefWidth="60.0" text="Exit" />
+            </children>
+        </AnchorPane>
+    </top>
+    <center>
+    </center>
+    <center>
+        <HBox alignment="TOP_CENTER" prefHeight="315.0" prefWidth="193.0" BorderPane.alignment="CENTER">
+            <opaqueInsets>
+                <Insets />
+            </opaqueInsets>
+            <children>
+                <GridPane alignment="CENTER" gridLinesVisible="true" prefHeight="263.0" prefWidth="291.0" style="-fx-border-color: black;">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                </GridPane>
+                <VBox prefHeight="315.0" prefWidth="242.0">
+                    <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Enter your guess below:" />
+                        <TextField />
+                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Submit" />
+                    </children>
+                </VBox>
+            </children>
+        </HBox>
+    </center>
+</BorderPane>
+
