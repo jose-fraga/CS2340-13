@@ -8,7 +8,7 @@
 <?import javafx.scene.text.Font?>
 
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.project.TwentyController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.project.twentyfourtyeight.TwentyController">
    <children>
       <Button layoutX="275.0" layoutY="254.0" mnemonicParsing="false" onAction="#returnToSelect" text="No, Go Back." />
       <Button layoutX="242.0" layoutY="211.0" mnemonicParsing="false" onAction="#continueToConfigure" text="Yes, Let's Go!" />
@@ -19,12 +19,12 @@
       </Label>
       <ImageView fitHeight="26.0" fitWidth="26.0" layoutX="242.0" layoutY="254.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@images/arrow.png" />
+            <Image url="@../images/arrow.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="26.0" fitWidth="43.0" layoutX="333.0" layoutY="211.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
          <image>
-            <Image url="@images/arrow.png" />
+            <Image url="@../images/arrow.png" />
          </image>
       </ImageView>
    </children>
