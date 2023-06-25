@@ -5,54 +5,45 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class DictionaryService {
+    public static void main(String[] args) {
+        checkIfWordExists("hello");
+    }
 
     public static boolean checkIfWordExists(String word) {
         try {
             // Construct the API request URL with the user input (should we store in .env ?)
-            String apiUrl = "https://api.datamuse.com/words?sp=";
-            String requestUrl = apiUrl + word;
+            String apiUrl = "https://api.api-ninjas.com/v1/dictionary?word=" + word;
+            String apiKey = "gVzGY7/ogCb0p9o7VO7dTw==Y5CfHFPPCRVQnBTA";
 
-            // Make the API request
-            URL url = new URL(requestUrl);
+            URL url = new URL(apiUrl);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
+            connection.setRequestProperty("accept", "application/json");
+            connection.setRequestProperty("X-Api-Key", apiKey);
 
-            // Read the API response
+            //Add some checking here
+            int responseCode = connection.getResponseCode();
 
-            BufferedReader responseReader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-            System.out.println(responseReader);
+            System.out.println(connection.getInputStream().toString());
+
+            BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
             StringBuilder response = new StringBuilder();
-            String line;
-            while ((line = responseReader.readLine()) != null) {
+            String line = reader.readLine();
+            while(line != null) {
                 response.append(line);
-            }
-            responseReader.close();
-
-            /*
-            Check if the word exists
-            Datamuse returns either an epty list if it does not exist, or similar words with different
-            scores based on the similarity. In our strict case if the first word does not match, then it does not exist
-            */
-
-            // Check if the response is not empty
-            boolean responseIsNotEmpty = response.length() > 2;
-
-            if (responseIsNotEmpty) {
-                // Define the regular expression pattern to extract the first word
-                Pattern pattern = Pattern.compile("\\{\"word\":\"(\\w+)\"");
-
-                Matcher matcher = pattern.matcher(response);
-                if (matcher.find()) {
-                    if (matcher.group(1).equals(word)) {
-                        return true;
-                    }
-                }
+                line = reader.readLine();
             }
 
+            int index = response.toString().indexOf("valid") + 8;
+            boolean isValid = Boolean.parseBoolean(response.substring(index).replace("}", ""));
+
+            if (isValid) {
+                System.out.println("SUCCESS");
+            } else {
+                System.out.println("INVALID");
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
