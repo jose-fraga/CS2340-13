@@ -1,9 +1,10 @@
-package com.example.project;
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+package com.example.project.flowfree;
 
 import com.example.project.flowfree.Obstacle;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class ObstacleTest {
     @Test

@@ -1,15 +1,12 @@
-package com.example.project;
+package com.example.project.flowfree;
 
 import com.example.project.flowfree.Pipe;
 import com.example.project.flowfree.enums.PipeState;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-import com.example.project.flowfree.Obstacle;
-import org.junit.jupiter.api.Test;
 class PipeTest {
     @Test
     void pipeIsNull() {
