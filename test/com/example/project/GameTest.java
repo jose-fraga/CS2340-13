@@ -1,13 +1,9 @@
 package com.example.project;
 
-
-
-import com.example.project.flowfree.Obstacle;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-
 
 class GameTest {
     /*
@@ -66,17 +62,17 @@ class GameTest {
     }
 
     @Test
-    void testGameTWENTY_FOURTY_EIGHT() {
-        assertEquals("2048", Game.TWENTY_FOURTY_EIGHT.title());
+    void testGameWORDLE() {
+        assertEquals("Wordle", Game.WORDLE.title());
 
-        checkFilePaths(Game.TWENTY_FOURTY_EIGHT);
+        checkFilePaths(Game.WORDLE);
 
-        assertEquals("twentyfourtyeight/2048Screen.fxml", Game.TWENTY_FOURTY_EIGHT.initialFxmlPath());
-        assertEquals("ConfigureScreen.fxml", Game.TWENTY_FOURTY_EIGHT.configFxmlPath());
-        assertEquals("twentyfourtyeight/2048GameScreen.fxml", Game.TWENTY_FOURTY_EIGHT.gameFxmlPath());
+        assertEquals("wordle/WRLSplashScreen.fxml", Game.WORDLE.initialFxmlPath());
+        assertEquals("ConfigureScreen.fxml", Game.WORDLE.configFxmlPath());
+        assertEquals("wordle/WRLGameScreen.fxml", Game.WORDLE.gameFxmlPath());
 
-        assertEquals(Game.TWENTY_FOURTY_EIGHT, Game.values()[2]);
-        assertEquals(Game.TWENTY_FOURTY_EIGHT, Game.valueOf("TWENTY_FOURTY_EIGHT"));
+        assertEquals(Game.WORDLE, Game.values()[2]);
+        assertEquals(Game.WORDLE, Game.valueOf("WORDLE"));
     }
 
     @Test

@@ -9,10 +9,10 @@ public enum Game {
             "flowfree/FFSplashScreen.fxml",
             "ConfigureScreen.fxml",
             "flowfree/FFLevelScreen.fxml"),
-    TWENTY_FOURTY_EIGHT("2048",
-            "twentyfourtyeight/2048Screen.fxml",
+    WORDLE("Wordle",
+            "wordle/WRLSplashScreen.fxml",
             "ConfigureScreen.fxml",
-            "twentyfourtyeight/2048GameScreen.fxml"),
+            "wordle/WRLGameScreen.fxml"),
     CODENAMES("Codenames",
             "codenames/CodenamesSplashScreen.fxml",
             "ConfigureScreen.fxml", //"codenames/CodenamesConfigurationScreen.fxml",
@@ -28,7 +28,6 @@ public enum Game {
         this.initialFxmlPath = initialFxmlPath;
         this.configFxmlPath = configFxmlPath;
         this.gameFxmlPath = gameFxmlPath;
-
     }
 
     public String title() { return this.title; }

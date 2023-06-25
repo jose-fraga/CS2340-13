@@ -22,7 +22,7 @@ public class GameController implements Initializable {
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         try {
-            System.out.println("ENTERED: " + Helper.currentGame.title() + " Free Game Screen");
+            System.out.println("ENTERED: " + Helper.currentGame.title() + " Game Screen");
 
             Helper.setGamePane(gamePane);
             Helper.changeGameScreen(Helper.currentGame.gameFxmlPath());
@@ -33,7 +33,7 @@ public class GameController implements Initializable {
             playerSprite.setImage(new Image(Main.class.getResourceAsStream(spritePath)));
             playerName.setText(Helper.getPlayerInstance().getName());
         } catch (Exception e) {
-            System.out.println("FAILURE: " + Helper.currentGame.title() + " Free Game Scrreen FXML Error");
+            System.out.println("FAILURE: " + Helper.currentGame.title() + " Game Screen FXML Error!");
             e.printStackTrace();
         }
     }

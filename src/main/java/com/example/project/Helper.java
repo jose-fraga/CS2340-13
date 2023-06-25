@@ -18,6 +18,7 @@ public class Helper {
     private static BorderPane gamePane;
 
     public static void setGamePane(BorderPane pane) { gamePane = pane; }
+    public static BorderPane getGamePane() { return gamePane; }
 
     public static Player getPlayerInstance() {
         if (currentPlayer == null) {

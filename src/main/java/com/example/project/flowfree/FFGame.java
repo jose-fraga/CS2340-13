@@ -16,4 +16,3 @@ public class FFGame {
         return game_instance;
     }
 }
-
