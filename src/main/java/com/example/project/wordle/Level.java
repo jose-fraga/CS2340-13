@@ -16,6 +16,9 @@ public class Level implements Scoreable {
         this.timer.start();
 
         // initialize wordCount number of wordPrompts of the correct wordLength and attemptLimit
+        for (int i = 0; i < wordCount; i++) {
+            this.wordPrompts.add(new WordPrompt(wordLength, attemptLimit));
+        }
     }
 
     public StopWatch getTimer() { return this.timer; }

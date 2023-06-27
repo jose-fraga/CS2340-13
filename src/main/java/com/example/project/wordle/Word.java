@@ -10,4 +10,8 @@ public class Word {
     public String getWord() {
         return this.word;
     }
+
+    public String letterAt(int index) {
+        return this.word.substring(index, index+1);
+    }
 }
