@@ -10,8 +10,8 @@ public class DictionaryService {
     public static boolean checkValidity(String word) {
         try {
             // Construct the API request URL with the user input (should we store in .env ?)
-            String apiUrl = "https://api.api-ninjas.com/v1/dictionary?word=" + word;
-            String apiKey = "gVzGY7/ogCb0p9o7VO7dTw==Y5CfHFPPCRVQnBTA";
+            String apiUrl = System.getenv("API_URL") + word;
+            String apiKey = System.getenv("API_KEY");
 
             URL url = new URL(apiUrl);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
