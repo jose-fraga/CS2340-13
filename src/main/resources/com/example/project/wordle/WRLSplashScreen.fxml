@@ -7,7 +7,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #121213;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.project.wordle.WRLSplashScreenController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #121213;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.project.wordle.controllers.WRLSplashScreenController">
    <children>
       <BorderPane prefHeight="400.0" prefWidth="600.0">
          <bottom>

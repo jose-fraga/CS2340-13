@@ -3,10 +3,10 @@ package com.example.project.wordle.enums;
 import com.example.project.flowfree.GridItem;
 
 public enum AttemptedResult {
-    UNKNOWN("#000000"),
-    INCORRECT("#000000"),
-    PARTIAL("#000000"),
-    CORRECT("#000000");
+    UNKNOWN("#121213"),
+    INCORRECT("#3A3A3C"),
+    PARTIAL("#B59F3B"),
+    CORRECT("#538D4E");
 
     private String color;
     

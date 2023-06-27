@@ -1,4 +1,4 @@
-package com.example.project.wordle;
+package com.example.project.wordle.controllers;
 
 import com.example.project.Game;
 import com.example.project.Helper;
