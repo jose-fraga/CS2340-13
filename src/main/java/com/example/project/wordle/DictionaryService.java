@@ -7,11 +7,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class DictionaryService {
-    public static void main(String[] args) {
-        checkIfWordExists("hello");
-    }
-
-    public static boolean checkIfWordExists(String word) {
+    public static boolean checkValidity(String word) {
         try {
             // Construct the API request URL with the user input (should we store in .env ?)
             String apiUrl = "https://api.api-ninjas.com/v1/dictionary?word=" + word;
@@ -26,10 +22,9 @@ public class DictionaryService {
             //Add some checking here
             int responseCode = connection.getResponseCode();
 
-            System.out.println(connection.getInputStream().toString());
-
             BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
             StringBuilder response = new StringBuilder();
+
             String line = reader.readLine();
             while(line != null) {
                 response.append(line);
@@ -39,11 +34,7 @@ public class DictionaryService {
             int index = response.toString().indexOf("valid") + 8;
             boolean isValid = Boolean.parseBoolean(response.substring(index).replace("}", ""));
 
-            if (isValid) {
-                System.out.println("SUCCESS");
-            } else {
-                System.out.println("INVALID");
-            }
+            return isValid;
         } catch (IOException e) {
             e.printStackTrace();
         }
