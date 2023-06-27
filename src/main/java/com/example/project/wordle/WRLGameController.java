@@ -26,12 +26,12 @@ public class WRLGameController implements Initializable {
     }
 
     public void populate() {
-        for (int i = 0; i < 5; i++) {
-            for (int j = 0; j < 7; j++) {
+        for (int i = 0; i < 7; i++) {
+            for (int j = 0; j < 5; j++) {
                 StackPane currPane = new StackPane();
                 currPane.getChildren().add(new Label());
                 currPane.setAlignment(Pos.CENTER);
-                gridPane.add(currPane, i, j);
+                gridPane.add(currPane, j, i);
             }
         }
 //        System.out.println(gridPane.getChildren());
