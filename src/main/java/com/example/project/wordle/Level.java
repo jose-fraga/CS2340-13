@@ -4,8 +4,7 @@ import org.apache.commons.lang3.time.StopWatch;
 
 import java.util.ArrayList;
 
-public class Level implements Scoreable {
-
+public class Level implements Scorable {
     public static final int TIME_LIMIT = 30; // seconds
     private int levelNumber;
     private StopWatch timer = new StopWatch();

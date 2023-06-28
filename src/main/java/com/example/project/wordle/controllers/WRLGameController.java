@@ -11,8 +11,13 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.BorderStroke;
+import javafx.scene.layout.BorderStrokeStyle;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 
 import java.net.URL;
 import java.util.Arrays;
@@ -35,9 +40,7 @@ public class WRLGameController implements Initializable {
     private void populate() {
         for (int i = 0; i < gridPane.getRowCount(); i++) {
             for (int j = 0; j < gridPane.getColumnCount(); j++) {
-                LetterPane pane = new LetterPane(new TargetWord("APPLE"), j);
-                pane.getChildren().add(new Label());
-                gridPane.add(pane,j,i);
+                gridPane.add(new LetterPane(j), j, i);
             }
         }
     }
@@ -51,8 +54,7 @@ public class WRLGameController implements Initializable {
             if (gridPane.getChildren().get(cellIdx) instanceof Group) {
                 cellIdx++;
             }
-            LetterPane pane = (LetterPane) gridPane.getChildren().get(cellIdx);
-            ((Label) pane.getChildren().get(0)).setText(e.getCode().getChar());
+            ((LetterPane) gridPane.getChildren().get(cellIdx)).updateText(e.getCode().getChar());
             cellIdx++;
             x++;
             currWord += e.getCode().getChar();
@@ -60,40 +62,20 @@ public class WRLGameController implements Initializable {
             if (x == 0 || gridPane.getChildren().get(cellIdx) instanceof Group) {
                 return;
             }
-            LetterPane pane = (LetterPane) gridPane.getChildren().get(--cellIdx);
-            ((Label) pane.getChildren().get(0)).setText("");
+            ((LetterPane) gridPane.getChildren().get(--cellIdx)).updateText("");
             x--;
             currWord = currWord.substring(0,currWord.length()-1);
         } else if (e.getCode() == KeyCode.ENTER) {
             if (x != 5) {
                 return;
             }
-            System.out.println(currWord);
+            gridPane.getChildren().subList(cellIdx-5, cellIdx).forEach(item -> {
+                ((LetterPane) item).attemptedLetter.checkAttempt();
+                ((LetterPane) item).updateStyle();
+            });
             currWord = "";
             x = 0;
             y = Math.min(++y, (gridPane.getRowCount() - 1));
         }
     }
-
-//        private String correctAnswer = DictionaryService.generateWord(5);
-//        public int currentRow = 0;
-//
-//        public void checkAnswer(char[] userAnswer) {
-//            String answer = new String(userAnswer);
-//            if (DictionaryService.checkValidity(answer)) {
-//                for (int column = 0; column < answer.length(); column++) {
-//                    String letter = correctAnswer.substring(column, column + 1);
-//                    if (letter.equals(correctAnswer.substring(column, column + 1))) {
-//                        changeColor("green", currentRow, column);
-//                    } else if (correctAnswer.contains(letter)) {
-//                        changeColor("yellow", currentRow, column);
-//                    } else {
-//                        changeColor("white", currentRow, column);
-//                    }
-//                }
-//                currentRow++;
-//            } else {
-//                System.out.println("Word is not valid");
-//            }
-//        }
 }

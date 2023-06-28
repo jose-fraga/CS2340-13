@@ -1,37 +1,37 @@
 package com.example.project.wordle;
 
-import com.example.project.wordle.enums.AttemptedResult;
+import com.example.project.wordle.enums.Status;
 
 public class AttemptedLetter {
-    private String attemptedLetter = "";
-    public AttemptedResult result = AttemptedResult.UNKNOWN;
+    private Status status = Status.EMPTY;
+    private String letter;
+    private int targetIdx;
 
-    private TargetWord target;
-    private int targetIndex;
-
-    public AttemptedLetter(TargetWord target, int targetIndex) {
-        this.target = target;
-        this.targetIndex = targetIndex;
+    public AttemptedLetter(int index) {
+        this.targetIdx = index;
     }
 
-    public boolean check(String attempt) {
-        boolean result = false;
-        this.attemptedLetter = attempt;
-        String correctLetter = target.getLetter(targetIndex);
+    public void setLetter(String letter) { this.letter = letter; }
 
-        if (attempt == correctLetter) {
-            this.result = AttemptedResult.CORRECT;
-            result = true;
-        } else if (this.target.getWord().contains(attempt)){
-            this.result = AttemptedResult.PARTIAL;
+    public Status getStatus() { return this.status; }
+
+    public void checkAttempt() {
+        String locale = "APPLE";
+        if (letter.equals(locale.substring(targetIdx,targetIdx+1))) {
+            status = Status.CORRECT;
+        } else if (locale.contains(letter)) {
+            status = Status.PARTIAL;
         } else {
-            this.result = AttemptedResult.INCORRECT;
+            status = Status.INCORRECT;
         }
-        return result;
     }
 
-    public void clear() {
-        this.attemptedLetter = "";
-        this.result = AttemptedResult.UNKNOWN;
+    @Override
+    public String toString() {
+        return "AttemptedLetter{" +
+                "status=" + status +
+                ", letter='" + letter + '\'' +
+                ", targetIdx=" + targetIdx +
+                '}';
     }
 }
