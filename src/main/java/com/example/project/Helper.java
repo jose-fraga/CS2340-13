@@ -33,7 +33,6 @@ public class Helper {
             loader = new FXMLLoader(Main.class.getResource(path));
             Parent root = loader.load();
             gamePane.setCenter(root);
-
         } catch (IOException e) {
             e.printStackTrace();
         }
