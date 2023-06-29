@@ -2,16 +2,23 @@ package com.example.project.flowfree;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Leaderboard {
+    public static void main(String[] args) {
+        Leaderboard test = new Leaderboard();
+        test.loadTimes();
+    }
+
     private static Leaderboard board;
-    private String highTimes;
+
+    private String highTimes = "10000L";
     private String filePath;
 
     public ArrayList<Long> topTimes;
 
     private Leaderboard()  {
-        filePath = new File("").getAbsolutePath();
+//        filePath = new File("flowfree/highTimes").getAbsolutePath();
         topTimes = new ArrayList<Long>();
     }
 
@@ -23,32 +30,30 @@ public class Leaderboard {
     }
 
     public void addTime(Long secs) {
-        for (int x = 0; x < topTimes.size(); x++) {
-            if (secs <= topTimes.get(x)) {
-                topTimes.add(x, secs);
-                topTimes.remove(topTimes.size() - 1);
-                return;
-            }
-        }
+        topTimes.add(secs);
+        Collections.sort(topTimes);
     }
 
     public void loadTimes() {
         try {
-            File f = new File(filePath, highTimes);
-            if (!f.isFile()) {
-                createSaveData();
-            }
+            System.out.println(this.getClass().getResource("highTimes"));
 
-            BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(f)));
-
-            topTimes.clear();
-            String[] times = reader.readLine().split("-");
-
-
-            for (int y = 0; y < times.length; y++) {
-                topTimes.add(Long.parseLong(times[y]));
-            }
-            reader.close();
+//            File f = new File(this.getClass().getResource("flowfree/highTimes").getPath());
+//            System.out.println(f.isFile());
+//            if (!f.isFile()) {
+//                createSaveData();
+//            }
+//
+//            BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(f)));
+//
+//            topTimes.clear();
+//            String[] times = reader.readLine().split("-");
+//
+//
+//            for (int y = 0; y < times.length; y++) {
+//                topTimes.add(Long.parseLong(times[y]));
+//            }
+//            reader.close();
         } catch (Exception e) {
             e.printStackTrace();
         }

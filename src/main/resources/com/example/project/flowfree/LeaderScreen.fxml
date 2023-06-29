@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -11,13 +10,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.project.LeaderScreen">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.project.flowfree.controllers.LeaderController">
     <children>
-        <ImageView fitHeight="490.0" fitWidth="683.0" pickOnBounds="true" preserveRatio="true">
-            <image>
-                <Image url="@../../../../../../../../../../../Downloads/leaderloop.gif" />
-            </image>
-        </ImageView>
+        <ImageView fitHeight="490.0" fitWidth="683.0" pickOnBounds="true" preserveRatio="true" />
         <Text fontSmoothingType="LCD" layoutX="201.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LEADERBOARD">
             <font>
                 <Font name="Berlin Sans FB" size="37.0" />
@@ -57,7 +52,7 @@
                 <Font name="Berlin Sans FB" size="47.0" />
             </font>
         </Text>
-        <GridPane layoutX="276.0" layoutY="154.0" prefHeight="243.0" prefWidth="232.0">
+        <GridPane fx:id="gridPane" layoutX="276.0" layoutY="154.0" prefHeight="243.0" prefWidth="232.0">
             <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />

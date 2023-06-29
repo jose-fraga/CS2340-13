@@ -2,15 +2,7 @@ package com.example.project.flowfree.controllers;
 
 import com.example.project.Game;
 import com.example.project.Helper;
-import com.example.project.flowfree.ColoredGridItem;
-import com.example.project.flowfree.Dot;
-import com.example.project.flowfree.FFGame;
-import com.example.project.flowfree.FFPane;
-import com.example.project.flowfree.Grid;
-import com.example.project.flowfree.GridItem;
-import com.example.project.flowfree.Level;
-import com.example.project.flowfree.Obstacle;
-import com.example.project.flowfree.Pipe;
+import com.example.project.flowfree.*;
 import com.example.project.flowfree.enums.Warning;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -63,6 +55,9 @@ public class FFGridController implements Initializable {
         handleEvent();
     }
 
+    private void initializeLeaderboard() {
+
+    }
     private void initializeTimer() {
         if (!this.level.getTimer().isStarted()) {
             this.level.getTimer().start();
@@ -201,8 +196,8 @@ public class FFGridController implements Initializable {
                         if (grid.isComplete()) {
                             level.complete();
                             System.out.println("LEVEL COMPLETE!");
-                            safelyChangeScreen("flowfree/FFEndScreen.fxml");
-
+//                            safelyChangeScreen("flowfree/FFEndScreen.fxml");
+                            safelyChangeScreen("flowfree/LeaderScreen.fxml");
                         } else {
                             System.out.println("KEEP GOING...");
                         }
