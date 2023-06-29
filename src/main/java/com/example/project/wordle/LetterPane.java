@@ -15,6 +15,9 @@ public class LetterPane extends StackPane {
         this.attemptedLetter = new AttemptedLetter(index);
     }
 
+    // Hello World
+    // Febin Wrote this Code
+
     public void updateText(String character) {
         ((Label) this.getChildren().get(0)).setText(character);
         this.attemptedLetter.setLetter(character);
