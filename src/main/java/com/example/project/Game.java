@@ -12,7 +12,7 @@ public enum Game {
     WORDLE("Wordle",
             "wordle/WRLSplashScreen.fxml",
             "ConfigureScreen.fxml",
-            "wordle/WRLGameScreen.fxml"),
+            "wordle/WRLLevelScreen.fxml"),
     CODENAMES("Codenames",
             "codenames/CodenamesSplashScreen.fxml",
             "ConfigureScreen.fxml", //"codenames/CodenamesConfigurationScreen.fxml",

@@ -9,4 +9,12 @@ public class TargetWord extends Word {
     public AttemptedWord check(AttemptedWord attemptedWord) {
         return null;
     }
+
+    public String getLetter(int index) {
+        String result = "";
+        if (index >= 0 && index < this.word.length()) {
+            result = this.word.charAt(index) + "";
+        }
+        return result;
+    }
 }

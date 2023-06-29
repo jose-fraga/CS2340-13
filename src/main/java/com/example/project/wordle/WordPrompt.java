@@ -4,7 +4,7 @@ import org.apache.commons.lang3.time.StopWatch;
 
 import java.util.ArrayList;
 
-public class WordPrompt implements Scoreable {
+public class WordPrompt implements Scorable {
     private int attemptLimit;
     private StopWatch time;
     private TargetWord targetWord;

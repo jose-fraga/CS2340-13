@@ -45,9 +45,5 @@ public class ConfigureController implements Initializable {
         player.setSpritePath(selectedSprite.getPath());
         Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
         Helper.changeScreen(stage, "GameScreen.fxml", "CS2340 - " + Helper.currentGame.title() + " (Game)");
-
-        if (Helper.currentGame == Game.WORDLE) {
-            Helper.getGamePane().getCenter().requestFocus();
-        }
     }
 }

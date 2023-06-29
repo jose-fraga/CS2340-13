@@ -69,7 +69,7 @@ class GameTest {
 
         assertEquals("wordle/WRLSplashScreen.fxml", Game.WORDLE.initialFxmlPath());
         assertEquals("ConfigureScreen.fxml", Game.WORDLE.configFxmlPath());
-        assertEquals("wordle/WRLGameScreen.fxml", Game.WORDLE.gameFxmlPath());
+        assertEquals("wordle/WRLLevelScreen.fxml", Game.WORDLE.gameFxmlPath());
 
         assertEquals(Game.WORDLE, Game.values()[2]);
         assertEquals(Game.WORDLE, Game.valueOf("WORDLE"));
