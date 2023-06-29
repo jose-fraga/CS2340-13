@@ -7,6 +7,8 @@ public class AttemptedLetter {
     private String letter;
     private int targetIdx;
 
+    // This was created by multiple users.
+
     public AttemptedLetter(int index) {
         this.targetIdx = index;
     }
