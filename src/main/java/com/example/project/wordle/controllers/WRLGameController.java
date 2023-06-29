@@ -1,5 +1,6 @@
 package com.example.project.wordle.controllers;
 
+import com.example.project.wordle.AttemptedLetter;
 import com.example.project.wordle.DictionaryService;
 import com.example.project.wordle.LetterPane;
 import com.example.project.wordle.TargetWord;
@@ -47,8 +48,9 @@ public class WRLGameController implements Initializable {
 
     @FXML public void handle(KeyEvent e) {
         // Add condition to check if all cells are filled
+        int rowLength = gridPane.getColumnCount();
         if (Character.isLetter(e.getCode().getChar().charAt(0))) {
-            if (x == 5) {
+            if (x == rowLength) {
                 return;
             }
             if (gridPane.getChildren().get(cellIdx) instanceof Group) {
@@ -66,16 +68,16 @@ public class WRLGameController implements Initializable {
             x--;
             currWord = currWord.substring(0,currWord.length()-1);
         } else if (e.getCode() == KeyCode.ENTER) {
-            if (x != 5) {
+            if (x != rowLength) {
                 return;
             }
-            gridPane.getChildren().subList(cellIdx-5, cellIdx).forEach(item -> {
-                ((LetterPane) item).attemptedLetter.checkAttempt();
+            gridPane.getChildren().subList(cellIdx - rowLength, cellIdx).forEach(item -> {
+                ((LetterPane) item).attemptedLetter.checkAttempt(rowLength);
                 ((LetterPane) item).updateStyle();
             });
             currWord = "";
             x = 0;
-            y = Math.min(++y, (gridPane.getRowCount() - 1));
+            y = Math.min(++y, rowLength);
         }
     }
 }
