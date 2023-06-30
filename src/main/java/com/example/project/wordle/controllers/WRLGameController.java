@@ -1,10 +1,16 @@
 package com.example.project.wordle.controllers;
 
+import com.example.project.Game;
+import com.example.project.Helper;
 import com.example.project.wordle.AttemptedLetter;
 import com.example.project.wordle.DictionaryService;
 import com.example.project.wordle.LetterPane;
+import com.example.project.wordle.Life;
 import com.example.project.wordle.TargetWord;
+
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
@@ -19,6 +25,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.Arrays;
@@ -26,6 +33,8 @@ import java.util.ResourceBundle;
 
 public class WRLGameController implements Initializable {
     @FXML private GridPane gridPane;
+    @FXML private Label endLabel;
+    @FXML private Label messageLabel;
 
     private int x = 0, y = 0, cellIdx = 0;
 
@@ -34,10 +43,13 @@ public class WRLGameController implements Initializable {
     private DictionaryService dictionaryService = new DictionaryService();
     private String targetWord = "";
 
+    private Life life;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         populate();
         currWord = "";
+        life = new Life(); // Instantiate Life
     }
 
     private void populate() {
@@ -49,7 +61,14 @@ public class WRLGameController implements Initializable {
         targetWord = dictionaryService.generateWord(gridPane.getColumnCount()).toUpperCase();
     }
 
-    @FXML public void handle(KeyEvent e) {
+    @FXML
+    public void handle(KeyEvent e) {
+        // Check if game over
+        if (life.getLives() <= 0) {
+            gameOver();
+            return;
+        }
+
         // Add condition to check if all cells are filled
         int rowLength = gridPane.getColumnCount();
         if (Character.isLetter(e.getCode().getChar().charAt(0))) {
@@ -63,6 +82,11 @@ public class WRLGameController implements Initializable {
             cellIdx++;
             x++;
             currWord += e.getCode().getChar();
+
+            // Check if game over
+            if (life.getLives() <= 0) {
+                gameOver();
+            }
         } else if (e.getCode() == KeyCode.BACK_SPACE) {
             if (x == 0 || gridPane.getChildren().get(cellIdx) instanceof Group) {
                 return;
@@ -72,6 +96,7 @@ public class WRLGameController implements Initializable {
             currWord = currWord.substring(0,currWord.length()-1);
         } else if (e.getCode() == KeyCode.ENTER) {
             if (x != rowLength) {
+                life.calculateLives(targetWord, currWord);
                 return;
             }
             gridPane.getChildren().subList(cellIdx - rowLength, cellIdx).forEach(item -> {
@@ -81,6 +106,20 @@ public class WRLGameController implements Initializable {
             currWord = "";
             x = 0;
             y = Math.min(++y, rowLength);
+          
+            // Check if game over
+            if (life.getLives() <= 0) {
+                gameOver();
+            }
         }
     }
+
+
+    private void gameOver() {
+        Helper.changeGameScreen("wordle/WRLEndLostScreen.fxml");
+        endLabel.setText("You lost"); // Set the label text to "You lost"
+        endLabel.setVisible(true); // Make the label visible
+        messageLabel.setVisible(false); // Hide the message label
+    }
+
 }
