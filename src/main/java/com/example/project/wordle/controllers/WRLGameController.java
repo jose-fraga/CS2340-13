@@ -100,6 +100,8 @@ public class WRLGameController implements Initializable {
                 life.calculateLives(targetWord.getWord(), currWord.getWord());
                 return;
             }
+            life.calculateLives(targetWord.getWord(), currWord.getWord());
+            livesDisplay.setText("Lives: " + life.getLives());
 
             if (currWord.isValid()) {
                 if (currWord.compareWithTarget(targetWord)) {
@@ -114,7 +116,6 @@ public class WRLGameController implements Initializable {
                 warningLabel.setVisible(true);
                 return;
             }
-
             gridPane.getChildren().subList(cellIdx - rowLength, cellIdx).forEach(item -> {
                 ((LetterPane) item).attemptedLetter.checkAttempt(targetWord.getWord());
                 ((LetterPane) item).updateStyle();
