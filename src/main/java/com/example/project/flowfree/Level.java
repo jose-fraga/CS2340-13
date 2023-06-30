@@ -10,6 +10,8 @@ public class Level {
     private StopWatch timer;
     private Grid grid;
 
+    public Leaderboard board = new Leaderboard();
+
     public Level(int levelNumber) {
         this.levelNumber = levelNumber;
         this.timer = new StopWatch(); // new TimerLogic();
@@ -20,8 +22,8 @@ public class Level {
     public Grid getGrid() { return this.grid; }
     public StopWatch getTimer() { return this.timer; }
 
-    public int getSecondsLeft() {
-        int timeLeft = TIME_LIMIT - (int) this.timer.getTime() / 1000;
+    public long getSecondsLeft() {
+        long timeLeft = TIME_LIMIT - this.timer.getTime() / 1000;
         if (timeLeft <= 0) {
             if (!this.timer.isStopped()) {
                 this.timer.stop();
@@ -43,5 +45,8 @@ public class Level {
 
     public void complete() {
         this.timer.stop();
+        this.board.addTime(this.getSecondsLeft());
+        this.board.writeTimes();
+        this.board.readTimes();
     }
 }

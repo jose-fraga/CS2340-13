@@ -5,21 +5,21 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class Leaderboard {
-    public static void main(String[] args) {
-        Leaderboard test = new Leaderboard();
-        test.loadTimes();
-    }
 
-    private static Leaderboard board;
 
-    private String highTimes = "10000L";
+    public static Leaderboard board;
     private String filePath;
 
+    private String highTimes;
     public ArrayList<Long> topTimes;
+    public ArrayList<String> times;
 
-    private Leaderboard()  {
-//        filePath = new File("flowfree/highTimes").getAbsolutePath();
+
+
+    public Leaderboard()  {
+        filePath = new File("flowfree/highTime").getAbsolutePath();
         topTimes = new ArrayList<Long>();
+        times = new ArrayList<String>();
     }
 
     public static synchronized Leaderboard getInstance() {
@@ -28,72 +28,82 @@ public class Leaderboard {
         }
         return board;
     }
-
-    public void addTime(Long secs) {
+//a long goes in that addTime
+    public void addTime(long secs) {
         topTimes.add(secs);
         Collections.sort(topTimes);
     }
 
-    public void loadTimes() {
+    public void readTimes() {
         try {
-            System.out.println(this.getClass().getResource("highTimes"));
+          BufferedReader reader = new BufferedReader(new FileReader("highTime.txt"));
 
-//            File f = new File(this.getClass().getResource("flowfree/highTimes").getPath());
-//            System.out.println(f.isFile());
-//            if (!f.isFile()) {
-//                createSaveData();
-//            }
-//
-//            BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(f)));
-//
-//            topTimes.clear();
-//            String[] times = reader.readLine().split("-");
-//
-//
-//            for (int y = 0; y < times.length; y++) {
-//                topTimes.add(Long.parseLong(times[y]));
-//            }
-//            reader.close();
+            for (String line = reader.readLine(); line != null; line = reader.readLine()) {
+                times.add(line);
+            }
+
+          reader.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void saveTimes() {
-        FileWriter output = null;
-
+    public void writeTimes() {
         try{
-            File f = new File(filePath, highTimes);
-            output = new FileWriter(f);
-            BufferedWriter writer = new BufferedWriter(output);
-
-            writer.newLine();
-            writer.write(topTimes.get(0) + "-" + topTimes.get(1) + "-" + topTimes.get(2) + "-" +topTimes.get(3));
+            BufferedWriter writer = new BufferedWriter(new FileWriter("highTime.txt"));
+            for(int x = 0; x < 3; x++) {
+                long l = this.topTimes.get(x);
+                String str = l +"";
+                writer.write(str);
+                writer.newLine();
+            }
             writer.close();
-
         } catch(Exception e) {
             e.printStackTrace();
         }
     }
 
-    private void createSaveData(){
-        FileWriter output = null;
+  //  private void createSaveData(){
+   //     FileWriter output = null;
 
-        try{
-            File f = new File(filePath, highTimes);
-            output = new FileWriter(f);
-            BufferedWriter writer = new BufferedWriter(output);
-            writer.newLine();
-            writer.write(Integer.MAX_VALUE + "-" + Integer.MAX_VALUE + "-" + Integer.MAX_VALUE + "-" + Integer.MAX_VALUE + "-");
-            writer.close();
+     //   try{
+       //     File f = new File(filePath, highTimes);
+         //   output = new FileWriter(f);
+           // BufferedWriter writer = new BufferedWriter(output);
+  //          writer.newLine();
+    //       writer.write(Integer.MAX_VALUE + "-" + Integer.MAX_VALUE + "-" + Integer.MAX_VALUE + "-" + Integer.MAX_VALUE + "-");
+      //      writer.close();
 
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
-    }
+        //} catch(Exception e) {
+          //  e.printStackTrace();
+       // }
+  //  }
 
-    public long getFastestTime() { return topTimes.get(0); }
-    public void setFastestTime(long time) { topTimes.set(0, time); }
+    public String getTopTime() { return this.times.get(0); }
+    public String getNextTime() { return this.times.get(1); }
+    public String getLastTime() { return this.times.get(2); }
+    public void setFastestTime(long time) { this.topTimes.set(0, time); }
+
     public ArrayList<Long> getTopTimes() { return topTimes; }
+
+    //public static void main(String[] args) throws IOException {
+  //      Leaderboard test = new Leaderboard();
+   //     BufferedReader reader = new BufferedReader(new FileReader("highTime.txt"));
+   //     test.addTime(4000L);
+  //      test.addTime(5000L);
+   //     test.addTime(3000L);
+
+   //     test.writeTimes();
+   //     test.readTimes();
+
+  //      System.out.println(test.getTopTime());
+  //      System.out.println(test.getNextTime());
+  //      System.out.println(test.getLastTime());
+
+     //   System.out.println(test.getTopTime());
+     //   System.out.println(test.getNextTime());
+    //    System.out.println(test.getLastTime());
+  //  }
+
 }
 

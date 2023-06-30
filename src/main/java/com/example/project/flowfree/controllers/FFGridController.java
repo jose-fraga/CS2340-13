@@ -55,9 +55,6 @@ public class FFGridController implements Initializable {
         handleEvent();
     }
 
-    private void initializeLeaderboard() {
-
-    }
     private void initializeTimer() {
         if (!this.level.getTimer().isStarted()) {
             this.level.getTimer().start();
@@ -69,7 +66,7 @@ public class FFGridController implements Initializable {
                 Platform.runLater(new Runnable() {
                     @Override
                     public void run() {
-                        int timeLeft = level.getSecondsLeft();
+                        long timeLeft = level.getSecondsLeft();
                         timerDisplay.setText(timeLeft + "");
 
                         if (timeLeft <= 0) {
