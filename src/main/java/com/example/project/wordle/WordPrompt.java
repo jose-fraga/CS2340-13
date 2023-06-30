@@ -14,5 +14,4 @@ public class WordPrompt implements Scorable {
 
     @Override
     public int calculateScore() { return 0; }
-
 }

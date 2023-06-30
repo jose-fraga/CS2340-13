@@ -7,9 +7,9 @@
 
 <AnchorPane prefHeight="330.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.project.wordle.controllers.WRLEndController">
     <children>
-        <Label fx:id="endLabel" alignment="CENTER" layoutX="259.0" layoutY="137.0" prefHeight="28.0" prefWidth="82.0" style="-fx-border-color: black; -fx-background-color: red;" text="FAILURE!" />
+        <Label fx:id="endLabel" alignment="CENTER" layoutX="259.0" layoutY="137.0" prefHeight="28.0" prefWidth="82.0" style="-fx-border-color: black; -fx-background-color: lightgreen;" text="Success!" />
         <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#returnToLevelSelect" text="Return" />
-        <Label fx:id="messageLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="223.0" layoutY="99.0" prefHeight="37.0" prefWidth="154.0" text="Lost!">
+        <Label fx:id="messageLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="223.0" layoutY="99.0" prefHeight="37.0" prefWidth="154.0" text="Won!">
             <font>
                 <Font name="Gill Sans Ultra Bold Condensed" size="15.0" />
             </font>

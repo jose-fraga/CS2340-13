@@ -3,6 +3,7 @@ package com.example.project.wordle.controllers;
 import com.example.project.Game;
 import com.example.project.Helper;
 import com.example.project.wordle.AttemptedLetter;
+import com.example.project.wordle.AttemptedWord;
 import com.example.project.wordle.DictionaryService;
 import com.example.project.wordle.LetterPane;
 import com.example.project.wordle.Life;
@@ -27,28 +28,28 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
+import java.lang.annotation.Target;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.ResourceBundle;
 
 public class WRLGameController implements Initializable {
     @FXML private GridPane gridPane;
-    @FXML private Label endLabel;
-    @FXML private Label messageLabel;
+    @FXML private Label warningLabel;
 
     private int x = 0, y = 0, cellIdx = 0;
 
     // Update this with AttemptedWord
-    private String currWord;
-    private DictionaryService dictionaryService = new DictionaryService();
-    private String targetWord = "";
-
+    private AttemptedWord currWord;
+    private TargetWord targetWord;
     private Life life;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         populate();
-        currWord = "";
+        currWord = new AttemptedWord("");
+//        targetWord = DictionaryService.generateWord(gridPane.getColumnCount()).toUpperCase();
+        targetWord = new TargetWord(gridPane.getColumnCount());
         life = new Life(); // Instantiate Life
     }
 
@@ -58,17 +59,16 @@ public class WRLGameController implements Initializable {
                 gridPane.add(new LetterPane(j), j, i);
             }
         }
-        targetWord = dictionaryService.generateWord(gridPane.getColumnCount()).toUpperCase();
     }
 
     @FXML
     public void handle(KeyEvent e) {
+        warningLabel.setVisible(false);
         // Check if game over
         if (life.getLives() <= 0) {
             gameOver();
             return;
         }
-
         // Add condition to check if all cells are filled
         int rowLength = gridPane.getColumnCount();
         if (Character.isLetter(e.getCode().getChar().charAt(0))) {
@@ -81,8 +81,8 @@ public class WRLGameController implements Initializable {
             ((LetterPane) gridPane.getChildren().get(cellIdx)).updateText(e.getCode().getChar());
             cellIdx++;
             x++;
-            currWord += e.getCode().getChar();
-
+//            currWord += e.getCode().getChar();
+            currWord.add(e.getCode().getChar());
             // Check if game over
             if (life.getLives() <= 0) {
                 gameOver();
@@ -93,20 +93,35 @@ public class WRLGameController implements Initializable {
             }
             ((LetterPane) gridPane.getChildren().get(--cellIdx)).updateText("");
             x--;
-            currWord = currWord.substring(0,currWord.length()-1);
+//            currWord = currWord.substring(0,currWord.length()-1);
+            currWord.remove();
         } else if (e.getCode() == KeyCode.ENTER) {
             if (x != rowLength) {
-                life.calculateLives(targetWord, currWord);
+                life.calculateLives(targetWord.getWord(), currWord.getWord());
                 return;
             }
+
+            if (currWord.isValid()) {
+                if (currWord.compareWithTarget(targetWord)) {
+                    System.out.println("VALID - YES");
+                    gameWon();
+                } else {
+                    System.out.println(targetWord.getWord());
+                    System.out.println("VALID - NO");
+                }
+            } else {
+                System.out.println("INVALID");
+                warningLabel.setVisible(true);
+                return;
+            }
+
             gridPane.getChildren().subList(cellIdx - rowLength, cellIdx).forEach(item -> {
-                ((LetterPane) item).attemptedLetter.checkAttempt(targetWord);
+                ((LetterPane) item).attemptedLetter.checkAttempt(targetWord.getWord());
                 ((LetterPane) item).updateStyle();
             });
-            currWord = "";
+            currWord = new AttemptedWord("");
             x = 0;
             y = Math.min(++y, rowLength);
-          
             // Check if game over
             if (life.getLives() <= 0) {
                 gameOver();
@@ -114,12 +129,11 @@ public class WRLGameController implements Initializable {
         }
     }
 
-
     private void gameOver() {
         Helper.changeGameScreen("wordle/WRLEndLostScreen.fxml");
-        endLabel.setText("You lost"); // Set the label text to "You lost"
-        endLabel.setVisible(true); // Make the label visible
-        messageLabel.setVisible(false); // Hide the message label
     }
 
+    private void gameWon() {
+        Helper.changeGameScreen("wordle/WRLEndWonScreen.fxml");
+    }
 }
