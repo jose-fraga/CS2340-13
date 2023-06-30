@@ -1,7 +1,12 @@
 package com.example.project.wordle.enums;
 
 public enum WordDifficulty {
-    FIVE("wordle/levels/Five.fxml");
+    FOUR("wordle/levels/Four.fxml"),
+    FIVE("wordle/levels/Five.fxml"),
+    SIX("wordle/levels/Six.fxml");
+
+
+
 
     private String path;
 
