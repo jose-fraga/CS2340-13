@@ -6,7 +6,6 @@ public class AttemptedLetter {
     private Status status = Status.EMPTY;
     private String letter;
     private int targetIdx;
-    private static String locale = "";
 
     public AttemptedLetter(int index) {
         this.targetIdx = index;
@@ -16,17 +15,10 @@ public class AttemptedLetter {
 
     public Status getStatus() { return this.status; }
 
-    public void checkAttempt(int wordCount) {
-        if(wordCount == 4) {
-            locale = "RICE";
-        } else if(wordCount == 5) {
-            locale = "APPLE";
-        } else {
-            locale = "ACROSS";
-        }
-        if (letter.equals(locale.substring(targetIdx,targetIdx+1))) {
+    public void checkAttempt(String targetWord) {
+        if (letter.equals(targetWord.substring(targetIdx,targetIdx+1))) {
             status = Status.CORRECT;
-        } else if (locale.contains(letter)) {
+        } else if (targetWord.contains(letter)) {
             status = Status.PARTIAL;
         } else {
             status = Status.INCORRECT;

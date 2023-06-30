@@ -31,6 +31,8 @@ public class WRLGameController implements Initializable {
 
     // Update this with AttemptedWord
     private String currWord;
+    private DictionaryService dictionaryService = new DictionaryService();
+    private String targetWord = "";
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -44,6 +46,7 @@ public class WRLGameController implements Initializable {
                 gridPane.add(new LetterPane(j), j, i);
             }
         }
+        targetWord = dictionaryService.generateWord(gridPane.getColumnCount()).toUpperCase();
     }
 
     @FXML public void handle(KeyEvent e) {
@@ -72,7 +75,7 @@ public class WRLGameController implements Initializable {
                 return;
             }
             gridPane.getChildren().subList(cellIdx - rowLength, cellIdx).forEach(item -> {
-                ((LetterPane) item).attemptedLetter.checkAttempt(rowLength);
+                ((LetterPane) item).attemptedLetter.checkAttempt(targetWord);
                 ((LetterPane) item).updateStyle();
             });
             currWord = "";
