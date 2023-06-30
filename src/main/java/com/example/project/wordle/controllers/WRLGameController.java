@@ -35,6 +35,7 @@ public class WRLGameController implements Initializable {
     @FXML private GridPane gridPane;
     @FXML private Label endLabel;
     @FXML private Label messageLabel;
+    @FXML private Label livesDisplay;
 
     private int x = 0, y = 0, cellIdx = 0;
 
@@ -96,9 +97,10 @@ public class WRLGameController implements Initializable {
             currWord = currWord.substring(0,currWord.length()-1);
         } else if (e.getCode() == KeyCode.ENTER) {
             if (x != rowLength) {
-                life.calculateLives(targetWord, currWord);
                 return;
             }
+            life.calculateLives(targetWord, currWord);
+            livesDisplay.setText("Lives: " + life.getLives());
             gridPane.getChildren().subList(cellIdx - rowLength, cellIdx).forEach(item -> {
                 ((LetterPane) item).attemptedLetter.checkAttempt(targetWord);
                 ((LetterPane) item).updateStyle();
@@ -117,9 +119,9 @@ public class WRLGameController implements Initializable {
 
     private void gameOver() {
         Helper.changeGameScreen("wordle/WRLEndLostScreen.fxml");
-        endLabel.setText("You lost"); // Set the label text to "You lost"
-        endLabel.setVisible(true); // Make the label visible
-        messageLabel.setVisible(false); // Hide the message label
+        endLabel.setText("You lost");
+        endLabel.setVisible(true);
+        messageLabel.setVisible(false);
     }
 
 }

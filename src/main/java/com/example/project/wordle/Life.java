@@ -6,7 +6,7 @@ public class Life {
     private int lives;
 
     public Life() {
-        this.lives = 4;
+        this.lives = 6;
     }
 
     public void calculateLives(String correctWord, String attemptedWord) {
