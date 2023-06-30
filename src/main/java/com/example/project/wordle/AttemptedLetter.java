@@ -5,7 +5,7 @@ import com.example.project.wordle.enums.Status;
 public class AttemptedLetter {
     private Status status = Status.EMPTY;
     private String letter;
-    private int targetIdx;
+    private final int targetIdx;
 
     public AttemptedLetter(int index) {
         this.targetIdx = index;
