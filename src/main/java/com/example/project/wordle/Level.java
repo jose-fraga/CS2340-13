@@ -13,8 +13,6 @@ public class Level implements Scorable {
 
     public Level(int wordLength, int wordCount, int attemptLimit) {
         this.timer.start();
-
-        // initialize wordCount number of wordPrompts of the correct wordLength and attemptLimit
     }
 
     public StopWatch getTimer() { return this.timer; }
