@@ -17,7 +17,9 @@ public class FFEndController implements Initializable {
     @FXML private Label messageLabel;
 
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {}
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        System.out.println("ENTERED: " + Helper.currentGame.title() + "End Screen");
+    }
 
     public void showFailureMessage() {
         endLabel.setText("FAILURE!");

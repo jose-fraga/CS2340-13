@@ -1,7 +1,5 @@
 package com.example.project.wordle;
 
-import java.util.ArrayList;
-
 public class AttemptedWord extends Word {
     public AttemptedWord(String word) {
         super(word);

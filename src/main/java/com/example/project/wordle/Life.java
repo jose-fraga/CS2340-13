@@ -1,7 +1,5 @@
 package com.example.project.wordle;
 
-import com.example.project.wordle.enums.Status;
-
 public class Life {
     private int lives;
 
@@ -11,11 +9,7 @@ public class Life {
 
     public void calculateLives(String correctWord, String attemptedWord) {
         if (!correctWord.equals(attemptedWord)) {
-            lives--;
+            this.lives--;
         }
-    }
-
-    public int getLives() {
-        return lives;
     }
 }

@@ -24,13 +24,4 @@ public class AttemptedLetter {
             status = Status.INCORRECT;
         }
     }
-
-    @Override
-    public String toString() {
-        return "AttemptedLetter{" +
-                "status=" + status +
-                ", letter='" + letter + '\'' +
-                ", targetIdx=" + targetIdx +
-                '}';
-    }
 }

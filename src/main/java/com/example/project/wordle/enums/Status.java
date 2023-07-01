@@ -1,7 +1,5 @@
 package com.example.project.wordle.enums;
 
-import javafx.scene.paint.Color;
-
 public enum Status {
     EMPTY("#FFFFFF"),
     INCORRECT("#3A3A3C"),

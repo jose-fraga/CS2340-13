@@ -7,7 +7,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class DictionaryService {
-    public static boolean checkValidity(String word) {
+    public synchronized static boolean checkValidity(String word) {
         try {
             String apiUrl = System.getenv("NINJA_API_URL") + word;
             String apiKey = System.getenv("NINJA_API_KEY");
@@ -39,7 +39,7 @@ public class DictionaryService {
         return false;
     }
 
-    public static String generateWord(int length) {
+    public synchronized static String generateWord(int length) {
         try {
             String apiUrl = System.getenv("RANDOM_WORD_API_URL") + length;
 

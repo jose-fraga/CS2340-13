@@ -32,5 +32,6 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             </rowConstraints>
         </GridPane>
+        <Label fx:id="warningLabel" layoutX="427.0" layoutY="146.0" text="Invalid Word!" visible="false" />
     </children>
 </AnchorPane>

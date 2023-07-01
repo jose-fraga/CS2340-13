@@ -10,7 +10,6 @@ public class TargetWord extends Word {
 
     public TargetWord(int length) {
         super("");
-//        super(curr.toUpperCase());
         updateWord(length);
         populateLetterMap();
     }
@@ -42,9 +41,6 @@ public class TargetWord extends Word {
         ArrayList<Status> result = new ArrayList<Status>();
         for (int i = 0; i < attempt.word.length(); i++) {
             Letter letterStats = letterMap.get(i);
-//            if (letterStats.c) {
-//
-//            }
             result.add(Status.INCORRECT);
         }
         return result;
@@ -67,10 +63,6 @@ public class TargetWord extends Word {
             this.indices.add(index);
             resetCheck();
         }
-
-//        public Status check(int index) {
-////            if (this.   )
-//        }
 
         private void resetCheck() {
             this.tempIndices = new ArrayList<Integer>(indices.size());
