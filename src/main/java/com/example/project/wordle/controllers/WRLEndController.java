@@ -18,7 +18,7 @@ public class WRLEndController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        System.out.println("ENTERED: " + Helper.currentGame.title() + "End Screen");
+        System.out.println("ENTERED: Wordle End Screen");
     }
 
     public void showFailureMessage() {

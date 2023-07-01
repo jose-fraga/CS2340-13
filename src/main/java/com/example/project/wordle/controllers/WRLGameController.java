@@ -68,7 +68,7 @@ public class WRLGameController implements Initializable {
                 switchToEndScreen(true);
             }
         } else if (e.getCode() == KeyCode.BACK_SPACE) {
-            if (x == 0 || gridPane.getChildren().get(cellIdx) instanceof Group) {
+            if (x == 0 || (cellIdx <= gridPane.getChildren().size()-1 && gridPane.getChildren().get(cellIdx) instanceof Group)) {
                 return;
             }
             ((LetterPane) gridPane.getChildren().get(--cellIdx)).updateText("");
@@ -76,21 +76,17 @@ public class WRLGameController implements Initializable {
             currWord.remove();
         } else if (e.getCode() == KeyCode.ENTER) {
             if (x != rowLength) {
-                life.calculateLives(targetWord.getWord(), currWord.getWord());
                 return;
             }
-            life.calculateLives(targetWord.getWord(), currWord.getWord());
-            livesDisplay.setText("Lives: " + life.getLives());
             if (currWord.isValid()) {
                 if (currWord.compareWithTarget(targetWord)) {
-                    System.out.println("VALID - YES");
                     switchToEndScreen(false);
                 } else {
+                    life.calculateLives(targetWord.getWord(), currWord.getWord());
+                    livesDisplay.setText("Lives: " + life.getLives());
                     System.out.println(targetWord.getWord());
-                    System.out.println("VALID - NO");
                 }
             } else {
-                System.out.println("INVALID");
                 warningLabel.setVisible(true);
                 return;
             }

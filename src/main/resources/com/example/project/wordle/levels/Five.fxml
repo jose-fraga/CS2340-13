@@ -5,7 +5,6 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyReleased="#handle" prefHeight="310.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.project.wordle.controllers.WRLGameController">
@@ -32,6 +31,10 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             </rowConstraints>
         </GridPane>
-        <Label fx:id="warningLabel" layoutX="427.0" layoutY="146.0" text="Invalid Word!" visible="false" />
+        <Label fx:id="warningLabel" alignment="CENTER" layoutX="415.0" layoutY="137.0" prefHeight="35.0" prefWidth="95.0" style="-fx-border-color: black; -fx-text-fill: red;" text="Invalid Word!" visible="false">
+            <font>
+                <Font size="13.0" />
+            </font>
+        </Label>
     </children>
 </AnchorPane>
