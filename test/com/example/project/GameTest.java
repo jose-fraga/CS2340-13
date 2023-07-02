@@ -21,16 +21,12 @@ class GameTest {
         assertThat— Asserts that an object matches the given conditions (see section A.2.2 for a more thorough explanation).
      */
 
-    private String fileNotFoundMessage(Game game, String pathMethodName, String path) {
-        return "FXML File not found for Game." + game + "." + pathMethodName + "() at " + path + "\n" +
-                "Check that the file exists in src/main/resources/com/example/project/" + path + "\n" +
-                "Check that the file is included in the build.gradle file";
-    }
+    private EnumPathTestHelper<Game> helper = new EnumPathTestHelper<Game>();
 
     private void checkFilePaths(Game game) {
-        assertNotNull(GameTest.class.getResource(game.initialFxmlPath()), fileNotFoundMessage(game, "initialFxmlPath", game.initialFxmlPath()));
-        assertNotNull(GameTest.class.getResource(game.configFxmlPath()), fileNotFoundMessage(game, "configFxmlPath", game.configFxmlPath()));
-        assertNotNull(GameTest.class.getResource(game.gameFxmlPath()), fileNotFoundMessage(game, "gameFxmlPath", game.gameFxmlPath()));
+        helper.assertPathResolves(game.initialFxmlPath(), "initialFxmlPath");
+        helper.assertPathResolves(game.configFxmlPath(), "configFxmlPath");
+        helper.assertPathResolves(game.gameFxmlPath(), "gameFxmlPath");
     }
 
     @Test
