@@ -5,6 +5,7 @@ import com.example.project.wordle.AttemptedWord;
 import com.example.project.wordle.LetterPane;
 import com.example.project.wordle.Life;
 import com.example.project.wordle.TargetWord;
+import com.example.project.wordle.Word;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -23,7 +24,7 @@ public class WRLGameController implements Initializable {
     @FXML private Label livesDisplay;
 
     private int x = 0, y = 0, cellIdx = 0;
-    private AttemptedWord currWord;
+    private Word currWord;
     private TargetWord targetWord;
     private Life life;
 
@@ -79,7 +80,7 @@ public class WRLGameController implements Initializable {
                 return;
             }
             if (currWord.isValid()) {
-                if (currWord.compareWithTarget(targetWord)) {
+                if (currWord.compare(targetWord)) {
                     switchToEndScreen(false);
                 } else {
                     life.calculateLives(targetWord.getWord(), currWord.getWord());
