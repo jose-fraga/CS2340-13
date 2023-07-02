@@ -1,11 +1,9 @@
-package com.example.project.wordle;
+package com.example.project.wordle.enums;
 
-import com.example.project.wordle.enums.Status;
 import org.junit.jupiter.api.Test;
 
 import static com.example.project.wordle.enums.Status.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 public class StatusTest {
 
     @Test

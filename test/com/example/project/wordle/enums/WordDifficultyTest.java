@@ -1,6 +1,6 @@
 package com.example.project.wordle.enums;
 
-import com.example.project.EnumPathTestHelper;
+import com.example.project.wordle.EnumPathTestHelper;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
