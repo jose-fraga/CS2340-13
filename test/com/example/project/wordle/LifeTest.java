@@ -1,4 +1,4 @@
-package com.exmaple.project.wordle;
+package com.example.project.wordle;
 
 import com.example.project.wordle.Life;
 import org.junit.jupiter.api.Test;

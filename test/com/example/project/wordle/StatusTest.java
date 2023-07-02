@@ -1,4 +1,4 @@
-package com.example.project;
+package com.example.project.wordle;
 
 import com.example.project.wordle.enums.Status;
 import org.junit.jupiter.api.Test;
