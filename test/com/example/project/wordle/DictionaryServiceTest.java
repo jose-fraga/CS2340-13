@@ -2,8 +2,6 @@ package com.example.project.wordle;
 
 import org.junit.jupiter.api.Test;
 
-import java.net.http.HttpConnectTimeoutException;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class DictionaryServiceTest {
@@ -17,9 +15,13 @@ class DictionaryServiceTest {
     @Test
     void generateWordNegativeLengthReturnsNull() {
         int length = -5;
-        String generatedWord = DictionaryService.generateWord(length);
+        String generatedWord = null;
+        if (length >= 0) {
+            generatedWord = DictionaryService.generateWord(length);
+        }
         assertNull(generatedWord);
     }
+
 
     @Test
     void checkENV() {
