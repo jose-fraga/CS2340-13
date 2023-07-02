@@ -1,4 +1,4 @@
-package com.example.project.wordle;
+package com.example.project;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
