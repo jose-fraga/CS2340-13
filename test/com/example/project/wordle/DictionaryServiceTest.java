@@ -6,6 +6,20 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class DictionaryServiceTest {
     @Test
+    void checkValidityNullWordReturnsFalse() {
+        String word = null;
+        boolean isValid = DictionaryService.checkValidity(word);
+        assertFalse(isValid);
+    }
+
+    @Test
+    void generateWordNegativeLengthReturnsNull() {
+        int length = -5;
+        String generatedWord = DictionaryService.generateWord(length);
+        assertNull(generatedWord);
+    }
+
+    @Test
     void checkValidityEnv() {
         assertNotNull(System.getenv("NINJA_API_URL"));
         assertNotNull(System.getenv("NINJA_API_KEY"));
