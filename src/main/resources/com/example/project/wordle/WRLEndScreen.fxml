@@ -15,5 +15,10 @@
                 <Font name="Gill Sans Ultra Bold Condensed" size="15.0" />
             </font>
         </Label>
+      <Label fx:id="scoreDisplay" alignment="CENTER" layoutX="237.0" layoutY="165.0" prefHeight="30.0" prefWidth="125.0" text="Score: ">
+         <font>
+            <Font name="Gill Sans Ultra Bold Condensed" size="12.0" />
+         </font>
+      </Label>
     </children>
 </AnchorPane>

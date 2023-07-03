@@ -16,8 +16,13 @@ public class TargetWord extends Word {
 
     private void updateWord(int length) {
         String curr = DictionaryService.generateWord(length).toUpperCase();
-        while (!DictionaryService.checkValidity(curr)) {
-            curr = DictionaryService.generateWord(length);
+        if (!DictionaryService.checkValidity(curr)) {
+            while (true) {
+                curr = DictionaryService.generateWord(length).toUpperCase();
+                if (DictionaryService.checkValidity(curr)) {
+                    break;
+                }
+            }
         }
         this.word = curr;
     }

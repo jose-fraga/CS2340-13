@@ -15,6 +15,7 @@ import java.util.ResourceBundle;
 public class WRLEndController implements Initializable {
     @FXML private Label endLabel;
     @FXML private Label messageLabel;
+    @FXML private Label scoreDisplay;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -25,6 +26,10 @@ public class WRLEndController implements Initializable {
         endLabel.setText("FAILURE!");
         endLabel.setStyle("-fx-background-color: red; -fx-border-color: black");
         messageLabel.setText("Sorry! Ran out of lives!");
+    }
+
+    public void updateScore(String score) {
+        scoreDisplay.setText(score);
     }
 
     @FXML public void returnToLevelSelect(ActionEvent e) {

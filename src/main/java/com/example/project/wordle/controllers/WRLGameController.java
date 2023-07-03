@@ -106,10 +106,11 @@ public class WRLGameController implements Initializable {
 
     private void switchToEndScreen(boolean isFailure) {
         FXMLLoader loader = safelyChangeScreen("wordle/WRLEndScreen.fxml");
+        WRLEndController controller = loader.getController();
         if (isFailure) {
-            WRLEndController controller = loader.getController();
             controller.showFailureMessage();
         }
+        controller.updateScore("Latest Score: " + Integer.toString(life.getLives() * 10));
     }
 
     private FXMLLoader safelyChangeScreen(String fxmlPath) {
