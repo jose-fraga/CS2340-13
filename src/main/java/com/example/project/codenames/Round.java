@@ -12,9 +12,16 @@ public class Round {
     private final int TIME_BUFFER = 15;
 
     public void start() {
+        timer.start();
     }
     public void restart() {
+        timer.stop();
+        timer.reset();
     }
     public void nextTurn() {
+     //   While(guesses < clueCount + 1) {
+    //        guess();
+    //}
+        //switch screen
     }
 }
