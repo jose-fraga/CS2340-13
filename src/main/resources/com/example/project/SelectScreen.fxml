@@ -40,9 +40,9 @@
                   </Label>
                </children>
             </HBox>
-                <Button fx:id="flowButton" contentDisplay="CENTER" mnemonicParsing="false" onAction="#flowSwitch" style="-fx-background-insets: 1; -fx-border-color: gray; -fx-border-radius: 2;" text="Flow" />
-                <Button fx:id="numbergameButton" contentDisplay="CENTER" mnemonicParsing="false" onAction="#twentySwitch" style="-fx-background-insets: 1; -fx-border-color: gray; -fx-border-radius: 2;" text="2048" />
-                <Button fx:id="codenamesButton" contentDisplay="CENTER" mnemonicParsing="false" onAction="#codeNameSwitch" style="-fx-background-insets: 1; -fx-border-color: gray; -fx-border-radius: 2;" text="Codenames" />
+                <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#flowSwitch" style="-fx-background-insets: 1; -fx-border-color: gray; -fx-border-radius: 2;" text="Flow" />
+                <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#wordleSwitch" style="-fx-background-insets: 1; -fx-border-color: gray; -fx-border-radius: 2;" text="Wordle" />
+                <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#codeNameSwitch" style="-fx-background-insets: 1; -fx-border-color: gray; -fx-border-radius: 2;" text="Codenames" />
             </children>
          <StackPane.margin>
             <Insets top="-30.0" />

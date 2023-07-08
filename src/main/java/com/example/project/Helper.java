@@ -18,6 +18,7 @@ public class Helper {
     private static BorderPane gamePane;
 
     public static void setGamePane(BorderPane pane) { gamePane = pane; }
+    public static BorderPane getGamePane() { return gamePane; }
 
     public static Player getPlayerInstance() {
         if (currentPlayer == null) {
@@ -32,7 +33,6 @@ public class Helper {
             loader = new FXMLLoader(Main.class.getResource(path));
             Parent root = loader.load();
             gamePane.setCenter(root);
-
         } catch (IOException e) {
             e.printStackTrace();
         }

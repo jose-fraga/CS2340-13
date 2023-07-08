@@ -1,13 +1,10 @@
 package com.example.project;
 
-
-
-import com.example.project.flowfree.Obstacle;
+import com.example.project.EnumPathTestHelper;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-
 
 class GameTest {
     /*
@@ -25,16 +22,12 @@ class GameTest {
         assertThat— Asserts that an object matches the given conditions (see section A.2.2 for a more thorough explanation).
      */
 
-    private String fileNotFoundMessage(Game game, String pathMethodName, String path) {
-        return "FXML File not found for Game." + game + "." + pathMethodName + "() at " + path + "\n" +
-                "Check that the file exists in src/main/resources/com/example/project/" + path + "\n" +
-                "Check that the file is included in the build.gradle file";
-    }
+    private EnumPathTestHelper<Game> helper = new EnumPathTestHelper<Game>();
 
     private void checkFilePaths(Game game) {
-        assertNotNull(GameTest.class.getResource(game.initialFxmlPath()), fileNotFoundMessage(game, "initialFxmlPath", game.initialFxmlPath()));
-        assertNotNull(GameTest.class.getResource(game.configFxmlPath()), fileNotFoundMessage(game, "configFxmlPath", game.configFxmlPath()));
-        assertNotNull(GameTest.class.getResource(game.gameFxmlPath()), fileNotFoundMessage(game, "gameFxmlPath", game.gameFxmlPath()));
+        helper.assertPathResolves(game.initialFxmlPath(), "initialFxmlPath");
+        helper.assertPathResolves(game.configFxmlPath(), "configFxmlPath");
+        helper.assertPathResolves(game.gameFxmlPath(), "gameFxmlPath");
     }
 
     @Test
@@ -66,17 +59,17 @@ class GameTest {
     }
 
     @Test
-    void testGameTWENTY_FOURTY_EIGHT() {
-        assertEquals("2048", Game.TWENTY_FOURTY_EIGHT.title());
+    void testGameWORDLE() {
+        assertEquals("Wordle", Game.WORDLE.title());
 
-        checkFilePaths(Game.TWENTY_FOURTY_EIGHT);
+        checkFilePaths(Game.WORDLE);
 
-        assertEquals("twentyfourtyeight/2048Screen.fxml", Game.TWENTY_FOURTY_EIGHT.initialFxmlPath());
-        assertEquals("ConfigureScreen.fxml", Game.TWENTY_FOURTY_EIGHT.configFxmlPath());
-        assertEquals("twentyfourtyeight/2048GameScreen.fxml", Game.TWENTY_FOURTY_EIGHT.gameFxmlPath());
+        assertEquals("wordle/WRLSplashScreen.fxml", Game.WORDLE.initialFxmlPath());
+        assertEquals("ConfigureScreen.fxml", Game.WORDLE.configFxmlPath());
+        assertEquals("wordle/WRLLevelScreen.fxml", Game.WORDLE.gameFxmlPath());
 
-        assertEquals(Game.TWENTY_FOURTY_EIGHT, Game.values()[2]);
-        assertEquals(Game.TWENTY_FOURTY_EIGHT, Game.valueOf("TWENTY_FOURTY_EIGHT"));
+        assertEquals(Game.WORDLE, Game.values()[2]);
+        assertEquals(Game.WORDLE, Game.valueOf("WORDLE"));
     }
 
     @Test

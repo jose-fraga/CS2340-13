@@ -9,8 +9,8 @@ public class SelectController {
         selectGame(e, Game.FLOW);
     }
 
-    public void twentySwitch(ActionEvent e) {
-        selectGame(e, Game.TWENTY_FOURTY_EIGHT);
+    public void wordleSwitch(ActionEvent e) {
+        selectGame(e, Game.WORDLE);
     }
 
     public void codeNameSwitch(ActionEvent e) {
