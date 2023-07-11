@@ -42,15 +42,6 @@ public class TargetWord extends Word {
         }
     }
 
-    public ArrayList<Status> check(Word attempt) {
-        ArrayList<Status> result = new ArrayList<Status>();
-        for (int i = 0; i < attempt.word.length(); i++) {
-            Letter letterStats = letterMap.get(i);
-            result.add(Status.INCORRECT);
-        }
-        return result;
-    }
-
     @Override
     public String toString() {
         return super.toString();

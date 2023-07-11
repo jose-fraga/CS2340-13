@@ -1,7 +1,6 @@
 package com.example.project.wordle.controllers;
 
 import com.example.project.Helper;
-import com.example.project.wordle.AttemptedWord;
 import com.example.project.wordle.LetterPane;
 import com.example.project.wordle.Life;
 import com.example.project.wordle.TargetWord;
@@ -31,7 +30,7 @@ public class WRLGameController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         populate();
-        currWord = new AttemptedWord("");
+        currWord = new Word("");
         targetWord = new TargetWord(gridPane.getColumnCount());
         life = new Life(); // Instantiate Life
     }
@@ -95,7 +94,7 @@ public class WRLGameController implements Initializable {
                 ((LetterPane) item).attemptedLetter.checkAttempt(targetWord.getWord());
                 ((LetterPane) item).updateStyle();
             });
-            currWord = new AttemptedWord("");
+            currWord = new Word("");
             x = 0;
             y = Math.min(++y, rowLength);
             if (life.getLives() <= 0) {
