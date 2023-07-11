@@ -78,9 +78,9 @@ class GameTest {
 
         checkFilePaths(Game.CODENAMES);
 
-        assertEquals("codenames/CodenamesSplashScreen.fxml", Game.CODENAMES.initialFxmlPath());
+        assertEquals("codenames/CNSplashScreen.fxml", Game.CODENAMES.initialFxmlPath());
         assertEquals("ConfigureScreen.fxml", Game.CODENAMES.configFxmlPath());
-        assertEquals("codenames/CodenamesInitialGamePlayScreen.fxml", Game.CODENAMES.gameFxmlPath());
+        assertEquals("codenames/CNGameScreen.fxml", Game.CODENAMES.gameFxmlPath());
 
         assertEquals(Game.CODENAMES, Game.values()[3]);
         assertEquals(Game.CODENAMES, Game.valueOf("CODENAMES"));

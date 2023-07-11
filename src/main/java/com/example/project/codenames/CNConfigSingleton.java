@@ -2,19 +2,19 @@ package com.example.project.codenames;
 
 import com.example.project.Player;
 
-public class CodenamesConfigSingleton {
-    private static CodenamesConfigSingleton config_instance = null;
+public class CNConfigSingleton {
+    private static CNConfigSingleton config_instance = null;
     private Player team1;
     private Player team2;
 
-    private CodenamesConfigSingleton() {
+    private CNConfigSingleton() {
         this.team1 = new Player("Team 1");
         this.team2 = new Player("Team 2");
     }
-    public static synchronized CodenamesConfigSingleton getInstance()
+    public static synchronized CNConfigSingleton getInstance()
     {
         if (config_instance == null)
-            config_instance = new CodenamesConfigSingleton();
+            config_instance = new CNConfigSingleton();
 
         return config_instance;
     }
