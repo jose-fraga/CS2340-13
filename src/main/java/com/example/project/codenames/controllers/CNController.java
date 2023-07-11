@@ -1,17 +1,11 @@
-package com.example.project.codenames;
+package com.example.project.codenames.controllers;
 
-import com.example.project.Game;
-import com.example.project.Helper;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class CodenamesController implements Initializable {
+public class CNController implements Initializable {
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
