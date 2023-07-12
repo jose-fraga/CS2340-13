@@ -9,9 +9,13 @@ public class CNGame {
     public Round getRound() { return this.round; }
     public void createRound() { this.round = new Round(); }
 
-    public static synchronized CNGame getGameInstance() {
+    public static CNGame getGameInstance() {
         if (game_instance == null) {
-            game_instance = new CNGame();
+            synchronized (CNGame.class) {
+                if (game_instance == null) {
+                    game_instance = new CNGame();
+                }
+            }
         }
         return game_instance;
     }

@@ -1,7 +1,7 @@
 package com.example.project.codenames.enums;
 
-public enum State {
-    GAME_MASTER,
-    PLAYER,
+public enum RoundPhase {
+    SPY_MASTER,
+    OPERATIVE,
     WINNER
 }
