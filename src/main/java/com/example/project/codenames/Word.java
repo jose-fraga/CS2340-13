@@ -2,6 +2,7 @@ package com.example.project.codenames;
 
 import com.example.project.codenames.enums.Team;
 
+// TODO: make words observable so that we can take actions when it is selected.
 public class Word {
     private String word;
     private boolean isSelected;
@@ -18,10 +19,7 @@ public class Word {
     public String getWord() { return this.word; }
     public boolean getIsRevealed() { return this.isSelected; }
 
-    @Override
-    public String toString() {
-        return "new Word(\"" + word + "\",false,\"" + definition + "\")";
-    }
+    public void setType(Team type) { this.type = type; }
 
     public void select() { this.isSelected = true; }
 
@@ -29,5 +27,8 @@ public class Word {
         return type;
     }
 
-    //TODO: make words observable so that we can take actions when it is selected.
+    @Override
+    public String toString() {
+        return "new Word(\"" + word + "\",false,\"" + definition + "\")";
+    }
 }

@@ -9,28 +9,28 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.project.codenames.controllers.CNSetupScreenController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.project.codenames.controllers.CNSetupScreenController">
    <children>
-      <ImageView fitHeight="400.0" fitWidth="644.0" layoutX="-12.0" pickOnBounds="true">
+      <ImageView fitHeight="412.0" fitWidth="644.0" layoutX="-12.0" layoutY="-12.0" pickOnBounds="true">
          <image>
-            <Image url="@images/codenames.jpg" />
+            <Image url="@../images/background.gif" />
          </image>
       </ImageView>
-      <Button layoutX="300.0" layoutY="304.0" mnemonicParsing="false" onAction="#add" style="-fx-border-color: red; -fx-border-style: solid; -fx-border-width: 2;" text="Add to Red" textFill="RED" />
-      <ListView fx:id="blueView" layoutX="340.0" layoutY="81.0" opacity="0.67" prefHeight="200.0" prefWidth="200.0" style="-fx-border-style: solid; -fx-border-width: 3; -fx-border-color: blue;" />
-      <ListView fx:id="redView" layoutX="93.0" layoutY="81.0" opacity="0.67" prefHeight="200.0" prefWidth="200.0" style="-fx-border-style: solid; -fx-border-width: 3; -fx-border-color: red;" />
-      <Label fx:id="redLabel" alignment="CENTER" layoutX="93.0" layoutY="41.0" prefHeight="32.0" prefWidth="200.0" style="-fx-border-color: red; -fx-border-width: 3;" text="Red">
+      <Button layoutX="147.0" layoutY="301.0" mnemonicParsing="false" onAction="#add" style="-fx-background-insets: 1; -fx-border-radius: 1; -fx-border-color: red; -fx-border-width: 2;" text="Add to Red" textFill="RED" />
+      <ListView fx:id="blueView" layoutX="329.0" layoutY="80.0" prefHeight="194.0" prefWidth="200.0" style="-fx-border-style: solid; -fx-border-width: 2; -fx-border-color: blue;" />
+      <ListView fx:id="redView" layoutX="103.0" layoutY="80.0" prefHeight="194.0" prefWidth="200.0" style="-fx-border-width: 2; -fx-border-color: red;" />
+      <Label fx:id="redLabel" alignment="CENTER" layoutX="103.0" layoutY="48.0" prefHeight="32.0" prefWidth="200.0" text="Red Team">
          <font>
             <Font name="Berlin Sans FB Bold" size="17.0" />
          </font>
       </Label>
-      <Label fx:id="blueLabel" alignment="CENTER" layoutX="340.0" layoutY="41.0" prefHeight="32.0" prefWidth="200.0" style="-fx-border-color: blue; -fx-border-width: 3;" text="Blue">
+      <Label fx:id="blueLabel" alignment="CENTER" layoutX="329.0" layoutY="48.0" prefHeight="32.0" prefWidth="200.0" text="Blue Team">
          <font>
             <Font name="Berlin Sans FB Bold" size="17.0" />
          </font>
       </Label>
-      <TextField fx:id="textField" layoutX="135.0" layoutY="304.0" style="-fx-border-width: 3; -fx-border-style: solid;" />
-      <Button layoutX="386.0" layoutY="304.0" mnemonicParsing="false" onAction="#add" style="-fx-border-color: blue; -fx-border-width: 2;" text="Add to Blue" textFill="#0023e8" />
-      <Button layoutX="521.0" layoutY="360.0" mnemonicParsing="false" onAction="#continueToGame" text="Continue" />
+      <TextField fx:id="textField" layoutX="238.0" layoutY="301.0" promptText="Enter Operative Name" style="-fx-border-width: 2; -fx-border-radius: 1; -fx-border-style: solid;" />
+      <Button layoutX="401.0" layoutY="301.0" mnemonicParsing="false" onAction="#add" style="-fx-background-insets: 1; -fx-border-color: blue; -fx-border-width: 2; -fx-border-radius: 1;" text="Add to Blue" textFill="#0023e8" />
+      <Button layoutX="499.0" layoutY="360.0" mnemonicParsing="false" onAction="#continueToGame" text="Continue To Game!" />
    </children>
 </AnchorPane>

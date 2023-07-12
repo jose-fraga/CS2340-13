@@ -8,12 +8,13 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class DictionaryService {
-    private static ArrayList<Word> gameWords = new ArrayList<>();
+    protected static ArrayList<Word> gameWords = new ArrayList<>();
 
-    public static ArrayList<Word> getGameWords() { return gameWords; }
+//    public static ArrayList<Word> getGameWords() { return gameWords; }
 
     public synchronized static void populate() {
 //        for (int i = 0; i < 25; i++) {
