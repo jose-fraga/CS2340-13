@@ -10,6 +10,5 @@ public class WordPane extends StackPane {
     private ArrayList<Player> playerGuesses;
 
     public WordPane() {
-        word = new Word("", false);
     }
 }
