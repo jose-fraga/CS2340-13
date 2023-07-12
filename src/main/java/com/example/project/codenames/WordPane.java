@@ -9,6 +9,7 @@ public class WordPane extends StackPane {
     private Word word;
     private ArrayList<Player> playerGuesses;
 
-    public WordPane() {
+    public WordPane(Word word) {
+        this.word = word;
     }
 }
