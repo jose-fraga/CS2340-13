@@ -8,20 +8,19 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class DictionaryService {
-    protected static ArrayList<Word> gameWords = new ArrayList<>();
+    private static ArrayList<Word> gameWords = new ArrayList<>();
 
-//    public static ArrayList<Word> getGameWords() { return gameWords; }
+    public static ArrayList<Word> getGameWords() { return gameWords; }
 
     public synchronized static void populate() {
 //        for (int i = 0; i < 25; i++) {
 //            String word = generateWord();
 //            gameWords.add(new Word(word,false,obtainDefinition(word)));
 //        }
-        gameWords = (ArrayList<Word>) List.of(
+        gameWords.addAll(List.of(
                 new Word("Perception", Team.NEUTRAL,"The organisation, identification and interpretation of sensory information."),
                 new Word("Scene",Team.NEUTRAL,"The location of an event that attracts attention."),
                 new Word("Context",Team.NEUTRAL,"The surroundings, circumstances, environment, background or settings that determine, specify, or clarify the meaning of an event or other occurrence."),
@@ -46,7 +45,7 @@ public class DictionaryService {
                 new Word("Examination",Team.NEUTRAL,"The act of examining."),
                 new Word("Basis",Team.NEUTRAL,"A physical base or foundation."),
                 new Word("Pizza",Team.NEUTRAL,"A baked Italian dish of a thinly rolled bread dough crust typically topped before baking with tomato sauce, cheese and other ingredients such as meat, vegetables or fruit"),
-                new Word("Chest",Team.NEUTRAL,"A box, now usually a large strong box with a secure convex lid."));
+                new Word("Chest",Team.NEUTRAL,"A box, now usually a large strong box with a secure convex lid.")));
     }
 
     private synchronized static String generateWord() {

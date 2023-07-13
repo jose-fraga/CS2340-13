@@ -27,7 +27,7 @@ public class Round {
         Team secondTurnTeam = Team.BLUE;
 
         // TODO: generate 25 words, assign 9/8 to red, 8/9 to blue, 7 to neutral, 1 to assassin
-        Collections.shuffle(DictionaryService.gameWords);
+//        Collections.shuffle(DictionaryService.gameWords);
         addType(0,10,Team.RED);
         addType(10,19,Team.BLUE);
         addType(19,24,Team.NEUTRAL);
@@ -36,7 +36,7 @@ public class Round {
 
     private void addType(int start, int end, Team type) {
         for (int i = start; i < end; i++) {
-            DictionaryService.gameWords.get(i).setType(type);
+//            DictionaryService.gameWords.get(i).setType(type);
         }
     }
 
