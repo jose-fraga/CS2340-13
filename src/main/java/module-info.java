@@ -2,6 +2,8 @@ module com.example.project {
     requires javafx.controls;
     requires javafx.fxml;
     requires org.apache.commons.lang3;
+    requires java.net.http;
+    requires org.json;
 
 
     opens com.example.project to javafx.fxml;
