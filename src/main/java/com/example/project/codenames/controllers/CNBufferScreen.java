@@ -1,4 +1,4 @@
-package com.example.project.codenames;
+package com.example.project.codenames.controllers;
 
 import com.example.project.Helper;
 import javafx.event.ActionEvent;
