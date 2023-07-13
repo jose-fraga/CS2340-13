@@ -1,11 +1,7 @@
 package com.example.project.wordle.controllers;
 
 import com.example.project.Helper;
-import com.example.project.wordle.AttemptedWord;
-import com.example.project.wordle.LetterPane;
-import com.example.project.wordle.Life;
-import com.example.project.wordle.TargetWord;
-import com.example.project.wordle.Word;
+import com.example.project.wordle.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
