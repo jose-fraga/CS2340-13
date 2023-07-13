@@ -48,6 +48,13 @@
           <artifactId>commons-lang3</artifactId>
           <version>3.8.1</version>
       </dependency>
+
+      <!-- https://mvnrepository.com/artifact/org.json/json -->
+      <dependency>
+          <groupId>org.json</groupId>
+          <artifactId>json</artifactId>
+          <version>20230618</version>
+      </dependency>
   </dependencies>
 
   <build>
