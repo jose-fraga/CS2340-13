@@ -16,7 +16,7 @@ public enum Game {
     CODENAMES("Codenames",
             "codenames/CNSplashScreen.fxml",
             "codenames/CNSetupScreen.fxml",
-            "codenames/CNSpyScreen.fxml");
+            "codenames/CNGridScreen.fxml");
 
 
 
