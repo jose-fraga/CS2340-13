@@ -4,15 +4,17 @@ import com.example.project.codenames.DictionaryService;
 import com.example.project.codenames.WordPane;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
+import javafx.scene.Group;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 
 import java.net.URL;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 
 public class CNGridScreenController implements Initializable {
     @FXML private GridPane gridPane;
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -33,8 +35,14 @@ public class CNGridScreenController implements Initializable {
     }
 
     public void handle() {
-        gridPane.getChildren().forEach(item -> {
-            item.addEventFilter(MouseEvent.MOUSE_CLICKED, System.out::println);
+        gridPane.getChildren().forEach(item ->{
+            if (!(item instanceof Group)) {
+                System.out.println(Arrays.toString(((WordPane) item).getChildren().toArray()));
+                ((WordPane) item).getChildren().get(1).addEventFilter(MouseEvent.MOUSE_CLICKED,e->{
+                 System.out.println(e);
+                });
+            }
         });
+
     }
 }
