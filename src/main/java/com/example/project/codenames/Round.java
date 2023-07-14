@@ -4,12 +4,17 @@ import com.example.project.codenames.enums.RoundPhase;
 import com.example.project.codenames.enums.Team;
 import org.apache.commons.lang3.time.StopWatch;
 
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
 public class Round {
+
+
     private Team currentTeamTurn;
+
+    public Team getCurrentTeamTurn() {
+        return this.currentTeamTurn;
+    }
     private RoundPhase currentPhase = RoundPhase.OPERATIVE; // switch between operative and spy master
     private String clue = "";
     private int maxGuessCount = 0;

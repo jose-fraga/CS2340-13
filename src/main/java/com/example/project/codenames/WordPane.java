@@ -1,5 +1,6 @@
 package com.example.project.codenames;
 
+import com.example.project.codenames.enums.Team;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -13,6 +14,8 @@ public class WordPane extends StackPane {
     private String style;
     private Color color;
     private Word word;
+
+    private Team Occupant = Team.NEUTRAL;
 
     public WordPane(Word word) {
         VBox currBox = new VBox();
@@ -36,5 +39,14 @@ public class WordPane extends StackPane {
     public void addBackground() {
         this.style += "-fx-background-color: red;";
         this.setStyle(this.style);
+    }
+
+    //each wordpane hashset would have a hashset to determine whether there is a red team or blue team alrady
+
+    public Team getOccupant() {
+        return Occupant;
+    }
+    public void SetOccupant(Team team) {
+        Occupant = team;
     }
 }

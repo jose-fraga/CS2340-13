@@ -4,7 +4,9 @@ public class CNGame {
     private static CNGame game_instance;
     private Round round;
 
-    private CNGame() {}
+    private CNGame() {
+        round = new Round();
+    }
 
     public Round getRound() { return this.round; }
     public void createRound() { this.round = new Round(); }
