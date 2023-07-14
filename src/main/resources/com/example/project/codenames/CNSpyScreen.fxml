@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -11,32 +12,35 @@
 
 
 <BorderPane fx:id="spyScreen" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.project.codenames.controllers.CNSpyScreen">
-   <top>
-      <AnchorPane prefHeight="340" prefWidth="600.0" BorderPane.alignment="CENTER">
-          <children>
-              <GridPane layoutX="50.0" layoutY="94.0">
-                  <columnConstraints>
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  </columnConstraints>
-                  <rowConstraints>
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  </rowConstraints>
-              </GridPane>
-              <Button layoutX="258.0" layoutY="61.0" mnemonicParsing="false" onAction="#endTurn" text="End Turn" />
-            <Text layoutX="181.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Spy Screen">
-               <font>
-                  <Font size="46.0" />
-               </font>
-            </Text>
-          </children>
-      </AnchorPane>
-   </top>
+    <top>
+        <AnchorPane prefHeight="340" prefWidth="600.0" BorderPane.alignment="CENTER">
+            <children>
+                <GridPane layoutX="50.0" layoutY="94.0">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                    </rowConstraints>
+                </GridPane>
+                <Button layoutX="258.0" layoutY="61.0" mnemonicParsing="false" onAction="#endTurn" text="End Turn"/>
+                <Text layoutX="181.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Spy Screen">
+                    <font>
+                        <Font size="46.0"/>
+                    </font>
+                </Text>
+                <TextField fx:id="clueTextField" layoutX="165.0" layoutY="150.0" promptText="Enter clue"/>
+                <TextField fx:id="guessCountTextField" layoutX="165.0" layoutY="190.0" promptText="Enter guess count"/>
+                <Button layoutX="230.0" layoutY="230.0" mnemonicParsing="false" onAction="#submitClue" text="Submit Clue"/>
+            </children>
+        </AnchorPane>
+    </top>
 </BorderPane>
