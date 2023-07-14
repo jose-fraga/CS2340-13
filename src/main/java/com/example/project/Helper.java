@@ -48,6 +48,7 @@ public class Helper {
             stage.setResizable(false);
             stage.setTitle(stageTitle);
             stage.show();
+            stage.centerOnScreen();
         } catch (IOException e) {
             e.printStackTrace();
         }
