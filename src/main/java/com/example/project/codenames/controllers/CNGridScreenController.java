@@ -7,14 +7,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.Group;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 
 import java.net.URL;
-import java.util.Arrays;
 import java.util.ResourceBundle;
 
 public class CNGridScreenController implements Initializable {
     @FXML private GridPane gridPane;
-
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -35,14 +34,14 @@ public class CNGridScreenController implements Initializable {
     }
 
     public void handle() {
-        gridPane.getChildren().forEach(item ->{
+        gridPane.getChildren().forEach(item -> {
             if (!(item instanceof Group)) {
-                System.out.println(Arrays.toString(((WordPane) item).getChildren().toArray()));
-                ((WordPane) item).getChildren().get(1).addEventFilter(MouseEvent.MOUSE_CLICKED,e->{
-                 System.out.println(e);
+                WordPane curr = (WordPane) item;
+                VBox currBox = (VBox) curr.getChildren().get(0);
+                currBox.getChildren().get(1).addEventFilter(MouseEvent.MOUSE_CLICKED, e -> {
+                    curr.addBackground();
                 });
             }
         });
-
     }
 }

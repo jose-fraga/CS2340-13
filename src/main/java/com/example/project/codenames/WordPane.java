@@ -1,33 +1,40 @@
 package com.example.project.codenames;
 
-import com.example.project.Player;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
-import java.util.ArrayList;
-
+// Model this using the Observer Pattern
 public class WordPane extends StackPane {
+    private String style;
     private Color color;
     private Word word;
-//    private ArrayList<Player> playerGuesses;
 
     public WordPane(Word word) {
-        Label curr = new Label();
-        curr.setText(word.getWord());
-        curr.setFont(Font.font("Segoe UI Black", 14));
-        this.getChildren().add(curr);
+        VBox currBox = new VBox();
 
-        Button select = new Button("PRESS");
-        this.getChildren().add(select);
+        Label text = new Label();
+        text.setText(word.getWord());
+        text.setFont(Font.font("Segoe UI Black", 11));
 
-        this.setStyle("-fx-border-color: black");
+        currBox.getChildren().add(text);
+        currBox.getChildren().add(new Button("PRESS"));
+        currBox.setSpacing(2);
+        currBox.setAlignment(Pos.CENTER);
+        this.setAlignment(Pos.CENTER);
+        this.getChildren().add(currBox);
+
+        this.style = "-fx-border-color: black; -fx-border-radius: 2;";
+        this.setStyle(this.style);
         this.word = word;
     }
 
-    public void changeBackground() {
-        this.setStyle("-fx-background-color: " + Color.RED);
+    public void addBackground() {
+        this.style += "-fx-background-color: red;";
+        this.setStyle(this.style);
     }
 }
