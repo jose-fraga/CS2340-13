@@ -110,6 +110,6 @@ public class WRLGameController implements Initializable {
     }
 
     private FXMLLoader safelyChangeScreen(String fxmlPath) {
-        return Helper.changeGameScreen(fxmlPath, "CENTER");
+        return Helper.changeGameScreen(fxmlPath);
     }
 }

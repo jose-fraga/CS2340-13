@@ -7,7 +7,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Group;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 
@@ -15,7 +14,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class CNGameScreenController implements Initializable {
-    @FXML private BorderPane borderPane;
     @FXML private GridPane gridPane;
 
     @Override

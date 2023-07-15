@@ -26,13 +26,8 @@ public class GameController implements Initializable {
         try {
             System.out.println("ENTERED: " + Helper.currentGame.title() + " Game Screen");
 
-            if (Helper.currentGame == Game.CODENAMES) {
-                gamePane.setPrefWidth(850);
-                gamePane.setPrefHeight(600);
-            }
-
             Helper.setGamePane(gamePane);
-            Helper.changeGameScreen(Helper.currentGame.gameFxmlPath(), "CENTER");
+            Helper.changeGameScreen(Helper.currentGame.gameFxmlPath());
 
             gameTitle.setText(Helper.currentGame.title());
             String spritePath = Helper.getPlayerInstance().getSpritePath();

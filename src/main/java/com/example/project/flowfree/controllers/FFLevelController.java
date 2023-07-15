@@ -26,6 +26,6 @@ public class FFLevelController implements Initializable {
     @FXML private void selectLevel(ActionEvent e) throws IOException {
         int levelNumber = Integer.parseInt(((Button) e.getSource()).getText()) - 1;
         this.gameInstance.createLevel(levelNumber);
-        Helper.changeGameScreen(SCREEN_GAME_EASY, "CENTER");
+        Helper.changeGameScreen(SCREEN_GAME_EASY);
     }
 }

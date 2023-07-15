@@ -17,7 +17,13 @@ public class Helper {
     private static Player currentPlayer;
     private static BorderPane gamePane;
 
-    public static void setGamePane(BorderPane pane) { gamePane = pane; }
+    public static void setGamePane(BorderPane pane) {
+        if (currentGame == Game.CODENAMES) {
+            pane.setPrefWidth(850);
+            pane.setPrefHeight(600);
+        }
+        gamePane = pane;
+    }
     public static BorderPane getGamePane() { return gamePane; }
 
     public static Player getPlayerInstance() {
@@ -27,12 +33,11 @@ public class Helper {
         return currentPlayer;
     }
 
-    public static FXMLLoader changeGameScreen(String path, String component) {
+    public static FXMLLoader changeGameScreen(String path) {
         FXMLLoader loader = null;
         try {
             loader = new FXMLLoader(Main.class.getResource(path));
             Parent root = loader.load();
-
             gamePane.setCenter(root);
         } catch (IOException e) {
             e.printStackTrace();
