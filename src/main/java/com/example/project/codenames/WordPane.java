@@ -9,13 +9,43 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
+import java.util.HashSet;
+
 // Model this using the Observer Pattern
 public class WordPane extends StackPane {
     private String style;
     private Color color;
     private Word word;
 
-    private Team Occupant = Team.NEUTRAL;
+
+    public void setCurrLength(int currLength) {
+        this.currLength = currLength;
+    }
+
+    private int currLength;
+
+    public int getRedPosition() {
+        return redPosition;
+    }
+
+    public void setRedPosition(int redPosition) {
+        this.redPosition = redPosition;
+    }
+
+    private int redPosition;
+
+    public void setBluePosition(int bluePosition) {
+        this.bluePosition = bluePosition;
+    }
+
+    public int getBluePosition() {
+        return bluePosition;
+    }
+
+    private int bluePosition;
+
+
+    private HashSet<Team> occupants = new HashSet<>(2);
 
     public WordPane(Word word) {
         VBox currBox = new VBox();
@@ -43,10 +73,22 @@ public class WordPane extends StackPane {
 
     //each wordpane hashset would have a hashset to determine whether there is a red team or blue team alrady
 
-    public Team getOccupant() {
-        return Occupant;
+    public void ToggleOccupants(Team team) {
+        if (occupants.contains(team)) {
+            occupants.remove(team);
+        } else if (!(occupants.contains(team))) {
+            occupants.add(team);
+        }
     }
-    public void SetOccupant(Team team) {
-        Occupant = team;
+
+    public HashSet<Team> getOccupants() {
+        return occupants;
     }
+
+    public int getCurrLength() {
+        return currLength;
+    }
+   // public void SetOccupant(Team team) {
+  //      Occupant = team;
+  //  }
 }

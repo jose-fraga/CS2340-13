@@ -12,6 +12,10 @@ public class Round {
 
     private Team currentTeamTurn;
 
+    public void setCurrentTeamTurn(Team currentTeamTurn) {
+        this.currentTeamTurn = currentTeamTurn;
+    }
+
     public Team getCurrentTeamTurn() {
         return this.currentTeamTurn;
     }

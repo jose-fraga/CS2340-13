@@ -52,29 +52,74 @@ public class CNGridScreenController implements Initializable {
                 currBox.addEventFilter(MouseEvent.MOUSE_CLICKED, e-> {
                             Round round = CNGame.getGameInstance().getRound();
                             Label text = new Label("Red");
+                            int curl = curr.getCurrLength();
 
-                    if (round.getCurrentTeamTurn() == Team.RED && curr.getOccupant() != Team.RED) {
+                    if (round.getCurrentTeamTurn() == Team.RED && (!(curr.getOccupants().contains(Team.RED)))){
+                       curl++;
+                       curr.setRedPosition(getPosition(curl));
+                       curr.setCurrLength(curl);
                         currBox.getChildren().add(text);
                         text.setStyle("-fx-background-color:" + Team.RED.getColor());
-                        curr.SetOccupant(Team.RED);
-                        System.out.println(curr.getOccupant());
+                        curr.ToggleOccupants(Team.RED);
+                        System.out.println(curr.getOccupants());
                     }
-                    else if (round.getCurrentTeamTurn() == Team.RED && curr.getOccupant() == Team.RED){
-                        currBox.getChildren().remove(2);
-                        curr.SetOccupant(Team.NEUTRAL);
+                    else if (round.getCurrentTeamTurn() == Team.RED && curr.getOccupants().contains(Team.RED)){
+                        curl--;
+                        curr.ToggleOccupants(Team.RED);
+                        curr.setRedPosition(getPosition(curl));
+                        removal(currBox, curr.getRedPosition(), curr.getBluePosition(), round.getCurrentTeamTurn());
+                        curr.setCurrLength(curl);
+                        System.out.println(curr.getOccupants());
+
                     }
-                    else if (round.getCurrentTeamTurn() == Team.BLUE && curr.getOccupant() != Team.BLUE) {
+                    else if (round.getCurrentTeamTurn() == Team.BLUE && (!(curr.getOccupants().contains(Team.BLUE)))) {
+                        curl++;
+                        curr.setBluePosition(getPosition(curl));
+                        curr.setCurrLength(curl);
                         currBox.getChildren().add(text);
                         text.setStyle("-fx-background-color:" + Team.BLUE.getColor());
-                        curr.SetOccupant(Team.BLUE);
-                        System.out.println(curr.getOccupant());
+                        curr.ToggleOccupants(Team.BLUE);
+                        System.out.println(curr.getOccupants());
                     }
-                    else if (round.getCurrentTeamTurn() == Team.BLUE && curr.getOccupant() == Team.BLUE){
-                        currBox.getChildren().remove(2);
-                        curr.SetOccupant(Team.NEUTRAL);
+                    else if (round.getCurrentTeamTurn() == Team.BLUE && curr.getOccupants().contains(Team.BLUE)){
+                        curl--;
+                        curr.ToggleOccupants(Team.BLUE);
+                        curr.setBluePosition(getPosition(curl));
+                        removal(currBox, curr.getRedPosition(), curr.getBluePosition(), round.getCurrentTeamTurn());
+                        curr.setCurrLength(curl);
+                        System.out.println(curr.getOccupants());
                     }
                 });
             }
         });
     }
-}
+
+    //method to return a label's new position on the wordpane after it is added or removed
+   public int getPosition(int currLength) {
+        int position = 0;
+        if(currLength == 1) {
+            position = 2;
+        } else if (currLength == 0) {
+            position = 1;
+        }
+        return position;
+    }
+
+    //method which takes in the position of the label being removed and removes it accordingly
+    public void removal (VBox currBox, int redPos, int bluePos, Team team) {
+        if(team == Team.RED) {
+            if(redPos == 1) {
+                currBox.getChildren().remove(2);
+            } else if (redPos == 2) {
+                currBox.getChildren().remove(3);
+            }
+        }
+        else if(team == Team.BLUE) {
+            if(bluePos == 1) {
+                currBox.getChildren().remove(2);
+            } else if (bluePos == 2) {
+                currBox.getChildren().remove(3);
+            }
+        }
+        }
+    }
