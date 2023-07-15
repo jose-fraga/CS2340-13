@@ -28,7 +28,7 @@ public class FFEndController implements Initializable {
     }
 
     @FXML public void returnToLevelSelect(ActionEvent e) {
-        Helper.changeGameScreen(Helper.currentGame.gameFxmlPath());
+        Helper.changeGameScreen(Helper.currentGame.gameFxmlPath(), "CENTER");
     }
 
     @FXML public void quitGame(ActionEvent e) {

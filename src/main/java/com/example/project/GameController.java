@@ -7,7 +7,9 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 import java.net.URL;
@@ -24,8 +26,13 @@ public class GameController implements Initializable {
         try {
             System.out.println("ENTERED: " + Helper.currentGame.title() + " Game Screen");
 
+            if (Helper.currentGame == Game.CODENAMES) {
+                gamePane.setPrefWidth(850);
+                gamePane.setPrefHeight(600);
+            }
+
             Helper.setGamePane(gamePane);
-            Helper.changeGameScreen(Helper.currentGame.gameFxmlPath());
+            Helper.changeGameScreen(Helper.currentGame.gameFxmlPath(), "CENTER");
 
             gameTitle.setText(Helper.currentGame.title());
             String spritePath = Helper.getPlayerInstance().getSpritePath();

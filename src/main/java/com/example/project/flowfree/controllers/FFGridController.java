@@ -290,6 +290,6 @@ public class FFGridController implements Initializable {
     // Use to change screens instead of using Helper directly, because we need to clean up the timer
     private FXMLLoader safelyChangeScreen(String fxmlPath) {
         timer.cancel();
-        return Helper.changeGameScreen(fxmlPath);
+        return Helper.changeGameScreen(fxmlPath, "CENTER");
     }
 }

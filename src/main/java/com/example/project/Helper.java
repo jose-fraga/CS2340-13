@@ -27,11 +27,12 @@ public class Helper {
         return currentPlayer;
     }
 
-    public static FXMLLoader changeGameScreen(String path) {
+    public static FXMLLoader changeGameScreen(String path, String component) {
         FXMLLoader loader = null;
         try {
             loader = new FXMLLoader(Main.class.getResource(path));
             Parent root = loader.load();
+
             gamePane.setCenter(root);
         } catch (IOException e) {
             e.printStackTrace();

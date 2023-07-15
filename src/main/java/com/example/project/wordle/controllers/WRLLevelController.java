@@ -16,11 +16,11 @@ public class WRLLevelController {
     private void selectLevel(ActionEvent e) {
         int levelNumber = Integer.parseInt(((Button) e.getSource()).getText());
         if (levelNumber == 4) {
-            Helper.changeGameScreen(WordDifficulty.FOUR.getPath());
+            Helper.changeGameScreen(WordDifficulty.FOUR.getPath(), "CENTER");
         } else if (levelNumber == 5) {
-            Helper.changeGameScreen(WordDifficulty.FIVE.getPath());
+            Helper.changeGameScreen(WordDifficulty.FIVE.getPath(), "CENTER");
         } else {
-            Helper.changeGameScreen(WordDifficulty.SIX.getPath());
+            Helper.changeGameScreen(WordDifficulty.SIX.getPath(), "CENTER");
         }
         Helper.getGamePane().getCenter().requestFocus();
     }
