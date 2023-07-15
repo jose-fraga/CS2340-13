@@ -36,14 +36,12 @@ public class CNGameScreenController implements Initializable, PropertyChangeList
         CNGame.getGameInstance().createRound();
         CNGame.getGameInstance().getRound().addPropertyChangeListener(this);
         this.round = CNGame.getGameInstance().getRound();
+
         int count = 0;
         for (int i = 0; i < gridPane.getRowCount(); i++) {
             for (int j = 0; j < gridPane.getColumnCount(); j++) {
-                if (round.getActiveTeam().getCurrentPlayer() == Player.SPY_MASTER) {
-                    gridPane.add(new WordPane(round.getWords().get(count),false), j, i);
-                } else {
-                    gridPane.add(new WordPane(round.getWords().get(count),true), j, i);
-                }
+                boolean show = round.getActiveTeam().getCurrentPlayer() == Player.SPY_MASTER;
+                gridPane.add(new WordPane(round.getWords().get(count), show), j, i);
                 count++;
             }
         }
@@ -57,7 +55,6 @@ public class CNGameScreenController implements Initializable, PropertyChangeList
 
                 if (this.round.getActiveTeam().getCurrentPlayer() == Player.OPERATIVE) {
                     currBox.getChildren().get(1).addEventFilter(MouseEvent.MOUSE_CLICKED, e -> {
-//                    curr.getWord().changeSelected();
                         curr.getWord().select();
                         if (curr.getWord().getIsSelected()) {
                             curr.addBackground();

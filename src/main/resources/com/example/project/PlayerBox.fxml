@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="CENTER" prefHeight="75.0" prefWidth="68.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
+   <children>
+      <ImageView fx:id="playerTwoSprite" fitHeight="47.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
+      <Label fx:id="playerTwoName" alignment="CENTER" prefHeight="5.0" prefWidth="68.0">
+         <font>
+            <Font name="Gill Sans Ultra Bold Condensed" size="12.0" />
+         </font>
+      </Label>
+   </children>
+</VBox>

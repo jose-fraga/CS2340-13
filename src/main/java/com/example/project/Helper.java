@@ -7,14 +7,19 @@ package com.example.project;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
 public class Helper {
     public static Game currentGame;
-    private static Player currentPlayer;
+    private static Player currentPlayer, secondaryPlayer;
     private static BorderPane gamePane;
 
     public static void setGamePane(BorderPane pane) {
@@ -24,6 +29,7 @@ public class Helper {
         }
         gamePane = pane;
     }
+
     public static BorderPane getGamePane() { return gamePane; }
 
     public static Player getPlayerInstance() {
@@ -31,6 +37,13 @@ public class Helper {
             currentPlayer = new Player();
         }
         return currentPlayer;
+    }
+
+    public static Player getSecondaryPlayer() {
+        if (secondaryPlayer == null) {
+            secondaryPlayer = new Player();
+        }
+        return secondaryPlayer;
     }
 
     public static FXMLLoader changeGameScreen(String path) {

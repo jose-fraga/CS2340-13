@@ -1,25 +1,17 @@
 package com.example.project.codenames;
 
-import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.effect.Effect;
-import javafx.scene.effect.InnerShadow;
-import javafx.scene.layout.BorderStroke;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
-import javafx.scene.text.Text;
 
 public class WordPane extends StackPane {
     // TODO: Add observer here so that when the player switches to SpyMaster, all buttons are set to invisible
 
     private String style;
-    private Color color;
     private Word word;
 
     private boolean isButtonShown;
@@ -56,7 +48,8 @@ public class WordPane extends StackPane {
     public void addBackground() {
         this.style += " -fx-background-color: " + this.word.getType().getColor() + ";";
         this.setStyle(this.style);
-        ((VBox) this.getChildren().get(0)).setStyle("-fx-text-fill: white;");
+
+        System.out.println(this.getChildren());
 
         if (isButtonShown) {
             ((VBox) this.getChildren().get(0)).getChildren().remove(1);
