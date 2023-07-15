@@ -1,74 +1,56 @@
 package com.example.project.codenames;
 
-import com.example.project.codenames.enums.RoundPhase;
-import com.example.project.codenames.enums.Team;
-import org.apache.commons.lang3.time.StopWatch;
+import com.example.project.codenames.enums.Type;
 
+import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.Random;
 
 public class Round {
-    private Team currentTeamTurn;
-    private RoundPhase currentPhase = RoundPhase.OPERATIVE; // switch between operative and spy master
-    private String clue = "";
-    private int maxGuessCount = 0;
-    private int guessedCount = 0;
-    private StopWatch timer = new StopWatch();
-    private final int TIME_BUFFER = 15;
+    private Team activeTeam, passiveTeam;
+    private ArrayList<Word> words;
 
-    private Team winner = null;
-
-    private Set<Word> words = new HashSet<Word>(25);
-    private Word assassinWord;
     public Round() {
-        // TODO: start random team red or blue
-        Team firstTurnTeam = this.currentTeamTurn = Team.RED;
-        Team secondTurnTeam = Team.BLUE;
-
-        // TODO: generate 25 words, assign 9/8 to red, 8/9 to blue, 7 to neutral, 1 to assassin
-//        Collections.shuffle(DictionaryService.gameWords);
-        addType(0,10,Team.RED);
-        addType(10,19,Team.BLUE);
-        addType(19,24,Team.NEUTRAL);
-        addType(24,25,Team.ASSASSIN);
+        this.activeTeam = new Random().nextBoolean() ? new Team(Type.RED, 9) : new Team(Type.BLUE, 9);
+        this.passiveTeam = (activeTeam.getType() == Type.RED) ? new Team(Type.BLUE, 8) : new Team(Type.RED, 8);
+        updateWordType();
     }
 
-    private void addType(int start, int end, Team type) {
+    public ArrayList<Word> getWords() { return this.words; }
+
+    private void updateWordType() {
+        this.words = DictionaryService.getGameWords();
+        addType(0, 9, activeTeam.getType());
+        addType(9, 17, passiveTeam.getType());
+        this.words.get(24).setType(Type.ASSASSIN);
+        Collections.shuffle(this.words);
+    }
+
+    private void addType(int start, int end, Type type) {
         for (int i = start; i < end; i++) {
-//            DictionaryService.gameWords.get(i).setType(type);
+            this.words.get(i).setType(type);
         }
     }
 
-    public void start() {
-        timer.start();
-    }
+//    public void guessWord(Word guessed) {
+//        guessed.select();
+//        guessedCount++;
+//
+//        // TODO: check for game over, or turn end
+//        // guessed.getType() != currentTeamTurn
+//    }
 
-    public void restart() {
-        timer.stop();
-        timer.reset();
-    }
-
-    public void guessWord(Word guessed) {
-        guessed.select();
-        guessedCount++;
-
-        // TODO: check for game over, or turn end
-        // guessed.getType() != currentTeamTurn
-    }
-
-    private void endTurn() {
-        this.currentTeamTurn = this.currentTeamTurn == Team.RED ? Team.BLUE : Team.RED;
-        this.guessedCount = 0;
-        this.currentPhase = RoundPhase.SPY_MASTER; // TODO: can have observable for the phase and team switching (for ui)
-    }
-
-    private void enterOperativePhase() {
-        this.currentPhase = RoundPhase.OPERATIVE;
-    }
-
-    private void endGame(Team winner) {
-        this.currentPhase = RoundPhase.WINNER;
-        this.winner = winner;
-    }
+//    private void endTurn() {
+////        this.currentTeamTurn = this.currentTeamTurn == CardType.RED ? CardType.BLUE : CardType.RED;
+//        this.guessedCount = 0;
+//        this.currentPhase = RoundPhase.SPY_MASTER; // TODO: can have observable for the phase and team switching (for ui)
+//    }
+//    private void enterOperativePhase() {
+//        this.currentPhase = RoundPhase.OPERATIVE;
+//    }
+//
+//    private void endGame(CardType winner) {
+//        this.currentPhase = RoundPhase.WINNER;
+//        this.winner = winner;
+//    }
 }
