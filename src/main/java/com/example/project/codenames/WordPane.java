@@ -7,6 +7,7 @@ import javafx.scene.control.Tooltip;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
+import javafx.scene.text.TextAlignment;
 
 public class WordPane extends StackPane {
     private String style;
@@ -56,6 +57,12 @@ public class WordPane extends StackPane {
 
     private void setTooltip() {
         Tooltip tooltip = new Tooltip(word.getDefinition());
+        tooltip.setMinWidth(50);
+        tooltip.setMaxWidth(400);
+        tooltip.setWrapText(true);
+        tooltip.setTextAlignment(TextAlignment.CENTER);
+        tooltip.setFont(Font.font("Tw Cen MT Condensed Extra Bold"));
+        tooltip.setStyle("-fx-background-color: dimgray; -fx-text-fill: white;");
         Tooltip.install(this, tooltip);
     }
 }
