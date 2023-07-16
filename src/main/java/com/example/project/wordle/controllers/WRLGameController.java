@@ -29,7 +29,7 @@ public class WRLGameController implements Initializable {
         populate();
         currWord = new AttemptedWord("");
         targetWord = new TargetWord(gridPane.getColumnCount());
-        life = new Life(); // Instantiate Life
+        life = WRLSingleton.getInstance().getLife(); // Use the Life instance from the singleton
     }
 
     private void populate() {
