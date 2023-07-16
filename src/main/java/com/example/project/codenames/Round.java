@@ -52,7 +52,9 @@ public class Round implements PropertyChangeListener {
         this.words = DictionaryService.getGameWords();
         addType(0, 9, team1.getType());
         addType(9, 17, team2.getType());
-        this.words.get(24).setType(Type.ASSASSIN);
+        Word assassinWord = this.words.get(24);
+        assassinWord.setType(Type.ASSASSIN);
+        assassinWord.addPropertyChangeListener(this);
     }
 
     private void addType(int start, int end, Type type) {
