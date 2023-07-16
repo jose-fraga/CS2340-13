@@ -33,7 +33,6 @@ public class Round implements PropertyChangeListener {
         this.team1 = this.activeTeam = new Random().nextBoolean() ? new Team(Type.RED, 9) : new Team(Type.BLUE, 9);
         this.team2 = (activeTeam.getType() == Type.RED) ? new Team(Type.BLUE, 8) : new Team(Type.RED, 8);
         updateWordType();
-        Collections.shuffle(this.words);
     }
 
     public void addPropertyChangeListener(PropertyChangeListener listener) {
@@ -50,11 +49,13 @@ public class Round implements PropertyChangeListener {
 
     private void updateWordType() {
         this.words = DictionaryService.getGameWords();
+        Collections.shuffle(this.words);
         addType(0, 9, team1.getType());
         addType(9, 17, team2.getType());
         Word assassinWord = this.words.get(24);
         assassinWord.setType(Type.ASSASSIN);
         assassinWord.addPropertyChangeListener(this);
+        Collections.shuffle(this.words);
     }
 
     private void addType(int start, int end, Type type) {
