@@ -5,10 +5,10 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.project.codenames.controllers.CNBufferScreen">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.project.codenames.controllers.CNBufferScreenController">
    <children>
-      <Button layoutX="273.0" layoutY="75.0" mnemonicParsing="false" onAction="#switchScreen" text="Ready" />
-      <Text layoutX="70.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pass the device to the next user">
+      <Button layoutX="276.0" layoutY="209.0" mnemonicParsing="false" onAction="#switchScreen" text="Ready" />
+      <Text layoutX="98.0" layoutY="187.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pass Device To Operatives">
          <font>
             <Font size="35.0" />
          </font>
