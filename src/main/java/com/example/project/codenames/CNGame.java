@@ -6,7 +6,10 @@ public class CNGame {
 
     private CNGame() {}
 
-    public Round getRound() { return this.round; }
+    public Round getRound() {
+        DictionaryService.populate();
+        return this.round;
+    }
 
     public static CNGame getGameInstance() {
         if (game_instance == null) {

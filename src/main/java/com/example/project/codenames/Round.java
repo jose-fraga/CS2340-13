@@ -1,17 +1,18 @@
 package com.example.project.codenames;
 
+import com.example.project.Game;
 import com.example.project.Helper;
 import com.example.project.codenames.enums.Player;
 import com.example.project.codenames.enums.Type;
+import javafx.scene.Node;
+import javafx.stage.Stage;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
-
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeSupport;
 
 // Observer
 public class Round implements PropertyChangeListener {
@@ -23,6 +24,14 @@ public class Round implements PropertyChangeListener {
     private int currentGuessCount; // What the operatives guess
 
     private PropertyChangeSupport support;
+
+    public Team getTeam1() {
+        return team1;
+    }
+
+    public Team getTeam2() {
+        return team2;
+    }
 
     public Round() {
         this.support = new PropertyChangeSupport(this);
@@ -46,6 +55,8 @@ public class Round implements PropertyChangeListener {
     public ArrayList<Word> getWords() { return this.words; }
 
     public Team getActiveTeam() { return this.activeTeam; }
+
+    public Team getPassiveTeam() { return (this.activeTeam == this.team1) ? this.team2 : this.team1; }
 
     private void updateWordType() {
         this.words = DictionaryService.getGameWords();
@@ -130,5 +141,7 @@ public class Round implements PropertyChangeListener {
         this.support.firePropertyChange("winner", null, winner);
         // TODO: observable for ending the game
         System.out.println("Game ends! " + winner);
+        Helper.changeGameScreen("codenames/CNEndScreen.fxml");
     }
+
 }
