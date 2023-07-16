@@ -1,8 +1,11 @@
 package com.example.project.codenames;
 
+import com.example.project.Game;
 import com.example.project.Helper;
 import com.example.project.codenames.enums.Player;
 import com.example.project.codenames.enums.Type;
+import javafx.scene.Node;
+import javafx.stage.Stage;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -127,5 +130,7 @@ public class Round implements PropertyChangeListener {
         this.support.firePropertyChange("winner", null, winner);
         // TODO: observable for ending the game
         System.out.println("Game ends! " + winner);
+        Helper.changeGameScreen("codenames/CNEndScreen.fxml");
     }
+
 }
