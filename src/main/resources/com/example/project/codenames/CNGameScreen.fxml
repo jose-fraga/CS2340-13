@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.BorderPane?>
@@ -74,4 +75,28 @@
          </children>
       </VBox>
    </top>
+    <left>
+        <VBox alignment="CENTER" prefHeight="475.0" prefWidth="125.0" spacing="25.0" BorderPane.alignment="CENTER">
+            <children>
+                <Label alignment="CENTER" prefHeight="26.0" prefWidth="151.0" style="-fx-border-color: black; -fx-text-fill: #CF2129;" text="Red Team">
+                    <font>
+                        <Font name="Berlin Sans FB" size="18.0" />
+                    </font>
+                </Label>
+                <Label fx:id="redTeamScore" alignment="CENTER" prefHeight="27.0" prefWidth="70.0" text="Label" />
+            </children>
+        </VBox>
+    </left>
+    <right>
+        <VBox alignment="CENTER" prefHeight="475.0" prefWidth="125.0" spacing="25.0" BorderPane.alignment="CENTER">
+            <children>
+                <Label alignment="CENTER" prefHeight="26.0" prefWidth="138.0" style="-fx-border-color: black; -fx-text-fill: #03B8D0;" text="Blue Team">
+                    <font>
+                        <Font name="Berlin Sans FB" size="18.0" />
+                    </font>
+                </Label>
+                <Label fx:id="blueTeamScore" alignment="CENTER" prefHeight="27.0" prefWidth="70.0" text="Label" />
+            </children>
+        </VBox>
+    </right>
 </BorderPane>
