@@ -17,18 +17,11 @@ public class ConfigureController implements Initializable {
     @FXML private Label characterNameError;
     @FXML private ChoiceBox<String> characterSelect;
 
-    private final String[] characters = {
-            Sprite.CHARACTER1.name(),
-            Sprite.CHARACTER2.name(),
-            Sprite.CHARACTER3.name(),
-            Sprite.CHARACTER4.name()
-    };
-
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         System.out.println("ENTERED: " + Helper.currentGame.title() + " Configuration Screen");
-        characterSelect.getItems().addAll(characters);
-        characterSelect.setValue(characters[0]);
+        characterSelect.getItems().addAll(Sprite.getCharacters());
+        characterSelect.setValue(Sprite.getCharacters()[0]);
         characterName.setText(Helper.getPlayerInstance().getName());
     }
 

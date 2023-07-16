@@ -7,30 +7,45 @@ package com.example.project;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
 public class Helper {
     public static Game currentGame;
-    private static Player currentPlayer;
-    private static BorderPane gamePane;
+    private static Player currentPlayer, secondaryPlayer;
+    private static BorderPane gamePane, cnGamePane;
 
-    public static void setGamePane(BorderPane pane) {
-        if (currentGame == Game.CODENAMES) {
-            pane.setPrefWidth(850);
-            pane.setPrefHeight(600);
-        }
-        gamePane = pane;
-    }
     public static BorderPane getGamePane() { return gamePane; }
+    public static void setGamePane(BorderPane pane) {
+        gamePane = pane;
+        if (currentGame == Game.CODENAMES) {
+            gamePane.setPrefWidth(900);
+            gamePane.setPrefHeight(600);
+        }
+    }
+
+    public static BorderPane getCNGamePane() { return cnGamePane; }
+    public static void setCNGamePane(BorderPane pane) { cnGamePane = pane; }
 
     public static Player getPlayerInstance() {
         if (currentPlayer == null) {
             currentPlayer = new Player();
         }
         return currentPlayer;
+    }
+
+    public static Player getSecondaryPlayer() {
+        if (secondaryPlayer == null) {
+            secondaryPlayer = new Player();
+        }
+        return secondaryPlayer;
     }
 
     public static FXMLLoader changeGameScreen(String path) {

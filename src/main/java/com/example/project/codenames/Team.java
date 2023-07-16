@@ -6,14 +6,21 @@ import com.example.project.codenames.enums.Type;
 public class Team {
     private Type type;
     private int numOfCards;
-    private Player player;
+    private Player currentPlayer;
 
     public Team(Type type, int count) {
         this.type = type;
         this.numOfCards = count;
-        this.player = Player.SPY_MASTER;
+        this.currentPlayer = Player.SPY_MASTER;
     }
 
     public Type getType() { return this.type; }
-    public Player getPlayer() { return this.player; }
+
+    public Player getCurrentPlayer() { return this.currentPlayer; }
+    public void setCurrentPlayer(Player player) { this.currentPlayer = player; }
+
+    public int getNumOfCards() { return this.numOfCards; }
+
+    public void decrementCardCount() { this.numOfCards--; }
+    public boolean hasWon() { return this.numOfCards <= 0; }
 }

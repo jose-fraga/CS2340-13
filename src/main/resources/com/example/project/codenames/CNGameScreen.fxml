@@ -23,5 +23,13 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             </rowConstraints>
         </GridPane>
+<!--        <AnchorPane visible="false" >-->
+<!--            <Button layoutX="273.0" layoutY="75.0" mnemonicParsing="false" onAction="#showOperativeView" text="Ready" />-->
+<!--            <Text layoutX="70.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pass the device to the next user">-->
+<!--                <font>-->
+<!--                    <Font size="35.0" />-->
+<!--                </font>-->
+<!--            </Text>-->
+<!--        </AnchorPane>-->
     </center>
 </BorderPane>

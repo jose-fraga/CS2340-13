@@ -14,22 +14,26 @@
    <top>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="600.0" spacing="125.0" style="-fx-border-color: black;" BorderPane.alignment="CENTER">
          <children>
-            <Button cancelButton="true" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#quitGame" prefHeight="25.0" prefWidth="60.0" text="Exit" />
+            <Button alignment="CENTER" cancelButton="true" contentDisplay="CENTER" mnemonicParsing="false" onAction="#quitGame" prefHeight="25.0" prefWidth="60.0" text="Exit" />
             <Label fx:id="gameTitle" alignment="CENTER" contentDisplay="CENTER" prefHeight="50.0" prefWidth="175.0">
                <font>
                   <Font name="Gill Sans Ultra Bold" size="22.0" />
                </font>
             </Label>
-            <VBox alignment="CENTER" prefHeight="75.0" prefWidth="68.0">
+            <HBox>
                <children>
-                  <ImageView fx:id="playerSprite" fitHeight="47.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
-                  <Label fx:id="playerName" alignment="CENTER" prefHeight="5.0" prefWidth="68.0">
-                     <font>
-                        <Font name="Gill Sans Ultra Bold Condensed" size="12.0" />
-                     </font>
-                  </Label>
+                  <VBox alignment="CENTER" prefHeight="75.0" prefWidth="68.0">
+                     <children>
+                        <ImageView fx:id="playerSprite" fitHeight="47.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
+                        <Label fx:id="playerName" alignment="CENTER" prefHeight="5.0" prefWidth="68.0">
+                           <font>
+                              <Font name="Gill Sans Ultra Bold Condensed" size="12.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
                </children>
-            </VBox>
+            </HBox>
          </children>
       </HBox>
    </top>

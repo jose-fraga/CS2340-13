@@ -3,22 +3,15 @@ package com.example.project.codenames;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.effect.Effect;
-import javafx.scene.effect.InnerShadow;
-import javafx.scene.layout.BorderStroke;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
-import javafx.scene.text.Text;
 
 public class WordPane extends StackPane {
     // TODO: Add observer here so that when the player switches to SpyMaster, all buttons are set to invisible
 
     private String style;
-    private Color color;
-    private Word word;
+    private final Word word;
 
     public WordPane(Word word) {
         VBox currBox = new VBox();
@@ -26,13 +19,15 @@ public class WordPane extends StackPane {
         Label text = new Label();
         text.setText(word.getWord());
         text.setFont(Font.font("Tw Cen MT Condensed Extra Bold", 16));
-
-        Button button = new Button("SELECT");
-        button.setMaxSize(45, 20);
-        button.setFont(Font.font(10));
-
         currBox.getChildren().add(text);
-        currBox.getChildren().add(button);
+
+//        if (showButton) {
+//            Button button = new Button("SELECT");
+//            button.setMaxSize(45, 20);
+//            button.setFont(Font.font(10));
+//            currBox.getChildren().add(button);
+//        }
+
         currBox.setSpacing(3);
         currBox.setAlignment(Pos.CENTER);
         this.setAlignment(Pos.CENTER);
@@ -49,8 +44,18 @@ public class WordPane extends StackPane {
     public void addBackground() {
         this.style += " -fx-background-color: " + this.word.getType().getColor() + ";";
         this.setStyle(this.style);
-
         ((VBox) this.getChildren().get(0)).getChildren().get(0).setStyle("-fx-text-fill: white;");
+    }
+
+    public void addButton() {
+        Button button = new Button("SELECT");
+        button.setMaxSize(45, 20);
+        button.setFont(Font.font(10));
+        ((VBox) this.getChildren().get(0)).getChildren().add(button);
+    }
+
+    public void selectedUpdate() {
         ((VBox) this.getChildren().get(0)).getChildren().remove(1);
+        addBackground();
     }
 }
