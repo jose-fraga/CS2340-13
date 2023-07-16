@@ -21,13 +21,6 @@ public class WordPane extends StackPane {
         text.setFont(Font.font("Tw Cen MT Condensed Extra Bold", 16));
         currBox.getChildren().add(text);
 
-//        if (showButton) {
-//            Button button = new Button("SELECT");
-//            button.setMaxSize(45, 20);
-//            button.setFont(Font.font(10));
-//            currBox.getChildren().add(button);
-//        }
-
         currBox.setSpacing(3);
         currBox.setAlignment(Pos.CENTER);
         this.setAlignment(Pos.CENTER);
