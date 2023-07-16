@@ -99,6 +99,8 @@ public class CNGameScreenController implements Initializable, PropertyChangeList
             Helper.getCNGamePane().setBottom(loader.load());
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
 
     private void updateScores() {
         blueTeamScore.setText(String.valueOf(this.round.getTeam1().getNumOfCards()));
