@@ -6,12 +6,10 @@ import com.example.project.codenames.enums.Type;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
-
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeSupport;
 
 // Observer
 public class Round implements PropertyChangeListener {
@@ -48,6 +46,7 @@ public class Round implements PropertyChangeListener {
     public Team getActiveTeam() { return this.activeTeam; }
 
     private void updateWordType() {
+        DictionaryService.populate();
         this.words = DictionaryService.getGameWords();
         addType(0, 9, team1.getType());
         addType(9, 17, team2.getType());

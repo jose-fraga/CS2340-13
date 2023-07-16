@@ -14,7 +14,6 @@ public class DictionaryService {
     private static ArrayList<Word> gameWords = new ArrayList<>();
 
     public static ArrayList<Word> getGameWords() {
-        populate();
         return gameWords;
     }
 
