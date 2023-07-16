@@ -1,9 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
+
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.text.Font?>
 
 <BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="475.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.project.codenames.controllers.CNGameScreenController">
     <center>
@@ -23,5 +32,27 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             </rowConstraints>
         </GridPane>
+<!--        <AnchorPane visible="false" >-->
+<!--            <Button layoutX="273.0" layoutY="75.0" mnemonicParsing="false" onAction="#showOperativeView" text="Ready" />-->
+<!--            <Text layoutX="70.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pass the device to the next user">-->
+<!--                <font>-->
+<!--                    <Font size="35.0" />-->
+<!--                </font>-->
+<!--            </Text>-->
+<!--        </AnchorPane>-->
     </center>
+    <bottom>
+        <HBox alignment="CENTER" fx:id="spyMasterBox" prefHeight="100.0" prefWidth="200.0" spacing="15.0" BorderPane.alignment="CENTER">
+            <children>
+                <TextField prefHeight="25.0" prefWidth="185.0" fx:id="clueInput" />
+                <MenuButton mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" text="1">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Action 1" />
+                        <MenuItem mnemonicParsing="false" text="Action 2" />
+                    </items>
+                </MenuButton>
+                <Button maxHeight="25.0" onAction="#switchToOperative" mnemonicParsing="false" text="Give Clue" />
+            </children>
+        </HBox>
+    </bottom>
 </BorderPane>

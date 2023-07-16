@@ -1,6 +1,8 @@
 package com.example.project.codenames;
 
+import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.effect.Effect;
@@ -20,19 +22,24 @@ public class WordPane extends StackPane {
     private Color color;
     private Word word;
 
-    public WordPane(Word word) {
+    private boolean isButtonShown;
+
+    public WordPane(Word word, boolean showButton) {
         VBox currBox = new VBox();
 
         Label text = new Label();
         text.setText(word.getWord());
         text.setFont(Font.font("Tw Cen MT Condensed Extra Bold", 16));
-
-        Button button = new Button("SELECT");
-        button.setMaxSize(45, 20);
-        button.setFont(Font.font(10));
-
         currBox.getChildren().add(text);
-        currBox.getChildren().add(button);
+
+        this.isButtonShown = showButton;
+        if (showButton) {
+            Button button = new Button("SELECT");
+            button.setMaxSize(45, 20);
+            button.setFont(Font.font(10));
+            currBox.getChildren().add(button);
+        }
+
         currBox.setSpacing(3);
         currBox.setAlignment(Pos.CENTER);
         this.setAlignment(Pos.CENTER);
@@ -49,8 +56,10 @@ public class WordPane extends StackPane {
     public void addBackground() {
         this.style += " -fx-background-color: " + this.word.getType().getColor() + ";";
         this.setStyle(this.style);
+        ((VBox) this.getChildren().get(0)).setStyle("-fx-text-fill: white;");
 
-        ((VBox) this.getChildren().get(0)).getChildren().get(0).setStyle("-fx-text-fill: white;");
-        ((VBox) this.getChildren().get(0)).getChildren().remove(1);
+        if (isButtonShown) {
+            ((VBox) this.getChildren().get(0)).getChildren().remove(1);
+        }
     }
 }
