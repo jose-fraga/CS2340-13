@@ -16,9 +16,7 @@ public enum Game {
     CODENAMES("Codenames",
             "codenames/CNSplashScreen.fxml",
             "codenames/CNSetupScreen.fxml",
-            "codenames/CNGridScreen.fxml");
-
-
+            "codenames/CNGameScreen.fxml");
 
     private final String title;
     private final String initialFxmlPath;

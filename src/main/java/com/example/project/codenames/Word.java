@@ -1,34 +1,30 @@
 package com.example.project.codenames;
 
-import com.example.project.codenames.enums.Team;
+import com.example.project.codenames.enums.Type;
 
 // TODO: make words observable so that we can take actions when it is selected.
 public class Word {
-    private String word;
+    private final String word;
+    private final String definition;
+    private Type type;
     private boolean isSelected;
-    private String definition;
-    private Team type;
 
-    public Word(String word, Team type, String definition) {
+    public Word(Type type, String word, String definition) {
         this.word = word;
+        this.definition = definition;
         this.type = type;
         this.isSelected = false;
-        this.definition = definition;
     }
 
     public String getWord() { return this.word; }
-    public boolean getIsRevealed() { return this.isSelected; }
 
-    public void setType(Team type) { this.type = type; }
+    public boolean getIsSelected() { return this.isSelected; }
 
-    public void select() { this.isSelected = true; }
-
-    public Team getType() {
-        return type;
-    }
+    public Type getType() { return this.type; }
+    public void setType(Type type) { this.type = type; }
 
     @Override
     public String toString() {
-        return "new Word(\"" + word + "\",false,\"" + definition + "\")";
+        return "new Word(\"" + word + "\"," + type + ", " + definition + "\")";
     }
 }

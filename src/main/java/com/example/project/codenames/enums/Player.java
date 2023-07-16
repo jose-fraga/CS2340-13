@@ -1,7 +1,6 @@
 package com.example.project.codenames.enums;
 
-public enum RoundPhase {
+public enum Player {
     SPY_MASTER,
-    OPERATIVE,
-    WINNER
+    OPERATIVE;
 }
