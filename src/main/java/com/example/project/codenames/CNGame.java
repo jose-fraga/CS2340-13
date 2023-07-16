@@ -5,12 +5,15 @@ public class CNGame {
     private Round round;
 
     private CNGame() {
+        DictionaryService.populate();
         round = new Round();
     }
 
-    public Round getRound() { return this.round; }
     public Round startNewRound() {
         this.round = new Round();
+    }
+
+    public Round getRound() {
         return this.round;
     }
 

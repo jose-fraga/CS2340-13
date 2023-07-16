@@ -1,17 +1,18 @@
 package com.example.project.codenames;
 
+import com.example.project.Game;
 import com.example.project.Helper;
 import com.example.project.codenames.enums.Player;
 import com.example.project.codenames.enums.Type;
+import javafx.scene.Node;
+import javafx.stage.Stage;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
-
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeSupport;
 
 // Observer
 public class Round implements PropertyChangeListener {
@@ -28,6 +29,14 @@ public class Round implements PropertyChangeListener {
 
     private PropertyChangeSupport support;
 
+    public Team getTeam1() {
+        return team1;
+    }
+
+    public Team getTeam2() {
+        return team2;
+    }
+
     public Round() {
         this.support = new PropertyChangeSupport(this);
         this.team1 = this.activeTeam = new Random().nextBoolean() ? new Team(Type.RED, 9) : new Team(Type.BLUE, 9);
@@ -43,11 +52,17 @@ public class Round implements PropertyChangeListener {
         this.support.removePropertyChangeListener(listener);
     }
 
+    public String getCurrentClue() { return this.currentClue; }
+    public int getCurrentGuessLimit() { return this.currentGuessLimit; }
+
     public ArrayList<Word> getWords() { return this.words; }
 
     public Team getActiveTeam() { return this.activeTeam; }
 
+    public Team getPassiveTeam() { return (this.activeTeam == this.team1) ? this.team2 : this.team1; }
+
     private void updateWordType() {
+        DictionaryService.populate();
         this.words = DictionaryService.getGameWords();
         Collections.shuffle(this.words);
         addType(0, 9, team1.getType());
@@ -117,7 +132,7 @@ public class Round implements PropertyChangeListener {
         }
     }
 
-    private void endTurn() {
+    public void endTurn() {
         // TODO: can have observable for the phase and team switching (for ui)
         Team previousTeam = this.activeTeam;
         this.activeTeam = (this.activeTeam == this.team1) ? this.team2 : this.team1;
@@ -130,5 +145,7 @@ public class Round implements PropertyChangeListener {
         this.support.firePropertyChange(winnerEvent, null, winner);
         // TODO: observable for ending the game
         System.out.println("Game ends! " + winner);
+        Helper.changeGameScreen("codenames/CNEndScreen.fxml");
     }
+
 }

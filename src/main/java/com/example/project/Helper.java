@@ -27,7 +27,7 @@ public class Helper {
         gamePane = pane;
         if (currentGame == Game.CODENAMES) {
             gamePane.setPrefWidth(900);
-            gamePane.setPrefHeight(600);
+            gamePane.setPrefHeight(655);
         }
     }
 
