@@ -49,6 +49,9 @@ public class Round implements PropertyChangeListener {
         this.support.removePropertyChangeListener(listener);
     }
 
+    public String getCurrentClue() { return this.currentClue; }
+    public int getCurrentGuessLimit() { return this.currentGuessLimit; }
+
     public ArrayList<Word> getWords() { return this.words; }
 
     public Team getActiveTeam() { return this.activeTeam; }
@@ -56,6 +59,7 @@ public class Round implements PropertyChangeListener {
     public Team getPassiveTeam() { return (this.activeTeam == this.team1) ? this.team2 : this.team1; }
 
     private void updateWordType() {
+        DictionaryService.populate();
         this.words = DictionaryService.getGameWords();
         addType(0, 9, team1.getType());
         addType(9, 17, team2.getType());
@@ -123,7 +127,7 @@ public class Round implements PropertyChangeListener {
         }
     }
 
-    private void endTurn() {
+    public void endTurn() {
         // TODO: can have observable for the phase and team switching (for ui)
         Team previousTeam = this.activeTeam;
         this.activeTeam = (this.activeTeam == this.team1) ? this.team2 : this.team1;

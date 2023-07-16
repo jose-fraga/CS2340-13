@@ -5,7 +5,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
 
-<HBox fx:id="spyMasterBox" alignment="CENTER" prefHeight="100.0" prefWidth="432.0" spacing="15.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.project.codenames.controllers.CNInputBoxController">
+<HBox alignment="CENTER" prefHeight="85.0" prefWidth="432.0" spacing="15.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.project.codenames.controllers.CNInputBoxController">
    <children>
       <TextField fx:id="clueInput" prefHeight="25.0" prefWidth="185.0" />
       <ChoiceBox fx:id="guessInput" prefWidth="25.0" />
