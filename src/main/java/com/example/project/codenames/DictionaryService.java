@@ -55,8 +55,6 @@ public class DictionaryService {
         try {
             String CN_RANDOM_WORD_API = System.getenv("CN_RANDOM_WORD_API");
 
-            System.out.println(CN_RANDOM_WORD_API);
-
             HttpRequest getRequest = HttpRequest.newBuilder()
                     .uri(new URL(CN_RANDOM_WORD_API).toURI())
                     .GET()

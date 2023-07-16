@@ -39,7 +39,7 @@ public class GameController implements Initializable {
 
             if (Helper.currentGame == Game.CODENAMES) {
                 HBox playersBox = (HBox) ((HBox) gamePane.getTop()).getChildren().get(2);
-                FXMLLoader curr = new FXMLLoader(Main.class.getResource("PlayerBox.fxml"));
+                FXMLLoader curr = new FXMLLoader(Main.class.getResource("components/PlayerBox.fxml"));
                 playersBox.getChildren().add(curr.load());
 
                 VBox currBox = (VBox) playersBox.getChildren().get(1);

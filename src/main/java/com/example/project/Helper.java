@@ -20,17 +20,19 @@ import java.io.IOException;
 public class Helper {
     public static Game currentGame;
     private static Player currentPlayer, secondaryPlayer;
-    private static BorderPane gamePane;
-
-    public static void setGamePane(BorderPane pane) {
-        if (currentGame == Game.CODENAMES) {
-            pane.setPrefWidth(900);
-            pane.setPrefHeight(600);
-        }
-        gamePane = pane;
-    }
+    private static BorderPane gamePane, cnGamePane;
 
     public static BorderPane getGamePane() { return gamePane; }
+    public static void setGamePane(BorderPane pane) {
+        gamePane = pane;
+        if (currentGame == Game.CODENAMES) {
+            gamePane.setPrefWidth(900);
+            gamePane.setPrefHeight(600);
+        }
+    }
+
+    public static BorderPane getCNGamePane() { return cnGamePane; }
+    public static void setCNGamePane(BorderPane pane) { cnGamePane = pane; }
 
     public static Player getPlayerInstance() {
         if (currentPlayer == null) {

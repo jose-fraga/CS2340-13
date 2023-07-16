@@ -2,12 +2,11 @@ package com.example.project.codenames;
 
 public class CNGame {
     private static CNGame game_instance;
-    private Round round;
+    private final Round round = new Round();
 
     private CNGame() {}
 
     public Round getRound() { return this.round; }
-    public void createRound() { this.round = new Round(); }
 
     public static CNGame getGameInstance() {
         if (game_instance == null) {

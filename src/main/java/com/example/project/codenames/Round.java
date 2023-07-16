@@ -29,6 +29,7 @@ public class Round implements PropertyChangeListener {
         this.team1 = this.activeTeam = new Random().nextBoolean() ? new Team(Type.RED, 9) : new Team(Type.BLUE, 9);
         this.team2 = (activeTeam.getType() == Type.RED) ? new Team(Type.BLUE, 8) : new Team(Type.RED, 8);
         updateWordType();
+        Collections.shuffle(this.words);
     }
 
     public void addPropertyChangeListener(PropertyChangeListener listener) {
@@ -48,7 +49,6 @@ public class Round implements PropertyChangeListener {
         addType(0, 9, team1.getType());
         addType(9, 17, team2.getType());
         this.words.get(24).setType(Type.ASSASSIN);
-        Collections.shuffle(this.words);
     }
 
     private void addType(int start, int end, Type type) {
@@ -65,14 +65,17 @@ public class Round implements PropertyChangeListener {
 
     public void checkSelectedWord(Word selected) {
         Team passiveTeam = (this.activeTeam == this.team1) ? this.team2 : this.team1;
+        System.out.println(passiveTeam.getType());
 
         // Assassin ends game
         if (selected.getType() == Type.ASSASSIN) {
+            System.out.println("SELECTED Assassin");
             Team winner = passiveTeam;
             endGame(winner.getType());
 
         // Other team's card ends turn
         } else if (selected.getType() == passiveTeam.getType()) {
+            System.out.println("SELECTED Otherteam");
             passiveTeam.decrementCardCount();
             if (passiveTeam.hasWon()) {
                 endGame(this.activeTeam.getType());
@@ -82,10 +85,12 @@ public class Round implements PropertyChangeListener {
 
         // Neutral card ends turn
         } else if (selected.getType() == Type.NEUTRAL) {
+            System.out.println("SELECTED Neutral");
             endTurn();
 
         // Correct card chosen...
         } else if (selected.getType() == activeTeam.getType()) {
+            System.out.println("SELECTED Yourteam");
             this.activeTeam.decrementCardCount();
             this.currentGuessCount++;
 
@@ -114,6 +119,8 @@ public class Round implements PropertyChangeListener {
         this.activeTeam.setCurrentPlayer(Player.SPY_MASTER);
         this.currentClue = "";
         this.support.firePropertyChange("activeTeam", previousTeam , activeTeam);
+
+        Helper.changeGameScreen("codenames/CNBufferScreen.fxml");
     }
 
     private void endGame(Type winner) {
