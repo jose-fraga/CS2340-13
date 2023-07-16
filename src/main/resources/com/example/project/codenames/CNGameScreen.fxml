@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="475.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.project.codenames.controllers.CNGameScreenController">
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.project.codenames.controllers.CNGameScreenController">
     <center>
         <GridPane fx:id="gridPane" hgap="7.0" maxHeight="400.0" maxWidth="525.0" vgap="7.0" BorderPane.alignment="CENTER">
             <columnConstraints>
@@ -22,14 +27,51 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             </rowConstraints>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
         </GridPane>
-<!--        <AnchorPane visible="false" >-->
-<!--            <Button layoutX="273.0" layoutY="75.0" mnemonicParsing="false" onAction="#showOperativeView" text="Ready" />-->
-<!--            <Text layoutX="70.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pass the device to the next user">-->
-<!--                <font>-->
-<!--                    <Font size="35.0" />-->
-<!--                </font>-->
-<!--            </Text>-->
-<!--        </AnchorPane>-->
     </center>
+   <top>
+      <VBox alignment="CENTER" prefHeight="95.0" prefWidth="850.0" spacing="5.0" BorderPane.alignment="CENTER">
+         <children>
+            <VBox alignment="CENTER">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="15.0">
+                     <children>
+                        <Label alignment="CENTER" prefHeight="30.0" prefWidth="126.0" text="Current Team: ">
+                           <font>
+                              <Font name="System Bold Italic" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="teamDisplay" alignment="CENTER" prefHeight="30.0" prefWidth="126.0">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="15.0">
+                     <children>
+                        <Label alignment="CENTER" prefHeight="30.0" prefWidth="126.0" text="Current Player:">
+                           <font>
+                              <Font name="System Bold Italic" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="playerDisplay" alignment="CENTER" prefHeight="30.0" prefWidth="126.0" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <Label fx:id="topTitle" alignment="CENTER" prefHeight="25.0" prefWidth="326.0" text="Give Your Operatives A Clue!">
+               <font>
+                  <Font name="Franklin Gothic Demi Cond" size="15.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="5.0" />
+               </VBox.margin>
+            </Label>
+         </children>
+      </VBox>
+   </top>
 </BorderPane>

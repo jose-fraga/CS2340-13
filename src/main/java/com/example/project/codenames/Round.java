@@ -40,6 +40,9 @@ public class Round implements PropertyChangeListener {
         this.support.removePropertyChangeListener(listener);
     }
 
+    public String getCurrentClue() { return this.currentClue; }
+    public int getCurrentGuessLimit() { return this.currentGuessLimit; }
+
     public ArrayList<Word> getWords() { return this.words; }
 
     public Team getActiveTeam() { return this.activeTeam; }
@@ -112,7 +115,7 @@ public class Round implements PropertyChangeListener {
         }
     }
 
-    private void endTurn() {
+    public void endTurn() {
         // TODO: can have observable for the phase and team switching (for ui)
         Team previousTeam = this.activeTeam;
         this.activeTeam = (this.activeTeam == this.team1) ? this.team2 : this.team1;
