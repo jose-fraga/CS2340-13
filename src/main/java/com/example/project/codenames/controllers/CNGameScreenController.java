@@ -102,7 +102,7 @@ public class CNGameScreenController implements Initializable, PropertyChangeList
     }
 
     public void restartGame() {
-        CNGame.getGameInstance().createRound();
+        CNGame.getGameInstance().startNewRound();
         Helper.changeGameScreen("codenames/CNBufferScreen.fxml");
     }
 }
