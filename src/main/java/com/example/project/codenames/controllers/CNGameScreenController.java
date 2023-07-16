@@ -4,16 +4,17 @@ import com.example.project.Helper;
 import com.example.project.Main;
 import com.example.project.codenames.*;
 import com.example.project.codenames.enums.Player;
+import com.example.project.codenames.enums.TeamType;
+import com.example.project.codenames.enums.Type;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Group;
-import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.control.Label;
 
 import java.awt.*;
 import java.beans.PropertyChangeEvent;
@@ -24,6 +25,7 @@ import java.util.ResourceBundle;
 public class CNGameScreenController implements Initializable, PropertyChangeListener {
     @FXML private BorderPane borderPane;
     @FXML private GridPane gridPane;
+    @FXML private Label redTeamScore, blueTeamScore;
 
     private final Round round = CNGame.getGameInstance().getRound();
 
@@ -33,11 +35,12 @@ public class CNGameScreenController implements Initializable, PropertyChangeList
         populate();
         handle();
         addInputBox();
+        updateScores();
 
         System.out.println(this.round.getActiveTeam().getType() + " " + this.round.getActiveTeam().getCurrentPlayer());
     }
 
-    public void populate() {
+    private void populate() {
         this.round.addPropertyChangeListener(this);
 
         int count = 0;
@@ -49,14 +52,13 @@ public class CNGameScreenController implements Initializable, PropertyChangeList
         }
     }
 
-    public void handle() {
+    private void handle() {
         gridPane.getChildren().forEach(item -> {
             if (!(item instanceof Group)) {
                 WordPane curr = (WordPane) item;
                 VBox currBox = (VBox) curr.getChildren().get(0);
 
                 if (this.round.getActiveTeam().getCurrentPlayer() == Player.OPERATIVE) {
-                    // If operative:
                     if (curr.getWord().getIsSelected()) {
                         curr.addBackground();
                     } else {
@@ -65,7 +67,7 @@ public class CNGameScreenController implements Initializable, PropertyChangeList
                             curr.getWord().select();
                             if (curr.getWord().getIsSelected()) {
                                 curr.selectedUpdate();
-//                            this.round.checkSelectedWord(curr.getWord());
+                                updateScores();
                             }
                         });
                     }
@@ -75,6 +77,11 @@ public class CNGameScreenController implements Initializable, PropertyChangeList
                 }
             }
         });
+    }
+
+    private void updateScores() {
+        blueTeamScore.setText(String.valueOf(this.round.getTeam1().getNumOfCards()));
+        redTeamScore.setText(String.valueOf(this.round.getTeam2().getNumOfCards()));
     }
 
     private void addInputBox() {
