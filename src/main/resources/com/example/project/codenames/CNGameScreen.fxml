@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="475.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.project.codenames.controllers.CNGameScreenController">
     <center>
@@ -23,13 +26,29 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             </rowConstraints>
         </GridPane>
-<!--        <AnchorPane visible="false" >-->
-<!--            <Button layoutX="273.0" layoutY="75.0" mnemonicParsing="false" onAction="#showOperativeView" text="Ready" />-->
-<!--            <Text layoutX="70.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pass the device to the next user">-->
-<!--                <font>-->
-<!--                    <Font size="35.0" />-->
-<!--                </font>-->
-<!--            </Text>-->
-<!--        </AnchorPane>-->
     </center>
+    <left>
+        <VBox alignment="CENTER" prefHeight="475.0" prefWidth="125.0" spacing="25.0" BorderPane.alignment="CENTER">
+            <children>
+                <Label alignment="CENTER" prefHeight="26.0" prefWidth="151.0" style="-fx-border-color: black; -fx-text-fill: #CF2129;" text="Red Team">
+                    <font>
+                        <Font name="Berlin Sans FB" size="18.0" />
+                    </font>
+                </Label>
+                <Label fx:id="redTeamScore" alignment="CENTER" prefHeight="27.0" prefWidth="70.0" text="Label" />
+            </children>
+        </VBox>
+    </left>
+    <right>
+        <VBox alignment="CENTER" prefHeight="475.0" prefWidth="125.0" spacing="25.0" BorderPane.alignment="CENTER">
+            <children>
+                <Label alignment="CENTER" prefHeight="26.0" prefWidth="138.0" style="-fx-border-color: black; -fx-text-fill: #03B8D0;" text="Blue Team">
+                    <font>
+                        <Font name="Berlin Sans FB" size="18.0" />
+                    </font>
+                </Label>
+                <Label fx:id="blueTeamScore" alignment="CENTER" prefHeight="27.0" prefWidth="70.0" text="Label" />
+            </children>
+        </VBox>
+    </right>
 </BorderPane>
