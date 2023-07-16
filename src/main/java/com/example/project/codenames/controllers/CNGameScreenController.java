@@ -91,10 +91,18 @@ public class CNGameScreenController implements Initializable, PropertyChangeList
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-//        System.out.println(evt);
-//        if (evt.getPropertyName().equals("activeTeam")) { //TODO make enums for propertynames
-//            Team activeTeam = (Team) evt.getNewValue();
-//            // switch screen to buffer screen so spy master can give clue
-//        }
+        String incomingEvent = evt.getPropertyName();
+        if (incomingEvent.equals(Round.activeTeamEvent)) { //TODO make enums for propertynames
+            Team activeTeam = (Team) evt.getNewValue();
+            Helper.changeGameScreen("codenames/CNBufferScreen.fxml");
+        } else if (incomingEvent.equals(Round.winnerEvent)) {
+            Team winningTeam = (Team) evt.getNewValue();
+            Helper.changeGameScreen("codenames/CNWinScreen.fxml");
+        }
+    }
+
+    public void restartGame() {
+        CNGame.getGameInstance().createRound();
+        Helper.changeGameScreen("codenames/CNBufferScreen.fxml");
     }
 }
