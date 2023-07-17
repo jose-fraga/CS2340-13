@@ -6,8 +6,6 @@ import com.example.project.codenames.CNGame;
 import com.example.project.codenames.Round;
 import com.example.project.codenames.WordPane;
 import com.example.project.codenames.enums.Player;
-import com.example.project.codenames.enums.TeamType;
-import com.example.project.codenames.enums.Type;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -17,7 +15,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.control.Label;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -115,7 +112,7 @@ public class CNGameScreenController implements Initializable, PropertyChangeList
             Helper.changeGameScreen("codenames/CNBufferScreen.fxml");
         } else if (incomingEvent.equals(Round.winnerEvent)) {
             Team winningTeam = (Team) evt.getNewValue();
-            Helper.changeGameScreen("codenames/CNWinScreen.fxml");
+            Helper.changeGameScreen("codenames/CNEndScreen.fxml");
         }
     }
 
