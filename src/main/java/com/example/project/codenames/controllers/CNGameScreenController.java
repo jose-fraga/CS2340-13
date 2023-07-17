@@ -21,6 +21,7 @@ import javafx.scene.layout.VBox;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 
 // TODO: Make enums for propertynames
@@ -36,21 +37,37 @@ public class CNGameScreenController implements Initializable, PropertyChangeList
     @FXML private Label teamDisplay, playerDisplay, topTitle;
     @FXML private Label redTeamScore, blueTeamScore;
 
+    private HashMap<Type, Label> scoreLabels = new HashMap<Type, Label>(2);
     private final Round round = CNGame.getGameInstance().getRound();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println("ENTERED: Codenames Game Screen");
+
+        scoreLabels.put(Type.RED, redTeamScore);
+        scoreLabels.put(Type.BLUE, blueTeamScore);
+
+        subscribeToEvents();
         populate();
         handle();
-        updateScores();
+
         addTop();
         addBottom();
     }
 
-    private void populate() {
+    private void subscribeToEvents() {
         this.round.addPropertyChangeListener(this);
+        this.round.getTeam1().addPropertyChangeListener(this);
+        this.round.getTeam2().addPropertyChangeListener(this);
+    }
 
+    private void unsubscribeFromEvents() {
+        this.round.removePropertyChangeListener(this);
+        this.round.getTeam1().removePropertyChangeListener(this);
+        this.round.getTeam2().removePropertyChangeListener(this);
+    }
+
+    private void populate() {
         int count = 0;
         for (int i = 0; i < gridPane.getRowCount(); i++) {
             for (int j = 0; j < gridPane.getColumnCount(); j++) {
@@ -59,13 +76,8 @@ public class CNGameScreenController implements Initializable, PropertyChangeList
             }
         }
 
-        if (this.round.getActiveTeam().getType() == Type.RED) {
-            redTeamScore.setText("9");
-            blueTeamScore.setText("8");
-        } else {
-            blueTeamScore.setText("9");
-            blueTeamScore.setText("8");
-        }
+        scoreLabels.get(this.round.getTeam1().getType()).setText(this.round.getTeam1().getNumOfCards() + "");
+        scoreLabels.get(this.round.getTeam2().getType()).setText(this.round.getTeam2().getNumOfCards() + "");
     }
 
     private void handle() {
@@ -83,7 +95,6 @@ public class CNGameScreenController implements Initializable, PropertyChangeList
                             curr.getWord().select();
                             if (curr.getWord().getIsSelected()) {
                                 curr.selectedUpdate();
-                                updateScores();
                             }
                         });
 
@@ -150,16 +161,6 @@ public class CNGameScreenController implements Initializable, PropertyChangeList
         }
     }
 
-    private void updateScores() {
-        if (this.round.getTeam1().getType() == Type.RED) {
-            redTeamScore.setText(String.valueOf(this.round.getTeam1().getNumOfCards()));
-            blueTeamScore.setText(String.valueOf(this.round.getTeam2().getNumOfCards()));
-        } else {
-            blueTeamScore.setText(String.valueOf(this.round.getTeam1().getNumOfCards()));
-            redTeamScore.setText(String.valueOf(this.round.getTeam2().getNumOfCards()));
-        }
-    }
-
     public int getPosition(int currLength) {
         int position = 0;
         if (currLength == 1) {
@@ -191,10 +192,18 @@ public class CNGameScreenController implements Initializable, PropertyChangeList
     public void propertyChange(PropertyChangeEvent evt) {
         String incomingEvent = evt.getPropertyName();
         if (incomingEvent.equals(Round.activeTeamEvent)) {
+            unsubscribeFromEvents();
             Helper.changeGameScreen("codenames/CNBufferScreen.fxml");
         } else if (incomingEvent.equals(Round.winnerEvent)) {
             Team winningTeam = (Team) evt.getNewValue();
+            CNGame.getGameInstance().clearRound();
+            unsubscribeFromEvents();
             Helper.changeGameScreen("codenames/CNEndScreen.fxml");
+        } else if (incomingEvent.equals(Team.numOfCardsUpdatedEvent)) {
+            // evt check blue or red type
+            Team updatedTeam = (Team) evt.getSource();
+            scoreLabels.get(updatedTeam.getType()).setText(updatedTeam.getNumOfCards() + "");
         }
+
     }
 }
