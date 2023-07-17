@@ -21,10 +21,6 @@ public class Word {
         this.isSelected = false;
     }
 
-    public String getDefinition() {
-        return definition;
-    }
-
     public String getWord() { return this.word; }
     public String getDefinition() { return this.definition; }
 
