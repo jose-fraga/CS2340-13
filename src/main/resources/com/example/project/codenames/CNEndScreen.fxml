@@ -13,7 +13,7 @@
          <image>
             <Image url="@../images/CNEnd.png" />
          </image></ImageView>
-      <Label fx:id="label" layoutX="321.0" layoutY="365.0" prefHeight="25.0" prefWidth="58.0">
+      <Label fx:id="label" layoutX="284.0" layoutY="356.0" prefHeight="58.0" prefWidth="109.0">
          <font>
             <Font name="Courier New Bold" size="33.0" />
          </font>

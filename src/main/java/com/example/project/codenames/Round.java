@@ -21,6 +21,10 @@ public class Round implements PropertyChangeListener {
 
     private PropertyChangeSupport support;
 
+
+
+
+
     public Team getTeam1() {
         return team1;
     }
@@ -135,6 +139,8 @@ public class Round implements PropertyChangeListener {
         this.currentClue = "";
         this.support.firePropertyChange("activeTeam", previousTeam, activeTeam);
     }
+
+
 
     private void endGame(Type winner) {
         this.support.firePropertyChange("winner", null, winner);
