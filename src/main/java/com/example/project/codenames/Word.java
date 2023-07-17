@@ -27,9 +27,9 @@ public class Word {
         this.isSelected = false;
     }
 
-    public String getDefinition() { return this.definition; }
-
     public String getWord() { return this.word; }
+    
+    public String getDefinition() { return this.definition; }
 
     public boolean getIsSelected() { return this.isSelected; }
 
