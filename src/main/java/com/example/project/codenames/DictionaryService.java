@@ -49,6 +49,9 @@ public class DictionaryService {
                 new Word(Type.NEUTRAL,"Chest","A box, now usually a large strong box with a secure convex lid.")));
     }
 
+    // Source: https://www.youtube.com/watch?v=9oq7Y8n1t00
+    // Basically, I followed this tutorial to make GET request to the external API,
+    // and how to read/handle the JSON resposne from such requests.
     public synchronized static String generateWord() {
         try {
             String CN_RANDOM_WORD_API = System.getenv("CN_RANDOM_WORD_API");
@@ -67,6 +70,9 @@ public class DictionaryService {
         return null;
     }
 
+    // Source: https://www.youtube.com/watch?v=9oq7Y8n1t00
+    // Basically, I followed this tutorial to make GET request to the external API,
+    // and how to read/handle the JSON resposne from such requests.
     public synchronized static String obtainDefinition(String word) {
         try {
             String DEFINITION_API = System.getenv("DEFINITION_API");

@@ -25,6 +25,11 @@ import java.util.ResourceBundle;
 
 // TODO: Make enums for propertynames
 
+// Source: https://www.youtube.com/watch?v=icf5S9fzRXE
+// We followed this tutorial to understand how to implement the Observer Pattern
+// through using the PropertyChangeListener and PropertyChangeSupport. This
+// code successfully adds listeners (observers), assigns support (observable),
+// and notifies listeners when some property changes.
 public class CNGameScreenController implements Initializable, PropertyChangeListener {
     @FXML private BorderPane borderPane;
     @FXML private GridPane gridPane;

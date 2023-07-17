@@ -12,6 +12,11 @@ import java.util.Random;
 
 // TODO: Make endGame an Observable
 
+// Source: https://www.youtube.com/watch?v=icf5S9fzRXE
+// We followed this tutorial to understand how to implement the Observer Pattern
+// through using the PropertyChangeListener and PropertyChangeSupport. This
+// code successfully adds listeners (observers), assigns support (observable),
+// and notifies listeners when some property changes.
 public class Round implements PropertyChangeListener {
     public static final String activeTeamEvent = "activeTeam";
     public static final String winnerEvent = "winner";
@@ -56,9 +61,7 @@ public class Round implements PropertyChangeListener {
 
         Collections.shuffle(this.words);
 
-        this.words.forEach(item -> {
-            item.addPropertyChangeListener(this);
-        });
+        this.words.forEach(item -> item.addPropertyChangeListener(this));
     }
 
     private void addType(int start, int end, Type type) {
