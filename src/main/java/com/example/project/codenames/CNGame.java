@@ -12,6 +12,7 @@ public class CNGame {
         }
         return this.round;
     }
+
     public void clearRound() { this.round = null; }
 
     public static CNGame getGameInstance() {

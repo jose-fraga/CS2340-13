@@ -18,18 +18,16 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class CNEndScreenController implements Initializable  {
-    @FXML public Label label;
-    @FXML public AnchorPane anchor;
-    @FXML public ImageView imageView;
+    @FXML public Label winningTeamLabel, scoreDisplay;
+    @FXML public AnchorPane anchorPane;
+    @FXML public ImageView backgroundIV;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println("ENTERED: " + Helper.currentGame.title() + "End Screen");
         changeLabel();
-        anchor.setStyle("-fx-background-image:url(@images/CNEnd.png)");
-        imageView.fitWidthProperty().bind(anchor.widthProperty());
-        imageView.fitHeightProperty().bind(anchor.heightProperty());
-        System.out.println("ENTERED: " + Helper.currentGame.title() + "End Screen");
+        addBackground();
+        updateScore();
     }
 
     @FXML public void quitGame(ActionEvent e) {
@@ -38,12 +36,25 @@ public class CNEndScreenController implements Initializable  {
         Helper.changeScreen(stage, Game.UNSELECTED.initialFxmlPath(), Game.UNSELECTED.title());
     }
 
-     public void changeLabel() {
-         if( CNGame.getGameInstance().getRound().getActiveTeam().getType() == Type.RED) {
-             label.setTextFill(Paint.valueOf("#CF2129"));
-         } else if (CNGame.getGameInstance().getRound().getActiveTeam().getType() == Type.BLUE) {
-             label.setTextFill(Paint.valueOf("#03B8D0"));
-         }
-         label.setText(" " + CNGame.getGameInstance().getRound().getActiveTeam().getType());
+    public void changeLabel() {
+        if( CNGame.getGameInstance().getRound().getActiveTeam().getType() == Type.RED) {
+            winningTeamLabel.setTextFill(Paint.valueOf("#CF2129"));
+        } else if (CNGame.getGameInstance().getRound().getActiveTeam().getType() == Type.BLUE) {
+            winningTeamLabel.setTextFill(Paint.valueOf("#03B8D0"));
+        }
+        winningTeamLabel.setText(CNGame.getGameInstance().getRound().getActiveTeam().getType().toString());
+    }
+
+    public void addBackground() {
+        anchorPane.setStyle("-fx-background-image:url(@images/CNEnd.png)");
+        backgroundIV.fitWidthProperty().bind(anchorPane.widthProperty());
+        backgroundIV.fitHeightProperty().bind(anchorPane.heightProperty());
+    }
+
+    public void updateScore() {
+        int score = CNGame.getGameInstance().getRound().getActiveTeam().getNumOfCards() * 10;
+
+        scoreDisplay.setText("Latest Score: " + score);
+        CNGame.getGameInstance().clearRound();
     }
 }

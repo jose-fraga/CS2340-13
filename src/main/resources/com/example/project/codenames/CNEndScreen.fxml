@@ -7,13 +7,14 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="anchor" prefHeight="475.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.project.codenames.controllers.CNEndScreenController">
+<AnchorPane fx:id="anchorPane" prefHeight="475.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.project.codenames.controllers.CNEndScreenController">
    <children>
-      <ImageView fx:id="imageView" fitHeight="475.0" fitWidth="850.0" pickOnBounds="true">
+      <ImageView fx:id="backgroundIV" fitHeight="475.0" fitWidth="850.0" pickOnBounds="true">
          <image>
             <Image url="@../images/CNEnd.png" />
-         </image></ImageView>
-      <Label fx:id="label" layoutX="284.0" layoutY="356.0" prefHeight="58.0" prefWidth="109.0">
+         </image>
+      </ImageView>
+      <Label fx:id="winningTeamLabel" layoutX="284.0" layoutY="356.0" prefHeight="58.0" prefWidth="109.0">
          <font>
             <Font name="Courier New Bold" size="33.0" />
          </font>
@@ -24,5 +25,10 @@
          </font>
       </Label>
       <Button layoutX="44.0" layoutY="117.0" mnemonicParsing="false" onAction="#quitGame" prefHeight="23.0" prefWidth="60.0" text="Exit" />
+      <Label fx:id="scoreDisplay" alignment="CENTER" layoutX="420.0" layoutY="414.0" prefHeight="26.0" prefWidth="123.0" style="-fx-background-color: white;" text="Latest Score: ">
+         <font>
+            <Font name="Gill Sans Ultra Bold Condensed" size="12.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
