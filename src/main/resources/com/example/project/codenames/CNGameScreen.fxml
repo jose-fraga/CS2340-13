@@ -11,6 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
+
 <BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.project.codenames.controllers.CNGameScreenController">
     <center>
         <GridPane fx:id="gridPane" hgap="7.0" maxHeight="400.0" maxWidth="525.0" vgap="7.0" BorderPane.alignment="CENTER">

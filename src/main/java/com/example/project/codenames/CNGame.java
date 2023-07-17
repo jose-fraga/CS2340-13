@@ -2,12 +2,18 @@ package com.example.project.codenames;
 
 public class CNGame {
     private static CNGame game_instance;
-    private final Round round = new Round();
+    private Round round;
 
-    private CNGame() {}
+    private CNGame() {
+        DictionaryService.populate();
+        round = new Round();
+    }
+
+    public Round startNewRound() {
+        this.round = new Round();
+    }
 
     public Round getRound() {
-        DictionaryService.populate();
         return this.round;
     }
 
