@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class DictionaryServiceTest {
+class DictionaryServiceTwoTest {
     @Test
     void checkENV() {
         assertNotNull(System.getenv("CN_RANDOM_WORD_API"));
