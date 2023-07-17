@@ -9,10 +9,42 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
+import java.util.HashSet;
 
+// Model this using the Observer Pattern
 public class WordPane extends StackPane {
     private String style;
     private final Word word;
+
+
+    public void setCurrLength(int currLength) {
+        this.currLength = currLength;
+    }
+
+    private int currLength;
+
+    public int getRedPosition() {
+        return redPosition;
+    }
+
+    public void setRedPosition(int redPosition) {
+        this.redPosition = redPosition;
+    }
+
+    private int redPosition;
+
+    public void setBluePosition(int bluePosition) {
+        this.bluePosition = bluePosition;
+    }
+
+    public int getBluePosition() {
+        return bluePosition;
+    }
+
+    private int bluePosition;
+
+
+    private HashSet<Type> occupants = new HashSet<>(2);
 
     public WordPane(Word word) {
         this.word = word;
@@ -74,4 +106,25 @@ public class WordPane extends StackPane {
         tooltip.setStyle("-fx-background-color: dimgray; -fx-text-fill: white;");
         Tooltip.install(this, tooltip);
     }
+
+    public void ToggleOccupants(Type team) {
+        if (occupants.contains(team)) {
+            occupants.remove(team);
+        } else if (!(occupants.contains(team))) {
+            occupants.add(team);
+        }
+    }
+
+    public HashSet<Type> getOccupants() {
+        return occupants;
+    }
+
+    public boolean hasOccupant(Type team) {
+        return this.occupants.contains(team);
+    }
+
+    public int getCurrLength() {
+        return currLength;
+    }
+
 }

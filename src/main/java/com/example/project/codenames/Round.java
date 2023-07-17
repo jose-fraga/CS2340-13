@@ -3,6 +3,11 @@ package com.example.project.codenames;
 import com.example.project.codenames.enums.Player;
 import com.example.project.codenames.enums.Type;
 
+import javafx.scene.Node;
+import javafx.stage.Stage;
+import java.util.HashSet;
+import java.util.Set;
+
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
@@ -45,7 +50,13 @@ public class Round implements PropertyChangeListener {
 
     public ArrayList<Word> getWords() { return this.words; }
 
-    public Team getActiveTeam() { return this.activeTeam; }
+    public Team getActiveTeam() {
+        return this.activeTeam;
+    }
+
+    public Team getPassiveTeam() {
+        return (this.activeTeam == this.team1) ? this.team2 : this.team1;
+    }
 
     private void updateWordType() {
         DictionaryService.populate();
@@ -76,6 +87,7 @@ public class Round implements PropertyChangeListener {
         // selected = Assassin (Incorrect -> endGame)
         if (selected.getType() == Type.ASSASSIN) {
             System.out.println("SELECTED: Assassin Card");
+            this.activeTeam = passiveTeam;
             endGame(passiveTeam);
 
         // selected = Other Team (Incorrect -> endTurn)

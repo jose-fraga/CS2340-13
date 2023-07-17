@@ -1,8 +1,9 @@
-package com.example.project;
+package com.example.project.codenames;
 
 import org.junit.jupiter.api.Test;
-import com.example.project.codenames.GameLog;
+
 import java.util.ArrayList;
+
 import static org.junit.Assert.assertEquals;
 
 
