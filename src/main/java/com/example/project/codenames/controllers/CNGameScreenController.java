@@ -2,21 +2,20 @@ package com.example.project.codenames.controllers;
 
 import com.example.project.Helper;
 import com.example.project.Main;
-import com.example.project.codenames.*;
+import com.example.project.codenames.CNGame;
+import com.example.project.codenames.Round;
+import com.example.project.codenames.WordPane;
 import com.example.project.codenames.enums.Player;
-import com.example.project.codenames.enums.TeamType;
-import com.example.project.codenames.enums.Type;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Group;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.control.Label;
 
-import java.awt.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.net.URL;
@@ -103,5 +102,8 @@ public class CNGameScreenController implements Initializable, PropertyChangeList
 //            Team activeTeam = (Team) evt.getNewValue();
 //            // switch screen to buffer screen so spy master can give clue
 //        }
+        if(evt.getPropertyName().equals("winner")) {
+            Helper.changeGameScreen("codenames/CNEndScreen.fxml");
+        }
     }
 }
