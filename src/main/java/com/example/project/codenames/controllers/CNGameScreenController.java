@@ -204,6 +204,5 @@ public class CNGameScreenController implements Initializable, PropertyChangeList
             Team updatedTeam = (Team) evt.getSource();
             scoreLabels.get(updatedTeam.getType()).setText(updatedTeam.getNumOfCards() + "");
         }
-
     }
 }

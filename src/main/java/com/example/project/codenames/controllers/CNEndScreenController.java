@@ -37,12 +37,14 @@ public class CNEndScreenController implements Initializable  {
     }
 
     public void changeLabel() {
-        if( CNGame.getGameInstance().getRound().getActiveTeam().getType() == Type.RED) {
+        if(CNGame.getGameInstance().getRound().getActiveTeam().getType() == Type.RED) {
             winningTeamLabel.setTextFill(Paint.valueOf("#CF2129"));
+            winningTeamLabel.setText("RED");
         } else if (CNGame.getGameInstance().getRound().getActiveTeam().getType() == Type.BLUE) {
             winningTeamLabel.setTextFill(Paint.valueOf("#03B8D0"));
+            winningTeamLabel.setText("BLUE");
         }
-        winningTeamLabel.setText(CNGame.getGameInstance().getRound().getActiveTeam().getType().toString());
+//        winningTeamLabel.setText(CNGame.getGameInstance().getRound().getActiveTeam().getType().toString());
     }
 
     public void addBackground() {
