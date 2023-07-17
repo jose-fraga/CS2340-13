@@ -24,6 +24,7 @@ import java.util.ResourceBundle;
 public class CNGameScreenController implements Initializable, PropertyChangeListener {
     @FXML private BorderPane borderPane;
     @FXML private GridPane gridPane;
+    @FXML private Label teamDisplay, playerDisplay, topTitle;
     @FXML private Label redTeamScore, blueTeamScore;
 
     private final Round round = CNGame.getGameInstance().getRound();
@@ -33,7 +34,9 @@ public class CNGameScreenController implements Initializable, PropertyChangeList
         System.out.println("ENTERED: Codenames Game Screen");
         populate();
         handle();
-        addInputBox();
+
+        addTop();
+        addBottom();
         updateScores();
 
         System.out.println(this.round.getActiveTeam().getType() + " " + this.round.getActiveTeam().getCurrentPlayer());
@@ -78,32 +81,39 @@ public class CNGameScreenController implements Initializable, PropertyChangeList
         });
     }
 
+    private void addTop() {
+        teamDisplay.setText(this.round.getActiveTeam().getType().toString());
+        teamDisplay.setStyle("-fx-text-fill: " + this.round.getActiveTeam().getType().getColor());
+        playerDisplay.setText(this.round.getActiveTeam().getCurrentPlayer().toString());
+        topTitle.setText(this.round.getActiveTeam().getCurrentPlayer().getHint());
+    }
+
+    private void addBottom() {
+        Player currPlayer = this.round.getActiveTeam().getCurrentPlayer();
+        try {
+            FXMLLoader loader = new FXMLLoader(Main.class.getResource(currPlayer.getPath()));
+            Helper.setCNGamePane(borderPane);
+            Helper.getCNGamePane().setBottom(loader.load());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     private void updateScores() {
         blueTeamScore.setText(String.valueOf(this.round.getTeam1().getNumOfCards()));
         redTeamScore.setText(String.valueOf(this.round.getTeam2().getNumOfCards()));
     }
 
-    private void addInputBox() {
-        if (this.round.getActiveTeam().getCurrentPlayer() == Player.SPY_MASTER) {
-            try {
-                FXMLLoader loader = new FXMLLoader(Main.class.getResource("codenames/components/InputBox.fxml"));
-                Helper.setCNGamePane(borderPane);
-                Helper.getCNGamePane().setBottom(loader.load());
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-//        System.out.println(evt);
-//        if (evt.getPropertyName().equals("activeTeam")) { //TODO make enums for propertynames
-//            Team activeTeam = (Team) evt.getNewValue();
-//            // switch screen to buffer screen so spy master can give clue
-//        }
-        if(evt.getPropertyName().equals("winner")) {
+        String incomingEvent = evt.getPropertyName();
+        if (incomingEvent.equals(Round.activeTeamEvent)) { //TODO make enums for propertynames
+            Team activeTeam = (Team) evt.getNewValue();
+            Helper.changeGameScreen("codenames/CNBufferScreen.fxml");
+        } else if (incomingEvent.equals(Round.winnerEvent)) {
+            Team winningTeam = (Team) evt.getNewValue();
             Helper.changeGameScreen("codenames/CNEndScreen.fxml");
         }
     }
+
 }

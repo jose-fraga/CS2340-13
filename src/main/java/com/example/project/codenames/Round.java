@@ -12,6 +12,10 @@ import java.util.Random;
 
 // Observer
 public class Round implements PropertyChangeListener {
+    public static final String activeTeamEvent = "activeTeam";
+    public static final String winnerEvent = "winner";
+
+
     private Team team1, team2, activeTeam;
     private ArrayList<Word> words;
 
@@ -38,7 +42,6 @@ public class Round implements PropertyChangeListener {
         this.team1 = this.activeTeam = new Random().nextBoolean() ? new Team(Type.RED, 9) : new Team(Type.BLUE, 9);
         this.team2 = (activeTeam.getType() == Type.RED) ? new Team(Type.BLUE, 8) : new Team(Type.RED, 8);
         updateWordType();
-        Collections.shuffle(this.words);
     }
 
     public void addPropertyChangeListener(PropertyChangeListener listener) {
@@ -49,9 +52,10 @@ public class Round implements PropertyChangeListener {
         this.support.removePropertyChangeListener(listener);
     }
 
-    public ArrayList<Word> getWords() {
-        return this.words;
-    }
+    public String getCurrentClue() { return this.currentClue; }
+    public int getCurrentGuessLimit() { return this.currentGuessLimit; }
+
+    public ArrayList<Word> getWords() { return this.words; }
 
     public Team getActiveTeam() {
         return this.activeTeam;
@@ -64,9 +68,13 @@ public class Round implements PropertyChangeListener {
     private void updateWordType() {
         DictionaryService.populate();
         this.words = DictionaryService.getGameWords();
+        Collections.shuffle(this.words);
         addType(0, 9, team1.getType());
         addType(9, 17, team2.getType());
-        this.words.get(24).setType(Type.ASSASSIN);
+        Word assassinWord = this.words.get(24);
+        assassinWord.setType(Type.ASSASSIN);
+        assassinWord.addPropertyChangeListener(this);
+        Collections.shuffle(this.words);
     }
 
     private void addType(int start, int end, Type type) {
@@ -83,21 +91,19 @@ public class Round implements PropertyChangeListener {
 
     public void checkSelectedWord(Word selected) {
         Team passiveTeam = (this.activeTeam == this.team1) ? this.team2 : this.team1;
-        System.out.println(passiveTeam.getType());
 
         // Assassin ends game
         if (selected.getType() == Type.ASSASSIN) {
-            System.out.println("SELECTED Assassin");
+            System.out.println("SELECTED Assassin Card");
             this.activeTeam = passiveTeam;
-            Team winner = passiveTeam;
-            endGame(winner.getType());
+            endGame(passiveTeam);
 
             // Other team's card ends turn
         } else if (selected.getType() == passiveTeam.getType()) {
-            System.out.println("SELECTED Otherteam");
+            System.out.println("SELECTED Enemy's Card");
             passiveTeam.decrementCardCount();
             if (passiveTeam.hasWon()) {
-                endGame(this.activeTeam.getType());
+                endGame(this.activeTeam);
             } else {
                 endTurn();
             }
@@ -109,12 +115,12 @@ public class Round implements PropertyChangeListener {
 
             // Correct card chosen...
         } else if (selected.getType() == activeTeam.getType()) {
-            System.out.println("SELECTED Yourteam");
+            System.out.println("SELECTED Correctly");
             this.activeTeam.decrementCardCount();
             this.currentGuessCount++;
 
             if (this.activeTeam.hasWon()) {
-                endGame(this.activeTeam.getType());
+                endGame(this.activeTeam);
             } else if (this.currentGuessCount == this.currentGuessLimit) {
                 endTurn();
             }
@@ -126,24 +132,22 @@ public class Round implements PropertyChangeListener {
         if (this.activeTeam.getCurrentPlayer() == Player.SPY_MASTER) {
             this.activeTeam.setCurrentPlayer(Player.OPERATIVE);
             this.currentGuessCount = 0;
-            this.currentGuessLimit = ++clueCount; //(they can guess 1 more than what the spymaster says if they get them all right)
+            this.currentGuessLimit = clueCount + 1; //(they can guess 1 more than what the spymaster says if they get them all right)
             this.currentClue = clue;
         }
     }
 
-    private void endTurn() {
+    public void endTurn() {
         // TODO: can have observable for the phase and team switching (for ui)
         Team previousTeam = this.activeTeam;
         this.activeTeam = (this.activeTeam == this.team1) ? this.team2 : this.team1;
         this.activeTeam.setCurrentPlayer(Player.SPY_MASTER);
         this.currentClue = "";
-        this.support.firePropertyChange("activeTeam", previousTeam, activeTeam);
+        this.support.firePropertyChange(activeTeamEvent, previousTeam , activeTeam);
     }
 
-
-
-    private void endGame(Type winner) {
-        this.support.firePropertyChange("winner", null, winner);
+    private void endGame(Team winner) {
+        this.support.firePropertyChange(winnerEvent, null, winner);
         // TODO: observable for ending the game
         System.out.println("Game ends! " + winner);
 
