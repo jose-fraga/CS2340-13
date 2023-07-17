@@ -58,6 +58,10 @@ public class Round implements PropertyChangeListener {
         return (this.activeTeam == this.team1) ? this.team2 : this.team1;
     }
 
+    public boolean isTeamActive(Type team) {
+        return this.activeTeam.getType() == team;
+    }
+
     private void updateWordType() {
         DictionaryService.populate();
         this.words = DictionaryService.getGameWords();
