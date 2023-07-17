@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox alignment="CENTER" prefHeight="85.0" prefWidth="432.0" spacing="15.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.project.codenames.controllers.CNClueBoxController">
+<HBox alignment="CENTER" prefHeight="85.0" prefWidth="432.0" spacing="15.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.project.codenames.controllers.components.CNClueBoxController">
    <children>
       <Label fx:id="clueWordDisplay" alignment="CENTER" prefHeight="25.0" prefWidth="150.0" style="-fx-border-color: black; -fx-border-radius: 3;" text="Label">
          <font>

@@ -7,6 +7,7 @@ import com.example.project.codenames.Round;
 import com.example.project.codenames.Team;
 import com.example.project.codenames.WordPane;
 import com.example.project.codenames.enums.Player;
+import com.example.project.codenames.enums.Type;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -22,6 +23,13 @@ import java.beans.PropertyChangeListener;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+// TODO: Make enums for propertynames
+
+// Source: https://www.youtube.com/watch?v=icf5S9fzRXE
+// We followed this tutorial to understand how to implement the Observer Pattern
+// through using the PropertyChangeListener and PropertyChangeSupport. This
+// code successfully adds listeners (observers), assigns support (observable),
+// and notifies listeners when some property changes.
 public class CNGameScreenController implements Initializable, PropertyChangeListener {
     @FXML private BorderPane borderPane;
     @FXML private GridPane gridPane;
@@ -33,14 +41,13 @@ public class CNGameScreenController implements Initializable, PropertyChangeList
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println("ENTERED: Codenames Game Screen");
+
         populate();
         handle();
+        updateScores();
 
         addTop();
         addBottom();
-        updateScores();
-
-        System.out.println(this.round.getActiveTeam().getType() + " " + this.round.getActiveTeam().getCurrentPlayer());
     }
 
     private void populate() {
@@ -52,6 +59,14 @@ public class CNGameScreenController implements Initializable, PropertyChangeList
                 gridPane.add(new WordPane(round.getWords().get(count)), j, i);
                 count++;
             }
+        }
+
+        if (this.round.getActiveTeam().getType() == Type.RED) {
+            redTeamScore.setText("9");
+            blueTeamScore.setText("8");
+        } else {
+            blueTeamScore.setText("9");
+            blueTeamScore.setText("8");
         }
     }
 
@@ -75,7 +90,6 @@ public class CNGameScreenController implements Initializable, PropertyChangeList
                         });
                     }
                 } else {
-                    // If Spymaster:
                     curr.addBackground();
                 }
             }
@@ -101,20 +115,24 @@ public class CNGameScreenController implements Initializable, PropertyChangeList
     }
 
     private void updateScores() {
-        blueTeamScore.setText(String.valueOf(this.round.getTeam1().getNumOfCards()));
-        redTeamScore.setText(String.valueOf(this.round.getTeam2().getNumOfCards()));
+        if (this.round.getTeam1().getType() == Type.RED) {
+            redTeamScore.setText(String.valueOf(this.round.getTeam1().getNumOfCards()));
+            blueTeamScore.setText(String.valueOf(this.round.getTeam2().getNumOfCards()));
+        } else {
+            blueTeamScore.setText(String.valueOf(this.round.getTeam1().getNumOfCards()));
+            redTeamScore.setText(String.valueOf(this.round.getTeam2().getNumOfCards()));
+        }
     }
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         String incomingEvent = evt.getPropertyName();
-        if (incomingEvent.equals(Round.activeTeamEvent)) { //TODO make enums for propertynames
-            Team activeTeam = (Team) evt.getNewValue();
+        if (incomingEvent.equals(Round.activeTeamEvent)) {
             Helper.changeGameScreen("codenames/CNBufferScreen.fxml");
         } else if (incomingEvent.equals(Round.winnerEvent)) {
             Team winningTeam = (Team) evt.getNewValue();
+            CNGame.getGameInstance().clearRound();
             Helper.changeGameScreen("codenames/CNEndScreen.fxml");
         }
     }
-
 }

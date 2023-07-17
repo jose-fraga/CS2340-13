@@ -13,15 +13,14 @@ import java.util.List;
 public class DictionaryService {
     private static ArrayList<Word> gameWords = new ArrayList<>();
 
-    public static ArrayList<Word> getGameWords() {
-        return gameWords;
-    }
+    public static ArrayList<Word> getGameWords() { return gameWords; }
 
     public synchronized static void populate() {
 //        for (int i = 0; i < 25; i++) {
 //            String word = generateWord();
 //            gameWords.add(new Word(word,false,obtainDefinition(word)));
 //        }
+        gameWords.clear();
         gameWords.addAll(List.of(
                 new Word(Type.NEUTRAL,"Perception","The organisation, identification and interpretation of sensory information."),
                 new Word(Type.NEUTRAL,"Scene","The location of an event that attracts attention."),
@@ -35,7 +34,7 @@ public class DictionaryService {
                 new Word(Type.NEUTRAL,"Chocolate","A food made from ground roasted cocoa beans."),
                 new Word(Type.NEUTRAL,"Woman","An adult female human."),
                 new Word(Type.NEUTRAL,"Family","A group of people who are closely related to one another (Type.NEUTRAL, by blood, marriage or adoption); kin; for example, a set of parents and their children; an immediate family."),
-                new Word(Type.NEUTRAL,"World","(Type.NEUTRAL, with \"the\") Human collective existence; existence in general."),
+                new Word(Type.NEUTRAL,"World","Human collective existence; existence in general."),
                 new Word(Type.NEUTRAL,"Finding","To encounter or discover by accident; to happen upon."),
                 new Word(Type.NEUTRAL,"Poet","A person who writes poems."),
                 new Word(Type.NEUTRAL,"Bread","A foodstuff made by baking dough made from cereals."),
@@ -50,6 +49,9 @@ public class DictionaryService {
                 new Word(Type.NEUTRAL,"Chest","A box, now usually a large strong box with a secure convex lid.")));
     }
 
+    // Source: https://www.youtube.com/watch?v=9oq7Y8n1t00
+    // Basically, I followed this tutorial to make GET request to the external API,
+    // and how to read/handle the JSON resposne from such requests.
     public synchronized static String generateWord() {
         try {
             String CN_RANDOM_WORD_API = System.getenv("CN_RANDOM_WORD_API");
@@ -68,6 +70,9 @@ public class DictionaryService {
         return null;
     }
 
+    // Source: https://www.youtube.com/watch?v=9oq7Y8n1t00
+    // Basically, I followed this tutorial to make GET request to the external API,
+    // and how to read/handle the JSON resposne from such requests.
     public synchronized static String obtainDefinition(String word) {
         try {
             String DEFINITION_API = System.getenv("DEFINITION_API");

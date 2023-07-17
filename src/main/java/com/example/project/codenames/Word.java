@@ -5,7 +5,13 @@ import com.example.project.codenames.enums.Type;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
-// TODO: make words observable so that we can take actions when it is selected.
+// TODO: Make words Observable to take action when they are clicked.
+
+// Source: https://www.youtube.com/watch?v=icf5S9fzRXE
+// We followed this tutorial to understand how to implement the Observer Pattern
+// through using the PropertyChangeListener and PropertyChangeSupport. This
+// code successfully adds listeners (observers), assigns support (observable),
+// and notifies listeners when some property changes.
 public class Word {
     private final String word;
     private final String definition;
@@ -22,6 +28,8 @@ public class Word {
     }
 
     public String getWord() { return this.word; }
+    
+    public String getDefinition() { return this.definition; }
 
     public boolean getIsSelected() { return this.isSelected; }
 

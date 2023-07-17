@@ -17,7 +17,6 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-
 public class CNEndScreenController implements Initializable  {
     @FXML public Label label;
     @FXML public AnchorPane anchor;
@@ -25,6 +24,7 @@ public class CNEndScreenController implements Initializable  {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        System.out.println("ENTERED: " + Helper.currentGame.title() + "End Screen");
         changeLabel();
         anchor.setStyle("-fx-background-image:url(@images/CNEnd.png)");
         imageView.fitWidthProperty().bind(anchor.widthProperty());
@@ -45,10 +45,5 @@ public class CNEndScreenController implements Initializable  {
              label.setTextFill(Paint.valueOf("#03B8D0"));
          }
          label.setText(" " + CNGame.getGameInstance().getRound().getActiveTeam().getType());
-
     }
-
-
-
-
 }
