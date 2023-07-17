@@ -1,9 +1,8 @@
 package com.example.project.codenames;
 
-import com.example.project.Game;
-import com.example.project.Helper;
 import com.example.project.codenames.enums.Player;
 import com.example.project.codenames.enums.Type;
+
 import javafx.scene.Node;
 import javafx.stage.Stage;
 import java.util.HashSet;
@@ -28,6 +27,10 @@ public class Round implements PropertyChangeListener {
     private int currentGuessCount; // What the operatives guess
 
     private PropertyChangeSupport support;
+
+
+
+
 
     public Team getTeam1() {
         return team1;
@@ -57,9 +60,13 @@ public class Round implements PropertyChangeListener {
 
     public ArrayList<Word> getWords() { return this.words; }
 
-    public Team getActiveTeam() { return this.activeTeam; }
+    public Team getActiveTeam() {
+        return this.activeTeam;
+    }
 
-    public Team getPassiveTeam() { return (this.activeTeam == this.team1) ? this.team2 : this.team1; }
+    public Team getPassiveTeam() {
+        return (this.activeTeam == this.team1) ? this.team2 : this.team1;
+    }
 
     public boolean isTeamActive(Type team) {
         return this.activeTeam.getType() == team;
@@ -95,9 +102,10 @@ public class Round implements PropertyChangeListener {
         // Assassin ends game
         if (selected.getType() == Type.ASSASSIN) {
             System.out.println("SELECTED Assassin Card");
+            this.activeTeam = passiveTeam;
             endGame(passiveTeam);
 
-        // Other team's card ends turn
+            // Other team's card ends turn
         } else if (selected.getType() == passiveTeam.getType()) {
             System.out.println("SELECTED Enemy's Card");
             passiveTeam.decrementCardCount();
@@ -107,12 +115,12 @@ public class Round implements PropertyChangeListener {
                 endTurn();
             }
 
-        // Neutral card ends turn
+            // Neutral card ends turn
         } else if (selected.getType() == Type.NEUTRAL) {
             System.out.println("SELECTED Neutral");
             endTurn();
 
-        // Correct card chosen...
+            // Correct card chosen...
         } else if (selected.getType() == activeTeam.getType()) {
             System.out.println("SELECTED Correctly");
             this.activeTeam.decrementCardCount();
@@ -149,7 +157,7 @@ public class Round implements PropertyChangeListener {
         this.support.firePropertyChange(winnerEvent, null, winner);
         // TODO: observable for ending the game
         System.out.println("Game ends! " + winner);
-        Helper.changeGameScreen("codenames/CNEndScreen.fxml");
+
     }
 
 }
