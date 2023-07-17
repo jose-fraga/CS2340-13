@@ -4,6 +4,7 @@ module com.example.project {
     requires org.apache.commons.lang3;
     requires java.net.http;
     requires org.json;
+    requires java.desktop;
 
 
     opens com.example.project to javafx.fxml;
@@ -22,4 +23,6 @@ module com.example.project {
     opens com.example.project.wordle.controllers to javafx.fxml;
     exports com.example.project.codenames.controllers;
     opens com.example.project.codenames.controllers to javafx.fxml;
+    exports com.example.project.codenames.enums;
+    opens com.example.project.codenames.enums to javafx.fxml;
 }

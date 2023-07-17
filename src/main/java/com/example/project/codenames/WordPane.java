@@ -1,21 +1,21 @@
 package com.example.project.codenames;
 
-import com.example.project.codenames.enums.Team;
+
+import com.example.project.codenames.enums.Type;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-
+import javafx.scene.text.TextAlignment;
 import java.util.HashSet;
 
 // Model this using the Observer Pattern
 public class WordPane extends StackPane {
     private String style;
-    private Color color;
-    private Word word;
+    private final Word word;
 
 
     public void setCurrLength(int currLength) {
@@ -45,35 +45,70 @@ public class WordPane extends StackPane {
     private int bluePosition;
 
 
-    private HashSet<Team> occupants = new HashSet<>(2);
+    private HashSet<Type> occupants = new HashSet<>(2);
 
     public WordPane(Word word) {
+        this.word = word;
         VBox currBox = new VBox();
 
         Label text = new Label();
         text.setText(word.getWord());
-        text.setFont(Font.font("Segoe UI Black", 11));
-
+        text.setFont(Font.font("Tw Cen MT Condensed Extra Bold", 16));
         currBox.getChildren().add(text);
-        currBox.getChildren().add(new Button("PRESS"));
-        currBox.setSpacing(2);
+
+        currBox.setSpacing(3);
         currBox.setAlignment(Pos.CENTER);
         this.setAlignment(Pos.CENTER);
         this.getChildren().add(currBox);
 
         this.style = "-fx-border-color: black; -fx-border-radius: 2;";
         this.setStyle(this.style);
-        this.word = word;
+
+        setTooltip();
+    }
+
+    public Word getWord() {
+        return this.word;
     }
 
     public void addBackground() {
-        this.style += "-fx-background-color: red;";
+        this.style += " -fx-background-color: " + this.word.getType().getColor() + ";";
+        if (this.word.getIsSelected()) {
+            this.style += "-fx-border-width: 1; -fx-border-style: solid inside; -fx-border-color: #00000066; -fx-border-radius: 0; -fx-border-insets: 0;";
+            this.style += "-fx-opacity: .8;";
+        } else {
+            this.style += "-fx-border-width: 5; -fx-border-style: solid inside; -fx-border-color: #00000066; -fx-border-radius: 0; -fx-border-insets: 0;";
+        }
         this.setStyle(this.style);
+
+        String cardTextStyle =  "-fx-text-fill: " + ((word.getType() == Type.ASSASSIN) ? "#ffffffcc;" : "#0000000cc");
+        ((VBox) this.getChildren().get(0)).getChildren().get(0).setStyle(cardTextStyle);
     }
 
-    //each wordpane hashset would have a hashset to determine whether there is a red team or blue team alrady
+    public void addButton() {
+        Button button = new Button("SELECT");
+        button.setMaxSize(45, 20);
+        button.setFont(Font.font(10));
+        ((VBox) this.getChildren().get(0)).getChildren().add(button);
+    }
 
-    public void ToggleOccupants(Team team) {
+    public void selectedUpdate() {
+        ((VBox) this.getChildren().get(0)).getChildren().remove(1);
+        addBackground();
+    }
+
+    private void setTooltip() {
+        Tooltip tooltip = new Tooltip(word.getDefinition());
+        tooltip.setMinWidth(50);
+        tooltip.setMaxWidth(400);
+        tooltip.setWrapText(true);
+        tooltip.setTextAlignment(TextAlignment.CENTER);
+        tooltip.setFont(Font.font("Tw Cen MT Condensed Extra Bold"));
+        tooltip.setStyle("-fx-background-color: dimgray; -fx-text-fill: white;");
+        Tooltip.install(this, tooltip);
+    }
+
+    public void ToggleOccupants(Type team) {
         if (occupants.contains(team)) {
             occupants.remove(team);
         } else if (!(occupants.contains(team))) {
@@ -81,14 +116,16 @@ public class WordPane extends StackPane {
         }
     }
 
-    public HashSet<Team> getOccupants() {
+    public HashSet<Type> getOccupants() {
         return occupants;
+    }
+
+    public boolean hasOccupant(Type team) {
+        return this.occupants.contains(team);
     }
 
     public int getCurrLength() {
         return currLength;
     }
-   // public void SetOccupant(Team team) {
-  //      Occupant = team;
-  //  }
+
 }

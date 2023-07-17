@@ -14,6 +14,15 @@ public enum Sprite {
         this.path = path;
     }
 
+    public static String[] getCharacters() {
+        return new String[] {
+                Sprite.CHARACTER1.name(),
+                Sprite.CHARACTER2.name(),
+                Sprite.CHARACTER3.name(),
+                Sprite.CHARACTER4.name()
+        };
+    }
+
     public String getLabel() { return this.label; }
     public String getPath() { return this.path; }
 }

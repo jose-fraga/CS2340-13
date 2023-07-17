@@ -4,7 +4,7 @@ import com.example.project.codenames.CNGame;
 import com.example.project.codenames.DictionaryService;
 import com.example.project.codenames.Round;
 import com.example.project.codenames.WordPane;
-import com.example.project.codenames.enums.Team;
+import com.example.project.codenames.enums.Type;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Group;
@@ -50,42 +50,42 @@ public class CNGridScreenController implements Initializable {
                 });
 
                 currBox.addEventFilter(MouseEvent.MOUSE_CLICKED, e-> {
-                            Round round = CNGame.getGameInstance().getRound();
-                            Label text = new Label("Red");
-                            int curl = curr.getCurrLength();
+                    Round round = CNGame.getGameInstance().getRound();
+                    Label text = new Label(String.valueOf(round.getActiveTeam().getType()));
+                    int curl = curr.getCurrLength();
 
-                    if (round.getCurrentTeamTurn() == Team.RED && (!(curr.getOccupants().contains(Team.RED)))){
+                    if (round.isTeamActive(Type.RED) && !curr.hasOccupant(Type.RED)) {
                        curl++;
                        curr.setRedPosition(getPosition(curl));
                        curr.setCurrLength(curl);
                         currBox.getChildren().add(text);
-                        text.setStyle("-fx-background-color:" + Team.RED.getColor());
-                        curr.ToggleOccupants(Team.RED);
+                        text.setStyle("-fx-background-color:" + Type.RED.getColor());
+                        curr.ToggleOccupants(Type.RED);
                         System.out.println(curr.getOccupants());
                     }
-                    else if (round.getCurrentTeamTurn() == Team.RED && curr.getOccupants().contains(Team.RED)){
+                    else if (round.isTeamActive(Type.RED) && curr.hasOccupant(Type.RED)){
                         curl--;
-                        curr.ToggleOccupants(Team.RED);
+                        curr.ToggleOccupants(Type.RED);
                         curr.setRedPosition(getPosition(curl));
-                        removal(currBox, curr.getRedPosition(), curr.getBluePosition(), round.getCurrentTeamTurn());
+                        removal(currBox, curr.getRedPosition(), curr.getBluePosition(), round.getActiveTeam().getType());
                         curr.setCurrLength(curl);
                         System.out.println(curr.getOccupants());
 
                     }
-                    else if (round.getCurrentTeamTurn() == Team.BLUE && (!(curr.getOccupants().contains(Team.BLUE)))) {
+                    else if (round.isTeamActive(Type.BLUE) && !curr.hasOccupant(Type.BLUE)) {
                         curl++;
                         curr.setBluePosition(getPosition(curl));
                         curr.setCurrLength(curl);
                         currBox.getChildren().add(text);
-                        text.setStyle("-fx-background-color:" + Team.BLUE.getColor());
-                        curr.ToggleOccupants(Team.BLUE);
+                        text.setStyle("-fx-background-color:" + Type.BLUE.getColor());
+                        curr.ToggleOccupants(Type.BLUE);
                         System.out.println(curr.getOccupants());
                     }
-                    else if (round.getCurrentTeamTurn() == Team.BLUE && curr.getOccupants().contains(Team.BLUE)){
+                    else if (round.isTeamActive(Type.BLUE) && curr.hasOccupant(Type.BLUE)){
                         curl--;
-                        curr.ToggleOccupants(Team.BLUE);
+                        curr.ToggleOccupants(Type.BLUE);
                         curr.setBluePosition(getPosition(curl));
-                        removal(currBox, curr.getRedPosition(), curr.getBluePosition(), round.getCurrentTeamTurn());
+                        removal(currBox, curr.getRedPosition(), curr.getBluePosition(), round.getActiveTeam().getType());
                         curr.setCurrLength(curl);
                         System.out.println(curr.getOccupants());
                     }
@@ -106,15 +106,15 @@ public class CNGridScreenController implements Initializable {
     }
 
     //method which takes in the position of the label being removed and removes it accordingly
-    public void removal (VBox currBox, int redPos, int bluePos, Team team) {
-        if(team == Team.RED) {
+    public void removal (VBox currBox, int redPos, int bluePos, Type team) {
+        if(team == Type.RED) {
             if(redPos == 1) {
                 currBox.getChildren().remove(2);
             } else if (redPos == 2) {
                 currBox.getChildren().remove(3);
             }
         }
-        else if(team == Team.BLUE) {
+        else if(team == Type.BLUE) {
             if(bluePos == 1) {
                 currBox.getChildren().remove(2);
             } else if (bluePos == 2) {
