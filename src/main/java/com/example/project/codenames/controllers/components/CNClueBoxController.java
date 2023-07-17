@@ -1,4 +1,4 @@
-package com.example.project.codenames.controllers;
+package com.example.project.codenames.controllers.components;
 
 import com.example.project.codenames.CNGame;
 import com.example.project.codenames.Round;

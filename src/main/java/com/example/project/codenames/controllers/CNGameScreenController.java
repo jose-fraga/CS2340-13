@@ -39,6 +39,7 @@ public class CNGameScreenController implements Initializable, PropertyChangeList
 
         populate();
         handle();
+        updateScores();
 
         addTop();
         addBottom();
@@ -79,7 +80,7 @@ public class CNGameScreenController implements Initializable, PropertyChangeList
                             curr.getWord().select();
                             if (curr.getWord().getIsSelected()) {
                                 curr.selectedUpdate();
-                                updateScores(curr.getWord().getType());
+                                updateScores();
                             }
                         });
                     }
@@ -108,18 +109,14 @@ public class CNGameScreenController implements Initializable, PropertyChangeList
         }
     }
 
-    private void updateScores(Type type) {
-        redTeamScore.setText(String.valueOf(this.round.getTeam1().getNumOfCards()));
-        blueTeamScore.setText(String.valueOf(this.round.getTeam2().getNumOfCards()));
-//        int score;
-//
-//        if (type == Type.RED) {
-//            score = Integer.parseInt(redTeamScore.getText());
-//            redTeamScore.setStyle(String.valueOf(score-1));
-//        } else if (type == Type.BLUE) {
-//            score = Integer.parseInt(blueTeamScore.getText());
-//            blueTeamScore.setStyle(String.valueOf(score-1));
-//        }
+    private void updateScores() {
+        if (this.round.getTeam1().getType() == Type.RED) {
+            redTeamScore.setText(String.valueOf(this.round.getTeam1().getNumOfCards()));
+            blueTeamScore.setText(String.valueOf(this.round.getTeam2().getNumOfCards()));
+        } else {
+            blueTeamScore.setText(String.valueOf(this.round.getTeam1().getNumOfCards()));
+            redTeamScore.setText(String.valueOf(this.round.getTeam2().getNumOfCards()));
+        }
     }
 
     @Override

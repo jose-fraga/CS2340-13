@@ -53,15 +53,17 @@ public class Round implements PropertyChangeListener {
 
         Word assassinWord = this.words.get(24);
         assassinWord.setType(Type.ASSASSIN);
-        assassinWord.addPropertyChangeListener(this);
 
         Collections.shuffle(this.words);
+
+        this.words.forEach(item -> {
+            item.addPropertyChangeListener(this);
+        });
     }
 
     private void addType(int start, int end, Type type) {
         for (int i = start; i < end; i++) {
             this.words.get(i).setType(type);
-            this.words.get(i).addPropertyChangeListener(this);
         }
     }
 

@@ -34,7 +34,7 @@ public class DictionaryService {
                 new Word(Type.NEUTRAL,"Chocolate","A food made from ground roasted cocoa beans."),
                 new Word(Type.NEUTRAL,"Woman","An adult female human."),
                 new Word(Type.NEUTRAL,"Family","A group of people who are closely related to one another (Type.NEUTRAL, by blood, marriage or adoption); kin; for example, a set of parents and their children; an immediate family."),
-                new Word(Type.NEUTRAL,"World","(Type.NEUTRAL, with \"the\") Human collective existence; existence in general."),
+                new Word(Type.NEUTRAL,"World","Human collective existence; existence in general."),
                 new Word(Type.NEUTRAL,"Finding","To encounter or discover by accident; to happen upon."),
                 new Word(Type.NEUTRAL,"Poet","A person who writes poems."),
                 new Word(Type.NEUTRAL,"Bread","A foodstuff made by baking dough made from cereals."),
