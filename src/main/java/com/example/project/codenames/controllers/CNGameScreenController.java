@@ -4,6 +4,7 @@ import com.example.project.Helper;
 import com.example.project.Main;
 import com.example.project.codenames.CNGame;
 import com.example.project.codenames.Round;
+import com.example.project.codenames.Team;
 import com.example.project.codenames.WordPane;
 import com.example.project.codenames.enums.Player;
 import javafx.fxml.FXML;

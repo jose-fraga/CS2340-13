@@ -3,6 +3,10 @@ package com.example.project.codenames;
 import com.example.project.codenames.enums.Player;
 import com.example.project.codenames.enums.Type;
 
+import javafx.scene.Node;
+import javafx.stage.Stage;
+import java.util.HashSet;
+import java.util.Set;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
@@ -14,7 +18,6 @@ import java.util.Random;
 public class Round implements PropertyChangeListener {
     public static final String activeTeamEvent = "activeTeam";
     public static final String winnerEvent = "winner";
-
 
     private Team team1, team2, activeTeam;
     private ArrayList<Word> words;
@@ -63,6 +66,10 @@ public class Round implements PropertyChangeListener {
 
     public Team getPassiveTeam() {
         return (this.activeTeam == this.team1) ? this.team2 : this.team1;
+    }
+
+    public boolean isTeamActive(Type team) {
+        return this.activeTeam.getType() == team;
     }
 
     private void updateWordType() {

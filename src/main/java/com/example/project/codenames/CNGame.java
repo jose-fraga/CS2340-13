@@ -11,6 +11,7 @@ public class CNGame {
 
     public Round startNewRound() {
         this.round = new Round();
+        return this.round;
     }
 
     public Round getRound() {
