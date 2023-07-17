@@ -3,11 +3,6 @@ package com.example.project.codenames;
 import com.example.project.codenames.enums.Player;
 import com.example.project.codenames.enums.Type;
 
-import javafx.scene.Node;
-import javafx.stage.Stage;
-import java.util.HashSet;
-import java.util.Set;
-
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
@@ -54,8 +49,8 @@ public class Round implements PropertyChangeListener {
         return this.activeTeam;
     }
 
-    public Team getPassiveTeam() {
-        return (this.activeTeam == this.team1) ? this.team2 : this.team1;
+    public boolean isTeamActive(Type team) {
+        return this.activeTeam.getType() == team;
     }
 
     public boolean isTeamActive(Type team) {

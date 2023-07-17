@@ -97,6 +97,44 @@ public class CNGameScreenController implements Initializable, PropertyChangeList
                                 curr.selectedUpdate();
                             }
                         });
+
+                        currBox.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> {
+                            Round round = CNGame.getGameInstance().getRound();
+                            Label text = new Label(String.valueOf(round.getActiveTeam().getType()));
+                            int curl = curr.getCurrLength();
+
+                            if (round.isTeamActive(Type.RED) && !curr.hasOccupant(Type.RED)) {
+                                curl++;
+                                curr.setRedPosition(getPosition(curl));
+                                curr.setCurrLength(curl);
+                                currBox.getChildren().add(text);
+                                text.setStyle("-fx-background-color:" + Type.RED.getColor());
+                                curr.ToggleOccupants(Type.RED);
+                                System.out.println(curr.getOccupants());
+                            } else if (round.isTeamActive(Type.RED) && curr.hasOccupant(Type.RED)) {
+                                curl--;
+                                curr.ToggleOccupants(Type.RED);
+                                curr.setRedPosition(getPosition(curl));
+                                removal(currBox, curr.getRedPosition(), curr.getBluePosition(), round.getActiveTeam().getType());
+                                curr.setCurrLength(curl);
+                                System.out.println(curr.getOccupants());
+                            } else if (round.isTeamActive(Type.BLUE) && !curr.hasOccupant(Type.BLUE)) {
+                                curl++;
+                                curr.setBluePosition(getPosition(curl));
+                                curr.setCurrLength(curl);
+                                currBox.getChildren().add(text);
+                                text.setStyle("-fx-background-color:" + Type.BLUE.getColor());
+                                curr.ToggleOccupants(Type.BLUE);
+                                System.out.println(curr.getOccupants());
+                            } else if (round.isTeamActive(Type.BLUE) && curr.hasOccupant(Type.BLUE)) {
+                                curl--;
+                                curr.ToggleOccupants(Type.BLUE);
+                                curr.setBluePosition(getPosition(curl));
+                                removal(currBox, curr.getRedPosition(), curr.getBluePosition(), round.getActiveTeam().getType());
+                                curr.setCurrLength(curl);
+                                System.out.println(curr.getOccupants());
+                            }
+                        });
                     }
                 } else {
                     curr.addBackground();
@@ -120,6 +158,33 @@ public class CNGameScreenController implements Initializable, PropertyChangeList
             Helper.getCNGamePane().setBottom(loader.load());
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    public int getPosition(int currLength) {
+        int position = 0;
+        if (currLength == 1) {
+            position = 2;
+        } else if (currLength == 0) {
+            position = 1;
+        }
+        return position;
+    }
+
+    //method which takes in the position of the label being removed and removes it accordingly
+    public void removal(VBox currBox, int redPos, int bluePos, Type team) {
+        if (team == Type.RED) {
+            if (redPos == 1) {
+                currBox.getChildren().remove(2);
+            } else if (redPos == 2) {
+                currBox.getChildren().remove(3);
+            }
+        } else if (team == Type.BLUE) {
+            if (bluePos == 1) {
+                currBox.getChildren().remove(2);
+            } else if (bluePos == 2) {
+                currBox.getChildren().remove(3);
+            }
         }
     }
 

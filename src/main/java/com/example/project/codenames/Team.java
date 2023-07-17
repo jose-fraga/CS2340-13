@@ -44,6 +44,6 @@ public class Team {
 
     @Override
     public String toString() {
-        return "Team={type:}" + type + ", numOfCards:" + numOfCards + ", currentPlayer:" + currentPlayer + "}";
+        return "Team={type:" + type + ", numOfCards:" + numOfCards + ", currentPlayer:" + currentPlayer + "}";
     }
 }
