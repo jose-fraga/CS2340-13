@@ -133,6 +133,10 @@ public class Round implements PropertyChangeListener {
         this.support.addPropertyChangeListener(listener);
     }
 
+    public void removePropertyChangeListener(PropertyChangeListener listener) {
+        this.support.removePropertyChangeListener(listener);
+    }
+
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         checkSelectedWord((Word) evt.getSource());

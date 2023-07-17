@@ -45,6 +45,10 @@ public class Word {
         this.support.addPropertyChangeListener(listener);
     }
 
+    public void removePropertyChangeListener(PropertyChangeListener listener) {
+        this.support.removePropertyChangeListener(listener);
+    }
+
     @Override
     public String toString() {
         return "new Word(\"" + word + "\"," + type + ", " + definition + "\")";
