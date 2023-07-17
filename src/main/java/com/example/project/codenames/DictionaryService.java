@@ -13,15 +13,14 @@ import java.util.List;
 public class DictionaryService {
     private static ArrayList<Word> gameWords = new ArrayList<>();
 
-    public static ArrayList<Word> getGameWords() {
-        return gameWords;
-    }
+    public static ArrayList<Word> getGameWords() { return gameWords; }
 
     public synchronized static void populate() {
 //        for (int i = 0; i < 25; i++) {
 //            String word = generateWord();
 //            gameWords.add(new Word(word,false,obtainDefinition(word)));
 //        }
+        gameWords.clear();
         gameWords.addAll(List.of(
                 new Word(Type.NEUTRAL,"Perception","The organisation, identification and interpretation of sensory information."),
                 new Word(Type.NEUTRAL,"Scene","The location of an event that attracts attention."),

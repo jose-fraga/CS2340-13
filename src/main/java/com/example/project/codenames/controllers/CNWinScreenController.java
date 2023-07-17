@@ -5,7 +5,7 @@ import com.example.project.codenames.CNGame;
 
 public class CNWinScreenController {
     public void restartGame() {
-        CNGame.getGameInstance().startNewRound();
+        CNGame.getGameInstance().clearRound();
         Helper.changeGameScreen("codenames/CNBufferScreen.fxml");
     }
 }

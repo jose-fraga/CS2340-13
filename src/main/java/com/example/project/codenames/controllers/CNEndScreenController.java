@@ -13,14 +13,13 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-
 public class CNEndScreenController implements Initializable {
     @FXML public Label label;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println("ENTERED: " + Helper.currentGame.title() + "End Screen");
-        changeLabel();
+//        changeLabel();
     }
 
     @FXML public void quitGame(ActionEvent e) {
@@ -29,11 +28,7 @@ public class CNEndScreenController implements Initializable {
         Helper.changeScreen(stage, Game.UNSELECTED.initialFxmlPath(), Game.UNSELECTED.title());
     }
 
-     public void changeLabel() {
-        label.setText("" + CNGame.getGameInstance().getRound().getActiveTeam().getType());
-    }
-
-
-
-
+//     public void changeLabel() {
+//        label.setText("" + CNGame.getGameInstance().getRound().getActiveTeam().getType());
+//    }
 }

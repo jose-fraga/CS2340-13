@@ -4,9 +4,9 @@ import com.example.project.Helper;
 import com.example.project.Main;
 import com.example.project.codenames.CNGame;
 import com.example.project.codenames.Round;
+import com.example.project.codenames.Team;
 import com.example.project.codenames.WordPane;
 import com.example.project.codenames.enums.Player;
-import com.example.project.codenames.enums.TeamType;
 import com.example.project.codenames.enums.Type;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,12 +17,13 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.control.Label;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+// TODO: Make enums for propertynames
 
 public class CNGameScreenController implements Initializable, PropertyChangeListener {
     @FXML private BorderPane borderPane;
@@ -35,14 +36,12 @@ public class CNGameScreenController implements Initializable, PropertyChangeList
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println("ENTERED: Codenames Game Screen");
+
         populate();
         handle();
 
         addTop();
         addBottom();
-        updateScores();
-
-        System.out.println(this.round.getActiveTeam().getType() + " " + this.round.getActiveTeam().getCurrentPlayer());
     }
 
     private void populate() {
@@ -54,6 +53,14 @@ public class CNGameScreenController implements Initializable, PropertyChangeList
                 gridPane.add(new WordPane(round.getWords().get(count)), j, i);
                 count++;
             }
+        }
+
+        if (this.round.getActiveTeam().getType() == Type.RED) {
+            redTeamScore.setText("9");
+            blueTeamScore.setText("8");
+        } else {
+            blueTeamScore.setText("9");
+            blueTeamScore.setText("8");
         }
     }
 
@@ -72,12 +79,11 @@ public class CNGameScreenController implements Initializable, PropertyChangeList
                             curr.getWord().select();
                             if (curr.getWord().getIsSelected()) {
                                 curr.selectedUpdate();
-                                updateScores();
+                                updateScores(curr.getWord().getType());
                             }
                         });
                     }
                 } else {
-                    // If Spymaster:
                     curr.addBackground();
                 }
             }
@@ -102,21 +108,29 @@ public class CNGameScreenController implements Initializable, PropertyChangeList
         }
     }
 
-    private void updateScores() {
-        blueTeamScore.setText(String.valueOf(this.round.getTeam1().getNumOfCards()));
-        redTeamScore.setText(String.valueOf(this.round.getTeam2().getNumOfCards()));
+    private void updateScores(Type type) {
+        redTeamScore.setText(String.valueOf(this.round.getTeam1().getNumOfCards()));
+        blueTeamScore.setText(String.valueOf(this.round.getTeam2().getNumOfCards()));
+//        int score;
+//
+//        if (type == Type.RED) {
+//            score = Integer.parseInt(redTeamScore.getText());
+//            redTeamScore.setStyle(String.valueOf(score-1));
+//        } else if (type == Type.BLUE) {
+//            score = Integer.parseInt(blueTeamScore.getText());
+//            blueTeamScore.setStyle(String.valueOf(score-1));
+//        }
     }
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         String incomingEvent = evt.getPropertyName();
-        if (incomingEvent.equals(Round.activeTeamEvent)) { //TODO make enums for propertynames
-            Team activeTeam = (Team) evt.getNewValue();
+        if (incomingEvent.equals(Round.activeTeamEvent)) {
             Helper.changeGameScreen("codenames/CNBufferScreen.fxml");
         } else if (incomingEvent.equals(Round.winnerEvent)) {
             Team winningTeam = (Team) evt.getNewValue();
-            Helper.changeGameScreen("codenames/CNWinScreen.fxml");
+            CNGame.getGameInstance().clearRound();
+            Helper.changeGameScreen("codenames/CNEndScreen.fxml");
         }
     }
-
 }

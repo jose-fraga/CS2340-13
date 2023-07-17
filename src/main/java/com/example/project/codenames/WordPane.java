@@ -1,9 +1,7 @@
 package com.example.project.codenames;
 
-import com.example.project.codenames.enums.Player;
 import com.example.project.codenames.enums.Type;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
@@ -30,7 +28,7 @@ public class WordPane extends StackPane {
         this.setAlignment(Pos.CENTER);
         this.getChildren().add(currBox);
 
-        this.style = "-fx-border-color: black; -fx-border-radius: 2;";
+        this.style = "-fx-border-color: black;";
         this.setStyle(this.style);
 
         setTooltip();
@@ -43,14 +41,14 @@ public class WordPane extends StackPane {
     public void addBackground() {
         this.style += " -fx-background-color: " + this.word.getType().getColor() + ";";
         if (this.word.getIsSelected()) {
-            this.style += "-fx-border-width: 1; -fx-border-style: solid inside; -fx-border-color: #00000066; -fx-border-radius: 0; -fx-border-insets: 0;";
-            this.style += "-fx-opacity: .8;";
+            this.style += "-fx-border-width: 2; -fx-border-style: solid inside; -fx-border-color: #00000066; -fx-border-insets: 0;";
+            this.style += "-fx-opacity: 0.8;";
         } else {
-            this.style += "-fx-border-width: 5; -fx-border-style: solid inside; -fx-border-color: #00000066; -fx-border-radius: 0; -fx-border-insets: 0;";
+            this.style += "-fx-border-width: 3; -fx-border-style: solid inside; -fx-border-color: #00000066; -fx-border-insets: 0;";
         }
         this.setStyle(this.style);
 
-        String cardTextStyle =  "-fx-text-fill: " + ((word.getType() == Type.ASSASSIN) ? "#ffffffcc;" : "#0000000cc");
+        String cardTextStyle = "-fx-text-fill: " + ((word.getType() == Type.ASSASSIN) ? "#ffffffcc;" : "#000000cc");
         ((VBox) this.getChildren().get(0)).getChildren().get(0).setStyle(cardTextStyle);
     }
 

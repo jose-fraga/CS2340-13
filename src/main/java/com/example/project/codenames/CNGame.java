@@ -4,18 +4,15 @@ public class CNGame {
     private static CNGame game_instance;
     private Round round;
 
-    private CNGame() {
-        DictionaryService.populate();
-        round = new Round();
-    }
-
-    public Round startNewRound() {
-        this.round = new Round();
-    }
+    private CNGame() {}
 
     public Round getRound() {
+        if (this.round == null) {
+            this.round = new Round();
+        }
         return this.round;
     }
+    public void clearRound() { this.round = null; }
 
     public static CNGame getGameInstance() {
         if (game_instance == null) {

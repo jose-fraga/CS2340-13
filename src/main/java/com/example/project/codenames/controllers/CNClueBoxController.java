@@ -17,8 +17,7 @@ public class CNClueBoxController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Round currRound = CNGame.getGameInstance().getRound();
-        String style = "-fx-border-radius: 3; -fx-border-color: " +
-                currRound.getActiveTeam().getType().getColor() + ";";
+        String style = "-fx-border-radius: 3; -fx-border-color: " + currRound.getActiveTeam().getType().getColor() + ";";
 
         clueWordDisplay.setStyle(style);
         clueGuessDisplay.setStyle(style);

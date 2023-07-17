@@ -28,7 +28,9 @@ public class CNInputBoxController implements Initializable {
         } else {
             String clue = clueInput.getText();
             int clueCount = guessInput.getValue();
+
             System.out.println("Clue: " + clue + " " + clueCount);
+
             CNGame.getGameInstance().getRound().setClue(clue, clueCount);
             Helper.changeGameScreen("codenames/CNBufferScreen.fxml");
         }

@@ -21,9 +21,7 @@ public class Word {
         this.isSelected = false;
     }
 
-    public String getDefinition() {
-        return definition;
-    }
+    public String getDefinition() { return this.definition; }
 
     public String getWord() { return this.word; }
 
@@ -39,10 +37,6 @@ public class Word {
 
     public void addPropertyChangeListener(PropertyChangeListener listener) {
         this.support.addPropertyChangeListener(listener);
-    }
-
-    public void removePropertyChangeListener(PropertyChangeListener listener) {
-        this.support.removePropertyChangeListener(listener);
     }
 
     @Override
