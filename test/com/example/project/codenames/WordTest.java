@@ -19,6 +19,11 @@ public class WordTest{
     }
 
     @Test
+    public void testGetDefinition() {
+        assertEquals("definition", word.getDefinition());
+    }
+
+    @Test
     public void testSelect() {
         word.select();
         assertEquals(true, word.getIsSelected());
