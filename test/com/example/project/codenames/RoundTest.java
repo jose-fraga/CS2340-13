@@ -28,4 +28,10 @@ public class RoundTest {
         assertEquals(8, team2.getNumOfCards());
     }
 
+    @Test
+    public void testGetWords() {
+        assertNotNull(round.getWords());
+        assertEquals(25, round.getWords().size());
+    }
+
 }
