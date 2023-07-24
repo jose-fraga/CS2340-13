@@ -35,6 +35,11 @@ public class WordTest{
     }
 
     @Test
+    public void testGetType() {
+        assertEquals(Type.ASSASSIN, word.getType());
+    }
+
+    @Test
     public void testSetType() {
         word.setType(Type.RED);
         assertEquals(Type.RED, word.getType());
