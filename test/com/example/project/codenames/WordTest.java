@@ -29,4 +29,9 @@ public class WordTest{
         word.setType(Type.RED);
         assertEquals(Type.RED, word.getType());
     }
+
+    @Test
+    public void testToString() {
+        assertEquals("new Word(\"word\",ASSASSIN, definition\")", word.toString());
+    }
 }
