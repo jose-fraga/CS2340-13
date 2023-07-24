@@ -34,4 +34,11 @@ public class RoundTest {
         assertEquals(25, round.getWords().size());
     }
 
+    @Test
+    public void testGetActiveTeam() {
+        Team activeTeam = round.getActiveTeam();
+        assertNotNull(activeTeam);
+        assertEquals(9, activeTeam.getNumOfCards());
+    }
+
 }
