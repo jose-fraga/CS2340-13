@@ -24,6 +24,11 @@ public class WordTest{
     }
 
     @Test
+    public void testGetIsSelected() {
+        assertEquals(false, word.getIsSelected());
+    }
+
+    @Test
     public void testSelect() {
         word.select();
         assertEquals(true, word.getIsSelected());
