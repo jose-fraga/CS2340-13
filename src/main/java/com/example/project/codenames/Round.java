@@ -2,6 +2,7 @@ package com.example.project.codenames;
 
 import com.example.project.codenames.enums.Player;
 import com.example.project.codenames.enums.Type;
+import javafx.scene.control.Label;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -23,6 +24,7 @@ public class Round implements PropertyChangeListener {
 
     private Team team1, team2, activeTeam;
     private ArrayList<Word> words;
+    private ArrayList<Label> gameLogEvents = new ArrayList<>();
 
     private String currentClue;
     private int currentGuessLimit;
@@ -48,6 +50,8 @@ public class Round implements PropertyChangeListener {
     public Team getActiveTeam() {
         return this.activeTeam;
     }
+
+    public ArrayList<Label> getGameLogEvents() { return this.gameLogEvents; }
 
     public boolean isTeamActive(Type team) {
         return this.activeTeam.getType() == team;
@@ -79,15 +83,23 @@ public class Round implements PropertyChangeListener {
     public void checkSelectedWord(Word selected) {
         Team passiveTeam = (this.activeTeam == this.team1) ? this.team2 : this.team1;
 
+        Label logEvent = new Label();
+        logEvent.setStyle("-fx-border-color: " + this.activeTeam.getType().toString().toLowerCase());
+
+//        gameLogEvents.add(new Label(selected.getWord()));
+
         // selected = Assassin (Incorrect -> endGame)
         if (selected.getType() == Type.ASSASSIN) {
             System.out.println("SELECTED: Assassin Card");
+            logEvent.setText("SELECTED: Assassin Card");
+
             this.activeTeam = passiveTeam;
             endGame(passiveTeam);
 
         // selected = Other Team (Incorrect -> endTurn)
         } else if (selected.getType() == passiveTeam.getType()) {
             System.out.println("SELECTED: Enemy Card");
+            logEvent.setText("SELECTED: Enemy Card");
             passiveTeam.decrementCardCount();
             if (passiveTeam.hasWon()) {
                 endGame(passiveTeam);
@@ -98,11 +110,13 @@ public class Round implements PropertyChangeListener {
         // selected = Neutral (Incorrect -> endTurn)
         } else if (selected.getType() == Type.NEUTRAL) {
             System.out.println("SELECTED: Neutral Card");
+            logEvent.setText("SELECTED: Neutral Card");
             endTurn();
 
         // selected = Your Team (Correct -> endTurn or endGame)
         } else if (selected.getType() == activeTeam.getType()) {
             System.out.println("SELECTED: Team Card");
+            logEvent.setText("SELECTED: Team Card");
             this.activeTeam.decrementCardCount();
             this.currentGuessCount++;
 
@@ -112,6 +126,8 @@ public class Round implements PropertyChangeListener {
                 endTurn();
             }
         }
+
+        gameLogEvents.add(logEvent);
     }
 
     public void setClue(String clue, int clueCount) {

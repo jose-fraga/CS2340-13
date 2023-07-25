@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -10,7 +10,6 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-
 
 <BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.project.codenames.controllers.CNGameScreenController">
     <center>
@@ -29,55 +28,55 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             </rowConstraints>
-         <BorderPane.margin>
-            <Insets />
-         </BorderPane.margin>
+            <BorderPane.margin>
+                <Insets />
+            </BorderPane.margin>
         </GridPane>
     </center>
-   <top>
-      <VBox alignment="CENTER" prefHeight="95.0" prefWidth="850.0" spacing="5.0" BorderPane.alignment="CENTER">
-         <children>
-            <VBox alignment="CENTER">
-               <children>
-                  <HBox alignment="CENTER" prefHeight="15.0">
-                     <children>
-                        <Label alignment="CENTER" prefHeight="30.0" prefWidth="126.0" text="Current Team: ">
-                           <font>
-                              <Font name="System Bold Italic" size="12.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="teamDisplay" alignment="CENTER" prefHeight="30.0" prefWidth="126.0">
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER" prefHeight="15.0">
-                     <children>
-                        <Label alignment="CENTER" prefHeight="30.0" prefWidth="126.0" text="Current Player:">
-                           <font>
-                              <Font name="System Bold Italic" size="12.0" />
-                           </font>
-                        </Label>
-                        <Label fx:id="playerDisplay" alignment="CENTER" prefHeight="30.0" prefWidth="126.0" />
-                     </children>
-                  </HBox>
-               </children>
-            </VBox>
-            <Label fx:id="topTitle" alignment="CENTER" prefHeight="25.0" prefWidth="326.0" text="Give Your Operatives A Clue!">
-               <font>
-                  <Font name="Franklin Gothic Demi Cond" size="15.0" />
-               </font>
-               <VBox.margin>
-                  <Insets top="5.0" />
-               </VBox.margin>
-            </Label>
-         </children>
-      </VBox>
-   </top>
+    <top>
+        <VBox alignment="CENTER" prefHeight="95.0" prefWidth="850.0" spacing="5.0" BorderPane.alignment="CENTER">
+            <children>
+                <VBox alignment="CENTER">
+                    <children>
+                        <HBox alignment="CENTER" prefHeight="15.0">
+                            <children>
+                                <Label alignment="CENTER" prefHeight="30.0" prefWidth="126.0" text="Current Team: ">
+                                    <font>
+                                        <Font name="System Bold Italic" size="12.0" />
+                                    </font>
+                                </Label>
+                                <Label fx:id="teamDisplay" alignment="CENTER" prefHeight="30.0" prefWidth="126.0">
+                                    <font>
+                                        <Font name="System Bold" size="12.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="15.0">
+                            <children>
+                                <Label alignment="CENTER" prefHeight="30.0" prefWidth="126.0" text="Current Player:">
+                                    <font>
+                                        <Font name="System Bold Italic" size="12.0" />
+                                    </font>
+                                </Label>
+                                <Label fx:id="playerDisplay" alignment="CENTER" prefHeight="30.0" prefWidth="126.0" />
+                            </children>
+                        </HBox>
+                    </children>
+                </VBox>
+                <Label fx:id="topTitle" alignment="CENTER" prefHeight="25.0" prefWidth="326.0" text="Give Your Operatives A Clue!">
+                    <font>
+                        <Font name="Franklin Gothic Demi Cond" size="15.0" />
+                    </font>
+                    <VBox.margin>
+                        <Insets top="5.0" />
+                    </VBox.margin>
+                </Label>
+            </children>
+        </VBox>
+    </top>
     <left>
-        <VBox alignment="CENTER" prefHeight="475.0" prefWidth="125.0" spacing="25.0" BorderPane.alignment="CENTER">
+        <VBox alignment="CENTER" prefHeight="475.0" prefWidth="100.0" spacing="25.0" BorderPane.alignment="CENTER">
             <children>
                 <Label alignment="CENTER" prefHeight="26.0" prefWidth="151.0" style="-fx-border-color: black; -fx-text-fill: #CF2129;" text="Red Team">
                     <font>
@@ -85,18 +84,24 @@
                     </font>
                 </Label>
                 <Label fx:id="redTeamScore" alignment="CENTER" prefHeight="27.0" prefWidth="70.0" text="Label" />
-            </children>
-        </VBox>
-    </left>
-    <right>
-        <VBox alignment="CENTER" prefHeight="475.0" prefWidth="125.0" spacing="25.0" BorderPane.alignment="CENTER">
-            <children>
                 <Label alignment="CENTER" prefHeight="26.0" prefWidth="138.0" style="-fx-border-color: black; -fx-text-fill: #03B8D0;" text="Blue Team">
                     <font>
                         <Font name="Berlin Sans FB" size="18.0" />
                     </font>
                 </Label>
                 <Label fx:id="blueTeamScore" alignment="CENTER" prefHeight="27.0" prefWidth="70.0" text="Label" />
+            </children>
+        </VBox>
+    </left>
+    <right>
+        <VBox alignment="CENTER" prefHeight="475.0" prefWidth="175.0" spacing="25.0" BorderPane.alignment="CENTER">
+            <children>
+                <Label alignment="CENTER" prefHeight="26.0" prefWidth="151.0" style="-fx-border-color: black; -fx-text-fill: blueviolet;" text="Game Log">
+                    <font>
+                        <Font name="Berlin Sans FB" size="18.0" />
+                    </font>
+                </Label>
+                <ListView fx:id="gameLog" prefHeight="350.0" prefWidth="126.0" />
             </children>
         </VBox>
     </right>
