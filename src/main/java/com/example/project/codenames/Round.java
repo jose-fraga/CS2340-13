@@ -2,6 +2,7 @@ package com.example.project.codenames;
 
 import com.example.project.codenames.enums.Player;
 import com.example.project.codenames.enums.Type;
+import javafx.scene.control.Label;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -23,6 +24,7 @@ public class Round implements PropertyChangeListener {
 
     private Team team1, team2, activeTeam;
     private ArrayList<Word> words;
+    private ArrayList<Label> gameLogEvents = new ArrayList<>();
 
     private String currentClue;
     private int currentGuessLimit;
@@ -48,6 +50,8 @@ public class Round implements PropertyChangeListener {
     public Team getActiveTeam() {
         return this.activeTeam;
     }
+
+    public ArrayList<Label> getGameLogEvents() { return this.gameLogEvents; }
 
     public boolean isTeamActive(Type team) {
         return this.activeTeam.getType() == team;
@@ -79,6 +83,9 @@ public class Round implements PropertyChangeListener {
     public void checkSelectedWord(Word selected) {
         Team passiveTeam = (this.activeTeam == this.team1) ? this.team2 : this.team1;
 
+        Label logEvent = new Label();
+        logEvent.setStyle("-fx-text-fill: " + this.activeTeam.getType().getColor());
+
         // selected = Assassin (Incorrect -> endGame)
         if (selected.getType() == Type.ASSASSIN) {
             System.out.println("SELECTED: Assassin Card");
@@ -88,6 +95,9 @@ public class Round implements PropertyChangeListener {
         // selected = Other Team (Incorrect -> endTurn)
         } else if (selected.getType() == passiveTeam.getType()) {
             System.out.println("SELECTED: Enemy Card");
+
+            logEvent.setText("Player selects " + selected.getWord());
+
             passiveTeam.decrementCardCount();
             if (passiveTeam.hasWon()) {
                 endGame(passiveTeam);
@@ -98,11 +108,17 @@ public class Round implements PropertyChangeListener {
         // selected = Neutral (Incorrect -> endTurn)
         } else if (selected.getType() == Type.NEUTRAL) {
             System.out.println("SELECTED: Neutral Card");
+
+            logEvent.setText("Player selects " + selected.getWord());
+
             endTurn();
 
         // selected = Your Team (Correct -> endTurn or endGame)
         } else if (selected.getType() == activeTeam.getType()) {
             System.out.println("SELECTED: Team Card");
+
+            logEvent.setText("Player selects " + selected.getWord());
+
             this.activeTeam.decrementCardCount();
             this.currentGuessCount++;
 
@@ -112,10 +128,17 @@ public class Round implements PropertyChangeListener {
                 endTurn();
             }
         }
+
+        gameLogEvents.add(logEvent);
     }
 
     public void setClue(String clue, int clueCount) {
         if (this.activeTeam.getCurrentPlayer() == Player.SPY_MASTER) {
+            Label logEvent = new Label();
+            logEvent.setText("Spymaster gives clue " + clue + " " + clueCount);
+            logEvent.setStyle("-fx-text-fill: " + this.activeTeam.getType().getColor());
+            gameLogEvents.add(logEvent);
+
             this.activeTeam.setCurrentPlayer(Player.OPERATIVE);
             this.currentGuessCount = 0;
             this.currentGuessLimit = clueCount + 1;

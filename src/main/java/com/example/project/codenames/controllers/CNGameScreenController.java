@@ -13,6 +13,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Group;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -36,6 +37,7 @@ public class CNGameScreenController implements Initializable, PropertyChangeList
     @FXML private GridPane gridPane;
     @FXML private Label teamDisplay, playerDisplay, topTitle;
     @FXML private Label redTeamScore, blueTeamScore;
+    @FXML private ListView<Label> gameLog;
 
     private HashMap<Type, Label> scoreLabels = new HashMap<Type, Label>(2);
     private final Round round = CNGame.getGameInstance().getRound();
@@ -53,6 +55,8 @@ public class CNGameScreenController implements Initializable, PropertyChangeList
 
         addTop();
         addBottom();
+
+        gameLog.getItems().addAll(this.round.getGameLogEvents());
     }
 
     private void subscribeToEvents() {
@@ -96,6 +100,7 @@ public class CNGameScreenController implements Initializable, PropertyChangeList
                             if (curr.getWord().getIsSelected()) {
                                 curr.selectedUpdate();
                             }
+                            gameLog.getItems().addAll(this.round.getGameLogEvents());
                         });
 
                         currBox.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> {
