@@ -100,6 +100,7 @@ public class CNGameScreenController implements Initializable, PropertyChangeList
                             if (curr.getWord().getIsSelected()) {
                                 curr.selectedUpdate();
                             }
+                            gameLog.getItems().addAll(this.round.getGameLogEvents());
                         });
 
                         currBox.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> {
