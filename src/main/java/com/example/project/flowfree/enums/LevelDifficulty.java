@@ -26,6 +26,40 @@ public enum LevelDifficulty {
                     null, null, new Dot(Color.LIMEGREEN), new Obstacle(15),
                     null, new Obstacle(10), null, null
             },
+    }),
+    MEDIUM("flowfree/levels/Medium.fxml", 5, new GridItem[][]{
+            {
+                    new Dot(Color.ORANGE), new Dot(Color.RED), null, new Obstacle(10), null,
+                    new Obstacle(5), new Dot(Color.PURPLE), null, null, new Dot(Color.RED),
+                    null, new Obstacle(5), new Dot(Color.ORANGE), null, new Dot(Color.PURPLE),
+                    null, new Obstacle(2), new Obstacle(5), new Dot(Color.BLUE), new Dot(Color.GREEN),
+                    new Dot(Color.BLUE), new Dot(Color.GREEN), null, null, new Obstacle(10)
+            },
+            {
+                    new Dot(Color.BLUE), new Dot(Color.PINK), new Obstacle(10), new Dot(Color.PINK), new Dot(Color.RED),
+                    null, new Dot(Color.YELLOW), new Obstacle(5), new Obstacle(5), null,
+                    new Obstacle(5), new Obstacle(5), null, new Dot(Color.RED), new Dot(Color.MEDIUMPURPLE),
+                    new Dot(Color.LIMEGREEN), new Dot(Color.BLUE), new Dot(Color.YELLOW), new Dot(Color.LIMEGREEN), new Obstacle(10),
+                    new Obstacle(2), null, new Obstacle(4), null, new Dot(Color.MEDIUMPURPLE)
+            },
+            {
+                    new Dot(Color.BLUEVIOLET), new Obstacle(5), new Obstacle(10), new Dot(Color.BLUEVIOLET), new Dot(Color.PINK),
+                    new Dot(Color.RED), new Obstacle(2), null, new Obstacle(5), new Obstacle(3),
+                    new Obstacle(5), new Dot(Color.PINK), new Dot(Color.LIMEGREEN), null, new Obstacle(10),
+                    null, new Dot(Color.RED), new Dot(Color.GOLD), new Obstacle(5), null,
+                    new Dot(Color.BLUE), new Obstacle(1), new Dot(Color.BLUE), new Dot(Color.GOLD), new Dot(Color.LIMEGREEN)
+            }
+    }),
+    HARD("flowfree/levels/Hard.fxml", 6, new GridItem[][]{
+            {
+
+            },
+            {
+
+            },
+            {
+
+            }
     });
 
     private final String path;

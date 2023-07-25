@@ -14,9 +14,7 @@ import java.util.ResourceBundle;
 
 public class FFLevelController implements Initializable {
     private FFGame gameInstance;
-    // Hardcoded Values --> Change in Sprint #5
-    private final String SCREEN_GAME_EASY = LevelDifficulty.EASY.getPath();
-    private final String SCREEN_LEVEL_SELECT = "flowfree/FFLevelScreen.fxml";
+    private LevelDifficulty gameLevel;
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
@@ -24,8 +22,19 @@ public class FFLevelController implements Initializable {
     }
 
     @FXML private void selectLevel(ActionEvent e) throws IOException {
-        int levelNumber = Integer.parseInt(((Button) e.getSource()).getText()) - 1;
+        int levelNumber = Integer.parseInt(((Button) e.getSource()).getText());
+        if (levelNumber >= 1 && levelNumber <= 3) {
+            gameLevel = LevelDifficulty.EASY;
+            levelNumber -= 1;
+        } else if (levelNumber >= 4 && levelNumber <= 6) {
+            gameLevel = LevelDifficulty.MEDIUM;
+            levelNumber -= 4;
+        } else if (levelNumber >= 7 && levelNumber <= 9) {
+            gameLevel = LevelDifficulty.HARD;
+            levelNumber -= 7;
+        }
         this.gameInstance.createLevel(levelNumber);
-        Helper.changeGameScreen(SCREEN_GAME_EASY);
+        this.gameInstance.setLevelGrid(gameLevel);
+        Helper.changeGameScreen(gameLevel.getPath());
     }
 }

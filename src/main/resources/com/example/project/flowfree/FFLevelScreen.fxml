@@ -3,15 +3,34 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
 <AnchorPane fx:id="levelSelect" prefHeight="330.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.project.flowfree.controllers.FFLevelController">
     <children>
-        <HBox alignment="CENTER" layoutX="232.0" layoutY="125.0" prefHeight="40.0" prefWidth="135.0" style="-fx-spacing: 20;">
-            <children>
-                <Button contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#selectLevel" prefHeight="25.0" prefWidth="25.0" style="-fx-border-color: black; -fx-border-radius: 1;" text="1" />
-                <Button contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#selectLevel" prefHeight="25.0" prefWidth="25.0" style="-fx-border-color: black; -fx-border-radius: 1;" text="2" />
-                <Button contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#selectLevel" prefHeight="25.0" prefWidth="25.0" style="-fx-border-color: black; -fx-border-radius: 1;" text="3" />
-            </children>
-        </HBox>
+      <VBox alignment="CENTER" layoutX="232.0" prefHeight="330.0" prefWidth="135.0">
+         <children>
+              <HBox alignment="CENTER" prefHeight="40.0" prefWidth="135.0" style="-fx-spacing: 20;">
+                  <children>
+                      <Button contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#selectLevel" prefHeight="25.0" prefWidth="25.0" style="-fx-border-color: black; -fx-border-radius: 1;" text="1" />
+                      <Button contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#selectLevel" prefHeight="25.0" prefWidth="25.0" style="-fx-border-color: black; -fx-border-radius: 1;" text="2" />
+                      <Button contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#selectLevel" prefHeight="25.0" prefWidth="25.0" style="-fx-border-color: black; -fx-border-radius: 1;" text="3" />
+                  </children>
+              </HBox>
+            <HBox alignment="CENTER" prefHeight="40.0" prefWidth="135.0" style="-fx-spacing: 20;">
+               <children>
+                  <Button contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#selectLevel" prefHeight="25.0" prefWidth="25.0" style="-fx-border-color: black; -fx-border-radius: 1;" text="4" />
+                  <Button contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#selectLevel" prefHeight="25.0" prefWidth="25.0" style="-fx-border-color: black; -fx-border-radius: 1;" text="5" />
+                  <Button contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#selectLevel" prefHeight="25.0" prefWidth="25.0" style="-fx-border-color: black; -fx-border-radius: 1;" text="6" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="40.0" prefWidth="135.0" style="-fx-spacing: 20;">
+               <children>
+                  <Button contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#selectLevel" prefHeight="25.0" prefWidth="25.0" style="-fx-border-color: black; -fx-border-radius: 1;" text="7" />
+                  <Button contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#selectLevel" prefHeight="25.0" prefWidth="25.0" style="-fx-border-color: black; -fx-border-radius: 1;" text="8" />
+                  <Button contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#selectLevel" prefHeight="25.0" prefWidth="25.0" style="-fx-border-color: black; -fx-border-radius: 1;" text="9" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
     </children>
 </AnchorPane>

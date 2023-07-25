@@ -3,21 +3,27 @@ package com.example.project.flowfree;
 import com.example.project.flowfree.enums.LevelDifficulty;
 import org.apache.commons.lang3.time.StopWatch;
 
-public class Level {
+import java.util.Timer;
 
-    public static final int TIME_LIMIT = 30; // seconds
-    private int levelNumber;
-    private StopWatch timer;
+public class Level {
+    public static final int TIME_LIMIT = 30;
+    private final int levelNumber;
+    private final StopWatch timer;
     private Grid grid;
+    private LevelDifficulty difficulty;
 
     public Level(int levelNumber) {
         this.levelNumber = levelNumber;
         this.timer = new StopWatch(); // new TimerLogic();
         this.timer.start();
-        this.grid = new Grid(LevelDifficulty.EASY, levelNumber); // Hardcoding EASY here
     }
 
     public Grid getGrid() { return this.grid; }
+    public void setGrid(LevelDifficulty difficulty) {
+        this.difficulty = difficulty;
+        this.grid = new Grid(this.difficulty, levelNumber);
+    }
+
     public StopWatch getTimer() { return this.timer; }
 
     public int getSecondsLeft() {
@@ -38,7 +44,7 @@ public class Level {
         this.grid = new Grid(LevelDifficulty.EASY, this.levelNumber);
         this.timer.reset();
         this.timer.start();
-        this.grid = new Grid(LevelDifficulty.EASY, levelNumber); // Hardcoding EASY here
+        this.grid = new Grid(this.difficulty, levelNumber);
     }
 
     public void complete() {
