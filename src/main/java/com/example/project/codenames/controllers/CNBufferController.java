@@ -17,6 +17,10 @@ public class CNBufferController implements Initializable {
         System.out.println("ENTERED: Codenames Buffer Screen");
     }
 
+    private void setBufferLabel(String phrase) {
+        bufferLabel.setText(phrase);
+    }
+
     @FXML public void switchScreen(ActionEvent e) {
         Helper.changeGameScreen("codenames/CNGameScreen.fxml");
     }

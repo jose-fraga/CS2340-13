@@ -12,12 +12,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Group;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -80,26 +80,26 @@ public class CNGameController implements Initializable, PropertyChangeListener {
     private void handle() {
         gridPane.getChildren().forEach(item -> {
             if (!(item instanceof Group)) {
-                WordPane curr = (WordPane) item;
-                VBox currBox = (VBox) curr.getChildren().get(0);
+                WordPane currPane = (WordPane) item;
+                VBox currBox = (VBox) currPane.getChildren().get(0);
 
                 if (this.round.getActiveTeam().getCurrentPlayer() == Player.OPERATIVE) {
-                    if (curr.getWord().getIsSelected()) {
-                        curr.addBackground();
+                    if (currPane.getWord().getIsSelected()) {
+                        currPane.addBackground();
                     } else {
-                        curr.addButton();
+                        currPane.addButton();
                         currBox.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> {
-                            
+                            currPane.handleGuess();
                         });
-                        currBox.getChildren().get(1).addEventFilter(MouseEvent.MOUSE_CLICKED, e -> {
-                            curr.getWord().select();
-                            if (curr.getWord().getIsSelected()) {
-                                curr.selectedUpdate();
+                        ((Button) currBox.getChildren().get(1)).setOnAction(e -> {
+                            currPane.getWord().select();
+                            if (currPane.getWord().getIsSelected()) {
+                                currPane.selectedUpdate();
                             }
                         });
                     }
                 } else {
-                    curr.addBackground();
+                    currPane.addBackground();
                 }
             }
         });
@@ -119,32 +119,6 @@ public class CNGameController implements Initializable, PropertyChangeListener {
             this.borderPane.setBottom(loader.load());
         } catch (Exception e) {
             e.printStackTrace();
-        }
-    }
-
-    public int getPosition(int currLength) {
-        int position = 0;
-        if (currLength == 1) {
-            position = 2;
-        } else if (currLength == 0) {
-            position = 1;
-        }
-        return position;
-    }
-
-    public void removal(VBox currBox, int redPos, int bluePos, Type team) {
-        if (team == Type.RED) {
-            if (redPos == 1) {
-                currBox.getChildren().remove(2);
-            } else if (redPos == 2) {
-                currBox.getChildren().remove(3);
-            }
-        } else if (team == Type.BLUE) {
-            if (bluePos == 1) {
-                currBox.getChildren().remove(2);
-            } else if (bluePos == 2) {
-                currBox.getChildren().remove(3);
-            }
         }
     }
 
