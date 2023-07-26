@@ -14,7 +14,7 @@ public class WordPane extends StackPane {
     private final Word word;
 
     private String style;
-    private boolean isGuessed, isSelected;
+    private boolean isGuessed;
 
     public WordPane(Word word) {
         this.word = word;
@@ -34,7 +34,6 @@ public class WordPane extends StackPane {
         this.setStyle(this.style);
 
         this.isGuessed = false;
-        this.isSelected = false;
 
         setTooltip();
     }
@@ -64,29 +63,28 @@ public class WordPane extends StackPane {
     }
 
     public void handleGuess() {
-        if (!this.isSelected && !this.isGuessed) {
+        if (!this.word.getIsSelected() && !this.isGuessed) {
             this.isGuessed = true;
 
             Round round = CNGame.getGameInstance().getRound();
 
-            Label guessLabel = new Label((round.getActiveTeam().getType() == Type.RED) ? "Red" : "Blue");
+            Label guessLabel = new Label((round.activeTeam().getType() == Type.RED) ? "Red" : "Blue");
             guessLabel.setStyle(
                     "-fx-text-fill: white;" +
-                            "-fx-background-color: " + round.getActiveTeam().getType().getColor() + ";" +
-                            "-fx-border-color: " + round.getActiveTeam().getType().getColor());
+                            "-fx-background-color: " + round.activeTeam().getType().getColor() + ";" +
+                            "-fx-border-color: " + round.activeTeam().getType().getColor());
             guessLabel.setPrefWidth(30);
             guessLabel.setAlignment(Pos.CENTER);
             guessLabel.setFont(Font.font("Tw Cen MT Condensed Extra Bold", 14));
 
             ((VBox) this.getChildren().get(0)).getChildren().add(guessLabel);
-        } else if (!isSelected || this.isGuessed) {
+        } else if (!this.word.getIsSelected() || this.isGuessed) {
             this.isGuessed = false;
             ((VBox) this.getChildren().get(0)).getChildren().remove(2);
         }
     }
 
     public void selectedUpdate() {
-        this.isSelected = true;
         handleGuess();
         ((VBox) this.getChildren().get(0)).getChildren().remove(1);
         addBackground();

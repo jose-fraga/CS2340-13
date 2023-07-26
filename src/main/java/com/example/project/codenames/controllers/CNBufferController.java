@@ -17,7 +17,7 @@ public class CNBufferController implements Initializable {
         System.out.println("ENTERED: Codenames Buffer Screen");
     }
 
-    private void setBufferLabel(String phrase) {
+    public void setBufferLabel(String phrase) {
         bufferLabel.setText(phrase);
     }
 

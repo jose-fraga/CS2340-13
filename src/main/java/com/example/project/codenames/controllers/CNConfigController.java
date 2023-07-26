@@ -28,17 +28,17 @@ public class CNConfigController implements Initializable {
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         System.out.println("ENTERED: Codenames Configuration Screen");
-        populate();
+        populateMenus();
     }
 
-    private void populate() {
+    private void populateMenus() {
         redCharacterSelect.getItems().addAll(Sprite.getCharacters());
         redCharacterSelect.setValue(Sprite.getCharacters()[0]);
         blueCharacterSelect.getItems().addAll(Sprite.getCharacters());
         blueCharacterSelect.setValue(Sprite.getCharacters()[0]);
     }
 
-    @FXML private void add(ActionEvent e) {
+    @FXML private void addPlayer(ActionEvent e) {
         if (!textField.getText().isEmpty()) {
             StackPane curr = new StackPane();
             curr.getChildren().add(new Label(textField.getText()));

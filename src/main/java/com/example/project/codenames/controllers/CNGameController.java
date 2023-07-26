@@ -6,8 +6,10 @@ import com.example.project.codenames.CNGame;
 import com.example.project.codenames.Round;
 import com.example.project.codenames.Team;
 import com.example.project.codenames.WordPane;
+import com.example.project.codenames.enums.Event;
 import com.example.project.codenames.enums.Player;
 import com.example.project.codenames.enums.Type;
+import com.example.project.wordle.controllers.WRLEndController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -49,14 +51,14 @@ public class CNGameController implements Initializable, PropertyChangeListener {
 
     private void registerListeners() {
         this.round.addPropertyChangeListener(this);
-        this.round.getTeam1().addPropertyChangeListener(this);
-        this.round.getTeam2().addPropertyChangeListener(this);
+        this.round.activeTeam().addPropertyChangeListener(this);
+        this.round.passiveTeam().addPropertyChangeListener(this);
     }
 
     private void unregisterListeners() {
         this.round.removePropertyChangeListener(this);
-        this.round.getTeam1().removePropertyChangeListener(this);
-        this.round.getTeam2().removePropertyChangeListener(this);
+        this.round.activeTeam().removePropertyChangeListener(this);
+        this.round.passiveTeam().removePropertyChangeListener(this);
     }
 
     private void populate() {
@@ -71,9 +73,9 @@ public class CNGameController implements Initializable, PropertyChangeListener {
             }
         }
 
-        Team team = this.round.getTeam1();
+        Team team = this.round.activeTeam();
         this.scoreLabels.get(team.getType()).setText(String.valueOf(team.getNumOfCards()));
-        team = this.round.getTeam2();
+        team = this.round.passiveTeam();
         this.scoreLabels.get(team.getType()).setText(String.valueOf(team.getNumOfCards()));
     }
 
@@ -83,7 +85,7 @@ public class CNGameController implements Initializable, PropertyChangeListener {
                 WordPane currPane = (WordPane) item;
                 VBox currBox = (VBox) currPane.getChildren().get(0);
 
-                if (this.round.getActiveTeam().getCurrentPlayer() == Player.OPERATIVE) {
+                if (this.round.activeTeam().getCurrentPlayer() == Player.OPERATIVE) {
                     if (currPane.getWord().getIsSelected()) {
                         currPane.addBackground();
                     } else {
@@ -106,14 +108,14 @@ public class CNGameController implements Initializable, PropertyChangeListener {
     }
 
     private void addTop() {
-        teamDisplay.setText(this.round.getActiveTeam().getType().toString());
-        teamDisplay.setStyle("-fx-text-fill: " + this.round.getActiveTeam().getType().getColor());
-        playerDisplay.setText(this.round.getActiveTeam().getCurrentPlayer().toString());
-        topTitle.setText(this.round.getActiveTeam().getCurrentPlayer().getHint());
+        teamDisplay.setText(this.round.activeTeam().getType().toString());
+        teamDisplay.setStyle("-fx-text-fill: " + this.round.activeTeam().getType().getColor());
+        playerDisplay.setText(this.round.activeTeam().getCurrentPlayer().toString());
+        topTitle.setText(this.round.activeTeam().getCurrentPlayer().getHint());
     }
 
     private void addBottom() {
-        Player currPlayer = this.round.getActiveTeam().getCurrentPlayer();
+        Player currPlayer = this.round.activeTeam().getCurrentPlayer();
         try {
             FXMLLoader loader = new FXMLLoader(Main.class.getResource(currPlayer.getPath()));
             this.borderPane.setBottom(loader.load());
@@ -122,21 +124,34 @@ public class CNGameController implements Initializable, PropertyChangeListener {
         }
     }
 
+    private FXMLLoader safelyChangeScreen(String fxmlPath) {
+        return Helper.changeGameScreen(fxmlPath);
+    }
+
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        String incomingEvent = evt.getPropertyName();
-        if (incomingEvent.equals(Round.activeTeamEvent)) {
-            unregisterListeners();
-            Helper.changeGameScreen("codenames/CNBufferScreen.fxml");
-        } else if (incomingEvent.equals(Round.winnerEvent)) {
-            Team winningTeam = (Team) evt.getNewValue();
-            CNGame.getGameInstance().clearRound();
-            unregisterListeners();
-            Helper.changeGameScreen("codenames/CNEndScreen.fxml");
-        } else if (incomingEvent.equals(Team.numOfCardsUpdatedEvent)) {
-            // evt check blue or red type
+        String currEvt = evt.getPropertyName();
+        if (currEvt.equals(Event.UPDATE_COUNT.getPropertyName())) {
             Team updatedTeam = (Team) evt.getSource();
-            scoreLabels.get(updatedTeam.getType()).setText(updatedTeam.getNumOfCards() + "");
+            this.scoreLabels.get(updatedTeam.getType()).setText(String.valueOf(updatedTeam.getNumOfCards()));
+        } else if (currEvt.equals(Event.GAME_OVER.getPropertyName())) {
+            unregisterListeners();
+            CNGame.getGameInstance().clearRound();
+
+            FXMLLoader loader = safelyChangeScreen("codenames/CNEndScreen.fxml");
+            CNEndController controller = loader.getController();
+
+            Team winningTeam = (Team) evt.getNewValue();
+            controller.updateScreen(winningTeam.getType(), winningTeam.getScore());
+        } else {
+            FXMLLoader loader = safelyChangeScreen("codenames/CNBufferScreen.fxml");
+            CNBufferController controller = loader.getController();
+            if (currEvt.equals(Event.SWITCH_PLAYER.getPropertyName())) {
+                controller.setBufferLabel("Pass Device To " + evt.getNewValue() + "'s Operatives!");
+            } else if (currEvt.equals(Event.SWITCH_TEAM.getPropertyName())) {
+                unregisterListeners();
+                controller.setBufferLabel("Pass Device To " + evt.getNewValue() + "'s Spymaster!");
+            }
         }
     }
 }

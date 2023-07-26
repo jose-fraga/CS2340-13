@@ -16,13 +16,13 @@ public class CNClueBoxController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Round currRound = CNGame.getGameInstance().getRound();
-        String style = "-fx-border-radius: 3; -fx-border-color: " + currRound.getActiveTeam().getType().getColor();
+        String style = "-fx-border-radius: 3; -fx-border-color: " + currRound.activeTeam().getType().getColor();
 
         clueDisplay.setStyle(style);
         clueDisplay.setText(currRound.getCurrentClue());
 
         countDisplay.setStyle(style);
-        countDisplay.setText(String.valueOf(currRound.getCurrentGuessLimit() - 1));
+        countDisplay.setText(String.valueOf(currRound.getCurrGuessLimit() - 1));
     }
 
     @FXML private void switchTeams(ActionEvent e) {

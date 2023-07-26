@@ -1,37 +1,50 @@
 package com.example.project.codenames;
 
 import com.example.project.codenames.enums.Player;
+import com.example.project.codenames.enums.TeamType;
 import com.example.project.codenames.enums.Type;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
 public class Team {
-    public static final String numOfCardsUpdatedEvent = "numOfCardsUpdatedEvent";
-    private PropertyChangeSupport support;
+    private final PropertyChangeSupport support;
     private final Type type;
-    private int numOfCards;
-    private Player currentPlayer;
 
-    public Team(Type type, int count) {
+    private int numOfCards, score;
+    private Player currentPlayer;
+    private TeamType teamType;
+
+    public Team(Type type, TeamType teamType) {
         this.support = new PropertyChangeSupport(this);
         this.type = type;
-        this.numOfCards = count;
+        this.teamType = teamType;
+        this.numOfCards = teamType.getCardCount();
         this.currentPlayer = Player.SPY_MASTER;
     }
 
     public Type getType() { return this.type; }
-
     public int getNumOfCards() { return this.numOfCards; }
 
     public Player getCurrentPlayer() { return this.currentPlayer; }
     public void setCurrentPlayer(Player player) { this.currentPlayer = player; }
 
-    public void decrementCardCount() {
-        int old = this.numOfCards;
-        this.numOfCards--;
-        this.support.firePropertyChange(numOfCardsUpdatedEvent, old, this.numOfCards);
+    public int getScore() { return this.score; }
+    public void setScore(int value) {this.score = value; }
+
+    public boolean isActiveTeam() { return this.teamType == TeamType.ACTIVE; }
+
+    public void swapTeamType(boolean isReset) {
+        this.teamType = (isActiveTeam()) ? TeamType.PASSIVE : TeamType.ACTIVE;
+        if (isReset) {
+            this.numOfCards = this.teamType.getCardCount();
+        }
     }
+
+    public void decrementCardCount() {
+        this.support.firePropertyChange("numOfCards", this.numOfCards, --this.numOfCards);
+    }
+
     public boolean hasWon() { return this.numOfCards <= 0; }
 
     public void addPropertyChangeListener(PropertyChangeListener listener) {
@@ -44,6 +57,11 @@ public class Team {
 
     @Override
     public String toString() {
-        return "Team={type:" + type + ", numOfCards:" + numOfCards + ", currentPlayer:" + currentPlayer + "}";
+        return "Team{" +
+                "type=" + this.type + ", " +
+                "numOfCards=" + this.numOfCards + ", " +
+                "currentPlayer=" + this.currentPlayer + ", " +
+                "teamType=" + this.teamType +
+                '}';
     }
 }

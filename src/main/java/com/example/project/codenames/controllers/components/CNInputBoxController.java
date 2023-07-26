@@ -36,7 +36,6 @@ public class CNInputBoxController implements Initializable {
             System.out.println("CLUE: " + clue + " " + clueCount);
 
             CNGame.getGameInstance().getRound().setClue(clue, clueCount);
-            Helper.changeGameScreen("codenames/CNBufferScreen.fxml");
         }
     }
 }

@@ -13,7 +13,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="400.0" prefWidth="665.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.project.codenames.controllers.CNConfigController">
    <children>
-      <Button layoutX="166.0" layoutY="282.0" mnemonicParsing="false" onAction="#add" style="-fx-background-insets: 1; -fx-border-radius: 1; -fx-border-color: red;" text="Add to Red" textFill="RED" />
+      <Button layoutX="166.0" layoutY="282.0" mnemonicParsing="false" onAction="#addPlayer" style="-fx-background-insets: 1; -fx-border-radius: 1; -fx-border-color: red;" text="Add to Red" textFill="RED" />
       <ListView fx:id="blueLV" focusTraversable="false" layoutX="345.0" layoutY="92.0" prefHeight="175.0" prefWidth="200.0" style="-fx-border-style: solid; -fx-border-color: blue; -fx-border-radius: 3;" />
       <ListView fx:id="redLV" focusTraversable="false" layoutX="118.0" layoutY="92.0" prefHeight="175.0" prefWidth="200.0" style="-fx-border-color: red; -fx-border-radius: 3;" />
       <Label alignment="CENTER" layoutX="118.0" layoutY="60.0" prefHeight="32.0" prefWidth="200.0" text="Red Team">
@@ -27,7 +27,7 @@
          </font>
       </Label>
       <TextField fx:id="textField" layoutX="257.0" layoutY="282.0" promptText="Enter Player Name" style="-fx-border-radius: 1; -fx-border-style: solid;" />
-      <Button layoutX="420.0" layoutY="282.0" mnemonicParsing="false" onAction="#add" style="-fx-background-insets: 1; -fx-border-color: blue; -fx-border-radius: 1;" text="Add to Blue" textFill="#0023e8" />
+      <Button layoutX="420.0" layoutY="282.0" mnemonicParsing="false" onAction="#addPlayer" style="-fx-background-insets: 1; -fx-border-color: blue; -fx-border-radius: 1;" text="Add to Blue" textFill="#0023e8" />
       <Button layoutX="533.0" layoutY="360.0" mnemonicParsing="false" onAction="#continueToGame" text="Continue To Game!" />
       <VBox alignment="CENTER" layoutX="-2.0" layoutY="92.0" prefHeight="175.0" prefWidth="120.0" spacing="10.0">
          <children>
