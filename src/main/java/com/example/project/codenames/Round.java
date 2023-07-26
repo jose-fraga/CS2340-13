@@ -1,7 +1,7 @@
 package com.example.project.codenames;
 
 import com.example.project.codenames.enums.Player;
-import com.example.project.codenames.enums.TeamType;
+import com.example.project.codenames.enums.Role;
 import com.example.project.codenames.enums.Type;
 
 import java.beans.PropertyChangeEvent;
@@ -18,10 +18,8 @@ import java.util.Random;
 // and notifies listeners when some property changes.
 public class Round implements PropertyChangeListener {
     private final PropertyChangeSupport support;
-
     private Team redTeam, blueTeam;
     private ArrayList<Word> words;
-
     private String currentClue;
     private int currGuessLimit, currGuessCount;
 
@@ -31,38 +29,32 @@ public class Round implements PropertyChangeListener {
         updateWordType();
     }
 
+    public ArrayList<Word> getWords() { return this.words; }
     public String getCurrentClue() { return this.currentClue; }
     public int getCurrGuessLimit() { return this.currGuessLimit; }
-
-    public ArrayList<Word> getWords() { return this.words; }
 
     public Team activeTeam() { return (this.redTeam.isActiveTeam()) ? this.redTeam : this.blueTeam; }
     public Team passiveTeam() { return (this.redTeam.isActiveTeam()) ? this.blueTeam : this.redTeam; }
 
     public void swapTeams(boolean isReset) {
-        this.redTeam.swapTeamType(isReset);
-        this.blueTeam.swapTeamType(isReset);
+        this.redTeam.swapRoleType(isReset);
+        this.redTeam.swapRoleType(isReset);
     }
 
     private void populateTeams() {
-        this.redTeam = new Team(Type.RED, (new Random().nextBoolean()) ? TeamType.ACTIVE : TeamType.PASSIVE);
-        this.blueTeam = new Team(Type.BLUE, (this.redTeam.isActiveTeam()) ? TeamType.PASSIVE : TeamType.ACTIVE);
+        this.redTeam = new Team(Type.RED, (new Random().nextBoolean()) ? Role.ACTIVE : Role.PASSIVE);
+        this.blueTeam = new Team(Type.BLUE, (this.redTeam.isActiveTeam()) ? Role.PASSIVE : Role.ACTIVE);
     }
 
     private void updateWordType() {
         DictionaryService.populate();
         this.words = DictionaryService.getGameWords();
-
         Collections.shuffle(this.words);
-
         addType(0, 9, activeTeam().getType());
         addType(9, 17, passiveTeam().getType());
-
         Word assassinWord = this.words.get(24);
         assassinWord.setType(Type.ASSASSIN);
-
         Collections.shuffle(this.words);
-
         this.words.forEach(item -> item.addPropertyChangeListener(this));
     }
 
@@ -73,19 +65,16 @@ public class Round implements PropertyChangeListener {
     }
 
     public void checkSelectedWord(Word selected) {
-//      Active select Assassian
         if (selected.getType() == Type.ASSASSIN) {
-            System.out.println("SELECTED: Assassin Card");
+//            System.out.println("A.T. SELECTED: Assassin Card (Game Over)");
             passiveTeam().setScore(188);
             endGame(passiveTeam());
-//      Active selects Neutral
         } else if (selected.getType() == Type.NEUTRAL) {
-            System.out.println("SELECTED: Neutral Card");
+//            System.out.println("A.T. SELECTED: Neutral Card (End Turn)");
             activeTeam().setScore(activeTeam().getScore() - 5);
             endTurn();
-//      Active selects Passive
         } else if (selected.getType() == passiveTeam().getType()) {
-            System.out.println("SELECTED: Enemy Card");
+//            System.out.println("A.T. SELECTED: Enemy Card (End Turn/Game Over)");
             passiveTeam().decrementCardCount();
             activeTeam().setScore(passiveTeam().getScore() + 20);
             if (passiveTeam().hasWon()) {
@@ -93,9 +82,8 @@ public class Round implements PropertyChangeListener {
             } else {
                 endTurn();
             }
-//      Active selects Active
         } else if (selected.getType() == activeTeam().getType()) {
-            System.out.println("SELECTED: Team Card");
+//            System.out.println("A.T. SELECTED: Team Card (Continue/End Turn/Game Over)");
             activeTeam().decrementCardCount();
             activeTeam().setScore(activeTeam().getScore() + 20);
             this.currGuessCount++;

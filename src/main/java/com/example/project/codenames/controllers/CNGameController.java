@@ -9,7 +9,6 @@ import com.example.project.codenames.WordPane;
 import com.example.project.codenames.enums.Event;
 import com.example.project.codenames.enums.Player;
 import com.example.project.codenames.enums.Type;
-import com.example.project.wordle.controllers.WRLEndController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -37,13 +36,13 @@ public class CNGameController implements Initializable, PropertyChangeListener {
     @FXML private GridPane gridPane;
     @FXML private Label teamDisplay, playerDisplay, topTitle, redScore, blueScore;
 
-    private final HashMap<Type, Label> scoreLabels = new HashMap<>(2);
     private final Round round = CNGame.getGameInstance().getRound();
+    private final HashMap<Type, Label> scoreLabels = new HashMap<>(2);
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         registerListeners();
-        populate();
+        populateGrid();
         handle();
         addTop();
         addBottom();
@@ -61,10 +60,9 @@ public class CNGameController implements Initializable, PropertyChangeListener {
         this.round.passiveTeam().removePropertyChangeListener(this);
     }
 
-    private void populate() {
+    private void populateGrid() {
         this.scoreLabels.put(Type.RED, redScore);
         this.scoreLabels.put(Type.BLUE, blueScore);
-
         int count = 0;
         for (int i = 0; i < gridPane.getRowCount(); i++) {
             for (int j = 0; j < gridPane.getColumnCount(); j++) {
@@ -72,11 +70,12 @@ public class CNGameController implements Initializable, PropertyChangeListener {
                 count++;
             }
         }
-
-        Team team = this.round.activeTeam();
-        this.scoreLabels.get(team.getType()).setText(String.valueOf(team.getNumOfCards()));
-        team = this.round.passiveTeam();
-        this.scoreLabels.get(team.getType()).setText(String.valueOf(team.getNumOfCards()));
+        this.scoreLabels.get(this.round.activeTeam().getType()).setText(
+                String.valueOf(this.round.activeTeam().getNumOfCards())
+        );
+        this.scoreLabels.get(this.round.passiveTeam().getType()).setText(
+                String.valueOf(this.round.passiveTeam().getNumOfCards())
+        );
     }
 
     private void handle() {
@@ -84,7 +83,6 @@ public class CNGameController implements Initializable, PropertyChangeListener {
             if (!(item instanceof Group)) {
                 WordPane currPane = (WordPane) item;
                 VBox currBox = (VBox) currPane.getChildren().get(0);
-
                 if (this.round.activeTeam().getCurrentPlayer() == Player.OPERATIVE) {
                     if (currPane.getWord().getIsSelected()) {
                         currPane.addBackground();
@@ -137,10 +135,8 @@ public class CNGameController implements Initializable, PropertyChangeListener {
         } else if (currEvt.equals(Event.GAME_OVER.getPropertyName())) {
             unregisterListeners();
             CNGame.getGameInstance().clearRound();
-
             FXMLLoader loader = safelyChangeScreen("codenames/CNEndScreen.fxml");
             CNEndController controller = loader.getController();
-
             Team winningTeam = (Team) evt.getNewValue();
             controller.updateScreen(winningTeam.getType(), winningTeam.getScore());
         } else {

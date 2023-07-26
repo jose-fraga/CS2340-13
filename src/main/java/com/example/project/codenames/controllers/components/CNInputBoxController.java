@@ -1,6 +1,5 @@
 package com.example.project.codenames.controllers.components;
 
-import com.example.project.Helper;
 import com.example.project.codenames.CNGame;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -28,13 +27,10 @@ public class CNInputBoxController implements Initializable {
     @FXML public void switchToOperative(ActionEvent e) {
         if (clueInput.getText().isBlank() || guessInput.getValue() == null) {
             warningLabel.setVisible(true);
-            System.out.println("ERROR: Clue Word or Count is Empty!");
+            System.out.println("ERROR #1: Clue Word or Count is Empty!");
         } else {
             String clue = clueInput.getText();
             int clueCount = guessInput.getValue();
-
-            System.out.println("CLUE: " + clue + " " + clueCount);
-
             CNGame.getGameInstance().getRound().setClue(clue, clueCount);
         }
     }

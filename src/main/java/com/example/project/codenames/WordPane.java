@@ -12,29 +12,23 @@ import javafx.scene.text.TextAlignment;
 
 public class WordPane extends StackPane {
     private final Word word;
-
     private String style;
     private boolean isGuessed;
 
     public WordPane(Word word) {
         this.word = word;
         VBox currBox = new VBox();
-
         Label text = new Label();
         text.setText(word.getWord());
         text.setFont(Font.font("Tw Cen MT Condensed Extra Bold", 16));
         currBox.getChildren().add(text);
-
         currBox.setSpacing(3);
         currBox.setAlignment(Pos.CENTER);
         this.setAlignment(Pos.CENTER);
         this.getChildren().add(currBox);
-
         this.style = "-fx-border-color: black;";
         this.setStyle(this.style);
-
         this.isGuessed = false;
-
         setTooltip();
     }
 
@@ -43,14 +37,12 @@ public class WordPane extends StackPane {
     public void addBackground() {
         String genericStyle = "-fx-border-style: solid inside; -fx-border-color: #00000066; -fx-border-insets: 0; ";
         this.style += " -fx-background-color: " + this.word.getType().getColor() + ";";
-
         if (this.word.getIsSelected()) {
             this.style += "-fx-border-width: 2; " + genericStyle + "-fx-opacity: 0.8;";
         } else {
             this.style += "-fx-border-width: 3; " + genericStyle;
         }
         this.setStyle(this.style);
-
         String cardTextStyle = "-fx-text-fill: " + ((this.word.getType() == Type.ASSASSIN) ? "#ffffffcc;" : "#000000cc");
         ((VBox) this.getChildren().get(0)).getChildren().get(0).setStyle(cardTextStyle);
     }
@@ -65,9 +57,7 @@ public class WordPane extends StackPane {
     public void handleGuess() {
         if (!this.word.getIsSelected() && !this.isGuessed) {
             this.isGuessed = true;
-
             Round round = CNGame.getGameInstance().getRound();
-
             Label guessLabel = new Label((round.activeTeam().getType() == Type.RED) ? "Red" : "Blue");
             guessLabel.setStyle(
                     "-fx-text-fill: white;" +
@@ -76,7 +66,6 @@ public class WordPane extends StackPane {
             guessLabel.setPrefWidth(30);
             guessLabel.setAlignment(Pos.CENTER);
             guessLabel.setFont(Font.font("Tw Cen MT Condensed Extra Bold", 14));
-
             ((VBox) this.getChildren().get(0)).getChildren().add(guessLabel);
         } else if (!this.word.getIsSelected() || this.isGuessed) {
             this.isGuessed = false;

@@ -43,7 +43,6 @@ public class CNConfigController implements Initializable {
             StackPane curr = new StackPane();
             curr.getChildren().add(new Label(textField.getText()));
             curr.setAlignment(Pos.CENTER);
-
             String text = ((Button) e.getSource()).getText();
             if (text.equals("Add to Red")) {
                 redLV.getItems().add(curr);

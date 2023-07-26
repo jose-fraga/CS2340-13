@@ -1,10 +1,10 @@
 package com.example.project.codenames.enums;
 
-public enum TeamType {
+public enum Role {
     ACTIVE(9),
     PASSIVE(8);
 
-    TeamType(int count) {
+    Role(int count) {
         this.cardCount = count;
     }
 
