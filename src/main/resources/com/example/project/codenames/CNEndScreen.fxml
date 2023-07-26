@@ -8,29 +8,31 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="545.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.project.codenames.controllers.CNEndController">
    <children>
-      <ImageView fitHeight="700.0" fitWidth="900.0" layoutY="-6.0" pickOnBounds="true">
+      <ImageView fitHeight="700.0" fitWidth="900.0" pickOnBounds="true" translateY="-5.0">
          <image>
             <Image url="@../images/CNEnd.png" />
          </image>
       </ImageView>
       <HBox alignment="CENTER" prefHeight="55.0" prefWidth="900.0" spacing="785.0">
          <children>
-            <Button contentDisplay="CENTER" mnemonicParsing="false" style="-fx-background-insets: 1;" text="Return" />
+            <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#restartGame" style="-fx-background-insets: 1;" text="Restart" />
             <Button contentDisplay="CENTER" mnemonicParsing="false" style="-fx-background-insets: 1;" text="Exit" />
          </children>
       </HBox>
-      <Label fx:id="endLabel" alignment="CENTER" layoutX="409.0" layoutY="277.0" prefHeight="28.0" prefWidth="82.0" style="-fx-border-color: black; -fx-background-color: lightgreen;" text="SUCCESS!" />
-      <Label fx:id="messageLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="373.0" layoutY="239.0" prefHeight="37.0" prefWidth="154.0" style="-fx-background-color: white; -fx-border-color: black;" text="Congratulations!">
+      <Label fx:id="teamDisplay" alignment="CENTER" layoutX="375.0" layoutY="262.0" prefHeight="30.0" prefWidth="145.0" style="-fx-border-color: black;">
          <font>
-            <Font name="Gill Sans Ultra Bold Condensed" size="15.0" />
+            <Font name="Courier New Bold" size="14.0" />
+         </font></Label>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="367.0" layoutY="222.0" prefHeight="40.0" prefWidth="165.0" style="-fx-text-fill: white;" text="Congratulations!">
+         <font>
+            <Font name="Gill Sans Ultra Bold Condensed" size="20.0" />
          </font>
       </Label>
-      <Label fx:id="scoreDisplay" alignment="CENTER" layoutX="387.0" layoutY="305.0" prefHeight="30.0" prefWidth="125.0" style="-fx-background-color: white; -fx-border-color: black;" text="Score: ">
+      <Label fx:id="scoreDisplay" alignment="CENTER" layoutX="370.0" layoutY="292.0" prefHeight="30.0" prefWidth="154.0" style="-fx-text-fill: white;" text="Score: ">
          <font>
-            <Font name="Gill Sans Ultra Bold Condensed" size="12.0" />
+            <Font name="Gill Sans Ultra Bold Condensed" size="15.0" />
          </font>
       </Label>
    </children>
