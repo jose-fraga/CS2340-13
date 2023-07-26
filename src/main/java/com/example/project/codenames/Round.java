@@ -3,6 +3,7 @@ package com.example.project.codenames;
 import com.example.project.codenames.enums.Player;
 import com.example.project.codenames.enums.Type;
 import javafx.scene.control.Label;
+import javafx.scene.text.TextFlow;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -10,8 +11,6 @@ import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
-
-// TODO: Make endGame an Observable
 
 // Source: https://www.youtube.com/watch?v=icf5S9fzRXE
 // We followed this tutorial to understand how to implement the Observer Pattern
@@ -24,21 +23,25 @@ public class Round implements PropertyChangeListener {
 
     private Team team1, team2, activeTeam;
     private ArrayList<Word> words;
-    private ArrayList<Label> gameLogEvents = new ArrayList<>();
 
     private String currentClue;
     private int currentGuessLimit;
     private int currentGuessCount;
+
+    private GameLog currentLog;
 
     private PropertyChangeSupport support;
 
     public Team getTeam1() { return team1; }
     public Team getTeam2() { return team2; }
 
+    public GameLog getCurrentLog() { return this.currentLog; }
+
     public Round() {
         this.support = new PropertyChangeSupport(this);
         this.team1 = this.activeTeam = new Random().nextBoolean() ? new Team(Type.RED, 9) : new Team(Type.BLUE, 9);
         this.team2 = (activeTeam.getType() == Type.RED) ? new Team(Type.BLUE, 8) : new Team(Type.RED, 8);
+        this.currentLog = new GameLog();
         updateWordType();
     }
 
@@ -50,8 +53,6 @@ public class Round implements PropertyChangeListener {
     public Team getActiveTeam() {
         return this.activeTeam;
     }
-
-    public ArrayList<Label> getGameLogEvents() { return this.gameLogEvents; }
 
     public boolean isTeamActive(Type team) {
         return this.activeTeam.getType() == team;
@@ -128,16 +129,11 @@ public class Round implements PropertyChangeListener {
                 endTurn();
             }
         }
-
-        gameLogEvents.add(logEvent);
     }
 
     public void setClue(String clue, int clueCount) {
         if (this.activeTeam.getCurrentPlayer() == Player.SPY_MASTER) {
-            Label logEvent = new Label();
-            logEvent.setText("Spymaster gives clue " + clue + " " + clueCount);
-            logEvent.setStyle("-fx-text-fill: " + this.activeTeam.getType().getColor());
-            gameLogEvents.add(logEvent);
+            this.currentLog.addClueItem(clue, clueCount, this.activeTeam.getType().getColor());
 
             this.activeTeam.setCurrentPlayer(Player.OPERATIVE);
             this.currentGuessCount = 0;

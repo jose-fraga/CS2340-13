@@ -3,6 +3,7 @@ package com.example.project.codenames.controllers;
 import com.example.project.Helper;
 import com.example.project.Main;
 import com.example.project.codenames.CNGame;
+import com.example.project.codenames.GameLog;
 import com.example.project.codenames.Round;
 import com.example.project.codenames.Team;
 import com.example.project.codenames.WordPane;
@@ -11,6 +12,7 @@ import com.example.project.codenames.enums.Type;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -18,14 +20,13 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.TextFlow;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.ResourceBundle;
-
-// TODO: Make enums for propertynames
 
 // Source: https://www.youtube.com/watch?v=icf5S9fzRXE
 // We followed this tutorial to understand how to implement the Observer Pattern
@@ -35,9 +36,8 @@ import java.util.ResourceBundle;
 public class CNGameScreenController implements Initializable, PropertyChangeListener {
     @FXML private BorderPane borderPane;
     @FXML private GridPane gridPane;
-    @FXML private Label teamDisplay, playerDisplay, topTitle;
-    @FXML private Label redTeamScore, blueTeamScore;
-    @FXML private ListView<Label> gameLog;
+    @FXML private Label teamDisplay, playerDisplay, topTitle, redTeamScore, blueTeamScore;
+    @FXML private ListView<TextFlow> gameLog;
 
     private HashMap<Type, Label> scoreLabels = new HashMap<Type, Label>(2);
     private final Round round = CNGame.getGameInstance().getRound();
@@ -45,18 +45,16 @@ public class CNGameScreenController implements Initializable, PropertyChangeList
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println("ENTERED: Codenames Game Screen");
-
         scoreLabels.put(Type.RED, redTeamScore);
         scoreLabels.put(Type.BLUE, blueTeamScore);
-
         subscribeToEvents();
         populate();
         handle();
-
         addTop();
         addBottom();
 
-        gameLog.getItems().addAll(this.round.getGameLogEvents());
+        gameLog.setFocusTraversable(false);
+        gameLog.getItems().addAll(round.getCurrentLog().getLogItems());
     }
 
     private void subscribeToEvents() {
@@ -96,11 +94,13 @@ public class CNGameScreenController implements Initializable, PropertyChangeList
                     } else {
                         curr.addButton();
                         currBox.getChildren().get(1).addEventFilter(MouseEvent.MOUSE_CLICKED, e -> {
+                            round.getCurrentLog().addLogItem(curr.getWord(), this.round.getActiveTeam().getType().getColor());
                             curr.getWord().select();
                             if (curr.getWord().getIsSelected()) {
                                 curr.selectedUpdate();
                             }
-                            gameLog.getItems().addAll(this.round.getGameLogEvents());
+                            gameLog.getItems().clear();
+                            gameLog.getItems().addAll(round.getCurrentLog().getLogItems());
                         });
 
                         currBox.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> {
@@ -176,7 +176,6 @@ public class CNGameScreenController implements Initializable, PropertyChangeList
         return position;
     }
 
-    //method which takes in the position of the label being removed and removes it accordingly
     public void removal(VBox currBox, int redPos, int bluePos, Type team) {
         if (team == Type.RED) {
             if (redPos == 1) {

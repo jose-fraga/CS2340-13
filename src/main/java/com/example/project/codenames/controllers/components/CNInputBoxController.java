@@ -2,6 +2,7 @@ package com.example.project.codenames.controllers.components;
 
 import com.example.project.Helper;
 import com.example.project.codenames.CNGame;
+import com.example.project.codenames.Word;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
