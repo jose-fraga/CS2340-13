@@ -11,7 +11,7 @@ public class GameLogTest {
     @Test
     public void testGetLogItems() {
         GameLog log = new GameLog();
-        log.addLogItem("test");
+//        log.addLogItem("test");
         ArrayList<String> expected = new ArrayList<String>();
         expected.add("test");
         assertEquals(expected, log.getLogItems());
@@ -19,7 +19,7 @@ public class GameLogTest {
     @Test
     public void testAddLogItem() {
         GameLog log = new GameLog();
-        log.addLogItem("test");
+//        log.addLogItem("test");
         ArrayList<String> expected = new ArrayList<String>();
         expected.add("test");
         assertEquals(expected, log.getLogItems());

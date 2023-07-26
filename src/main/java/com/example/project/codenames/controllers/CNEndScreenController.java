@@ -44,7 +44,6 @@ public class CNEndScreenController implements Initializable  {
             winningTeamLabel.setTextFill(Paint.valueOf("#03B8D0"));
             winningTeamLabel.setText("BLUE");
         }
-//        winningTeamLabel.setText(CNGame.getGameInstance().getRound().getActiveTeam().getType().toString());
     }
 
     public void addBackground() {
@@ -55,7 +54,6 @@ public class CNEndScreenController implements Initializable  {
 
     public void updateScore() {
         int score = CNGame.getGameInstance().getRound().getActiveTeam().getNumOfCards() * 10;
-
         scoreDisplay.setText("Latest Score: " + score);
         CNGame.getGameInstance().clearRound();
     }

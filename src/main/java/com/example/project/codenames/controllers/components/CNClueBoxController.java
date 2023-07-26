@@ -11,8 +11,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class CNClueBoxController implements Initializable {
-    @FXML private Label clueWordDisplay;
-    @FXML private Label clueGuessDisplay;
+    @FXML private Label clueWordDisplay, clueGuessDisplay;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -27,6 +26,7 @@ public class CNClueBoxController implements Initializable {
     }
 
     @FXML private void switchTeams(ActionEvent e) {
+        CNGame.getGameInstance().getRound().getCurrentLog().addLogItem(null,  CNGame.getGameInstance().getRound().getActiveTeam().getType().getColor());
         CNGame.getGameInstance().getRound().endTurn();
     }
 }

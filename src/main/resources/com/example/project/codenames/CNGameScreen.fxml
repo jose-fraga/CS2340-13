@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.project.codenames.controllers.CNGameScreenController">
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.project.codenames.controllers.CNGameScreenController">
     <center>
         <GridPane fx:id="gridPane" hgap="7.0" maxHeight="400.0" maxWidth="525.0" vgap="7.0" BorderPane.alignment="CENTER">
             <columnConstraints>
@@ -94,7 +94,7 @@
         </VBox>
     </left>
     <right>
-        <VBox alignment="CENTER" prefHeight="475.0" prefWidth="175.0" spacing="25.0" BorderPane.alignment="CENTER">
+        <VBox alignment="CENTER" prefHeight="475.0" prefWidth="225.0" spacing="25.0" BorderPane.alignment="CENTER">
             <children>
                 <Label alignment="CENTER" prefHeight="26.0" prefWidth="151.0" style="-fx-border-color: black; -fx-text-fill: blueviolet;" text="Game Log">
                     <font>
