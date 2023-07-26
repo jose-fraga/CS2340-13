@@ -19,23 +19,27 @@ import java.util.ResourceBundle;
 
 public class GameController implements Initializable {
     @FXML private BorderPane gamePane;
-    @FXML private Label gameTitle;
+    @FXML private Label gameTitle, playerName;
     @FXML private ImageView playerSprite;
-    @FXML private Label playerName;
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         try {
             System.out.println("ENTERED: " + Helper.currentGame.title() + " Game Screen");
 
+            if (Helper.currentGame == Game.CODENAMES) {
+                gamePane.setPrefWidth(900);
+                gamePane.setPrefHeight(655);
+            }
+
             Helper.setGamePane(gamePane);
             Helper.changeGameScreen(Helper.currentGame.gameFxmlPath());
 
             gameTitle.setText(Helper.currentGame.title());
-            String spritePath = Helper.getPlayerInstance().getSpritePath();
+            String spritePath = Helper.getPrimaryPlayer().getSpritePath();
 
             playerSprite.setImage(new Image(Main.class.getResourceAsStream(spritePath)));
-            playerName.setText(Helper.getPlayerInstance().getName());
+            playerName.setText(Helper.getPrimaryPlayer().getName());
 
             if (Helper.currentGame == Game.CODENAMES) {
                 HBox playersBox = (HBox) ((HBox) gamePane.getTop()).getChildren().get(2);

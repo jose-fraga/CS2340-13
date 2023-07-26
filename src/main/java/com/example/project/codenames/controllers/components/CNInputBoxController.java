@@ -17,23 +17,23 @@ import java.util.stream.IntStream;
 public class CNInputBoxController implements Initializable {
     @FXML private TextField clueInput;
     @FXML private ChoiceBox<Integer> guessInput;
-    @FXML private Text warningText;
+    @FXML private Text warningLabel;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        warningText.setVisible(false);
+        warningLabel.setVisible(false);
         guessInput.getItems().addAll(IntStream.range(1,9).boxed().collect(Collectors.toList()));
     }
 
     @FXML public void switchToOperative(ActionEvent e) {
         if (clueInput.getText().isBlank() || guessInput.getValue() == null) {
-            warningText.setVisible(true);
-            System.out.println("TRY AGAIN!");
+            warningLabel.setVisible(true);
+            System.out.println("ERROR: Clue Word or Count is Empty!");
         } else {
             String clue = clueInput.getText();
             int clueCount = guessInput.getValue();
 
-            System.out.println("Clue: " + clue + " " + clueCount);
+            System.out.println("CLUE: " + clue + " " + clueCount);
 
             CNGame.getGameInstance().getRound().setClue(clue, clueCount);
             Helper.changeGameScreen("codenames/CNBufferScreen.fxml");

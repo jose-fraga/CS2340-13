@@ -27,6 +27,6 @@ public class CNSplashScreenController implements Initializable {
     @FXML
     private void configureGame(ActionEvent actionEvent) {
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-        Helper.changeScreen(stage, Game.CODENAMES.configFxmlPath(), "CS2340 " + Helper.currentGame.title() + " (Configuration)");
+        Helper.changeScreen(stage, Game.CODENAMES.configFxmlPath(), "CS2340 - Codenames (Configuration)");
     }
 }

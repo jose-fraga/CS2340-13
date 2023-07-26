@@ -17,6 +17,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -24,60 +25,56 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 
-// TODO: Make enums for propertynames
-
 // Source: https://www.youtube.com/watch?v=icf5S9fzRXE
 // We followed this tutorial to understand how to implement the Observer Pattern
 // through using the PropertyChangeListener and PropertyChangeSupport. This
 // code successfully adds listeners (observers), assigns support (observable),
 // and notifies listeners when some property changes.
-public class CNGameScreenController implements Initializable, PropertyChangeListener {
+public class CNGameController implements Initializable, PropertyChangeListener {
     @FXML private BorderPane borderPane;
     @FXML private GridPane gridPane;
-    @FXML private Label teamDisplay, playerDisplay, topTitle;
-    @FXML private Label redTeamScore, blueTeamScore;
+    @FXML private Label teamDisplay, playerDisplay, topTitle, redScore, blueScore;
 
-    private HashMap<Type, Label> scoreLabels = new HashMap<Type, Label>(2);
+    private final HashMap<Type, Label> scoreLabels = new HashMap<>(2);
     private final Round round = CNGame.getGameInstance().getRound();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        System.out.println("ENTERED: Codenames Game Screen");
-
-        scoreLabels.put(Type.RED, redTeamScore);
-        scoreLabels.put(Type.BLUE, blueTeamScore);
-
-        subscribeToEvents();
+        registerListeners();
         populate();
         handle();
-
         addTop();
         addBottom();
     }
 
-    private void subscribeToEvents() {
+    private void registerListeners() {
         this.round.addPropertyChangeListener(this);
         this.round.getTeam1().addPropertyChangeListener(this);
         this.round.getTeam2().addPropertyChangeListener(this);
     }
 
-    private void unsubscribeFromEvents() {
+    private void unregisterListeners() {
         this.round.removePropertyChangeListener(this);
         this.round.getTeam1().removePropertyChangeListener(this);
         this.round.getTeam2().removePropertyChangeListener(this);
     }
 
     private void populate() {
+        this.scoreLabels.put(Type.RED, redScore);
+        this.scoreLabels.put(Type.BLUE, blueScore);
+
         int count = 0;
         for (int i = 0; i < gridPane.getRowCount(); i++) {
             for (int j = 0; j < gridPane.getColumnCount(); j++) {
-                gridPane.add(new WordPane(round.getWords().get(count)), j, i);
+                gridPane.add(new WordPane(this.round.getWords().get(count)), j, i);
                 count++;
             }
         }
 
-        scoreLabels.get(this.round.getTeam1().getType()).setText(this.round.getTeam1().getNumOfCards() + "");
-        scoreLabels.get(this.round.getTeam2().getType()).setText(this.round.getTeam2().getNumOfCards() + "");
+        Team team = this.round.getTeam1();
+        this.scoreLabels.get(team.getType()).setText(String.valueOf(team.getNumOfCards()));
+        team = this.round.getTeam2();
+        this.scoreLabels.get(team.getType()).setText(String.valueOf(team.getNumOfCards()));
     }
 
     private void handle() {
@@ -91,48 +88,13 @@ public class CNGameScreenController implements Initializable, PropertyChangeList
                         curr.addBackground();
                     } else {
                         curr.addButton();
+                        currBox.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> {
+                            
+                        });
                         currBox.getChildren().get(1).addEventFilter(MouseEvent.MOUSE_CLICKED, e -> {
                             curr.getWord().select();
                             if (curr.getWord().getIsSelected()) {
                                 curr.selectedUpdate();
-                            }
-                        });
-
-                        currBox.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> {
-                            Round round = CNGame.getGameInstance().getRound();
-                            Label text = new Label(String.valueOf(round.getActiveTeam().getType()));
-                            int curl = curr.getCurrLength();
-
-                            if (round.isTeamActive(Type.RED) && !curr.hasOccupant(Type.RED)) {
-                                curl++;
-                                curr.setRedPosition(getPosition(curl));
-                                curr.setCurrLength(curl);
-                                currBox.getChildren().add(text);
-                                text.setStyle("-fx-background-color:" + Type.RED.getColor());
-                                curr.ToggleOccupants(Type.RED);
-                                System.out.println(curr.getOccupants());
-                            } else if (round.isTeamActive(Type.RED) && curr.hasOccupant(Type.RED)) {
-                                curl--;
-                                curr.ToggleOccupants(Type.RED);
-                                curr.setRedPosition(getPosition(curl));
-                                removal(currBox, curr.getRedPosition(), curr.getBluePosition(), round.getActiveTeam().getType());
-                                curr.setCurrLength(curl);
-                                System.out.println(curr.getOccupants());
-                            } else if (round.isTeamActive(Type.BLUE) && !curr.hasOccupant(Type.BLUE)) {
-                                curl++;
-                                curr.setBluePosition(getPosition(curl));
-                                curr.setCurrLength(curl);
-                                currBox.getChildren().add(text);
-                                text.setStyle("-fx-background-color:" + Type.BLUE.getColor());
-                                curr.ToggleOccupants(Type.BLUE);
-                                System.out.println(curr.getOccupants());
-                            } else if (round.isTeamActive(Type.BLUE) && curr.hasOccupant(Type.BLUE)) {
-                                curl--;
-                                curr.ToggleOccupants(Type.BLUE);
-                                curr.setBluePosition(getPosition(curl));
-                                removal(currBox, curr.getRedPosition(), curr.getBluePosition(), round.getActiveTeam().getType());
-                                curr.setCurrLength(curl);
-                                System.out.println(curr.getOccupants());
                             }
                         });
                     }
@@ -154,8 +116,7 @@ public class CNGameScreenController implements Initializable, PropertyChangeList
         Player currPlayer = this.round.getActiveTeam().getCurrentPlayer();
         try {
             FXMLLoader loader = new FXMLLoader(Main.class.getResource(currPlayer.getPath()));
-            Helper.setCNGamePane(borderPane);
-            Helper.getCNGamePane().setBottom(loader.load());
+            this.borderPane.setBottom(loader.load());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -171,7 +132,6 @@ public class CNGameScreenController implements Initializable, PropertyChangeList
         return position;
     }
 
-    //method which takes in the position of the label being removed and removes it accordingly
     public void removal(VBox currBox, int redPos, int bluePos, Type team) {
         if (team == Type.RED) {
             if (redPos == 1) {
@@ -192,12 +152,12 @@ public class CNGameScreenController implements Initializable, PropertyChangeList
     public void propertyChange(PropertyChangeEvent evt) {
         String incomingEvent = evt.getPropertyName();
         if (incomingEvent.equals(Round.activeTeamEvent)) {
-            unsubscribeFromEvents();
+            unregisterListeners();
             Helper.changeGameScreen("codenames/CNBufferScreen.fxml");
         } else if (incomingEvent.equals(Round.winnerEvent)) {
             Team winningTeam = (Team) evt.getNewValue();
             CNGame.getGameInstance().clearRound();
-            unsubscribeFromEvents();
+            unregisterListeners();
             Helper.changeGameScreen("codenames/CNEndScreen.fxml");
         } else if (incomingEvent.equals(Team.numOfCardsUpdatedEvent)) {
             // evt check blue or red type

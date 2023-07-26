@@ -11,19 +11,18 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class CNClueBoxController implements Initializable {
-    @FXML private Label clueWordDisplay;
-    @FXML private Label clueGuessDisplay;
+    @FXML private Label clueDisplay, countDisplay;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Round currRound = CNGame.getGameInstance().getRound();
-        String style = "-fx-border-radius: 3; -fx-border-color: " + currRound.getActiveTeam().getType().getColor() + ";";
+        String style = "-fx-border-radius: 3; -fx-border-color: " + currRound.getActiveTeam().getType().getColor();
 
-        clueWordDisplay.setStyle(style);
-        clueGuessDisplay.setStyle(style);
+        clueDisplay.setStyle(style);
+        clueDisplay.setText(currRound.getCurrentClue());
 
-        clueWordDisplay.setText(currRound.getCurrentClue());
-        clueGuessDisplay.setText(String.valueOf(currRound.getCurrentGuessLimit() - 1));
+        countDisplay.setStyle(style);
+        countDisplay.setText(String.valueOf(currRound.getCurrentGuessLimit() - 1));
     }
 
     @FXML private void switchTeams(ActionEvent e) {

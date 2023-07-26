@@ -15,7 +15,7 @@ public enum Game {
             "wordle/WRLLevelScreen.fxml"),
     CODENAMES("Codenames",
             "codenames/CNSplashScreen.fxml",
-            "codenames/CNSetupScreen.fxml",
+            "codenames/CNConfigScreen.fxml",
             "codenames/CNGameScreen.fxml");
 
     private final String title;

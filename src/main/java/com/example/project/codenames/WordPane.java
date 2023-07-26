@@ -12,10 +12,13 @@ import javafx.scene.text.TextAlignment;
 import java.util.HashSet;
 
 public class WordPane extends StackPane {
-    private String style;
     private final Word word;
-    private int currLength;
-    private int redPosition, bluePosition;
+
+    private String style;
+    private int currLength, redPosition, bluePosition;
+
+    private boolean isGuessed;
+
     private final HashSet<Type> occupants = new HashSet<>(2);
 
     public void setCurrLength(int currLength) { this.currLength = currLength; }

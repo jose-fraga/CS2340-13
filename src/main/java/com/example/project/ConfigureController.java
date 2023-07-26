@@ -22,14 +22,14 @@ public class ConfigureController implements Initializable {
         System.out.println("ENTERED: " + Helper.currentGame.title() + " Configuration Screen");
         characterSelect.getItems().addAll(Sprite.getCharacters());
         characterSelect.setValue(Sprite.getCharacters()[0]);
-        characterName.setText(Helper.getPlayerInstance().getName());
+        characterName.setText(Helper.getPrimaryPlayer().getName());
     }
 
     @FXML
     private void continueToGame(ActionEvent e) {
         String playerName = characterName.getCharacters().toString();
         Sprite selectedSprite = Sprite.valueOf(characterSelect.getValue());
-        Player player = Helper.getPlayerInstance();
+        Player player = Helper.getPrimaryPlayer();
         if (playerName.isBlank()) {
             characterNameError.setVisible(true);
             return;
