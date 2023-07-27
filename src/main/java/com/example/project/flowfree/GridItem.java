@@ -1,8 +1,7 @@
 package com.example.project.flowfree;
 
 public class GridItem {
-    private int x;
-    private int y;
+    private int x, y;
     private boolean isEmpty;
 
     public GridItem() {}

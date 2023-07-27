@@ -7,7 +7,7 @@ import com.example.project.flowfree.Pipe;
 import javafx.scene.paint.Color;
 
 public enum LevelDifficulty {
-    EASY("flowfree/levels/Easy.fxml", 4, new GridItem[][]{
+    EASY("flowfree/levels/Easy.fxml", 4, 30, new GridItem[][]{
             {
                     new Dot(Color.GREEN), new Dot(Color.RED), new Dot(Color.BLUE), new Dot(Color.RED),
                     null, null, new Obstacle(1), null,
@@ -27,7 +27,7 @@ public enum LevelDifficulty {
                     null, new Obstacle(10), null, null
             },
     }),
-    MEDIUM("flowfree/levels/Medium.fxml", 5, new GridItem[][]{
+    MEDIUM("flowfree/levels/Medium.fxml", 5, 50, new GridItem[][]{
             {
                     new Dot(Color.ORANGE), new Dot(Color.RED), null, new Obstacle(10), null,
                     new Obstacle(5), new Dot(Color.PURPLE), null, null, new Dot(Color.RED),
@@ -50,7 +50,7 @@ public enum LevelDifficulty {
                     new Dot(Color.BLUE), new Obstacle(1), new Dot(Color.BLUE), new Dot(Color.GOLD), new Dot(Color.LIMEGREEN)
             }
     }),
-    HARD("flowfree/levels/Hard.fxml", 6, new GridItem[][]{
+    HARD("flowfree/levels/Hard.fxml", 6, 70, new GridItem[][]{
             {
                     new Dot(Color.RED), null, new Obstacle(5), new Dot(Color.LIMEGREEN), null, new Obstacle(10),
                     new Dot(Color.MEDIUMPURPLE), new Obstacle(5), new Obstacle(10), new Obstacle(8), new Dot(Color.PLUM), new Dot(Color.LIMEGREEN),
@@ -79,16 +79,19 @@ public enum LevelDifficulty {
 
     private final String path;
     private final int size;
+    private final int timerLimit;
     private final GridItem[][] levels;
 
-    LevelDifficulty(String path, int size, GridItem[][] levels) {
+    LevelDifficulty(String path, int size, int limit, GridItem[][] levels) {
         this.path = path;
         this.size = size;
+        this.timerLimit = limit;
         this.levels = levels;
     }
 
     public String getPath() { return this.path; }
     public int getSize() { return this.size; }
+    public int getTimerLimit() { return this.timerLimit; }
 
     public GridItem[][] level(int level) {
         GridItem[][] copiedLevel = new GridItem[size][size];

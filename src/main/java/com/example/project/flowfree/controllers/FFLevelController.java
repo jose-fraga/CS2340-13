@@ -2,6 +2,7 @@ package com.example.project.flowfree.controllers;
 
 import com.example.project.Helper;
 import com.example.project.flowfree.FFGame;
+import com.example.project.flowfree.Level;
 import com.example.project.flowfree.enums.LevelDifficulty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -34,6 +35,7 @@ public class FFLevelController implements Initializable {
             levelNumber -= 7;
         }
         this.gameInstance.createLevel(levelNumber);
+        Level.TIME_LIMIT = gameLevel.getTimerLimit();
         this.gameInstance.setLevelGrid(gameLevel);
         Helper.changeGameScreen(gameLevel.getPath());
     }

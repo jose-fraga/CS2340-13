@@ -13,12 +13,11 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class FFEndController implements Initializable {
-    @FXML private Label endLabel;
-    @FXML private Label messageLabel;
+    @FXML private Label endLabel, messageLabel;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        System.out.println("ENTERED: " + Helper.currentGame.title() + "End Screen");
+        System.out.println("ENTERED: " + Helper.currentGame.title() + " End Screen");
     }
 
     public void showFailureMessage() {

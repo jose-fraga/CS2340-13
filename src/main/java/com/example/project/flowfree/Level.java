@@ -3,10 +3,8 @@ package com.example.project.flowfree;
 import com.example.project.flowfree.enums.LevelDifficulty;
 import org.apache.commons.lang3.time.StopWatch;
 
-import java.util.Timer;
-
 public class Level {
-    public static final int TIME_LIMIT = 30;
+    public static int TIME_LIMIT;
     private final int levelNumber;
     private final StopWatch timer;
     private Grid grid;

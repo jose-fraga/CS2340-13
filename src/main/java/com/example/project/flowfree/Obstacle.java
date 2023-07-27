@@ -29,5 +29,4 @@ public class Obstacle extends Pipe {
     public String toString() {
         return String.format("Obstacle(%d, %d, hp(%d))", this.getX(), this.getY(), this.hitPoints);
     }
-
 }
