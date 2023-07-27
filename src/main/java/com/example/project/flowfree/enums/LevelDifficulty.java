@@ -52,13 +52,28 @@ public enum LevelDifficulty {
     }),
     HARD("flowfree/levels/Hard.fxml", 6, new GridItem[][]{
             {
-
+                    new Dot(Color.RED), null, new Obstacle(5), new Dot(Color.LIMEGREEN), null, new Obstacle(10),
+                    new Dot(Color.MEDIUMPURPLE), new Obstacle(5), new Obstacle(10), new Obstacle(8), new Dot(Color.PLUM), new Dot(Color.LIMEGREEN),
+                    new Dot(Color.ORANGE), null, new Dot(Color.MEDIUMPURPLE), null, null, new Obstacle(2),
+                    new Obstacle(2), new Dot(Color.RED), null, new Obstacle(5), new Dot(Color.BLUE), null,
+                    null, new Dot(Color.BLUE), new Obstacle(10), null, null, new Obstacle(2),
+                    new Obstacle(5), null, new Dot(Color.ORANGE), new Dot(Color.PLUM), new Obstacle(10), null
             },
             {
-
+                    new Dot(Color.BLUE), null, new Obstacle(5), new Obstacle(5), new Dot(Color.ORANGE), new Dot(Color.RED),
+                    null, new Dot(Color.ORANGE), null, new Dot(Color.BLUE), new Obstacle(6), null,
+                    new Obstacle(5), null, new Obstacle(10), new Obstacle(2), null, new Dot(Color.LIME),
+                    new Dot(Color.MAGENTA), new Obstacle(2), new Dot(Color.YELLOW), new Dot(Color.RED), new Dot(Color.YELLOW), new Obstacle(2),
+                    new Dot(Color.MEDIUMPURPLE), new Dot(Color.MAGENTA), null, new Obstacle(8), null, null,
+                    new Obstacle(5), null, new Obstacle(8), new Dot(Color.MEDIUMPURPLE), new Dot(Color.LIME), new Obstacle(6)
             },
             {
-
+                    new Dot(Color.CORNFLOWERBLUE), new Obstacle(5), new Dot(Color.CORNFLOWERBLUE), new Obstacle(5), new Dot(Color.LIME), new Dot(Color.BLUE),
+                    new Obstacle(4), new Dot(Color.BLUEVIOLET), new Dot(Color.LIME), null, new Obstacle(8), null,
+                    new Obstacle(10), new Dot(Color.RED), new Obstacle(10), new Dot(Color.BLUE), new Obstacle(5), new Dot(Color.DARKORANGE),
+                    null, new Obstacle(10), null, new Obstacle(5), new Obstacle(4), null,
+                    new Dot(Color.DARKTURQUOISE), null, new Dot(Color.BLUEVIOLET), null, new Dot(Color.DARKORANGE), new Dot(Color.MAGENTA),
+                    new Obstacle(5), new Dot(Color.DARKTURQUOISE), new Dot(Color.RED), new Obstacle(8), new Dot(Color.MAGENTA), new Obstacle(4)
             }
     });
 
