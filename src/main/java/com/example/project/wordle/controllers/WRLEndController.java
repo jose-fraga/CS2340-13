@@ -13,9 +13,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class WRLEndController implements Initializable {
-    @FXML private Label endLabel;
-    @FXML private Label messageLabel;
-    @FXML private Label scoreDisplay;
+    @FXML private Label endLabel, messageLabel, scoreDisplay;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

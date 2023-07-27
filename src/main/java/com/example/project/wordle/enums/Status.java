@@ -6,7 +6,7 @@ public enum Status {
     PARTIAL("#B59F3B"),
     CORRECT("#538D4E");
 
-    private String color;
+    private final String color;
 
     Status(String color) {
         this.color = color;

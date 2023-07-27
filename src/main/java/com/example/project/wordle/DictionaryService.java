@@ -61,7 +61,6 @@ public class DictionaryService {
                 return response.toString().replace("[", "")
                         .replace("]", "")
                         .replace("\"", "");
-
             } else {
                 System.out.println("ERROR CODE:" + connection.getResponseCode());
             }

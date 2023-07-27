@@ -4,8 +4,8 @@ import org.junit.jupiter.api.Test;
 
 import static com.example.project.wordle.enums.Status.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-public class StatusTest {
 
+public class StatusTest {
     @Test
     void testMisses() {
         assertEquals(EMPTY.getColor(), "#FFFFFF");
@@ -17,5 +17,4 @@ public class StatusTest {
         assertEquals(PARTIAL.getColor(), "#B59F3B");
         assertEquals(CORRECT.getColor(), "#538D4E");
     }
-
 }
