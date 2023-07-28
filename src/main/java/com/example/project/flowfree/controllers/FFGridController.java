@@ -11,6 +11,7 @@ import com.example.project.flowfree.GridItem;
 import com.example.project.flowfree.Level;
 import com.example.project.flowfree.Obstacle;
 import com.example.project.flowfree.Pipe;
+import com.example.project.flowfree.enums.PipeState;
 import com.example.project.flowfree.enums.Warning;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -18,12 +19,16 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.scene.Cursor;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseDragEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Border;
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 
 import java.net.URL;
@@ -149,6 +154,7 @@ public class FFGridController implements Initializable {
 
             // Checks full drag from Dots
             item.addEventFilter(MouseDragEvent.MOUSE_DRAG_ENTERED, e -> {
+                gridPane.getScene().setCursor(Cursor.CLOSED_HAND);
                 if (activeDot == null) { return; }
                 FFPane itemPane = (FFPane) e.getSource();
                 GridItem gridItem = itemPane.getGridItem();
@@ -187,7 +193,6 @@ public class FFGridController implements Initializable {
                             level.complete();
                             System.out.println("LEVEL COMPLETE!");
                             safelyChangeScreen("flowfree/FFEndScreen.fxml");
-
                         } else {
                             System.out.println("KEEP GOING...");
                         }
@@ -211,9 +216,20 @@ public class FFGridController implements Initializable {
                 isDragging = false;
             });
 
-            // Destorys Obstacles
+            // Destorys Pipe Connections and/or Obstacles
             item.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> {
                 FFPane pane = (FFPane) e.getSource();
+                if (pane.getGridItem() instanceof Dot) {
+                    Color color = ((Dot) pane.getGridItem()).getColor();
+                    gridPane.getChildren().forEach(currPane -> {
+                        if (currPane instanceof Group) return;
+                        FFPane curr = (FFPane) currPane;
+                        if (curr.getGridItem() instanceof Pipe && ((Pipe) curr.getGridItem()).getColor() == color) {
+                            ((Pipe) curr.getGridItem()).resetFill();
+                            curr.setStyle("-fx-background-color: transparent;");
+                        }
+                    });
+                }
                 if (pane.getGridItem() instanceof Obstacle) {
                     Obstacle obstacle = (Obstacle) pane.getGridItem();
                     if (obstacle.isCleared()) { return; }
@@ -224,10 +240,21 @@ public class FFGridController implements Initializable {
                     }
                 }
             });
+
+            // Change Cursor
+            item.addEventFilter(MouseEvent.MOUSE_ENTERED, e -> {
+                FFPane pane = (FFPane) e.getSource();
+                if (pane.getGridItem() instanceof Dot) {
+                    gridPane.getScene().setCursor(Cursor.HAND);
+                } else {
+                    gridPane.getScene().setCursor(Cursor.DEFAULT);
+                }
+            });
         });
     }
 
     private void displayWarning(String message) {
+        gridPane.getScene().setCursor(Cursor.DEFAULT);
         warningLabel.setVisible(true);
         warningLabel.setText(message);
         isDragging = false;
