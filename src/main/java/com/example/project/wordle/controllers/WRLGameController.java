@@ -44,6 +44,7 @@ public class WRLGameController implements Initializable {
     }
 
     private void switchToEndScreen(boolean isFailure) {
+        life.resetLives();
         FXMLLoader loader = safelyChangeScreen("wordle/WRLEndScreen.fxml");
         WRLEndController controller = loader.getController();
         if (isFailure) {

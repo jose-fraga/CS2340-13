@@ -8,7 +8,6 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -17,7 +16,7 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class GameController implements Initializable {
+public class CRGameController implements Initializable {
     @FXML private BorderPane gamePane;
     @FXML private Label gameTitle, playerName;
     @FXML private ImageView playerSprite;

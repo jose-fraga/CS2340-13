@@ -34,9 +34,9 @@ class GameTest {
 
         checkFilePaths(Game.UNSELECTED);
 
-        assertEquals("SelectScreen.fxml", Game.UNSELECTED.initialFxmlPath());
-        assertEquals("ConfigureScreen.fxml", Game.UNSELECTED.configFxmlPath());
-        assertEquals("SelectScreen.fxml", Game.UNSELECTED.gameFxmlPath());
+        assertEquals("CRSelectScreen.fxml", Game.UNSELECTED.initialFxmlPath());
+        assertEquals("CRConfigureScreen.fxml", Game.UNSELECTED.configFxmlPath());
+        assertEquals("CRSelectScreen.fxml", Game.UNSELECTED.gameFxmlPath());
 
         assertEquals(Game.UNSELECTED, Game.values()[0]);
         assertEquals(Game.UNSELECTED, Game.valueOf("UNSELECTED"));
@@ -49,7 +49,7 @@ class GameTest {
         checkFilePaths(Game.FLOW);
 
         assertEquals("flowfree/FFSplashScreen.fxml", Game.FLOW.initialFxmlPath());
-        assertEquals("ConfigureScreen.fxml", Game.FLOW.configFxmlPath());
+        assertEquals("CRConfigureScreen.fxml", Game.FLOW.configFxmlPath());
         assertEquals("flowfree/FFLevelScreen.fxml", Game.FLOW.gameFxmlPath());
 
         assertEquals(Game.FLOW, Game.values()[1]);
@@ -63,7 +63,7 @@ class GameTest {
         checkFilePaths(Game.WORDLE);
 
         assertEquals("wordle/WRLSplashScreen.fxml", Game.WORDLE.initialFxmlPath());
-        assertEquals("ConfigureScreen.fxml", Game.WORDLE.configFxmlPath());
+        assertEquals("CRConfigureScreen.fxml", Game.WORDLE.configFxmlPath());
         assertEquals("wordle/WRLLevelScreen.fxml", Game.WORDLE.gameFxmlPath());
 
         assertEquals(Game.WORDLE, Game.values()[2]);

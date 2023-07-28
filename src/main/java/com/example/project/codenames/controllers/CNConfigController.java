@@ -83,6 +83,6 @@ public class CNConfigController implements Initializable {
     @FXML private void continueToGame(ActionEvent e) {
         updateSprites();
         Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-        Helper.changeScreen(stage, "GameScreen.fxml", "CS2340 - Codenames (Game)");
+        Helper.changeScreen(stage, "CRGameScreen.fxml", "CS2340 - Codenames (Game)");
     }
 }

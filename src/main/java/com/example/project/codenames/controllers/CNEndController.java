@@ -29,7 +29,7 @@ public class CNEndController implements Initializable {
 
     @FXML public void restartGame(ActionEvent e) {
         Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-        Helper.changeScreen(stage, "GameScreen.fxml", "CS2340 - Codenames (Game)");
+        Helper.changeScreen(stage, "CRGameScreen.fxml", "CS2340 - Codenames (Game)");
     }
 
     @FXML public void quitGame(ActionEvent e) {

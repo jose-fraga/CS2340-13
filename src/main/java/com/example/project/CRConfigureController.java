@@ -12,7 +12,7 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ConfigureController implements Initializable {
+public class CRConfigureController implements Initializable {
     @FXML private TextField characterName;
     @FXML private Label characterNameError;
     @FXML private ChoiceBox<String> characterSelect;
@@ -37,6 +37,6 @@ public class ConfigureController implements Initializable {
         player.setName(playerName);
         player.setSpritePath(selectedSprite.getPath());
         Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-        Helper.changeScreen(stage, "GameScreen.fxml", "CS2340 - " + Helper.currentGame.title() + " (Game)");
+        Helper.changeScreen(stage, "CRGameScreen.fxml", "CS2340 - " + Helper.currentGame.title() + " (Game)");
     }
 }
