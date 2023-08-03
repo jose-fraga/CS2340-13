@@ -21,6 +21,8 @@ module com.example.project {
     opens com.example.project.wordle to javafx.fxml;
     exports com.example.project.wordle.controllers;
     opens com.example.project.wordle.controllers to javafx.fxml;
+    exports com.example.project.wordle.enums;
+    opens com.example.project.wordle.enums to javafx.fxml;
     exports com.example.project.codenames.controllers;
     opens com.example.project.codenames.controllers to javafx.fxml;
     exports com.example.project.codenames.enums;

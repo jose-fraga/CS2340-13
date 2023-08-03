@@ -1,7 +1,12 @@
 package com.example.project.wordle.controllers;
 
 import com.example.project.Helper;
-import com.example.project.wordle.*;
+import com.example.project.wordle.AttemptedWord;
+import com.example.project.wordle.LetterPane;
+import com.example.project.wordle.Life;
+import com.example.project.wordle.TargetWord;
+import com.example.project.wordle.WRLGame;
+import com.example.project.wordle.Word;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -29,6 +34,7 @@ public class WRLGameController implements Initializable {
         currWord = new AttemptedWord("");
         targetWord = new TargetWord(gridPane.getColumnCount());
         life = WRLGame.getInstance().getLife(); // Use the Life instance from the singleton
+        life.resetLives();
     }
 
     private void populate() {
@@ -44,13 +50,13 @@ public class WRLGameController implements Initializable {
     }
 
     private void switchToEndScreen(boolean isFailure) {
-        life.resetLives();
         FXMLLoader loader = safelyChangeScreen("wordle/WRLEndScreen.fxml");
         WRLEndController controller = loader.getController();
         if (isFailure) {
             controller.showFailureMessage();
         }
         controller.updateScore("Latest Score: " + Integer.toString(life.getLives() * 10));
+        life.resetLives();
     }
 
     @FXML public void handle(KeyEvent e) {
@@ -99,8 +105,13 @@ public class WRLGameController implements Initializable {
                 warningLabel.setVisible(true);
                 return;
             }
+            currWord.populateLetterMap();
+            targetWord.populateLetterMap();
             gridPane.getChildren().subList(cellIdx - rowLength, cellIdx).forEach(item -> {
-                ((LetterPane) item).attemptedLetter.checkAttempt(targetWord.getWord());
+                ((LetterPane) item).attemptedLetter.checkInitial(currWord, targetWord);
+            });
+            gridPane.getChildren().subList(cellIdx - rowLength, cellIdx).forEach(item -> {
+                ((LetterPane) item).attemptedLetter.checkNext(currWord, targetWord);
                 ((LetterPane) item).updateStyle();
             });
             currWord = new AttemptedWord("");
