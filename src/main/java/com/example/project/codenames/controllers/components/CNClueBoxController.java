@@ -24,6 +24,7 @@ public class CNClueBoxController implements Initializable {
     }
 
     @FXML private void switchTeams(ActionEvent e) {
+//        CNGame.getGameInstance().getRound().getCurrentLog().addLogItem(null,  CNGame.getGameInstance().getRound().getActiveTeam().getType().getColor());
         CNGame.getGameInstance().getRound().endTurn();
     }
 }

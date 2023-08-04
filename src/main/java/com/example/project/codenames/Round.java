@@ -3,6 +3,8 @@ package com.example.project.codenames;
 import com.example.project.codenames.enums.Player;
 import com.example.project.codenames.enums.Role;
 import com.example.project.codenames.enums.Type;
+import javafx.scene.control.Label;
+import javafx.scene.text.TextFlow;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -22,6 +24,8 @@ public class Round implements PropertyChangeListener {
     private ArrayList<Word> words;
     private String currentClue;
     private int currGuessLimit, currGuessCount;
+
+//    public GameLog getCurrentLog() { return this.currentLog; }
 
     public Round() {
         this.support = new PropertyChangeSupport(this);
