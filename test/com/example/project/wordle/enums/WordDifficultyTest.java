@@ -6,7 +6,8 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class WordDifficultyTest {
-    private EnumPathTestHelper<WordDifficulty> helper = new EnumPathTestHelper<WordDifficulty>();
+    private final EnumPathTestHelper<WordDifficulty> helper = new EnumPathTestHelper<>();
+
     @Test
     void testFOUR() {
         assertEquals("wordle/levels/Four.fxml", WordDifficulty.FOUR.getPath());
@@ -38,6 +39,5 @@ class WordDifficultyTest {
         helper.assertPathResolves(WordDifficulty.FOUR.getPath(), "getPath");
         helper.assertPathResolves(WordDifficulty.FIVE.getPath(), "getPath");
         helper.assertPathResolves(WordDifficulty.SIX.getPath(), "getPath");
-
     }
 }

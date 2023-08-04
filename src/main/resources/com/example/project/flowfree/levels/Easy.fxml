@@ -19,7 +19,7 @@
                        <Button fx:id="restartButton" mnemonicParsing="false" onAction="#restartLevel" prefHeight="25.0" prefWidth="60.0" text="Restart" />
          </children>
       </HBox>
-         <GridPane fx:id="gridPane" alignment="CENTER" focusTraversable="true" gridLinesVisible="true" layoutX="205.0" layoutY="98.0" prefHeight="190.0" prefWidth="190.0" style="-fx-border-color: black;">
+         <GridPane fx:id="gridPane" alignment="CENTER" focusTraversable="true" gridLinesVisible="true" layoutX="210.0" layoutY="103.0" prefHeight="180.0" prefWidth="180.0" style="-fx-border-color: black;">
              <columnConstraints>
                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />

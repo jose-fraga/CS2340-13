@@ -8,7 +8,6 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -17,25 +16,29 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class GameController implements Initializable {
+public class CRGameController implements Initializable {
     @FXML private BorderPane gamePane;
-    @FXML private Label gameTitle;
+    @FXML private Label gameTitle, playerName;
     @FXML private ImageView playerSprite;
-    @FXML private Label playerName;
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         try {
             System.out.println("ENTERED: " + Helper.currentGame.title() + " Game Screen");
 
+            if (Helper.currentGame == Game.CODENAMES) {
+                gamePane.setPrefWidth(900);
+                gamePane.setPrefHeight(655);
+            }
+
             Helper.setGamePane(gamePane);
             Helper.changeGameScreen(Helper.currentGame.gameFxmlPath());
 
             gameTitle.setText(Helper.currentGame.title());
-            String spritePath = Helper.getPlayerInstance().getSpritePath();
+            String spritePath = Helper.getPrimaryPlayer().getSpritePath();
 
             playerSprite.setImage(new Image(Main.class.getResourceAsStream(spritePath)));
-            playerName.setText(Helper.getPlayerInstance().getName());
+            playerName.setText(Helper.getPrimaryPlayer().getName());
 
             if (Helper.currentGame == Game.CODENAMES) {
                 HBox playersBox = (HBox) ((HBox) gamePane.getTop()).getChildren().get(2);

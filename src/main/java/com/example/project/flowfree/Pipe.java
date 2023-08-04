@@ -15,15 +15,7 @@ public class Pipe extends ColoredGridItem {
         setPipeState(PipeState.EMPTY);
     }
 
-    @Override
-    public boolean getIsEmpty() {
-        return this.pipeState == PipeState.EMPTY;
-    }
-
-    public PipeState getPipeState() {
-        return this.pipeState;
-    }
-
+    public PipeState getPipeState() { return this.pipeState; }
     public void setPipeState(PipeState state) {
         this.pipeState = state;
         this.setIsEmpty(this.pipeState == PipeState.EMPTY);
@@ -43,6 +35,11 @@ public class Pipe extends ColoredGridItem {
         if (this.pipeState == PipeState.FILLED_TEMP) {
             this.setPipeState(PipeState.FILLED_FINAL);
         }
+    }
+
+    @Override
+    public boolean getIsEmpty() {
+        return this.pipeState == PipeState.EMPTY;
     }
 
     @Override

@@ -1,7 +1,13 @@
 package com.example.project.wordle.controllers;
 
 import com.example.project.Helper;
-import com.example.project.wordle.*;
+import com.example.project.wordle.AttemptedWord;
+import com.example.project.wordle.Leaderboard;
+import com.example.project.wordle.LetterPane;
+import com.example.project.wordle.Life;
+import com.example.project.wordle.TargetWord;
+import com.example.project.wordle.WRLGame;
+import com.example.project.wordle.Word;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -16,20 +22,22 @@ import java.util.ResourceBundle;
 
 public class WRLGameController implements Initializable {
     @FXML private GridPane gridPane;
-    @FXML private Label warningLabel;
-    @FXML private Label livesDisplay;
+    @FXML private Label warningLabel, livesDisplay;
 
     private int x = 0, y = 0, cellIdx = 0;
     private Word currWord;
     private TargetWord targetWord;
     private Life life;
+    private Leaderboard leaderboard;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         populate();
         currWord = new AttemptedWord("");
         targetWord = new TargetWord(gridPane.getColumnCount());
-        life = WRLSingleton.getInstance().getLife(); // Use the Life instance from the singleton
+        life = WRLGame.getInstance().getLife(); // Use the Life instance from the singleton
+        life.resetLives();
+        leaderboard = Leaderboard.getInstance();
     }
 
     private void populate() {
@@ -40,15 +48,30 @@ public class WRLGameController implements Initializable {
         }
     }
 
-    @FXML
-    public void handle(KeyEvent e) {
+    private FXMLLoader safelyChangeScreen(String fxmlPath) {
+        return Helper.changeGameScreen(fxmlPath);
+    }
+
+    private void switchToEndScreen(boolean isFailure) {
+        int score = life.getLives() * 10;
+        leaderboard.addEntry(Helper.getPrimaryPlayer().getName(), score);
+        FXMLLoader loader = safelyChangeScreen("wordle/WRLEndScreen.fxml");
+        WRLEndController controller = loader.getController();
+        if (isFailure) {
+            controller.showFailureMessage();
+        }
+        controller.updateScore("Latest Score: " + Integer.toString(score));
+        life.resetLives();
+    }
+
+    @FXML public void handle(KeyEvent e) {
         warningLabel.setVisible(false);
-        // Check if game over
+        // Check If Game Over
         if (life.getLives() <= 0) {
             switchToEndScreen(true);
             return;
         }
-        // Add condition to check if all cells are filled
+        // Check If All Cells Are Filled
         int rowLength = gridPane.getColumnCount();
         if (Character.isLetter(e.getCode().getChar().charAt(0))) {
             if (x == rowLength) {
@@ -87,8 +110,13 @@ public class WRLGameController implements Initializable {
                 warningLabel.setVisible(true);
                 return;
             }
+            currWord.populateLetterMap();
+            targetWord.populateLetterMap();
             gridPane.getChildren().subList(cellIdx - rowLength, cellIdx).forEach(item -> {
-                ((LetterPane) item).attemptedLetter.checkAttempt(targetWord.getWord());
+                ((LetterPane) item).attemptedLetter.checkInitial(currWord, targetWord);
+            });
+            gridPane.getChildren().subList(cellIdx - rowLength, cellIdx).forEach(item -> {
+                ((LetterPane) item).attemptedLetter.checkNext(currWord, targetWord);
                 ((LetterPane) item).updateStyle();
             });
             currWord = new AttemptedWord("");
@@ -98,18 +126,5 @@ public class WRLGameController implements Initializable {
                 switchToEndScreen(true);
             }
         }
-    }
-
-    private void switchToEndScreen(boolean isFailure) {
-        FXMLLoader loader = safelyChangeScreen("wordle/WRLEndScreen.fxml");
-        WRLEndController controller = loader.getController();
-        if (isFailure) {
-            controller.showFailureMessage();
-        }
-        controller.updateScore("Latest Score: " + Integer.toString(life.getLives() * 10));
-    }
-
-    private FXMLLoader safelyChangeScreen(String fxmlPath) {
-        return Helper.changeGameScreen(fxmlPath);
     }
 }

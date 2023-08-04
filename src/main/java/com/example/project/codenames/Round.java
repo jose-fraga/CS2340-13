@@ -1,6 +1,7 @@
 package com.example.project.codenames;
 
 import com.example.project.codenames.enums.Player;
+import com.example.project.codenames.enums.Role;
 import com.example.project.codenames.enums.Type;
 import javafx.scene.control.Label;
 import javafx.scene.text.TextFlow;
@@ -18,60 +19,46 @@ import java.util.Random;
 // code successfully adds listeners (observers), assigns support (observable),
 // and notifies listeners when some property changes.
 public class Round implements PropertyChangeListener {
-    public static final String activeTeamEvent = "activeTeam";
-    public static final String winnerEvent = "winner";
-
-    private Team team1, team2, activeTeam;
+    private final PropertyChangeSupport support;
+    private Team redTeam, blueTeam;
     private ArrayList<Word> words;
-
     private String currentClue;
-    private int currentGuessLimit;
-    private int currentGuessCount;
+    private int currGuessLimit, currGuessCount;
 
-    private GameLog currentLog;
-
-    private PropertyChangeSupport support;
-
-    public Team getTeam1() { return team1; }
-    public Team getTeam2() { return team2; }
-
-    public GameLog getCurrentLog() { return this.currentLog; }
+//    public GameLog getCurrentLog() { return this.currentLog; }
 
     public Round() {
         this.support = new PropertyChangeSupport(this);
-        this.team1 = this.activeTeam = new Random().nextBoolean() ? new Team(Type.RED, 9) : new Team(Type.BLUE, 9);
-        this.team2 = (activeTeam.getType() == Type.RED) ? new Team(Type.BLUE, 8) : new Team(Type.RED, 8);
-        this.currentLog = new GameLog();
+        populateTeams();
         updateWordType();
     }
 
-    public String getCurrentClue() { return this.currentClue; }
-    public int getCurrentGuessLimit() { return this.currentGuessLimit; }
-
     public ArrayList<Word> getWords() { return this.words; }
+    public String getCurrentClue() { return this.currentClue; }
+    public int getCurrGuessLimit() { return this.currGuessLimit; }
 
-    public Team getActiveTeam() {
-        return this.activeTeam;
+    public Team activeTeam() { return (this.redTeam.isActiveTeam()) ? this.redTeam : this.blueTeam; }
+    public Team passiveTeam() { return (this.redTeam.isActiveTeam()) ? this.blueTeam : this.redTeam; }
+
+    public void swapTeams(boolean isReset) {
+        this.redTeam.swapRoleType(isReset);
+        this.redTeam.swapRoleType(isReset);
     }
 
-    public boolean isTeamActive(Type team) {
-        return this.activeTeam.getType() == team;
+    private void populateTeams() {
+        this.redTeam = new Team(Type.RED, (new Random().nextBoolean()) ? Role.ACTIVE : Role.PASSIVE);
+        this.blueTeam = new Team(Type.BLUE, (this.redTeam.isActiveTeam()) ? Role.PASSIVE : Role.ACTIVE);
     }
 
     private void updateWordType() {
         DictionaryService.populate();
         this.words = DictionaryService.getGameWords();
-
         Collections.shuffle(this.words);
-
-        addType(0, 9, team1.getType());
-        addType(9, 17, team2.getType());
-
+        addType(0, 9, activeTeam().getType());
+        addType(9, 17, passiveTeam().getType());
         Word assassinWord = this.words.get(24);
         assassinWord.setType(Type.ASSASSIN);
-
         Collections.shuffle(this.words);
-
         this.words.forEach(item -> item.addPropertyChangeListener(this));
     }
 
@@ -82,65 +69,56 @@ public class Round implements PropertyChangeListener {
     }
 
     public void checkSelectedWord(Word selected) {
-        Team passiveTeam = (this.activeTeam == this.team1) ? this.team2 : this.team1;
-
-        // selected = Assassin (Incorrect -> endGame)
         if (selected.getType() == Type.ASSASSIN) {
-            System.out.println("SELECTED: Assassin Card");
-            this.activeTeam = passiveTeam;
-            endGame(passiveTeam);
-
-        // selected = Other Team (Incorrect -> endTurn)
-        } else if (selected.getType() == passiveTeam.getType()) {
-            System.out.println("SELECTED: Enemy Card");
-            passiveTeam.decrementCardCount();
-            if (passiveTeam.hasWon()) {
-                endGame(passiveTeam);
+//            System.out.println("A.T. SELECTED: Assassin Card (Game Over)");
+            passiveTeam().setScore(188);
+            endGame(passiveTeam());
+        } else if (selected.getType() == Type.NEUTRAL) {
+//            System.out.println("A.T. SELECTED: Neutral Card (End Turn)");
+            activeTeam().setScore(activeTeam().getScore() - 5);
+            endTurn();
+        } else if (selected.getType() == passiveTeam().getType()) {
+//            System.out.println("A.T. SELECTED: Enemy Card (End Turn/Game Over)");
+            passiveTeam().decrementCardCount();
+            activeTeam().setScore(passiveTeam().getScore() + 20);
+            if (passiveTeam().hasWon()) {
+                endGame(passiveTeam());
             } else {
                 endTurn();
             }
-
-        // selected = Neutral (Incorrect -> endTurn)
-        } else if (selected.getType() == Type.NEUTRAL) {
-            System.out.println("SELECTED: Neutral Card");
-            endTurn();
-
-        // selected = Your Team (Correct -> endTurn or endGame)
-        } else if (selected.getType() == activeTeam.getType()) {
-            System.out.println("SELECTED: Team Card");
-            this.activeTeam.decrementCardCount();
-            this.currentGuessCount++;
-
-            if (this.activeTeam.hasWon()) {
-                endGame(this.activeTeam);
-            } else if (this.currentGuessCount == this.currentGuessLimit) {
+        } else if (selected.getType() == activeTeam().getType()) {
+//            System.out.println("A.T. SELECTED: Team Card (Continue/End Turn/Game Over)");
+            activeTeam().decrementCardCount();
+            activeTeam().setScore(activeTeam().getScore() + 20);
+            this.currGuessCount++;
+            if (activeTeam().hasWon()) {
+                endGame(activeTeam());
+            } else if (this.currGuessCount == this.currGuessLimit) {
                 endTurn();
             }
         }
     }
 
     public void setClue(String clue, int clueCount) {
-        if (this.activeTeam.getCurrentPlayer() == Player.SPY_MASTER) {
-            this.currentLog.addClueItem(clue, clueCount);
-
-            this.activeTeam.setCurrentPlayer(Player.OPERATIVE);
-            this.currentGuessCount = 0;
-            this.currentGuessLimit = clueCount + 1;
+        if (activeTeam().getCurrentPlayer() == Player.SPY_MASTER) {
+            activeTeam().setCurrentPlayer(Player.OPERATIVE);
+            this.currGuessCount = 0;
+            this.currGuessLimit = ++clueCount;
             this.currentClue = clue;
+            this.support.firePropertyChange("endPlayerTurn", null, activeTeam().getType());
         }
     }
 
     public void endTurn() {
-        Team previousTeam = this.activeTeam;
-        this.activeTeam = (this.activeTeam == this.team1) ? this.team2 : this.team1;
-        this.activeTeam.setCurrentPlayer(Player.SPY_MASTER);
+        swapTeams(false);
+        activeTeam().setCurrentPlayer(Player.SPY_MASTER);
         this.currentClue = "";
-        this.support.firePropertyChange(activeTeamEvent, previousTeam , activeTeam);
+        this.support.firePropertyChange("endTeamTurn", null, activeTeam().getType());
     }
 
     private void endGame(Team winner) {
-        this.support.firePropertyChange(winnerEvent, null, winner);
-        System.out.println("Game ends! " + winner);
+        this.support.firePropertyChange("endGame", null, winner);
+        swapTeams(true);
     }
 
     public void addPropertyChangeListener(PropertyChangeListener listener) {

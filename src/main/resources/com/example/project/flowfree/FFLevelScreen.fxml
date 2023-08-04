@@ -1,17 +1,85 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="levelSelect" prefHeight="330.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.project.flowfree.controllers.FFLevelController">
     <children>
-        <HBox alignment="CENTER" layoutX="232.0" layoutY="125.0" prefHeight="40.0" prefWidth="135.0" style="-fx-spacing: 20;">
+        <HBox fx:id="buttonBox" alignment="CENTER" layoutX="90.0" layoutY="158.0" prefHeight="45.0" prefWidth="420.0" style="-fx-spacing: 20;">
             <children>
-                <Button contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#selectLevel" prefHeight="25.0" prefWidth="25.0" style="-fx-border-color: black; -fx-border-radius: 1;" text="1" />
-                <Button contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#selectLevel" prefHeight="25.0" prefWidth="25.0" style="-fx-border-color: black; -fx-border-radius: 1;" text="2" />
-                <Button contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#selectLevel" prefHeight="25.0" prefWidth="25.0" style="-fx-border-color: black; -fx-border-radius: 1;" text="3" />
+                <Button contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#selectLevel" prefHeight="25.0" prefWidth="25.0" style="-fx-border-color: black; -fx-border-radius: 1; -fx-background-color: lightgreen; -fx-background-insets: 0;" text="1">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+                <Button contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#selectLevel" prefHeight="25.0" prefWidth="25.0" style="-fx-border-color: black; -fx-border-radius: 1; -fx-background-color: lightgreen; -fx-background-insets: 0;" text="2">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+                <Button contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#selectLevel" prefHeight="25.0" prefWidth="25.0" style="-fx-border-color: black; -fx-border-radius: 1; -fx-background-color: lightgreen; -fx-background-insets: 0;" text="3">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+            <Button contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#selectLevel" prefHeight="25.0" prefWidth="25.0" style="-fx-border-color: black; -fx-border-radius: 1; -fx-background-color: gold; -fx-background-insets: 0;" text="4">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+            <Button contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#selectLevel" prefHeight="25.0" prefWidth="25.0" style="-fx-border-color: black; -fx-border-radius: 1; -fx-background-color: gold; -fx-background-insets: 0;" text="5">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+            <Button contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#selectLevel" prefHeight="25.0" prefWidth="25.0" style="-fx-border-color: black; -fx-border-radius: 1; -fx-background-color: gold; -fx-background-insets: 0;" text="6">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+            <Button contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#selectLevel" prefHeight="25.0" prefWidth="25.0" style="-fx-border-color: black; -fx-border-radius: 1; -fx-background-color: red; -fx-background-insets: 0;" text="7">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+            <Button contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#selectLevel" prefHeight="25.0" prefWidth="25.0" style="-fx-border-color: black; -fx-border-radius: 1; -fx-background-color: red; -fx-background-insets: 0;" text="8">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+            <Button contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#selectLevel" prefHeight="25.0" prefWidth="25.0" style="-fx-border-color: black; -fx-border-radius: 1; -fx-background-color: red; -fx-background-insets: 0;" text="9">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
             </children>
         </HBox>
+      <HBox alignment="CENTER" layoutX="90.0" layoutY="127.0" prefHeight="30.0" prefWidth="420.0" spacing="17.0">
+         <children>
+            <Label alignment="CENTER" prefHeight="27.0" prefWidth="118.0" style="-fx-border-color: lightgreen; -fx-text-fill: lightgreen;" text="Easy">
+               <font>
+                  <Font name="Tw Cen MT Condensed Extra Bold" size="17.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" prefHeight="27.0" prefWidth="118.0" style="-fx-border-color: gold; -fx-text-fill: gold;" text="Medium">
+               <font>
+                  <Font name="Tw Cen MT Condensed Extra Bold" size="17.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" prefHeight="27.0" prefWidth="118.0" style="-fx-border-color: red; -fx-text-fill: red;" text="Hard">
+               <font>
+                  <Font name="Tw Cen MT Condensed Extra Bold" size="17.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+      <Label alignment="CENTER" layoutX="165.0" layoutY="81.0" prefHeight="45.0" prefWidth="270.0" text="Please Select A Level:">
+         <font>
+            <Font name="Gill Sans Ultra Bold Condensed" size="25.0" />
+         </font>
+      </Label>
     </children>
 </AnchorPane>

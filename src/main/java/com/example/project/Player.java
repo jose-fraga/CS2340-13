@@ -4,8 +4,8 @@ public class Player {
     private String name = DEFAULT_NAME;
     private String spritePath = DEFAULT_SPRITE_PATH;
 
-    private static String DEFAULT_NAME = "Player";
-    private static String DEFAULT_SPRITE_PATH = Sprite.CHARACTER1.getPath();
+    private static final String DEFAULT_NAME = "Player";
+    private static final String DEFAULT_SPRITE_PATH = Sprite.CHARACTER1.getPath();
 
     public Player() {}
 

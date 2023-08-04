@@ -11,22 +11,20 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class CNClueBoxController implements Initializable {
-    @FXML private Label clueWordDisplay, clueGuessDisplay;
+    @FXML private Label clueDisplay, countDisplay;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Round currRound = CNGame.getGameInstance().getRound();
-        String style = "-fx-border-radius: 3; -fx-border-color: " + currRound.getActiveTeam().getType().getColor() + ";";
-
-        clueWordDisplay.setStyle(style);
-        clueGuessDisplay.setStyle(style);
-
-        clueWordDisplay.setText(currRound.getCurrentClue());
-        clueGuessDisplay.setText(String.valueOf(currRound.getCurrentGuessLimit() - 1));
+        String style = "-fx-border-radius: 3; -fx-border-color: " + currRound.activeTeam().getType().getColor();
+        clueDisplay.setStyle(style);
+        clueDisplay.setText(currRound.getCurrentClue());
+        countDisplay.setStyle(style);
+        countDisplay.setText(String.valueOf(currRound.getCurrGuessLimit() - 1));
     }
 
     @FXML private void switchTeams(ActionEvent e) {
-        CNGame.getGameInstance().getRound().getCurrentLog().addLogItem(null,  CNGame.getGameInstance().getRound().getActiveTeam().getType().getColor());
+//        CNGame.getGameInstance().getRound().getCurrentLog().addLogItem(null,  CNGame.getGameInstance().getRound().getActiveTeam().getType().getColor());
         CNGame.getGameInstance().getRound().endTurn();
     }
 }

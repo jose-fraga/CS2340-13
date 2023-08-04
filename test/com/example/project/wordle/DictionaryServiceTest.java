@@ -22,7 +22,6 @@ class DictionaryServiceTest {
         assertNull(generatedWord);
     }
 
-
     @Test
     void checkENV() {
         assertNotNull(System.getenv("NINJA_API_URL"));

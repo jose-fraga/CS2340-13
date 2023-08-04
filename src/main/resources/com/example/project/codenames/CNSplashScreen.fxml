@@ -14,7 +14,7 @@
             <ButtonBar buttonMinWidth="100.0" prefHeight="55.0" prefWidth="600.0" style="-fx-padding: 10;" BorderPane.alignment="CENTER">
                 <buttons>
                     <Button cancelButton="true" mnemonicParsing="false" onAction="#backToGameSelect" style="-fx-background-insets: 1;" text="Back" ButtonBar.buttonData="LEFT" />
-                    <Button defaultButton="true" mnemonicParsing="false" onAction="#configureGame" style="-fx-background-insets: 1;" text="Setup to Play" ButtonBar.buttonData="RIGHT" />
+                    <Button defaultButton="true" mnemonicParsing="false" onAction="#configureGame" style="-fx-background-insets: 1;" text="Setup To Play" ButtonBar.buttonData="RIGHT" />
                 </buttons>
             </ButtonBar>
         </bottom>

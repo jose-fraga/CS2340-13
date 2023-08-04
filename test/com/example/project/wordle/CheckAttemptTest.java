@@ -2,8 +2,7 @@ package com.example.project.wordle;
 
 import com.example.project.wordle.enums.Status;
 import org.junit.jupiter.api.Test;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class CheckAttemptTest {
     @Test
@@ -12,6 +11,7 @@ public class CheckAttemptTest {
         AttemptedLetter al = new AttemptedLetter(index);
         assertNotNull(al);
     }
+
     @Test
     void testDefaultStatus() {
         AttemptedLetter al = new AttemptedLetter(1);

@@ -9,6 +9,7 @@ class LevelTest {
     @Test
     void checkNullLevel() {
         Level level = new Level(0);
+        level.setGrid(LevelDifficulty.EASY);
         assertNotNull(level);
         assertNotNull(level.getTimer());
         assertNotNull(level.getGrid());
@@ -23,6 +24,7 @@ class LevelTest {
 
     void gridCompare(int number) {
         Level level = new Level(number);
+        level.setGrid(LevelDifficulty.EASY);
         GridItem[][] curr = level.getGrid().getGridCells();
         GridItem[][] base = LevelDifficulty.EASY.level(number);
         for (int i = 0; i < curr.length; i++) {
@@ -37,6 +39,7 @@ class LevelTest {
     @Test
     void timerTest() {
         Level level = new Level(1);
+        level.setGrid(LevelDifficulty.EASY);
         level.pause();
         assertTrue(level.isPaused());
         level.resume();

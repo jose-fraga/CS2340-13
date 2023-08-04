@@ -1,17 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="levelSelect" prefHeight="330.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.project.wordle.controllers.WRLLevelController">
+<AnchorPane fx:id="levelSelect" prefHeight="330.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.project.wordle.controllers.WRLLevelController">
     <children>
-      <VBox layoutX="262.0" layoutY="104.0" prefHeight="84.0" prefWidth="75.0" style="-fx-spacing: 20;">
+      <HBox alignment="CENTER" layoutX="191.0" layoutY="166.0" spacing="25.0" style="-fx-padding: 8;" translateY="-20.0">
          <children>
-                <Button contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#selectLevel" prefHeight="25.0" prefWidth="75.0" style="-fx-border-color: black; -fx-border-radius: 1;" text="4" />
-                <Button contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#selectLevel" prefHeight="25.0" prefWidth="75.0" style="-fx-border-color: black; -fx-border-radius: 1;" text="5" />
-                <Button contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#selectLevel" prefHeight="25.0" prefWidth="75.0" style="-fx-border-color: black; -fx-border-radius: 1;" text="6" />
+                <Button contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#selectLevel" prefHeight="25.0" prefWidth="50.0" style="-fx-border-color: black; -fx-border-radius: 1;" text="4" />
+                <Button contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#selectLevel" prefHeight="25.0" prefWidth="50.0" style="-fx-border-color: black; -fx-border-radius: 1;" text="5" />
+                <Button contentDisplay="BOTTOM" mnemonicParsing="false" onAction="#selectLevel" prefHeight="25.0" prefWidth="50.0" style="-fx-border-color: black; -fx-border-radius: 1;" text="6" />
          </children>
-      </VBox>
+      </HBox>
+      <Label alignment="CENTER" layoutX="125.0" layoutY="120.0" prefHeight="45.0" prefWidth="350.0" text="Please Select A Word Length:" translateY="-20.0">
+         <font>
+            <Font name="Gill Sans Ultra Bold Condensed" size="25.0" />
+         </font>
+      </Label>
     </children>
 </AnchorPane>

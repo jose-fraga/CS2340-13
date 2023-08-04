@@ -3,8 +3,8 @@ package com.example.project.flowfree;
 import com.example.project.flowfree.enums.LevelDifficulty;
 
 public class Grid {
-    private GridItem gridCells[][];
-    private int size;
+    private final GridItem[][] gridCells;
+    private final int size;
     private boolean isComplete;
 
     public Grid(LevelDifficulty difficulty, int level) {

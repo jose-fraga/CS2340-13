@@ -1,10 +1,9 @@
 package com.example.project.wordle;
 
-import com.example.project.wordle.Life;
 import org.junit.jupiter.api.Test;
 
-import static com.example.project.wordle.Life.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 public class LifeTest {
     @Test
     void testGetLives() {

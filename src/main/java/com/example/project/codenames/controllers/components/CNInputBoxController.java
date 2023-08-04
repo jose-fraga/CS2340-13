@@ -1,6 +1,5 @@
 package com.example.project.codenames.controllers.components;
 
-import com.example.project.Helper;
 import com.example.project.codenames.CNGame;
 import com.example.project.codenames.GameLog;
 import com.example.project.codenames.Word;
@@ -26,31 +25,28 @@ import java.util.stream.IntStream;
 public class CNInputBoxController implements Initializable {
     @FXML private TextField clueInput;
     @FXML private ChoiceBox<Integer> guessInput;
-    @FXML private Text warningText;
+    @FXML private Text warningLabel;
 
     private PropertyChangeSupport support;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.support = new PropertyChangeSupport(this);
-        warningText.setVisible(false);
+        warningLabel.setVisible(false);
         guessInput.getItems().addAll(IntStream.range(1,9).boxed().collect(Collectors.toList()));
         this.addPropertyChangeListener(CNGame.getGameInstance().getRound().getCurrentLog());
     }
 
     @FXML public void switchToOperative(ActionEvent e) {
         if (clueInput.getText().isBlank() || guessInput.getValue() == null) {
-            warningText.setVisible(true);
-            System.out.println("TRY AGAIN!");
+            warningLabel.setVisible(true);
+            System.out.println("ERROR #1: Clue Word or Count is Empty!");
         } else {
             String clue = clueInput.getText();
             int clueCount = guessInput.getValue();
-
             System.out.println("Clue: " + clue + " " + clueCount);
-
-            this.support.firePropertyChange("clue", null, CNGame.getGameInstance().getRound().getActiveTeam().getType().getColor());
+//            this.support.firePropertyChange("clue", null, CNGame.getGameInstance().getRound().getActiveTeam().getType().getColor());
             CNGame.getGameInstance().getRound().setClue(clue, clueCount);
-            Helper.changeGameScreen("codenames/CNBufferScreen.fxml");
         }
     }
 
