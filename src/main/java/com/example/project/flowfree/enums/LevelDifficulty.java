@@ -27,7 +27,7 @@ public enum LevelDifficulty {
                     null, new Obstacle(10), null, null
             },
     }),
-    MEDIUM("flowfree/levels/Medium.fxml", 5, 50, new GridItem[][]{
+    MEDIUM("flowfree/levels/Medium.fxml", 5, 40, new GridItem[][]{
             {
                     new Dot(Color.ORANGE), new Dot(Color.RED), null, new Obstacle(10), null,
                     new Obstacle(5), new Dot(Color.PURPLE), null, null, new Dot(Color.RED),
@@ -50,7 +50,7 @@ public enum LevelDifficulty {
                     new Dot(Color.BLUE), new Obstacle(1), new Dot(Color.BLUE), new Dot(Color.GOLD), new Dot(Color.LIMEGREEN)
             }
     }),
-    HARD("flowfree/levels/Hard.fxml", 6, 70, new GridItem[][]{
+    HARD("flowfree/levels/Hard.fxml", 6, 45, new GridItem[][]{
             {
                     new Dot(Color.RED), null, new Obstacle(5), new Dot(Color.LIMEGREEN), null, new Obstacle(10),
                     new Dot(Color.MEDIUMPURPLE), new Obstacle(5), new Obstacle(10), new Obstacle(8), new Dot(Color.PLUM), new Dot(Color.LIMEGREEN),

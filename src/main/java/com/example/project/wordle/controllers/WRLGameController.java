@@ -2,6 +2,7 @@ package com.example.project.wordle.controllers;
 
 import com.example.project.Helper;
 import com.example.project.wordle.AttemptedWord;
+import com.example.project.wordle.Leaderboard;
 import com.example.project.wordle.LetterPane;
 import com.example.project.wordle.Life;
 import com.example.project.wordle.TargetWord;
@@ -27,6 +28,7 @@ public class WRLGameController implements Initializable {
     private Word currWord;
     private TargetWord targetWord;
     private Life life;
+    private Leaderboard leaderboard;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -35,6 +37,7 @@ public class WRLGameController implements Initializable {
         targetWord = new TargetWord(gridPane.getColumnCount());
         life = WRLGame.getInstance().getLife(); // Use the Life instance from the singleton
         life.resetLives();
+        leaderboard = Leaderboard.getInstance();
     }
 
     private void populate() {
@@ -50,12 +53,14 @@ public class WRLGameController implements Initializable {
     }
 
     private void switchToEndScreen(boolean isFailure) {
+        int score = life.getLives() * 10;
+        leaderboard.addEntry(Helper.getPrimaryPlayer().getName(), score);
         FXMLLoader loader = safelyChangeScreen("wordle/WRLEndScreen.fxml");
         WRLEndController controller = loader.getController();
         if (isFailure) {
             controller.showFailureMessage();
         }
-        controller.updateScore("Latest Score: " + Integer.toString(life.getLives() * 10));
+        controller.updateScore("Latest Score: " + Integer.toString(score));
         life.resetLives();
     }
 
