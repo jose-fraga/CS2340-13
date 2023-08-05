@@ -12,6 +12,6 @@
             <Font name="Berlin Sans FB Demi Bold" size="40.0" />
          </font>
       </Label>
-      <Button alignment="CENTER" mnemonicParsing="false" onAction="#switchScreen" style="-fx-background-insets: 1;" text="Ready" />
+      <Button alignment="CENTER" mnemonicParsing="false" onAction="#switchScreen" style="-fx-background-insets: 1; -fx-border-color: gray; -fx-border-radius: 3;" text="Ready, Let's Go!" />
    </children>
 </VBox>

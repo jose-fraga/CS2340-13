@@ -103,7 +103,7 @@
         </VBox>
     </left>
     <right>
-        <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="475.0" prefWidth="180.0" spacing="15.0" BorderPane.alignment="CENTER">
+        <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="475.0" prefWidth="190.0" spacing="15.0" BorderPane.alignment="CENTER">
             <children>
                 <Label alignment="CENTER" prefHeight="25.0" prefWidth="150.0" style="-fx-text-fill: blueviolet;" text="Game Log" underline="true">
                     <font>

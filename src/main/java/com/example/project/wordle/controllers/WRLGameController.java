@@ -104,7 +104,7 @@ public class WRLGameController implements Initializable {
                 } else {
                     life.calculateLives(targetWord.getWord(), currWord.getWord());
                     livesDisplay.setText("Lives: " + life.getLives());
-                    System.out.println(targetWord.getWord());
+                    System.out.println("Target Word: " + targetWord.getWord());
                 }
             } else {
                 warningLabel.setVisible(true);

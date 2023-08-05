@@ -61,12 +61,7 @@
       <Label fx:id="characterNameError" alignment="CENTER" layoutX="225.0" layoutY="344.0" prefHeight="27.0" prefWidth="150.0" style="-fx-padding: 5;" text="Name cannot be empty!" textFill="#ff0606" translateY="10.0" visible="false" />
       <HBox alignment="CENTER_RIGHT" layoutY="353.0" prefHeight="50.0" prefWidth="600.0" style="-fx-spacing: 5; -fx-padding: 8;">
          <children>
-            <Button mnemonicParsing="false" onAction="#continueToGame" text="Continue To Game!" />
-            <ImageView fitHeight="26.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
-               <image>
-                  <Image url="@images/arrow.png" />
-               </image>
-            </ImageView>
+            <Button mnemonicParsing="false" onAction="#continueToGame" text="Continue To Game!" translateX="-5.0" />
          </children>
          <opaqueInsets>
             <Insets />

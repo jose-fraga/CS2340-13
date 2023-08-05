@@ -38,7 +38,6 @@ public class WRLLeaderboardController implements Initializable {
             gridPane.add(entryScore, 2,(i+1));
             if (i == 2) { break; }
         }
-        System.out.println(List.of(Leaderboard.getInstance().getTopScores()));
     }
 
     private StackPane createPane(String text) {

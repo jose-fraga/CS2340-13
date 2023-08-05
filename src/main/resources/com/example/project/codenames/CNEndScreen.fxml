@@ -10,15 +10,15 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="545.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.project.codenames.controllers.CNEndController">
    <children>
-      <ImageView fitHeight="700.0" fitWidth="900.0" pickOnBounds="true" translateY="-3.0">
+      <ImageView fitHeight="700.0" fitWidth="900.0" pickOnBounds="true" translateY="-2.0">
          <image>
             <Image url="@../images/background.png" />
          </image>
       </ImageView>
-      <HBox alignment="CENTER" prefHeight="55.0" prefWidth="900.0" spacing="785.0">
+      <HBox alignment="CENTER" prefHeight="55.0" prefWidth="900.0" spacing="775.0">
          <children>
-            <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#restartGame" style="-fx-background-insets: 1;" text="Restart" />
-            <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#quitGame" style="-fx-background-insets: 1;" text="Exit" />
+            <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#restartGame" style="-fx-background-insets: 1; -fx-border-color: gray; -fx-border-radius: 3;" text="Restart" />
+            <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#quitGame" style="-fx-background-insets: 1; -fx-border-color: gray; -fx-border-radius: 3;" text="Exit" />
          </children>
       </HBox>
       <Label fx:id="teamDisplay" alignment="CENTER" layoutX="375.0" layoutY="262.0" prefHeight="30.0" prefWidth="145.0" style="-fx-border-color: black;">
