@@ -9,39 +9,27 @@ import java.net.URL;
 public class DictionaryService {
     public synchronized static boolean checkValidity(String word) {
         try {
-            String apiUrl = System.getenv("NINJA_API_URL") + word;
-            String apiKey = System.getenv("NINJA_API_KEY");
+            String apiUrl = System.getenv("DICTIONARY_API") + word;
 
             URL url = new URL(apiUrl);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
             connection.setRequestProperty("accept", "application/json");
-            connection.setRequestProperty("X-Api-Key", apiKey);
 
             if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
-                BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-                StringBuilder response = new StringBuilder();
-
-                String line = reader.readLine();
-                while (line != null) {
-                    response.append(line);
-                    line = reader.readLine();
-                }
-
-                int index = response.toString().indexOf("valid") + 8;
-                return Boolean.parseBoolean(response.substring(index).replace("}", ""));
+                return true;
             } else {
                 System.out.println("ERROR CODE:" + connection.getResponseCode());
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            e.printStackTrace(System.out);
         }
         return false;
     }
 
     public synchronized static String generateWord(int length) {
         try {
-            String apiUrl = System.getenv("RANDOM_WORD_API_URL") + length;
+            String apiUrl = System.getenv("WRL_RANDOM_WORD_API") + length;
 
             URL url = new URL(apiUrl);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -61,12 +49,11 @@ public class DictionaryService {
                 return response.toString().replace("[", "")
                         .replace("]", "")
                         .replace("\"", "");
-
             } else {
                 System.out.println("ERROR CODE:" + connection.getResponseCode());
             }
         } catch(IOException e) {
-            e.printStackTrace();
+            e.printStackTrace(System.out);
         }
         return null;
     }

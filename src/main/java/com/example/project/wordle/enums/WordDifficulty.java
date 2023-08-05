@@ -5,7 +5,7 @@ public enum WordDifficulty {
     FIVE("wordle/levels/Five.fxml"),
     SIX("wordle/levels/Six.fxml");
 
-    private String path;
+    private final String path;
 
     WordDifficulty(String path) {
         this.path = path;

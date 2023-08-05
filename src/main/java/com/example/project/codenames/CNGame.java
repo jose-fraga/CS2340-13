@@ -26,4 +26,3 @@ public class CNGame {
         return game_instance;
     }
 }
-

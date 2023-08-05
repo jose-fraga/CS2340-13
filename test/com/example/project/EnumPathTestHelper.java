@@ -14,5 +14,4 @@ public class EnumPathTestHelper<T> {
                 "Check that the file exists in src/main/resources/com/example/project/" + path + "\n" +
                 "Check that the file is included in the build.gradle file";
     }
-
 }

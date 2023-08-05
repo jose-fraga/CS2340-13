@@ -65,7 +65,7 @@ public class DictionaryService {
 
             return (String) new JSONArray(getResponse.body()).getJSONObject(0).get("word");
         } catch(Exception e) {
-            e.printStackTrace();
+            e.printStackTrace(System.out);
         }
         return null;
     }
@@ -75,7 +75,7 @@ public class DictionaryService {
     // and how to read/handle the JSON resposne from such requests.
     public synchronized static String obtainDefinition(String word) {
         try {
-            String DEFINITION_API = System.getenv("DEFINITION_API");
+            String DEFINITION_API = System.getenv("DICTIONARY_API");
 
             HttpRequest getRequest = HttpRequest.newBuilder()
                     .uri(new URL(DEFINITION_API + word).toURI())
@@ -89,7 +89,7 @@ public class DictionaryService {
                     .getJSONArray("definitions").getJSONObject(0)
                     .get("definition");
         } catch (Exception e) {
-            e.printStackTrace();
+            e.printStackTrace(System.out);
         }
         return null;
     }

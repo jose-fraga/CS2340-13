@@ -9,62 +9,41 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
-import java.util.HashSet;
 
 public class WordPane extends StackPane {
-    private String style;
     private final Word word;
-    private int currLength;
-    private int redPosition, bluePosition;
-    private final HashSet<Type> occupants = new HashSet<>(2);
-
-    public void setCurrLength(int currLength) { this.currLength = currLength; }
-
-
-    public int getRedPosition() { return this.redPosition; }
-    public void setRedPosition(int redPosition) { this.redPosition = redPosition; }
-
-
-    public int getBluePosition() { return this.bluePosition; }
-    public void setBluePosition(int bluePosition) { this.bluePosition = bluePosition; }
-
-    public Word getWord() { return this.word; }
-
-    public HashSet<Type> getOccupants() { return this.occupants; }
-
-    public int getCurrLength() { return this.currLength; }
+    private String style;
+    private boolean isGuessed;
 
     public WordPane(Word word) {
         this.word = word;
         VBox currBox = new VBox();
-
         Label text = new Label();
         text.setText(word.getWord());
         text.setFont(Font.font("Tw Cen MT Condensed Extra Bold", 16));
         currBox.getChildren().add(text);
-
         currBox.setSpacing(3);
         currBox.setAlignment(Pos.CENTER);
         this.setAlignment(Pos.CENTER);
         this.getChildren().add(currBox);
-
         this.style = "-fx-border-color: black;";
         this.setStyle(this.style);
-
+        this.isGuessed = false;
         setTooltip();
     }
 
+    public Word getWord() { return this.word; }
+
     public void addBackground() {
+        String genericStyle = "-fx-border-style: solid inside; -fx-border-color: #00000066; -fx-border-insets: 0; ";
         this.style += " -fx-background-color: " + this.word.getType().getColor() + ";";
         if (this.word.getIsSelected()) {
-            this.style += "-fx-border-width: 2; -fx-border-style: solid inside; -fx-border-color: #00000066; -fx-border-insets: 0;";
-            this.style += "-fx-opacity: 0.8;";
+            this.style += "-fx-border-width: 2; " + genericStyle + "-fx-opacity: 0.8;";
         } else {
-            this.style += "-fx-border-width: 3; -fx-border-style: solid inside; -fx-border-color: #00000066; -fx-border-insets: 0;";
+            this.style += "-fx-border-width: 3; " + genericStyle;
         }
         this.setStyle(this.style);
-
-        String cardTextStyle = "-fx-text-fill: " + ((word.getType() == Type.ASSASSIN) ? "#ffffffcc;" : "#000000cc");
+        String cardTextStyle = "-fx-text-fill: " + ((this.word.getType() == Type.ASSASSIN) ? "#ffffffcc;" : "#000000cc");
         ((VBox) this.getChildren().get(0)).getChildren().get(0).setStyle(cardTextStyle);
     }
 
@@ -75,13 +54,33 @@ public class WordPane extends StackPane {
         ((VBox) this.getChildren().get(0)).getChildren().add(button);
     }
 
+    public void handleGuess() {
+        if (!this.word.getIsSelected() && !this.isGuessed) {
+            this.isGuessed = true;
+            Round round = CNGame.getGameInstance().getRound();
+            Label guessLabel = new Label((round.activeTeam().getType() == Type.RED) ? "Red" : "Blue");
+            guessLabel.setStyle(
+                    "-fx-text-fill: white;" +
+                            "-fx-background-color: " + round.activeTeam().getType().getColor() + ";" +
+                            "-fx-border-color: " + round.activeTeam().getType().getColor());
+            guessLabel.setPrefWidth(30);
+            guessLabel.setAlignment(Pos.CENTER);
+            guessLabel.setFont(Font.font("Tw Cen MT Condensed Extra Bold", 14));
+            ((VBox) this.getChildren().get(0)).getChildren().add(guessLabel);
+        } else if (!this.word.getIsSelected() || this.isGuessed) {
+            this.isGuessed = false;
+            ((VBox) this.getChildren().get(0)).getChildren().remove(2);
+        }
+    }
+
     public void selectedUpdate() {
+        handleGuess();
         ((VBox) this.getChildren().get(0)).getChildren().remove(1);
         addBackground();
     }
 
     private void setTooltip() {
-        Tooltip tooltip = new Tooltip(word.getDefinition());
+        Tooltip tooltip = new Tooltip(this.word.getDefinition());
         tooltip.setMinWidth(50);
         tooltip.setMaxWidth(400);
         tooltip.setWrapText(true);
@@ -90,14 +89,4 @@ public class WordPane extends StackPane {
         tooltip.setStyle("-fx-background-color: dimgray; -fx-text-fill: white;");
         Tooltip.install(this, tooltip);
     }
-
-    public void ToggleOccupants(Type team) {
-        if (occupants.contains(team)) {
-            occupants.remove(team);
-        } else {
-            occupants.add(team);
-        }
-    }
-
-    public boolean hasOccupant(Type team) { return this.occupants.contains(team); }
 }

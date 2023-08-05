@@ -7,38 +7,25 @@ package com.example.project;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
 public class Helper {
     public static Game currentGame;
-    private static Player currentPlayer, secondaryPlayer;
-    private static BorderPane gamePane, cnGamePane;
+    private static Player primaryPlayer, secondaryPlayer;
+    private static BorderPane gamePane;
 
     public static BorderPane getGamePane() { return gamePane; }
-    public static void setGamePane(BorderPane pane) {
-        gamePane = pane;
-        if (currentGame == Game.CODENAMES) {
-            gamePane.setPrefWidth(950);
-            gamePane.setPrefHeight(655);
-        }
-    }
 
-    public static BorderPane getCNGamePane() { return cnGamePane; }
-    public static void setCNGamePane(BorderPane pane) { cnGamePane = pane; }
+    public static void setGamePane(BorderPane pane) { gamePane = pane; }
 
-    public static Player getPlayerInstance() {
-        if (currentPlayer == null) {
-            currentPlayer = new Player();
+    public static Player getPrimaryPlayer() {
+        if (primaryPlayer == null) {
+            primaryPlayer = new Player();
         }
-        return currentPlayer;
+        return primaryPlayer;
     }
 
     public static Player getSecondaryPlayer() {
@@ -55,7 +42,7 @@ public class Helper {
             Parent root = loader.load();
             gamePane.setCenter(root);
         } catch (IOException e) {
-            e.printStackTrace();
+            e.printStackTrace(System.out);
         }
         return loader;
     }
@@ -71,7 +58,7 @@ public class Helper {
             stage.show();
             stage.centerOnScreen();
         } catch (IOException e) {
-            e.printStackTrace();
+            e.printStackTrace(System.out);
         }
     }
 }

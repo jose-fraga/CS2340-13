@@ -14,4 +14,6 @@ public class Life {
             this.lives--;
         }
     }
+
+    public void resetLives() { this.lives = 6; }
 }

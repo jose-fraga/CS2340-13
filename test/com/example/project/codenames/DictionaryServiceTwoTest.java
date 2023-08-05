@@ -8,7 +8,7 @@ class DictionaryServiceTwoTest {
     @Test
     void checkENV() {
         assertNotNull(System.getenv("CN_RANDOM_WORD_API"));
-        assertNotNull(System.getenv("DEFINITION_API"));
+        assertNotNull(System.getenv("DICTIONARY_API"));
     }
 
     @Test

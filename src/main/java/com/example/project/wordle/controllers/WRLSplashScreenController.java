@@ -19,11 +19,11 @@ public class WRLSplashScreenController implements Initializable {
 
     @FXML private void returnToSelect(ActionEvent e) {
         Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-        Helper.changeScreen(stage, "SelectScreen.fxml", "CS2340 Project");
+        Helper.changeScreen(stage, "CRSelectScreen.fxml", "CS2340 Project");
     }
 
     @FXML private void continueToConfigure(ActionEvent e) {
         Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-        Helper.changeScreen(stage, Game.WORDLE.configFxmlPath(), "CS2340 Configuration");
+        Helper.changeScreen(stage, Game.WORDLE.configFxmlPath(), "CS2340 - Wordle (Configuration)");
     }
 }

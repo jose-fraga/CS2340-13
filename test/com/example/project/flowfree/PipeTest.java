@@ -1,6 +1,5 @@
 package com.example.project.flowfree;
 
-import com.example.project.flowfree.Pipe;
 import com.example.project.flowfree.enums.PipeState;
 import org.junit.jupiter.api.Test;
 

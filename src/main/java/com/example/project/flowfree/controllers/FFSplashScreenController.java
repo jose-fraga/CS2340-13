@@ -25,6 +25,6 @@ public class FFSplashScreenController implements Initializable {
 
     @FXML private void configureGame(ActionEvent e) {
         Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-        Helper.changeScreen(stage, Game.FLOW.configFxmlPath(), "CS2340 - " + Helper.currentGame.title() + " (Configuration)");
+        Helper.changeScreen(stage, Game.FLOW.configFxmlPath(), "CS2340 - Flow Free (Configuration)");
     }
 }

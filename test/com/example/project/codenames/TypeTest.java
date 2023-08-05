@@ -17,5 +17,4 @@ public class TypeTest {
         assertEquals(NEUTRAL.getColor(), "#E6CCA2");
         assertEquals(ASSASSIN.getColor(), "#373737");
     }
-
 }
