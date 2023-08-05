@@ -10,7 +10,7 @@ import javafx.scene.control.Label;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class CNClueBoxController implements Initializable {
+public class CNClueDisplayController implements Initializable {
     @FXML private Label clueDisplay, countDisplay;
 
     @Override
@@ -24,7 +24,8 @@ public class CNClueBoxController implements Initializable {
     }
 
     @FXML private void switchTeams(ActionEvent e) {
-//        CNGame.getGameInstance().getRound().getCurrentLog().addLogItem(null,  CNGame.getGameInstance().getRound().getActiveTeam().getType().getColor());
-        CNGame.getGameInstance().getRound().endTurn();
+        Round currRound = CNGame.getGameInstance().getRound();
+        currRound.getCurrentLog().addLogItem(null,  currRound.activeTeam().getType().getColor());
+        currRound.endTurn();
     }
 }

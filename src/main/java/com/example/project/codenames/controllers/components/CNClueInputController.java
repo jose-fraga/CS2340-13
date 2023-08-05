@@ -1,8 +1,6 @@
 package com.example.project.codenames.controllers.components;
 
 import com.example.project.codenames.CNGame;
-import com.example.project.codenames.GameLog;
-import com.example.project.codenames.Word;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -22,7 +20,7 @@ import java.util.stream.IntStream;
 // through using the PropertyChangeListener and PropertyChangeSupport. This
 // code successfully adds listeners (observers), assigns support (observable),
 // and notifies listeners when some property changes.
-public class CNInputBoxController implements Initializable {
+public class CNClueInputController implements Initializable {
     @FXML private TextField clueInput;
     @FXML private ChoiceBox<Integer> guessInput;
     @FXML private Text warningLabel;
@@ -45,7 +43,7 @@ public class CNInputBoxController implements Initializable {
             String clue = clueInput.getText();
             int clueCount = guessInput.getValue();
             System.out.println("Clue: " + clue + " " + clueCount);
-//            this.support.firePropertyChange("clue", null, CNGame.getGameInstance().getRound().getActiveTeam().getType().getColor());
+            this.support.firePropertyChange("color", null, CNGame.getGameInstance().getRound().activeTeam().getType().getColor());
             CNGame.getGameInstance().getRound().setClue(clue, clueCount);
         }
     }

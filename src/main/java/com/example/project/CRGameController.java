@@ -27,8 +27,8 @@ public class CRGameController implements Initializable {
             System.out.println("ENTERED: " + Helper.currentGame.title() + " Game Screen");
 
             if (Helper.currentGame == Game.CODENAMES) {
-                gamePane.setPrefWidth(900);
-                gamePane.setPrefHeight(655);
+                gamePane.setPrefWidth(895);
+                gamePane.setPrefHeight(650);
             }
 
             Helper.setGamePane(gamePane);
@@ -52,7 +52,7 @@ public class CRGameController implements Initializable {
             }
         } catch (Exception e) {
             System.out.println("FAILURE: " + Helper.currentGame.title() + " Game Screen FXML Error!");
-            e.printStackTrace();
+            e.printStackTrace(System.out);
         }
     }
 

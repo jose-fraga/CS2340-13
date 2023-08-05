@@ -39,7 +39,8 @@ public class GameLog implements PropertyChangeListener {
         } else {
             item = new TextFlow(playerItem, new Text(" ends guessing "));
         }
-        logger.add(item);
+
+        this.logger.add(item);
     }
 
     public void addClueItem(String clue, int count) {
@@ -52,12 +53,11 @@ public class GameLog implements PropertyChangeListener {
         clueItem.setStyle("-fx-font-weight: bold;");
 
         TextFlow item = new TextFlow(playerItem, new Text(" gives clue "), clueItem);
-        logger.add(item);
+        this.logger.add(item);
     }
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        System.out.println(evt);
         this.color = (String) evt.getNewValue();
     }
 }

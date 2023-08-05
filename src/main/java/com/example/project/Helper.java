@@ -42,7 +42,7 @@ public class Helper {
             Parent root = loader.load();
             gamePane.setCenter(root);
         } catch (IOException e) {
-            e.printStackTrace();
+            e.printStackTrace(System.out);
         }
         return loader;
     }
@@ -58,7 +58,7 @@ public class Helper {
             stage.show();
             stage.centerOnScreen();
         } catch (IOException e) {
-            e.printStackTrace();
+            e.printStackTrace(System.out);
         }
     }
 }

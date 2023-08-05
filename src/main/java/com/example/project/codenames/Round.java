@@ -24,11 +24,11 @@ public class Round implements PropertyChangeListener {
     private ArrayList<Word> words;
     private String currentClue;
     private int currGuessLimit, currGuessCount;
-
-//    public GameLog getCurrentLog() { return this.currentLog; }
+    private GameLog currentLog;
 
     public Round() {
         this.support = new PropertyChangeSupport(this);
+        this.currentLog = new GameLog();
         populateTeams();
         updateWordType();
     }
@@ -36,13 +36,14 @@ public class Round implements PropertyChangeListener {
     public ArrayList<Word> getWords() { return this.words; }
     public String getCurrentClue() { return this.currentClue; }
     public int getCurrGuessLimit() { return this.currGuessLimit; }
+    public GameLog getCurrentLog() { return this.currentLog; }
 
     public Team activeTeam() { return (this.redTeam.isActiveTeam()) ? this.redTeam : this.blueTeam; }
     public Team passiveTeam() { return (this.redTeam.isActiveTeam()) ? this.blueTeam : this.redTeam; }
 
     public void swapTeams(boolean isReset) {
         this.redTeam.swapRoleType(isReset);
-        this.redTeam.swapRoleType(isReset);
+        this.blueTeam.swapRoleType(isReset);
     }
 
     private void populateTeams() {
@@ -102,6 +103,7 @@ public class Round implements PropertyChangeListener {
     public void setClue(String clue, int clueCount) {
         if (activeTeam().getCurrentPlayer() == Player.SPY_MASTER) {
             activeTeam().setCurrentPlayer(Player.OPERATIVE);
+            this.currentLog.addClueItem(clue, clueCount);
             this.currGuessCount = 0;
             this.currGuessLimit = ++clueCount;
             this.currentClue = clue;

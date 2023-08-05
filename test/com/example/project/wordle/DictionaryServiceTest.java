@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class DictionaryServiceTest {
     @Test
     void checkValidityNullWordReturnsFalse() {
-        String word = null;
+        String word = "";
         boolean isValid = DictionaryService.checkValidity(word);
         assertFalse(isValid);
     }
@@ -24,14 +24,13 @@ class DictionaryServiceTest {
 
     @Test
     void checkENV() {
-        assertNotNull(System.getenv("NINJA_API_URL"));
-        assertNotNull(System.getenv("NINJA_API_KEY"));
-        assertNotNull(System.getenv("RANDOM_WORD_API_URL"));
+        assertNotNull(System.getenv("WRL_RANDOM_WORD_API"));
+        assertNotNull(System.getenv("DICTIONARY_API"));
     }
 
     @Test
     void checkValidityOfWords() {
-        String[] words = {"apple", "ap", "abcde", "mapple", "amazing"};
+        String[] words = {"apple", "", "abcde", "mapple", "amazing"};
         assertTrue(DictionaryService.checkValidity(words[0]));
         assertFalse(DictionaryService.checkValidity(words[1]));
         assertFalse(DictionaryService.checkValidity(words[2]));

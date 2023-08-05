@@ -18,7 +18,7 @@ public class CNEndController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        System.out.println("ENTERED: " + Helper.currentGame.title() + "End Screen");
+        System.out.println("ENTERED: Codenames End Screen");
     }
 
     public void updateScreen(Type winningTeam, int score) {

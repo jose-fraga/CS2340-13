@@ -9,7 +9,7 @@ import java.net.URL;
 public class DictionaryService {
     public synchronized static boolean checkValidity(String word) {
         try {
-            String apiUrl = System.getenv("DEFINITION_API") + word;
+            String apiUrl = System.getenv("DICTIONARY_API") + word;
 
             URL url = new URL(apiUrl);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -22,14 +22,14 @@ public class DictionaryService {
                 System.out.println("ERROR CODE:" + connection.getResponseCode());
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            e.printStackTrace(System.out);
         }
         return false;
     }
 
     public synchronized static String generateWord(int length) {
         try {
-            String apiUrl = System.getenv("RANDOM_WORD_API_URL") + length;
+            String apiUrl = System.getenv("WRL_RANDOM_WORD_API") + length;
 
             URL url = new URL(apiUrl);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
@@ -53,7 +53,7 @@ public class DictionaryService {
                 System.out.println("ERROR CODE:" + connection.getResponseCode());
             }
         } catch(IOException e) {
-            e.printStackTrace();
+            e.printStackTrace(System.out);
         }
         return null;
     }

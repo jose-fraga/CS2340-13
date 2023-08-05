@@ -15,10 +15,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.TextFlow;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -35,6 +37,7 @@ public class CNGameController implements Initializable, PropertyChangeListener {
     @FXML private BorderPane borderPane;
     @FXML private GridPane gridPane;
     @FXML private Label teamDisplay, playerDisplay, topTitle, redScore, blueScore;
+    @FXML private ListView<TextFlow> gameLog;
 
     private final Round round = CNGame.getGameInstance().getRound();
     private final HashMap<Type, Label> scoreLabels = new HashMap<>(2);
@@ -49,33 +52,31 @@ public class CNGameController implements Initializable, PropertyChangeListener {
     }
 
     private void registerListeners() {
-        this.round.addPropertyChangeListener(this);
-        this.round.activeTeam().addPropertyChangeListener(this);
-        this.round.passiveTeam().addPropertyChangeListener(this);
+        round.addPropertyChangeListener(this);
+        round.activeTeam().addPropertyChangeListener(this);
+        round.passiveTeam().addPropertyChangeListener(this);
     }
 
     private void unregisterListeners() {
-        this.round.removePropertyChangeListener(this);
-        this.round.activeTeam().removePropertyChangeListener(this);
-        this.round.passiveTeam().removePropertyChangeListener(this);
+        round.removePropertyChangeListener(this);
+        round.activeTeam().removePropertyChangeListener(this);
+        round.passiveTeam().removePropertyChangeListener(this);
     }
 
     private void populateGrid() {
-        this.scoreLabels.put(Type.RED, redScore);
-        this.scoreLabels.put(Type.BLUE, blueScore);
+        scoreLabels.put(Type.RED, redScore);
+        scoreLabels.put(Type.BLUE, blueScore);
         int count = 0;
         for (int i = 0; i < gridPane.getRowCount(); i++) {
             for (int j = 0; j < gridPane.getColumnCount(); j++) {
-                gridPane.add(new WordPane(this.round.getWords().get(count)), j, i);
+                gridPane.add(new WordPane(round.getWords().get(count)), j, i);
                 count++;
             }
         }
-        this.scoreLabels.get(this.round.activeTeam().getType()).setText(
-                String.valueOf(this.round.activeTeam().getNumOfCards())
-        );
-        this.scoreLabels.get(this.round.passiveTeam().getType()).setText(
-                String.valueOf(this.round.passiveTeam().getNumOfCards())
-        );
+        scoreLabels.get(round.activeTeam().getType()).setText(String.valueOf(round.activeTeam().getNumOfCards()));
+        scoreLabels.get(round.passiveTeam().getType()).setText(String.valueOf(round.passiveTeam().getNumOfCards()));
+        gameLog.setFocusTraversable(false);
+        gameLog.getItems().addAll(round.getCurrentLog().getLogItems());
     }
 
     private void handle() {
@@ -83,7 +84,7 @@ public class CNGameController implements Initializable, PropertyChangeListener {
             if (!(item instanceof Group)) {
                 WordPane currPane = (WordPane) item;
                 VBox currBox = (VBox) currPane.getChildren().get(0);
-                if (this.round.activeTeam().getCurrentPlayer() == Player.OPERATIVE) {
+                if (round.activeTeam().getCurrentPlayer() == Player.OPERATIVE) {
                     if (currPane.getWord().getIsSelected()) {
                         currPane.addBackground();
                     } else {
@@ -92,10 +93,13 @@ public class CNGameController implements Initializable, PropertyChangeListener {
                             currPane.handleGuess();
                         });
                         ((Button) currBox.getChildren().get(1)).setOnAction(e -> {
+                            round.getCurrentLog().addLogItem(currPane.getWord(), round.activeTeam().getType().getColor());
                             currPane.getWord().select();
                             if (currPane.getWord().getIsSelected()) {
                                 currPane.selectedUpdate();
                             }
+                            gameLog.getItems().clear();
+                            gameLog.getItems().addAll(round.getCurrentLog().getLogItems());
                         });
                     }
                 } else {
@@ -106,19 +110,21 @@ public class CNGameController implements Initializable, PropertyChangeListener {
     }
 
     private void addTop() {
-        teamDisplay.setText(this.round.activeTeam().getType().toString());
-        teamDisplay.setStyle("-fx-text-fill: " + this.round.activeTeam().getType().getColor());
-        playerDisplay.setText(this.round.activeTeam().getCurrentPlayer().toString());
-        topTitle.setText(this.round.activeTeam().getCurrentPlayer().getHint());
+        Team currTeam = round.activeTeam();
+        teamDisplay.setText(currTeam.getType().toString());
+        teamDisplay.setStyle("-fx-text-fill: " + currTeam.getType().getColor());
+        playerDisplay.setText(currTeam.getCurrentPlayer().getName());
+        playerDisplay.setStyle("-fx-text-fill: blueviolet;");
+        topTitle.setText(currTeam.getCurrentPlayer().getHint());
     }
 
     private void addBottom() {
-        Player currPlayer = this.round.activeTeam().getCurrentPlayer();
         try {
+            Player currPlayer = round.activeTeam().getCurrentPlayer();
             FXMLLoader loader = new FXMLLoader(Main.class.getResource(currPlayer.getPath()));
-            this.borderPane.setBottom(loader.load());
+            borderPane.setBottom(loader.load());
         } catch (Exception e) {
-            e.printStackTrace();
+            e.printStackTrace(System.out);
         }
     }
 
@@ -131,7 +137,7 @@ public class CNGameController implements Initializable, PropertyChangeListener {
         String currEvt = evt.getPropertyName();
         if (currEvt.equals(Event.UPDATE_COUNT.getPropertyName())) {
             Team updatedTeam = (Team) evt.getSource();
-            this.scoreLabels.get(updatedTeam.getType()).setText(String.valueOf(updatedTeam.getNumOfCards()));
+            scoreLabels.get(updatedTeam.getType()).setText(String.valueOf(updatedTeam.getNumOfCards()));
         } else if (currEvt.equals(Event.GAME_OVER.getPropertyName())) {
             unregisterListeners();
             CNGame.getGameInstance().clearRound();

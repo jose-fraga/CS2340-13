@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Text?>
 
-<HBox alignment="CENTER" prefHeight="85.0" prefWidth="432.0" spacing="15.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.project.codenames.controllers.components.CNInputBoxController">
+<HBox alignment="CENTER" prefHeight="85.0" prefWidth="430.0" spacing="15.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.project.codenames.controllers.components.CNClueInputController">
    <children>
       <Text fx:id="warningLabel" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-text-alignment: center; -fx-fill: red;" text="Try Again!" visible="false" wrappingWidth="38.93670654296875" />
       <TextField fx:id="clueInput" prefHeight="25.0" prefWidth="185.0" />
